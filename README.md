@@ -11,7 +11,7 @@ Clone the project
 https://github.com/zagdiablo/RandomForest_Flask_Thesis.git
 ```
 
-sebelum melakukan perubahan pada kode, pastikan anda menggunakan branch "development"
+Sebelum melakukan perubahan pada kode, pastikan anda menggunakan branch "development"
 
 ```bash
 git checkout development
