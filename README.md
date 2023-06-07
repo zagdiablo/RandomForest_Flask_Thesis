@@ -11,6 +11,12 @@ Clone the project
 https://github.com/zagdiablo/RandomForest_Flask_Thesis.git
 ```
 
+sebelum melakukan perubahan pada kode, pastikan anda menggunakan branch "development"
+
+```bash
+git checkout development
+```
+
 Go to the project directory
 
 ```bash
@@ -47,6 +53,3 @@ Menjadi:
 `<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />`
 
 tambahkan `{{ url_for('static', filename='<lokasi/nama_file>') }}` pada href.
-
-
-
