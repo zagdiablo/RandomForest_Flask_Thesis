@@ -1,0 +1,28 @@
+{% extends "public/template.html" %}
+
+{% block title %}Cari Rumah{% endblock %}
+
+{% block header_title %}Cari Rumah{% endblock %}
+
+{% block content %}
+
+<div>
+    <form action="/get_price_suggestion" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        <label for="lantai_rumah">Lantai rumah:</label>
+        <input type="number" name="lantai" id="lantai_rumah">
+        <br>
+        <label for="ukuran_rumah">Ukuran (Meter Kubik): </label>
+        <input type="number" name="ukuran" id="ukuran_rumah">m&sup2
+        <br>
+
+        <button type="submit" name="get_price_suggestion">Cari Harga</button>
+    </form>
+
+    <br>
+    <label for="range_harga">Perkiraan range harga (Rupiah): </label>
+    <input type="text" name="range_harga" id="range_harga" value="Rp. 0" disabled>
+</div>
+
+{% endblock %}
