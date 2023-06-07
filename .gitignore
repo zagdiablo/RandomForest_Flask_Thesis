@@ -1,5 +1,6 @@
 # others
 .vscode
+vscode/
 App/database.db
 
 # Byte-compiled / optimized / DLL files
