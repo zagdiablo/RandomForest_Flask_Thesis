@@ -1,6 +1,11 @@
 from flask import Blueprint, render_template, redirect, request
 
 
+#####
+# file ini menghandle tampilan halaman yang tidak membutuhkan user login
+#####
+
+
 public_views = Blueprint("public_views", __name__)
 
 
@@ -32,6 +37,7 @@ def cari_rumah_page():
 def get_price_suggestion():
     #####
     # TODO handle logika machine learning & query data hasil
+    # TODO requirement: untuk user yang belum login reange parameter gaji di tiadakan
     lantai = request.form.get("lantai")
     ukuran = request.form.get("ukuran")
     print(lantai, ukuran)
