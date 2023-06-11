@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, flash, redirect, request
-from flask_login import login_user, logout_user
+from flask import Blueprint, render_template, flash, redirect, request, url_for
+from flask_login import login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from .models import User
@@ -18,21 +18,33 @@ public_auth = Blueprint("public_auth", __name__)
 # API untuk handle halaman login
 @public_auth.route("/login", methods=["GET"])
 def login_page():
-    return render_template("public/login.html")
+    return render_template("public/login_register.html")
 
 
-@public_auth.route("/user_login", methods=["POST"])
+@public_auth.route("/handle_login", methods=["POST"])
 def handle_login():
     email = request.form.get("email")
     password = request.form.get("password")
 
-    to_login_user = request.query.filter_by(email=email).first()
+    to_login_user = User.query.filter_by(email=email).first()
 
     if to_login_user:
         if check_password_hash(to_login_user.password, password):
             login_user(to_login_user)
-            return redirect("/profile")
+            flash(f"Selamat datang!", category="success")
+            return redirect(url_for("public_views_loggedin.profile_page"))
 
+    flash(f"email atau password salah", category="error")
+    return redirect("/login")
+
+
+#
+#
+# API untuk handle logout
+@public_auth.route("/logout")
+@login_required
+def logout():
+    logout_user()
     return redirect("/login")
 
 
@@ -41,19 +53,17 @@ def handle_login():
 # API untuk handle halaman register
 @public_auth.route("/register", methods=["GET"])
 def register_page():
-    return render_template("public/register.html")
+    return render_template("public/login_register.html")
 
 
-@public_auth.route("/user_register", methods=["POST"])
+@public_auth.route("/handle_register", methods=["POST"])
 def handle_register():
-    nama_lengkap = request.form.get("nama_lengkap")
     email = request.form.get("email")
     password = request.form.get("password")
 
     check_user = User.query.filter_by(email=email).first()
     if not check_user:
         new_user = User(
-            nama_lengkap=nama_lengkap,
             email=email,
             password=generate_password_hash(password, "sha256"),
         )

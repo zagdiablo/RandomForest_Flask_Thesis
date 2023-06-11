@@ -39,11 +39,13 @@ def start_app():
     from .admin_auth import admin_auth
     from .public_views import public_views
     from .public_auth import public_auth
+    from .public_views_loggedin import public_views_loggedin
 
     app.register_blueprint(admin_views, url_prefix="/")
     app.register_blueprint(admin_auth, url_prefix="/")
     app.register_blueprint(public_views, url_prefix="/")
     app.register_blueprint(public_auth, url_prefix="/")
+    app.register_blueprint(public_views_loggedin, url_prefix="/")
 
     # cross site request forgery protection
     csrf.init_app(app)
