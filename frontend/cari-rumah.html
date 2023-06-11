@@ -154,6 +154,26 @@ body,
 .btn:is(:hover, :focus)::before { width: 100%; }
 
 
+/* CheckBox */
+
+fieldset > * + * {
+        margin-top: 0.5rem;
+      }
+
+      .form__group {
+        display: flex;
+        align-items: center;
+      }
+
+      input[type="checkbox"],
+      input[type="radio"] {
+        width: 1rem;
+        height: 1rem;
+        margin-right: 0.65rem;
+      }
+
+      /* End CheckbBox */
+
 </style>
 
 
@@ -311,7 +331,7 @@ body,
                   </div>
                   <div class="card mt-3 ly-detail-search">
                     <div class="card-body p-4">
-                      <h6 class="text-uppercase mt-3 mb-4" style="color: var(--prussian-blue);">Pencarian Detail</h6>
+                      <h6 class="text-uppercase mt-3 mb-4" style="color: var(--prussian-blue);font-weight: bold;">Pencarian Detail</h6>
                       <div class="row">
                         <div class="col-md-4 mb-3">
                           <select class="form-select btn btn-light" aria-label="Default select example">
@@ -364,6 +384,44 @@ body,
                           </select> 
                         </div>
                       </div>
+
+                      <div class="row">
+                        <fieldset>
+                          <h5>Fasilitas</h5>
+                          <div class="row">
+                            
+                            <div class="col-xl-3">
+                              <div class="form__group">
+                                <input type="checkbox"  value="strawberries" name="berries">
+                                <label for="berries_1">Gym</label>
+                              </div>
+                              <div class="form__group">
+                                <input type="checkbox"  value="blueberries" name="berries">
+                                <label for="berries_2">Masjid</label>
+                              </div>
+                              <div class="form__group">
+                                <input type="checkbox"  value="bananas" name="berries">
+                                <label for="berries_3">Kamar</label>
+                              </div>
+                            </div>
+                            <div class="col-xl-5">
+                              <div class="form__group">
+                                <input type="checkbox"  value="strawberries" name="berries">
+                                <label for="berries_1">Taman</label>
+                              </div>
+                              <div class="form__group">
+                                <input type="checkbox"  value="blueberries" name="berries">
+                                <label for="berries_2">Playground Anak</label>
+                              </div>
+                              <div class="form__group">
+                                <input type="checkbox"  value="bananas" name="berries">
+                                <label for="berries_3">Kolam Renang</label>
+                              </div>
+                            </div>
+                          </div>
+                        </fieldset>
+                      </div>
+
                       <div class="d-flex justify-content-between align-items-center mt-4">
                         <p class="mb-0 " style="color: var(--prussian-blue);"><strong>Kisaran Harga</strong><span class="font-weight-bold"><strong>Rp300.000.000 - Rp500.000.000</strong></span></p>
                         <div>
