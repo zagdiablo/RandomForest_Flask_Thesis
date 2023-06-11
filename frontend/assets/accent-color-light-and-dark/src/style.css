@@ -1,0 +1,65 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "Open Sans", sans-serif;
+	accent-color: lime;
+	min-height: 100vh;
+	display: grid;
+	place-items: center;
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+	gap: 3rem;
+}
+
+.wrapper {
+	max-width: 75rem;
+	width: 100%;
+	padding: min(3rem, 5vw);
+}
+
+form {
+	padding: 1.5rem;
+	background-color: rgba(245, 245, 245);
+	border-radius: 0.5rem;
+}
+
+legend {
+	font-weight: 700;
+}
+
+fieldset > * + * {
+	margin-top: 0.5rem;
+}
+
+form > * + * {
+	margin-top: 1.5rem;
+}
+
+.form__group {
+	display: flex;
+	align-items: center;
+}
+
+input[type="checkbox"],
+input[type="radio"]{
+	width: 1.5em;
+	height: 1.5em;
+	margin-right: 0.65rem;
+}
+
+input[type="range"],
+progress {
+	margin-left: auto;
+	flex: 0 1 50%;
+}
+
+form:nth-child(2n) {
+	color-scheme: dark;
+	background-color: black;
+	color: white;
+}

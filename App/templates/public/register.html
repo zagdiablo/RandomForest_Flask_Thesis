@@ -1,0 +1,33 @@
+{% extends "public/template.html" %}
+
+{% block title %}Cari Rumah{% endblock %}
+
+{% block header_title %}Cari Rumah{% endblock %}
+
+{% block content %}
+
+<div>
+    <form action="/user_register" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        <label for="nama_lengkap">Nama Lengkap</label>
+        <input type="text" name="nama_lengkap" id="nama_lengkap">
+        <br>
+
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email">
+        <br>
+
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password">
+        <br>
+
+        <label for="password">Konfirmasi Password</label>
+        <input type="password" name="password" id="password">
+        <br>
+
+        <button type="submit" name="user_login">Login</button>
+    </form>
+</div>
+
+{% endblock %}
