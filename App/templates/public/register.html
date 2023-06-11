@@ -7,7 +7,7 @@
 {% block content %}
 
 <div>
-    <form action="/user_login" method="post">
+    <form action="/user_register" method="post">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
         <label for="nama_lengkap">Nama Lengkap</label>

@@ -29,8 +29,10 @@ def start_app():
     login_manager.login_message = "Silahkan login terlebih dahulu."
 
     # database
-    db.init_app(app)
+    from . import models
     from .models import User
+
+    db.init_app(app)
 
     # blueprint import
     from .admin_views import admin_views
@@ -46,14 +48,20 @@ def start_app():
     # cross site request forgery protection
     csrf.init_app(app)
 
-    # create app
+    # login manager initiation
+    @login_manager.user_loader
+    def load_user(id):
+        return User.query.get(int(id))
+
+    # generate database
     create_database(app)
 
     return app
 
 
 def create_database(app):
-    if not os.path.exists("App/" + DB_NAME):
+    if not os.path.exists(f"App/{DB_NAME}"):
         db.create_all(app=app)
-        print("[+] database succesfully generated!")
-    print("[-] database already generated!")
+        print(f"[+] Database successfully created!")
+        return
+    print(f"[-] Dabase already exist!")

@@ -1,4 +1,5 @@
 from App import start_app
+from App import db
 
 
 app = start_app()
