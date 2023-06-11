@@ -30,7 +30,8 @@ def handle_login():
 
     if to_login_user:
         if check_password_hash(to_login_user.password, password):
-            pass
+            login_user(to_login_user)
+            return redirect("/profile")
 
     return redirect("/login")
 
