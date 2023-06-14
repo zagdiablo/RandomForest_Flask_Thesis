@@ -64,6 +64,12 @@
 
               <input type="submit" value="Sign In" class="sign-btn" />
 
+           <!-- 
+            Tombol Tes Sweetalert Login gagal dan berhasil 
+            - Ganti nama function menjadi tes pada script dibawah    
+            -->
+            <!-- <button class="btn btn-primary" id="tes">Tes</button> -->
+
               <p class="text">
                 Lupa Password atau detail login anda?
                 <a href="#">Dapatkan Bantuan</a> Login
@@ -96,6 +102,10 @@
                 <input type="password" name="password" minlength="4" class="input-field" autocomplete="off" required />
                 <label>Password</label>
               </div>
+              <div class="input-wrap">
+                <input type="password" name="password" minlength="4" class="input-field" autocomplete="off" required />
+                <label>Confirm Password</label>
+              </div>
 
               <input type="submit" value="Sign Up" class="sign-btn" />
 
@@ -118,6 +128,46 @@
   <!-- Javascript file -->
 
   <script src="{{ url_for('static', filename='js/login_register.js') }}"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.7.0.js"
+  integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+  crossorigin="anonymous"></script>
+
+
+  <script>
+
+
+
+$(document).ready(function() {
+  $("#tes").click(function() {
+    tes();
+  });
+});
+
+// Login berhasil
+
+function loginSuccess() { 
+  Swal.fire(
+  'Success!',
+  'Berhasl Login!',
+  'success'
+)
+ }
+
+
+
+// Login Gagal
+
+function loginFailed() {
+  Swal.fire({
+  icon: 'error',
+  title: 'Error',
+  text: 'Email atau Password Salah!',
+})
+}
+
+</script>
 </body>
 
 </html>

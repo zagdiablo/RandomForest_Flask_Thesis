@@ -1,22 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Homeverse - Find your dream house</title>
-    <link
-      rel="shortcut icon"
-      href="./assets/images/icon.png"
-      type="image/svg+xml"
-    />
-    <link rel="stylesheet" href="./assets/css/style.css" />
 
     <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
-      integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
-      crossorigin="anonymous"
+      rel="shortcut icon"
+      href="assets/images/icon.png"
+      type="image/svg+xml"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -24,176 +17,45 @@
       href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
 
   <style>
-  
-    .card-wrapper {
-      max-width: 1100px;
-      margin: 0 auto;
+    body {
+      font-family: var(--ff-poppins);
     }
-    img {
-      width: 100%;
-      display: block;
+
+    .form-control:focus {
+      box-shadow: none;
+      border-color: #ba68c8;
     }
-    .img-display {
-      overflow: hidden;
+
+    .labels {
+      font-size: 11px;
     }
-    .img-showcase {
-      display: flex;
-      width: 100%;
-      transition: all 0.5s ease;
-    }
-    .img-showcase img {
-      min-width: 100%;
-    }
-    .img-select {
-      display: flex;
-    }
-    .img-item {
-      margin: 0.3rem;
-    }
-    .img-item:nth-child(1),
-    .img-item:nth-child(2),
-    .img-item:nth-child(3) {
-      margin-right: 0;
-    }
-    .img-item:hover {
-      opacity: 0.8;
-    }
-    .product-content {
-      padding: 2rem 1rem;
-    }
-    .product-title {
-      font-size: 3rem;
-      text-transform: capitalize;
-      font-weight: 700;
-      position: relative;
-      color: #12263a;
-      margin: 1rem 0;
-    }
-    .product-title::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      height: 4px;
-      width: 80px;
-      background: #12263a;
-    }
-    .product-link {
-      text-decoration: none;
-      text-transform: uppercase;
-      font-weight: 400;
-      font-size: 0.9rem;
-      display: inline-block;
-      margin-bottom: 0.5rem;
-      background: #256eff;
+    .add-experience:hover {
+      background: var(--orange-soda);
       color: #fff;
-      padding: 0 0.3rem;
-      transition: all 0.5s ease;
-    }
-    .product-link:hover {
-      opacity: 0.9;
-    }
-    .product-rating {
-      color: #ffc107;
-    }
-    .product-rating span {
-      font-weight: 600;
-      color: #252525;
-    }
-    .product-price {
-      color: var(--orange-soda);
+      cursor: pointer;
+      border: solid 1px var(--prussian-blue);
     }
 
-    .last-price span {
-      color: #f64749;
-      text-decoration: line-through;
+    #googleMap {
+      width: 80%;
+      height: 400px;
+      margin: 10px auto;
     }
-    .new-price span {
-      color: #256eff;
-    }
-    .product-detail h2 {
-      text-transform: capitalize;
-      color: #12263a;
-      padding-bottom: 0.6rem;
-    }
-    .product-detail p {
-      font-size: 0.9rem;
-      padding: 0.3rem;
-      opacity: 0.8;
-    }
-    .product-detail ul {
-      margin: 1rem 0;
-      font-size: 0.9rem;
-    }
-    .product-detail ul li {
-      margin: 0;
-      list-style: none;
-      background: url(shoes_images/checked.png) left center no-repeat;
-      background-size: 18px;
-      padding-left: 1.7rem;
-      margin: 0.4rem 0;
-      font-weight: 600;
-      opacity: 0.9;
-    }
-    .product-detail ul li span {
-      font-weight: 400;
-    }
-   
-    .social-links {
-      display: flex;
-      align-items: center;
-    }
-    .social-links a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 32px;
-      height: 32px;
-      color: #000;
-      border: 1px solid #000;
-      margin: 0 0.2rem;
-      border-radius: 50%;
-      text-decoration: none;
-      font-size: 0.8rem;
-      transition: all 0.5s ease;
-    }
-    .social-links a:hover {
-      background: #000;
-      border-color: transparent;
-      color: #fff;
-    }
-
-    
-
-    @media screen and (min-width: 992px) {
-      .card {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 1.5rem;
-      }
-      .card-wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      .product-imgs {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-      .product-content {
-        padding-top: 0;
-      }
-    }
-
-    .location{
-      display: flex;
-    }
-    
-
   </style>
 
   <body>
@@ -215,7 +77,9 @@
               <a href="#" class="header-top-link">
                 <ion-icon name="location-outline"></ion-icon>
 
-                <address>Tanggerang Selatan,Banten,Indonesia</address>
+                <address style="display: block; margin-bottom: 0">
+                  Tanggerang Selatan,Banten,Indonesia
+                </address>
               </a>
             </li>
           </ul>
@@ -246,8 +110,6 @@
                 </a>
               </li>
             </ul>
-
-           
           </div>
         </div>
       </div>
@@ -258,7 +120,7 @@
             <img src="./assets/images/logo.png" alt="Homeverse logo" />
           </a>
 
-          <nav class="navbar" data-navbar>
+          <nav class="navbar" data-navbar style="display: block">
             <div class="navbar-top">
               <a href="#" class="logo">
                 <img src="./assets/images/logo.png" alt="Homeverse logo" />
@@ -320,107 +182,95 @@
       </div>
     </header>
 
-    <main style="margin: 100px;">
+    <main>
       <article>
-        <div class="container">
-          <div class="card-wrapper mt-3 mb-3 p-3">
-            <div class="card">
-              <!-- card left -->
-              <div class="product-imgs">
-                <div class="img-display">
-                  <div class="img-showcase">
-                    <img src="./assets/images/blog-1.png" alt="shoe image" />
-                    <img src="./assets/images/blog-1.png" alt="shoe image" />
-                    <img src="./assets/images/blog-1.png" alt="shoe image" />
-                    <img src="./assets/images/blog-1.png" alt="shoe image" />
-                  </div>
-                </div>
-                <div class="img-select">
-                  <div class="img-item">
-                    <a href="#" data-id="1">
-                      <img src="./assets/images/blog-1.png" alt="shoe image" />
-                    </a>
-                  </div>
-                  <div class="img-item">
-                    <a href="#" data-id="2">
-                      <img src="./assets/images/blog-1.png" alt="shoe image" />
-                    </a>
-                  </div>
-                  <div class="img-item">
-                    <a href="#" data-id="3">
-                      <img src="./assets/images/blog-1.png" alt="shoe image" />
-                    </a>
-                  </div>
-                  <div class="img-item">
-                    <a href="#" data-id="4">
-                      <img src="./assets/images/blog-1.png" alt="shoe image" />
-                    </a>
-                  </div>
-                </div>
+        <div
+          class="container rounded bg-white mt-5 mb-5"
+          style="
+            box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
+              rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+          "
+        >
+          <div class="row">
+            <div class="col-md-4 border-right">
+              <div
+                class="d-flex flex-column align-items-center text-center p-3 py-5"
+              >
+                <img
+                  class="rounded-circle"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQF2psCzfbB611rnUhxgMi-lc2oB78ykqDGYb4v83xQ1pAbhPiB&usqp=CAU"
+                /><span class="font-weight-bold">Amelly</span
+                ><span class="text-black-50">amelly12@bbb.com</span
+                ><span> </span>
               </div>
-              <!-- card right -->
-              <div class="product-content">
-                <h2 class="product-title">Pamulang Regency</h2>
-
-                <div class="location">
-                  <ion-icon name="location-outline"></ion-icon>
-                  <address>Viktor</address>
+            </div>
+            <div class="col-md-5 border-right">
+              <div class="p-3 py-5">
+                <div
+                  class="d-flex align-items-center"
+                >
+                  <h4 class="text-right">Profile Settings</h4>
                 </div>
 
-                <!-- <div class = "product-rating">
-                  <i class = "fas fa-star"></i>
-                  <i class = "fas fa-star"></i>
-                  <i class = "fas fa-star"></i>
-                  <i class = "fas fa-star"></i>
-                  <i class = "fas fa-star-half-alt"></i>
-                  <span>4.7(21)</span>
-                </div> -->
-
-                <div class="product-price">
-                  <strong><h1>Rp1.500.000.000</h1></strong>
+                <div class="row mt-3">
+                  <div class="col-md-12">
+                    <label class="labels">Nama Lengkap</label
+                    ><input
+                      type="text"
+                      class="form-control"
+                      placeholder="Nama"
+                      value=""
+                    />
+                  </div>
+                  <div class="col-md-12">
+                    <label class="labels">Email</label
+                    ><input
+                      type="text"
+                      class="form-control"
+                      placeholder="Email"
+                      value=""
+                    />
+                  </div>
+                  <div class="col-md-12">
+                    <label class="labels">Range Gaji</label>
+                    <select
+                      class="form-select"
+                      aria-label="Default select example"
+                    >
+                      <option selected>Pilih Range</option>
+                      <option value="1">1jt - 3jt</option>
+                      <option value="2">3jt - 6jt</option>
+                      <option value="3">>6jt</option>
+                    </select>
+                  </div>
+                  <div class="col-md-12 mt-5">
+                    <label class="labels">Lokasi tempat kerja</label
+                    ><input
+                      type="text"
+                      class="form-control"
+                      placeholder="Lokasi Kerja"
+                      value=""
+                    />
+                  </div>
                 </div>
 
-                <div class="product-detail">
-                  <h2>about this item:</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Illo eveniet veniam tempora fuga tenetur placeat sapiente
-                    architecto illum soluta consequuntur, aspernatur quidem at
-                    sequi ipsa!
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Consequatur, perferendis eius. Dignissimos, labore suscipit.
-                    Unde.
-                  </p>
-                  <ul>
-                    <li>Color: <span>Black</span></li>
-                    <li>Available: <span>in stock</span></li>
-                    <li>Category: <span>Shoes</span></li>
-                    <li>Shipping Area: <span>All over the world</span></li>
-                    <li>Shipping Fee: <span>Free</span></li>
-                  </ul>
-                </div>
-
-                <div class="social-links">
-                  <p>Share At:</p>
-                  <a href="#">
-                    <i class="fab fa-facebook-f"></i>
-                  </a>
-                  <a href="#">
-                    <i class="fab fa-twitter"></i>
-                  </a>
-                  <a href="#">
-                    <i class="fab fa-instagram"></i>
-                  </a>
-                  <a href="#">
-                    <i class="fab fa-whatsapp"></i>
-                  </a>
-                  <a href="#">
-                    <i class="fab fa-pinterest"></i>
-                  </a>
-                </div>
+              
               </div>
+            </div>
+           
+          </div>
+
+          <div class="row">
+            <div class="mt-3">
+              <div id="googleMap"></div>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top: -10px;">
+            <div class="mt-5 text-center">
+              <button class="btn btn-primary profile-button" type="button">
+                Save Profile
+              </button>
             </div>
           </div>
         </div>
@@ -564,9 +414,7 @@
         </div>
       </div>
     </footer>
-
     <script src="./assets/js/script.js"></script>
-    <script src="./assets/js/detail-rumah.js"></script>
 
     <script
       type="module"
@@ -576,5 +424,112 @@
       nomodule
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
     ></script>
+
+    <script>
+      const sorting = document.querySelector(".selectpicker");
+      const commentSorting = document.querySelector(".selectpicker");
+      const sortingchoices = new Choices(sorting, {
+        placeholder: false,
+        itemSelectText: "",
+      });
+
+      // Trick to apply your custom classes to generated dropdown menu
+      let sortingClass = sorting.getAttribute("class");
+      window.onload = function () {
+        sorting.parentElement.setAttribute("class", sortingClass);
+      };
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwqGQ5BbN_hu-bSFX7aHvqMDW2C2tK5Yo"></script>
+
+    <script>
+      // var map;
+      // var directionsService = new google.maps.DirectionsService();
+      // var directionsDisplay = new google.maps.DirectionsRenderer();
+      // var harga = 1.7;
+
+      // map = new google.maps.Map(document.getElementById("googleMap"), {
+      //   center: {
+      //     lat: -7.960996,
+      //     lng: 112.618634,
+      //   },
+      //   zoom: 16,
+      // });
+      // directionsDisplay.setMap(map);
+
+//javascript.js
+//set map options
+var myLatLng = { lat: 38.3460, lng: -0.4907 };
+var mapOptions = {
+    center: myLatLng,
+    zoom: 7,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+
+};
+
+//create map
+var map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
+
+//create a DirectionsService object to use the route method and get a result for our request
+var directionsService = new google.maps.DirectionsService();
+
+//create a DirectionsRenderer object which we will use to display the route
+var directionsDisplay = new google.maps.DirectionsRenderer();
+
+//bind the DirectionsRenderer to the map
+directionsDisplay.setMap(map);
+
+
+//define calcRoute function
+function calcRoute() {
+    //create request
+    var request = {
+        origin: document.getElementById("from").value,
+        destination: document.getElementById("to").value,
+        travelMode: google.maps.TravelMode.DRIVING, //WALKING, BYCYCLING, TRANSIT
+        unitSystem: google.maps.UnitSystem.IMPERIAL
+    }
+
+    //pass the request to the route method
+    directionsService.route(request, function (result, status) {
+        if (status == google.maps.DirectionsStatus.OK) {
+
+            //Get distance and time
+            const output = document.querySelector('#output');
+            output.innerHTML = "<div class='alert-info'>From: " 
+            + document.getElementById("from").value + ".<br />To: " 
+            + document.getElementById("to").value + ".<br /> Driving distance <i class='fas fa-road'></i> : " 
+            + result.routes[0].legs[0].distance.text + ".<br />Duration <i class='fas fa-hourglass-start'></i> : " 
+            + result.routes[0].legs[0].duration.text + ".</div>";
+
+            //display route
+            directionsDisplay.setDirections(result);
+        } else {
+            //delete route from map
+            directionsDisplay.setDirections({ routes: [] });
+            //center map in London
+            map.setCenter(myLatLng);
+
+            //show error message
+            output.innerHTML = "<div class='alert-danger'><i class='fas fa-exclamation-triangle'></i> Could not retrieve driving distance.</div>";
+        }
+    });
+
+}
+
+
+
+//create autocomplete objects for all inputs
+var options = {
+    types: ['(cities)']
+}
+
+var input1 = document.getElementById("from");
+var autocomplete1 = new google.maps.places.Autocomplete(input1, options);
+
+var input2 = document.getElementById("to");
+var autocomplete2 = new google.maps.places.Autocomplete(input2, options);
+
+
+    </script>
   </body>
 </html>

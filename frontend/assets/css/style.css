@@ -1645,5 +1645,12 @@ button, a { transition: var(--transition); }
   .footer { --fs-5: 1rem; }
 
   .footer-link-box { flex-basis: 700px; }
+  
 
+}
+
+@media (max-width: 1199px){
+  .header-top-btn{
+    margin-bottom: 10px;
+  }
 }
