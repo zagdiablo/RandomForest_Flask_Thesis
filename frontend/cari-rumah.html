@@ -25,8 +25,10 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap"
     rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./assets/css/bootstrap-5/css/bootstrap.min.css">
+    <script src="./assets/css/bootstrap-5/js/bootstrap.bundle.min.js"></script>
+    
+ 
     <link rel="stylesheet" href="./assets/css/style.css">
 
 
@@ -54,6 +56,10 @@
 #search-icon{
     color: var(--prussian-blue);
     font-size: 30px;
+}
+
+.header-top{
+  line-height: 1.2;
 }
 
 .button-cari{
@@ -154,7 +160,7 @@ fieldset > * + * {
     <div class="header-top">
       <div class="container">
 
-        <ul class="header-top-list">
+        <ul class="header-top-list" style="margin-bottom: 0px;" >
 
           <li>
             <a href="mailto:info@homeverse.com" class="header-top-link">
@@ -175,7 +181,7 @@ fieldset > * + * {
         </ul>
 
         <div class="wrapper">
-          <ul class="header-top-social-list">
+          <ul class="header-top-social-list" style="margin-bottom: 0px;">
 
             <li>
               <a href="#" class="header-top-social-link">
@@ -215,7 +221,7 @@ fieldset > * + * {
           <img src="./assets/images/logo.png" alt="Homeverse logo" />
         </a>
 
-        <nav class="navbar" data-navbar>
+        <nav class="navbar" data-navbar style=" line-height: 0;">
           <div class="navbar-top">
             <a href="#" class="logo">
               <img src="./assets/images/logo.png" alt="Homeverse logo" />
@@ -256,7 +262,7 @@ fieldset > * + * {
                 >
               </li>
               <li>
-                <button class="header-top-btn">Login</button>
+                <button class="header-top-btn" style="padding: 20px;">Login</button>
               </li>
             </ul>
           </div>
@@ -278,7 +284,11 @@ fieldset > * + * {
 
   </header>
 
-
+<style>
+  #kecamatan:focus{
+    border: none;
+  }
+</style>
   
   <main>
     <article>
@@ -293,8 +303,14 @@ fieldset > * + * {
                     style="border-radius: 10em; ">
                     <div class="card-body p-2">
                       <div class="input-group input-group-lg">
-                        <input type="text" class="form-control form-control-lg rounde bg-transparent"
-                          placeholder="Kecamatan" aria-label="Cari Lokasi" aria-describedby="basic-addon2" style="color: var(--prussian-blue)" />
+                        <!-- <input type="text" class="form-control form-control-lg rounde bg-transparent"
+                          placeholder="Kecamatan" aria-label="Cari Lokasi" aria-describedby="basic-addon2" style="color: var(--prussian-blue)" /> -->
+                          <select class="form-select bg-transparent" id="kecamatan" style="border: none;" aria-label="Default select example">
+                            <option selected>Kecamatan</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select> 
                         <span  class="input-group-text border-0" id="basic-addon2" style="background: transparent;">
                             <ion-icon id="search-icon"  name="location"></ion-icon>
                         </span>
