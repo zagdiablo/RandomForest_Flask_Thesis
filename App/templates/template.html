@@ -32,11 +32,16 @@
     <h1>{% block header_title %}{% endblock %}</h1>
     <br><br>
     <ul>
+        <li><a href="/">Home</a></li>
         <li><a href="/cari_rumah">Cari Rumah</a></li>
         <li><a href="/about">Tentang</a></li>
         <li><a href="/contact">Kontak</a></li>
+        {% if user_is_authenticated %}
+        <li><a href="/logout">Logout</a></li>
+        {% else %}
         <li><a href="/login">Login</a></li>
         <li><a href="/register">Register</a></li>
+        {% endif %}
     </ul>
 
     {% block content %}

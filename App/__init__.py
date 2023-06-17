@@ -24,7 +24,7 @@ def start_app():
 
     # login manager
     login_manager = LoginManager()
-    login_manager.login_view = "public_auth.handle_login"
+    login_manager.login_view = "public_auth.login_page"
     login_manager.init_app(app)
     login_manager.login_message = "Silahkan login terlebih dahulu."
 

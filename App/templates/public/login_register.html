@@ -8,6 +8,8 @@
   <title>Sign in & Sign up Form</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/login_register.css')}}" />
   <!-- <link rel="stylesheet" href="../assets/css/style.css" /> -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 
 <body>
@@ -16,33 +18,12 @@
       <div class="inner-box">
         <div class="forms-wrap">
 
-          <!-- Alert logic -->
-          {% with messages = get_flashed_messages(with_categories=true) %} {% if
-          messages %} {% for category, message in messages %} {% if category ==
-          'error' %}
-          <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-          {% elif category == 'warning' %}
-          <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-          {% else %}
-          <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-          {% endif %} {% endfor %} {% endif %} {% endwith %}
-          <!-- end alert logic -->
-
           <!-- Login form -->
           <form action="/handle_login" autocomplete="off" class="sign-in-form" method="post">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
             <div class="logo">
-              <img src="{{ url_for('static', filename='images/logo.png') }}" alt="easyclass" />
+              <a href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="easyclass" /></a>
             </div>
 
             <div class="heading">
@@ -50,6 +31,24 @@
               <h6>Belum terdaftar?</h6>
               <a href="#" class="toggle">Sign Up</a>
             </div>
+
+            <!-- Alert logic -->
+            {% with messages = get_flashed_messages(with_categories=true) %} {% if
+            messages %} {% for category, message in messages %} {% if category ==
+            'error' %}
+            <div class="alert alert-danger" role="alert">
+              {{ message }}
+            </div>
+            {% elif category == 'warning' %}
+            <div class="alert alert-warning" role="alert">
+              {{ message }}
+            </div>
+            {% else %}
+            <div class="alert alert-success" role="alert">
+              {{ message }}
+            </div>
+            {% endif %} {% endfor %} {% endif %} {% endwith %}
+            <!-- end alert logic -->
 
             <div class="actual-form">
               <div class="input-wrap">
@@ -62,13 +61,15 @@
                 <label>Password</label>
               </div>
 
-              <input type="submit" value="Sign In" class="sign-btn" />
+              <!-- TODO alert username dan password salah -->
+              <!-- <input type="submit" value="Sign In" class="sign-btn" /> -->
+              <button class="sign-btn" id="tes">Login</button>
 
-           <!-- 
+              <!-- 
             Tombol Tes Sweetalert Login gagal dan berhasil 
             - Ganti nama function menjadi tes pada script dibawah    
             -->
-            <!-- <button class="btn btn-primary" id="tes">Tes</button> -->
+              <!-- <button class="btn btn-primary" id="tes" onclick="loginSuccess()">Tes</button> -->
 
               <p class="text">
                 Lupa Password atau detail login anda?
@@ -103,7 +104,8 @@
                 <label>Password</label>
               </div>
               <div class="input-wrap">
-                <input type="password" name="password" minlength="4" class="input-field" autocomplete="off" required />
+                <input type="password" name="confirm-password" minlength="4" class="input-field" autocomplete="off"
+                  required />
                 <label>Confirm Password</label>
               </div>
 
@@ -129,45 +131,43 @@
 
   <script src="{{ url_for('static', filename='js/login_register.js') }}"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-  <script
-  src="https://code.jquery.com/jquery-3.7.0.js"
-  integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
-  crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+    crossorigin="anonymous"></script>
 
 
   <script>
 
 
 
-$(document).ready(function() {
-  $("#tes").click(function() {
-    tes();
-  });
-});
+    $(document).ready(function () {
+      $("#tes").click(function () {
+        tes();
+      });
+    });
 
-// Login berhasil
+    // Login berhasil
 
-function loginSuccess() { 
-  Swal.fire(
-  'Success!',
-  'Berhasl Login!',
-  'success'
-)
- }
+    function loginSuccess() {
+      Swal.fire(
+        'Success!',
+        'Berhasl Login!',
+        'success'
+      )
+    }
 
 
 
-// Login Gagal
+    // Login Gagal
 
-function loginFailed() {
-  Swal.fire({
-  icon: 'error',
-  title: 'Error',
-  text: 'Email atau Password Salah!',
-})
-}
+    function loginFailed() {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Email atau Password Salah!',
+      })
+    }
 
-</script>
+  </script>
 </body>
 
 </html>

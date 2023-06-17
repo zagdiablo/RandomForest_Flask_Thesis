@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template, redirect, request
-from flask_login import login_required
+from flask_login import login_required, current_user
+
+from .models import User
 
 
 #####
@@ -23,7 +25,11 @@ def init():
 # API untuk handle halaman home
 @public_views.route("/home", methods=["GET"])
 def home_page():
-    return render_template("public/home.html")
+    user_is_authenticated = current_user.is_authenticated
+
+    return render_template(
+        "public/home.html", user_is_authenticated=user_is_authenticated
+    )
 
 
 #
@@ -31,14 +37,18 @@ def home_page():
 # API untuk handle halaman pencarian rumah
 @public_views.route("/cari_rumah", methods=["GET"])
 def cari_rumah_page():
-    return render_template("public/cari_rumah.html")
+    user_is_authenticated = current_user.is_authenticated
+
+    return render_template(
+        "public/cari_rumah.html", user_is_authenticated=user_is_authenticated
+    )
 
 
 @public_views.route("/get_price_suggestion", methods=["POST"])
 def get_price_suggestion():
     #####
     # TODO handle logika machine learning & query data hasil
-    # TODO requirement: untuk user yang belum login reange parameter gaji di tiadakan
+    # TODO requirement: untuk user yang belum login range parameter gaji dan kontak sales rumah di tiadakan
     lantai = request.form.get("lantai")
     ukuran = request.form.get("ukuran")
     print(lantai, ukuran)
@@ -52,7 +62,11 @@ def get_price_suggestion():
 # API untuk handle halaman tentang kami
 @public_views.route("/about", methods=["GET"])
 def about_page():
-    return render_template("public/about.html")
+    user_is_authenticated = current_user.is_authenticated
+
+    return render_template(
+        "public/about.html", user_is_authenticated=user_is_authenticated
+    )
 
 
 #
@@ -60,4 +74,8 @@ def about_page():
 # API untuk handle halaman kontak
 @public_views.route("/contact", methods=["GET"])
 def contact_page():
-    return render_template("public/contact.html")
+    user_is_authenticated = current_user.is_authenticated
+
+    return render_template(
+        "public/contact.html", user_is_authenticated=user_is_authenticated
+    )
