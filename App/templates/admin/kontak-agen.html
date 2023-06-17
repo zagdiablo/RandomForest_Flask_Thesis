@@ -92,54 +92,62 @@
                 <div class="page-title">
                     <div class="row">
                         <div class="col-12 col-md-6 order-md-1 order-last">
-                            <strong><h3>Kecamatan</h3></strong>
+                            <strong><h3>Agen</h3></strong>
                         </div>
                         <div class="col-12 col-md-6 order-md-2 order-first">
                             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                                 </ol>
                             </nav>
                         </div>
                     </div>
                 </div>
-                <section id="basic-vertical-layouts">
-                    <div class="row match-height">
-                        <div class="col-md-12 col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Tambah Kecamatan</h4>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        <form class="form form-vertical">
-                                            <div class="form-body">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div class="form-group">
-                                                            <label for="first-name-vertical"><strong>Nama Kecamatan</strong></label>
-                                                            <input type="text" id="first-name-vertical"
-                                                                class="form-control" name="fname"
-                                                                placeholder="Kecamatan">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 d-flex justify-content-end">
-                                                        <button type="submit"
-                                                            class="btn btn-primary me-1 mb-1">Tambah</button>
-                                                        <button type="reset"
-                                                            class="btn btn-light-secondary me-1 mb-1">Batal</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
+                <section class="section">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div class="row mt-2 mb-3">
+                                <div class="col-md-6">
+                                    
+                                    <a class="btn btn-primary" style="display: flex; align-items: center;width: 150px;" >
+                                        <i class="bi bi-plus-circle" style="font-size: 20px;margin-top: -5px;"></i>
+                                        <div class="txt" style="margin-left: 7px;">Tambah Agen</div>
+                                    </a>
                                 </div>
                             </div>
+
+                           <div class="table-responsive">
+                            <table class="table table-striped" id="table1">
+                                <thead>
+                                    <tr>
+                                        <th>Nomor</th>
+                                        <th>Nama Agen</th>
+                                        <th>Telepon</th>
+                                        <th>Email</th>
+                                        <th>Whatsapp</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                    
+                                    <tr>
+                                        <td>1</td>
+                                       <td>Agen1</td>
+                                       <td>02132424</td>
+                                       <td>Agen1@gmail.com</td>
+                                       <td>0824448484</td>
+                                        <td>
+                                            <span class="badge bg-warning">Edit</span>
+                                            <span class="badge bg-danger">Delete</span>
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                           </div>
                         </div>
-                        
                     </div>
+
                 </section>
-           
             </div>
 
             <footer>
