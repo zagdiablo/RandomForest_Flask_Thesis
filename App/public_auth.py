@@ -66,6 +66,10 @@ def handle_register():
     password = request.form.get("password")
     confirm_password = request.form.get("confirm-password")
 
+    if email == "admin@admin.com":
+        flash("Format email tidak valid")
+        return redirect("/register")
+
     check_user = User.query.filter_by(email=email).first()
     if password == confirm_password:
         if not check_user:

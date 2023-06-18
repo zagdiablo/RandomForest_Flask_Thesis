@@ -8,19 +8,19 @@
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
 
-    <link rel="stylesheet" href="assets/vendors/iconly/bold.css">
-<!--     
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendors/iconly/bold.css') }}">
+    <!--     
     <link rel="stylesheet" href="assets/vendors/dripicons/webfont.css">
     <link rel="stylesheet" href="assets/css/pages/dripicons.css"> -->
-    <link rel="stylesheet" href="assets/vendors/simple-datatables/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendors/simple-datatables/style.css') }}">
 
-    <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendors/bootstrap-icons/bootstrap-icons.css') }}">
 
-    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
-    <link rel="stylesheet" href="assets/css/app.css">
-    <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.svg') }}" type="image/x-icon">
 </head>
 
 <body>
@@ -30,7 +30,8 @@
                 <div class="sidebar-header">
                     <div class="d-flex justify-content-between">
                         <div class="logo">
-                            <a href="index.html"><img src="assets/images/logo/logo.png" alt="Logo"  style="height: 3rem;"></a>
+                            <a href="index.html"><img src="assets/images/logo/logo.png" alt="Logo"
+                                    style="height: 3rem;"></a>
                         </div>
                         <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -47,7 +48,7 @@
                                 <span>Dashboard</span>
                             </a>
                         </li>
-                        
+
                         <li class="sidebar-item">
                             <a href="kecamatan.html" class='sidebar-link'>
                                 <i class="bi bi-geo-fill"></i>
@@ -92,11 +93,13 @@
                 <div class="page-title">
                     <div class="row">
                         <div class="col-12 col-md-6 order-md-1 order-last">
-                            <strong><h3>Kecamatan</h3></strong>
+                            <strong>
+                                <h3>Kecamatan</h3>
+                            </strong>
                         </div>
                         <div class="col-12 col-md-6 order-md-2 order-first">
                             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                              
+
                             </nav>
                         </div>
                     </div>
@@ -107,252 +110,40 @@
 
                             <div class="row mt-2 mb-3">
                                 <div class="col-md-6">
-                                    
-                                    <a href="tambah-kecamatan.html" class="btn btn-primary" style="display: flex; align-items: center;width: 200px;">
+
+                                    <a href="tambah-kecamatan.html" class="btn btn-primary"
+                                        style="display: flex; align-items: center;width: 200px;">
                                         <i class="bi bi-plus-circle" style="font-size: 20px;margin-top: -5px;"></i>
                                         <div class="txt" style="margin-left: 8px;">Tambah Kecamatan</div>
                                     </a href="tambah-kecamatan.html">
                                 </div>
                             </div>
 
-                           <div class="table-responsive">
-                            <table class="table table-striped" id="table1">
-                                <thead>
-                                    <tr>
-                                        <th>Nomor</th>
-                                        <th>Nama Kecamatan</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                    
-                                    <tr>
-                                        <td>1</td>
-                                       <td>Viktor Pamulang</td>
-                                        <td>
-                                            <span class="badge bg-warning">Edit</span>
-                                            <span class="badge bg-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                       <td>Viktor Pamulang</td>
-                                        <td>
-                                            <span class="badge bg-warning">Edit</span>
-                                            <span class="badge bg-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                       <td>Viktor Pamulang</td>
-                                        <td>
-                                            <span class="badge bg-warning">Edit</span>
-                                            <span class="badge bg-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                       <td>Viktor Pamulang</td>
-                                        <td>
-                                            <span class="badge bg-warning">Edit</span>
-                                            <span class="badge bg-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                       <td>Viktor Pamulang</td>
-                                        <td>
-                                            <span class="badge bg-warning">Edit</span>
-                                            <span class="badge bg-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                       <td>Viktor Pamulang</td>
-                                        <td>
-                                            <span class="badge bg-warning">Edit</span>
-                                            <span class="badge bg-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                       <td>Viktor Pamulang</td>
-                                        <td>
-                                            <span class="badge bg-warning">Edit</span>
-                                            <span class="badge bg-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                       <td>Viktor Pamulang</td>
-                                        <td>
-                                            <span class="badge bg-warning">Edit</span>
-                                            <span class="badge bg-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                       <td>Viktor Pamulang</td>
-                                        <td>
-                                            <span class="badge bg-warning">Edit</span>
-                                            <span class="badge bg-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                       <td>Viktor Pamulang</td>
-                                        <td>
-                                            <span class="badge bg-warning">Edit</span>
-                                            <span class="badge bg-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                       <td>Viktor Pamulang</td>
-                                        <td>
-                                            <span class="badge bg-warning">Edit</span>
-                                            <span class="badge bg-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                       <td>Viktor Pamulang</td>
-                                        <td>
-                                            <span class="badge bg-warning">Edit</span>
-                                            <span class="badge bg-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                       <td>Viktor Pamulang</td>
-                                        <td>
-                                            <span class="badge bg-warning">Edit</span>
-                                            <span class="badge bg-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                       <td>Viktor Pamulang</td>
-                                        <td>
-                                            <span class="badge bg-warning">Edit</span>
-                                            <span class="badge bg-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                       <td>Viktor Pamulang</td>
-                                        <td>
-                                            <span class="badge bg-warning">Edit</span>
-                                            <span class="badge bg-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                       <td>Viktor Pamulang</td>
-                                        <td>
-                                            <span class="badge bg-warning">Edit</span>
-                                            <span class="badge bg-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                       <td>Viktor Pamulang</td>
-                                        <td>
-                                            <span class="badge bg-warning">Edit</span>
-                                            <span class="badge bg-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                       <td>Viktor Pamulang</td>
-                                        <td>
-                                            <span class="badge bg-warning">Edit</span>
-                                            <span class="badge bg-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                       <td>Viktor Pamulang</td>
-                                        <td>
-                                            <span class="badge bg-warning">Edit</span>
-                                            <span class="badge bg-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                       <td>Viktor Pamulang</td>
-                                        <td>
-                                            <span class="badge bg-warning">Edit</span>
-                                            <span class="badge bg-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                       <td>Viktor Pamulang</td>
-                                        <td>
-                                            <span class="badge bg-warning">Edit</span>
-                                            <span class="badge bg-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                       <td>Viktor Pamulang</td>
-                                        <td>
-                                            <span class="badge bg-warning">Edit</span>
-                                            <span class="badge bg-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                       <td>Viktor Pamulang</td>
-                                        <td>
-                                            <span class="badge bg-warning">Edit</span>
-                                            <span class="badge bg-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                       <td>Viktor Pamulang</td>
-                                        <td>
-                                            <span class="badge bg-warning">Edit</span>
-                                            <span class="badge bg-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                       <td>Viktor Pamulang</td>
-                                        <td>
-                                            <span class="badge bg-warning">Edit</span>
-                                            <span class="badge bg-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                       <td>Viktor Pamulang</td>
-                                        <td>
-                                            <span class="badge bg-warning">Edit</span>
-                                            <span class="badge bg-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                       <td>ciputat</td>
-                                        <td>
-                                            <span class="badge bg-warning">Edit</span>
-                                            <span class="badge bg-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                       <td>Viktor Pamulang</td>
-                                        <td>
-                                            <span class="badge bg-warning">Edit</span>
-                                            <span class="badge bg-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                           </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped" id="table1">
+                                    <thead>
+                                        <tr>
+                                            <th>Nomor</th>
+                                            <th>Nama Kecamatan</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        {% for num in range(20) %}
+                                        <tr>
+                                            <td>{{ num+1 }}</td>
+                                            <td>Viktor Pamulang</td>
+                                            <td>
+                                                <span class="badge bg-warning">Edit</span>
+                                                <span class="badge bg-danger">Delete</span>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
 

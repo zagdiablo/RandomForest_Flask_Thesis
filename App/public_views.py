@@ -109,6 +109,14 @@ def get_price_suggestion():
 
 #
 #
+# API untuk handle detail rumah
+@public_views.route("/detail_rumah", methods=["GET"])
+def detail_rumah():
+    return render_template("public/detail-rumah.html")
+
+
+#
+#
 # API untuk handle halaman tentang kami
 @public_views.route("/about", methods=["GET"])
 def about_page():
