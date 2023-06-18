@@ -504,46 +504,37 @@
                         <h2 class="h2 section-title">Rekomendasi Kami</h2>
                         <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
 
+                            {% for num in range(3) %}
                             <div class="col">
                                 <div class="property-card">
-
                                     <figure class="card-banner">
-
-                                        <a href="#">
+                                        <!-- TODO link detail rumah -->
+                                        <a href="/detail_rumah">
                                             <img src="{{ url_for('static', filename='images/property-4.png') }}"
                                                 alt="Luxury villa in Rego Park" class="w-100">
                                         </a>
-
                                         <div class="card-badge orange">Dijual</div>
-
                                         <div class="banner-actions">
-
                                             <button class="banner-actions-btn">
                                                 <ion-icon name="location"></ion-icon>
 
                                                 <address>Serpong</address>
                                             </button>
-
                                         </div>
-
                                     </figure>
 
                                     <div class="card-content">
-
                                         <div class="card-price">
                                             <strong>Rp6.500.000</strong>/Bulan
                                         </div>
-
                                         <h3 class="h3 card-title">
-                                            <a href="#">Perumahan Batang Indah</a>
+                                            <!-- TODO link detail rumah -->
+                                            <a href="/detail_rumah">Perumahan Batang Indah</a>
                                         </h3>
-
                                         <p class="card-text">
                                             Rumah yang nyaman dan cocok untuk keluarga
                                         </p>
-
                                         <ul class="card-list">
-
                                             <li class="card-item">
                                                 <strong>3</strong>
 
@@ -551,237 +542,39 @@
 
                                                 <span>Kamar</span>
                                             </li>
-
                                             <li class="card-item">
                                                 <strong>2</strong>
-
                                                 <ion-icon name="man-outline"></ion-icon>
-
                                                 <span>Kamar Mandi</span>
                                             </li>
-
                                             <li class="card-item">
                                                 <strong>3450</strong>
-
                                                 <ion-icon name="square-outline"></ion-icon>
-
                                                 <span>Luas M2</span>
                                             </li>
-
                                         </ul>
-
                                     </div>
 
                                     <div class="card-footer">
-
                                         <div class="card-author">
-
                                             <figure class="author-avatar">
                                                 <img src="{{ url_for('static', filename='images/author.jpg') }}"
                                                     alt="Habibi Qodri" class="w-100">
                                             </figure>
-
                                             <div>
+                                                <!-- TODO sales link -->
                                                 <p class="author-name">
                                                     <a href="#">Habibi Qodri</a>
                                                 </p>
-
                                                 <p class="author-title">Agen Perumahan</p>
                                             </div>
-
                                         </div>
-
                                     </div>
-
                                 </div>
                             </div>
-
-                            <div class="col">
-                                <div class="property-card">
-
-                                    <figure class="card-banner">
-
-                                        <a href="#">
-                                            <img src="{{ url_for('static', filename='images/property-4.png') }}"
-                                                alt="Luxury villa in Rego Park" class="w-100">
-                                        </a>
-
-                                        <div class="card-badge orange">Dijual</div>
-
-                                        <div class="banner-actions">
-
-                                            <button class="banner-actions-btn">
-                                                <ion-icon name="location"></ion-icon>
-
-                                                <address>Serpong</address>
-                                            </button>
-
-                                        </div>
-
-                                    </figure>
-
-                                    <div class="card-content">
-
-                                        <div class="card-price">
-                                            <strong>Rp6.500.000</strong>/Bulan
-                                        </div>
-
-                                        <h3 class="h3 card-title">
-                                            <a href="#">Perumahan Batang Indah</a>
-                                        </h3>
-
-                                        <p class="card-text">
-                                            Rumah yang nyaman dan cocok untuk keluarga
-                                        </p>
-
-                                        <ul class="card-list">
-
-                                            <li class="card-item">
-                                                <strong>3</strong>
-
-                                                <ion-icon name="bed-outline"></ion-icon>
-
-                                                <span>Kamar</span>
-                                            </li>
-
-                                            <li class="card-item">
-                                                <strong>2</strong>
-
-                                                <ion-icon name="man-outline"></ion-icon>
-
-                                                <span>Kamar Mandi</span>
-                                            </li>
-
-                                            <li class="card-item">
-                                                <strong>3450</strong>
-
-                                                <ion-icon name="square-outline"></ion-icon>
-
-                                                <span>Luas M2</span>
-                                            </li>
-
-                                        </ul>
-
-                                    </div>
-
-                                    <div class="card-footer">
-
-                                        <div class="card-author">
-
-                                            <figure class="author-avatar">
-                                                <img src="{{ url_for('static', filename='images/author.jpg') }}"
-                                                    alt="Habibi Qodri" class="w-100">
-                                            </figure>
-
-                                            <div>
-                                                <p class="author-name">
-                                                    <a href="#">Habibi Qodri</a>
-                                                </p>
-
-                                                <p class="author-title">Agen Perumahan</p>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="property-card">
-
-                                    <figure class="card-banner">
-
-                                        <a href="#">
-                                            <img src="{{ url_for('static', filename='images/property-4.png') }}"
-                                                alt="Luxury villa in Rego Park" class="w-100">
-                                        </a>
-
-                                        <div class="card-badge orange">Dijual</div>
-
-                                        <div class="banner-actions">
-
-                                            <button class="banner-actions-btn">
-                                                <ion-icon name="location"></ion-icon>
-
-                                                <address>Serpong</address>
-                                            </button>
-
-                                        </div>
-
-                                    </figure>
-
-                                    <div class="card-content">
-
-                                        <div class="card-price">
-                                            <strong>Rp6.500.000</strong>/Bulan
-                                        </div>
-
-                                        <h3 class="h3 card-title">
-                                            <a href="#">Perumahan Batang Indah</a>
-                                        </h3>
-
-                                        <p class="card-text">
-                                            Rumah yang nyaman dan cocok untuk keluarga
-                                        </p>
-
-                                        <ul class="card-list">
-
-                                            <li class="card-item">
-                                                <strong>3</strong>
-
-                                                <ion-icon name="bed-outline"></ion-icon>
-
-                                                <span>Kamar</span>
-                                            </li>
-
-                                            <li class="card-item">
-                                                <strong>2</strong>
-
-                                                <ion-icon name="man-outline"></ion-icon>
-
-                                                <span>Kamar Mandi</span>
-                                            </li>
-
-                                            <li class="card-item">
-                                                <strong>3450</strong>
-
-                                                <ion-icon name="square-outline"></ion-icon>
-
-                                                <span>Luas M2</span>
-                                            </li>
-
-                                        </ul>
-
-                                    </div>
-
-                                    <div class="card-footer">
-
-                                        <div class="card-author">
-
-                                            <figure class="author-avatar">
-                                                <img src="{{ url_for('static', filename='images/author.jpg') }}"
-                                                    alt="Habibi Qodri" class="w-100">
-                                            </figure>
-
-                                            <div>
-                                                <p class="author-name">
-                                                    <a href="#">Habibi Qodri</a>
-                                                </p>
-
-                                                <p class="author-title">Agen Perumahan</p>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
+                            {% endfor %}
 
                         </div>
-
                     </div>
                 </section>
             </div>

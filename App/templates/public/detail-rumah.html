@@ -1,369 +1,373 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Homeverse - Find your dream house</title>
 
-    <link
-      rel="shortcut icon"
-      href="assets/images/icon.png"
-      type="image/svg+xml"
-    />
-    <link rel="stylesheet" href="./assets/css/style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-   
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Homeverse - Find your dream house</title>
 
-    
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <style>
-  
+  <link rel="shortcut icon" href="{{ url_for('static', filename='images/icon.png') }}" type="image/svg+xml" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+</head>
+<style>
+  .card-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  img {
+    width: 100%;
+    display: block;
+  }
+
+  .img-display {
+    overflow: hidden;
+  }
+
+  .img-showcase {
+    display: flex;
+    width: 100%;
+    transition: all 0.5s ease;
+  }
+
+  .img-showcase img {
+    min-width: 100%;
+  }
+
+  .img-select {
+    display: flex;
+  }
+
+  .img-item {
+    margin: 0.3rem;
+  }
+
+  .img-item:nth-child(1),
+  .img-item:nth-child(2),
+  .img-item:nth-child(3) {
+    margin-right: 0;
+  }
+
+  .img-item:hover {
+    opacity: 0.8;
+  }
+
+  .product-content {
+    padding: 2rem 1rem;
+  }
+
+  .product-title {
+    font-size: 3rem;
+    text-transform: capitalize;
+    font-weight: 700;
+    position: relative;
+    color: #12263a;
+    margin: 1rem 0;
+  }
+
+  .product-title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 4px;
+    width: 80px;
+    background: #12263a;
+  }
+
+  .product-link {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 0.9rem;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    background: #256eff;
+    color: #fff;
+    padding: 0 0.3rem;
+    transition: all 0.5s ease;
+  }
+
+  .product-link:hover {
+    opacity: 0.9;
+  }
+
+  .product-rating {
+    color: #ffc107;
+  }
+
+  .product-rating span {
+    font-weight: 600;
+    color: #252525;
+  }
+
+  .product-price {
+    color: var(--orange-soda);
+  }
+
+  .last-price span {
+    color: #f64749;
+    text-decoration: line-through;
+  }
+
+  .new-price span {
+    color: #256eff;
+  }
+
+  .product-detail h2 {
+    text-transform: capitalize;
+    color: #12263a;
+    padding-bottom: 0.6rem;
+  }
+
+  .product-detail p {
+    font-size: 0.9rem;
+    padding: 0.3rem;
+    opacity: 0.8;
+  }
+
+  .product-detail ul {
+    margin: 1rem 0;
+    font-size: 0.9rem;
+  }
+
+  .product-detail ul li {
+    margin: 0;
+    list-style: none;
+    background: url(shoes_images/checked.png) left center no-repeat;
+    background-size: 18px;
+    padding-left: 1.7rem;
+    margin: 0.4rem 0;
+    font-weight: 600;
+    opacity: 0.9;
+  }
+
+  .product-detail ul li span {
+    font-weight: 400;
+  }
+
+  .social-links {
+    display: flex;
+    align-items: center;
+  }
+
+  .social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    color: #000;
+    border: 1px solid #000;
+    margin: 0 0.2rem;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: all 0.5s ease;
+  }
+
+  .social-links a:hover {
+    background: #000;
+    border-color: transparent;
+    color: #fff;
+  }
+
+
+
+  @media screen and (min-width: 992px) {
+    .card {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 1.5rem;
+    }
+
     .card-wrapper {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    img {
-      width: 100%;
-      display: block;
-    }
-    .img-display {
-      overflow: hidden;
-    }
-    .img-showcase {
       display: flex;
-      width: 100%;
-      transition: all 0.5s ease;
-    }
-    .img-showcase img {
-      min-width: 100%;
-    }
-    .img-select {
-      display: flex;
-    }
-    .img-item {
-      margin: 0.3rem;
-    }
-    .img-item:nth-child(1),
-    .img-item:nth-child(2),
-    .img-item:nth-child(3) {
-      margin-right: 0;
-    }
-    .img-item:hover {
-      opacity: 0.8;
-    }
-    .product-content {
-      padding: 2rem 1rem;
-    }
-    .product-title {
-      font-size: 3rem;
-      text-transform: capitalize;
-      font-weight: 700;
-      position: relative;
-      color: #12263a;
-      margin: 1rem 0;
-    }
-    .product-title::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      height: 4px;
-      width: 80px;
-      background: #12263a;
-    }
-    .product-link {
-      text-decoration: none;
-      text-transform: uppercase;
-      font-weight: 400;
-      font-size: 0.9rem;
-      display: inline-block;
-      margin-bottom: 0.5rem;
-      background: #256eff;
-      color: #fff;
-      padding: 0 0.3rem;
-      transition: all 0.5s ease;
-    }
-    .product-link:hover {
-      opacity: 0.9;
-    }
-    .product-rating {
-      color: #ffc107;
-    }
-    .product-rating span {
-      font-weight: 600;
-      color: #252525;
-    }
-    .product-price {
-      color: var(--orange-soda);
-    }
-
-    .last-price span {
-      color: #f64749;
-      text-decoration: line-through;
-    }
-    .new-price span {
-      color: #256eff;
-    }
-    .product-detail h2 {
-      text-transform: capitalize;
-      color: #12263a;
-      padding-bottom: 0.6rem;
-    }
-    .product-detail p {
-      font-size: 0.9rem;
-      padding: 0.3rem;
-      opacity: 0.8;
-    }
-    .product-detail ul {
-      margin: 1rem 0;
-      font-size: 0.9rem;
-    }
-    .product-detail ul li {
-      margin: 0;
-      list-style: none;
-      background: url(shoes_images/checked.png) left center no-repeat;
-      background-size: 18px;
-      padding-left: 1.7rem;
-      margin: 0.4rem 0;
-      font-weight: 600;
-      opacity: 0.9;
-    }
-    .product-detail ul li span {
-      font-weight: 400;
-    }
-   
-    .social-links {
-      display: flex;
-      align-items: center;
-    }
-    .social-links a {
-      display: flex;
-      align-items: center;
       justify-content: center;
-      width: 32px;
-      height: 32px;
-      color: #000;
-      border: 1px solid #000;
-      margin: 0 0.2rem;
-      border-radius: 50%;
-      text-decoration: none;
-      font-size: 0.8rem;
-      transition: all 0.5s ease;
-    }
-    .social-links a:hover {
-      background: #000;
-      border-color: transparent;
-      color: #fff;
+      align-items: center;
     }
 
-    
-
-    @media screen and (min-width: 992px) {
-      .card {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 1.5rem;
-      }
-      .card-wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      .product-imgs {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-      .product-content {
-        padding-top: 0;
-      }
-    }
-
-    .location{
+    .product-imgs {
       display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
-    
 
-  </style>
+    .product-content {
+      padding-top: 0;
+    }
+  }
 
-  <body>
-    <header class="header" data-header>
-      <div class="overlay" data-overlay></div>
+  .location {
+    display: flex;
+  }
+</style>
 
-      <div class="header-top">
-        <div class="container">
-          <ul class="header-top-list">
+<body>
+  <header class="header" data-header>
+    <div class="overlay" data-overlay></div>
+
+    <div class="header-top">
+      <div class="container">
+        <ul class="header-top-list">
+          <li>
+            <a href="mailto:info@homeverse.com" class="header-top-link">
+              <ion-icon name="mail-outline"></ion-icon>
+
+              <span>rumahtangsel@gmail.com</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="header-top-link">
+              <ion-icon name="location-outline"></ion-icon>
+
+              <address>Tanggerang Selatan,Banten,Indonesia</address>
+            </a>
+          </li>
+        </ul>
+
+        <div class="wrapper">
+          <ul class="header-top-social-list">
             <li>
-              <a href="mailto:info@homeverse.com" class="header-top-link">
-                <ion-icon name="mail-outline"></ion-icon>
-
-                <span>rumahtangsel@gmail.com</span>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-facebook"></ion-icon>
               </a>
             </li>
 
             <li>
-              <a href="#" class="header-top-link">
-                <ion-icon name="location-outline"></ion-icon>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </a>
+            </li>
 
-                <address>Tanggerang Selatan,Banten,Indonesia</address>
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-pinterest"></ion-icon>
               </a>
             </li>
           </ul>
 
-          <div class="wrapper">
-            <ul class="header-top-social-list">
-              <li>
-                <a href="#" class="header-top-social-link">
-                  <ion-icon name="logo-facebook"></ion-icon>
-                </a>
-              </li>
 
-              <li>
-                <a href="#" class="header-top-social-link">
-                  <ion-icon name="logo-twitter"></ion-icon>
-                </a>
-              </li>
-
-              <li>
-                <a href="#" class="header-top-social-link">
-                  <ion-icon name="logo-instagram"></ion-icon>
-                </a>
-              </li>
-
-              <li>
-                <a href="#" class="header-top-social-link">
-                  <ion-icon name="logo-pinterest"></ion-icon>
-                </a>
-              </li>
-            </ul>
-
-           
-          </div>
         </div>
       </div>
+    </div>
 
-      <div class="header-bottom">
-        <div class="container">
-          <a href="#" class="logo">
-            <img src="./assets/images/logo.png" alt="Homeverse logo" />
-          </a>
+    <div class="header-bottom">
+      <div class="container">
+        <a href="#" class="logo">
+          <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Homeverse logo" />
+        </a>
 
-          <nav class="navbar" data-navbar>
-            <div class="navbar-top">
-              <a href="#" class="logo">
-                <img src="./assets/images/logo.png" alt="Homeverse logo" />
-              </a>
+        <nav class="navbar" data-navbar>
+          <div class="navbar-top">
+            <a href="#" class="logo">
+              <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Homeverse logo" />
+            </a>
 
-              <button
-                class="nav-close-btn"
-                data-nav-close-btn
-                aria-label="Close Menu"
-              >
-                <ion-icon name="close-outline"></ion-icon>
-              </button>
-            </div>
-
-            <div class="navbar-bottom">
-              <ul class="navbar-list">
-                <li>
-                  <a href="index.html" class="navbar-link" data-nav-link
-                    >Beranda</a
-                  >
-                </li>
-
-                <li>
-                  <a href="cari-rumah.html" class="navbar-link" data-nav-link
-                    >Cari Rumah</a
-                  >
-                </li>
-
-                <li>
-                  <a href="about.html" class="navbar-link" data-nav-link
-                    >Tentang</a
-                  >
-                </li>
-
-                <li>
-                  <a href="contact.html" class="navbar-link" data-nav-link
-                    >Kontak</a
-                  >
-                </li>
-                <li>
-                  <button class="header-top-btn">Login</button>
-                </li>
-              </ul>
-            </div>
-          </nav>
-
-          <div class="header-bottom-actions">
-            <button
-              class="header-bottom-actions-btn"
-              data-nav-open-btn
-              aria-label="Open Menu"
-            >
-              <ion-icon name="menu-outline"></ion-icon>
-
-              <span>Menu</span>
+            <button class="nav-close-btn" data-nav-close-btn aria-label="Close Menu">
+              <ion-icon name="close-outline"></ion-icon>
             </button>
           </div>
+
+          <div class="navbar-bottom">
+            <ul class="navbar-list">
+              <li>
+                <a href="/" class="navbar-link" data-nav-link>Beranda</a>
+              </li>
+
+              <li>
+                <a href="/cari_rumah" class="navbar-link" data-nav-link>Cari Rumah</a>
+              </li>
+
+              <li>
+                <a href="/about" class="navbar-link" data-nav-link>Tentang</a>
+              </li>
+
+              <li>
+                <a href="/contact" class="navbar-link" data-nav-link>Kontak</a>
+              </li>
+              <li>
+                <button class="header-top-btn">Login</button>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <div class="header-bottom-actions">
+          <button class="header-bottom-actions-btn" data-nav-open-btn aria-label="Open Menu">
+            <ion-icon name="menu-outline"></ion-icon>
+
+            <span>Menu</span>
+          </button>
         </div>
       </div>
-    </header>
+    </div>
+  </header>
 
-    <main style="margin: 100px;">
-      <article>
-        <div class="container">
-          <div class="card-wrapper mt-3 mb-3 p-3">
-            <div class="card">
-              <!-- card left -->
-              <div class="product-imgs">
-                <div class="img-display">
-                  <div class="img-showcase">
-                    <img src="./assets/images/blog-1.png" alt="shoe image" />
-                    <img src="./assets/images/blog-1.png" alt="shoe image" />
-                    <img src="./assets/images/blog-1.png" alt="shoe image" />
-                    <img src="./assets/images/blog-1.png" alt="shoe image" />
-                  </div>
-                </div>
-                <div class="img-select">
-                  <div class="img-item">
-                    <a href="#" data-id="1">
-                      <img src="./assets/images/blog-1.png" alt="shoe image" />
-                    </a>
-                  </div>
-                  <div class="img-item">
-                    <a href="#" data-id="2">
-                      <img src="./assets/images/blog-1.png" alt="shoe image" />
-                    </a>
-                  </div>
-                  <div class="img-item">
-                    <a href="#" data-id="3">
-                      <img src="./assets/images/blog-1.png" alt="shoe image" />
-                    </a>
-                  </div>
-                  <div class="img-item">
-                    <a href="#" data-id="4">
-                      <img src="./assets/images/blog-1.png" alt="shoe image" />
-                    </a>
-                  </div>
+  <main style="margin: 100px;">
+    <article>
+      <div class="container">
+        <div class="card-wrapper mt-3 mb-3 p-3">
+          <div class="card">
+            <!-- card left -->
+            <div class="product-imgs">
+              <div class="img-display">
+                <div class="img-showcase">
+                  <img src="{{ url_for('static', filename='images/blog-1.png') }}" alt="shoe image" />
+                  <img src="{{ url_for('static', filename='images/blog-1.png') }}" alt="shoe image" />
+                  <img src="{{ url_for('static', filename='images/blog-1.png') }}" alt="shoe image" />
+                  <img src="{{ url_for('static', filename='images/blog-1.png') }}" alt="shoe image" />
                 </div>
               </div>
-              <!-- card right -->
-              <div class="product-content">
-                <h2 class="product-title">Pamulang Regency</h2>
-
-                <div class="location">
-                  <ion-icon name="location-outline"></ion-icon>
-                  <address>Viktor</address>
+              <div class="img-select">
+                <div class="img-item">
+                  <a href="#" data-id="1">
+                    <img src="{{ url_for('static', filename='images/blog-1.png') }}" alt="shoe image" />
+                  </a>
                 </div>
+                <div class="img-item">
+                  <a href="#" data-id="1">
+                    <img src="{{ url_for('static', filename='images/blog-1.png') }}" alt="shoe image" />
+                  </a>
+                </div>
+                <div class="img-item">
+                  <a href="#" data-id="1">
+                    <img src="{{ url_for('static', filename='images/blog-1.png') }}" alt="shoe image" />
+                  </a>
+                </div>
+                <div class="img-item">
+                  <a href="#" data-id="1">
+                    <img src="{{ url_for('static', filename='images/blog-1.png') }}" alt="shoe image" />
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- card right -->
+            <div class="product-content">
+              <h2 class="product-title">Pamulang Regency</h2>
 
-                <!-- <div class = "product-rating">
+              <div class="location">
+                <ion-icon name="location-outline"></ion-icon>
+                <address>Viktor</address>
+              </div>
+
+              <!-- <div class = "product-rating">
                   <i class = "fas fa-star"></i>
                   <i class = "fas fa-star"></i>
                   <i class = "fas fa-star"></i>
@@ -372,205 +376,202 @@
                   <span>4.7(21)</span>
                 </div> -->
 
-                <div class="product-price">
-                  <strong><h1>Rp1.500.000.000</h1></strong>
-                </div>
+              <div class="product-price">
+                <strong>
+                  <h1>Rp1.500.000.000</h1>
+                </strong>
+              </div>
 
-                <div class="product-detail">
-                  <h2>about this item:</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Illo eveniet veniam tempora fuga tenetur placeat sapiente
-                    architecto illum soluta consequuntur, aspernatur quidem at
-                    sequi ipsa!
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Consequatur, perferendis eius. Dignissimos, labore suscipit.
-                    Unde.
-                  </p>
-                  <ul>
-                    <li>Color: <span>Black</span></li>
-                    <li>Available: <span>in stock</span></li>
-                    <li>Category: <span>Shoes</span></li>
-                    <li>Shipping Area: <span>All over the world</span></li>
-                    <li>Shipping Fee: <span>Free</span></li>
-                  </ul>
-                </div>
+              <div class="product-detail">
+                <h2>about this item:</h2>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Illo eveniet veniam tempora fuga tenetur placeat sapiente
+                  architecto illum soluta consequuntur, aspernatur quidem at
+                  sequi ipsa!
+                </p>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Consequatur, perferendis eius. Dignissimos, labore suscipit.
+                  Unde.
+                </p>
+                <ul>
+                  <li>Color: <span>Black</span></li>
+                  <li>Available: <span>in stock</span></li>
+                  <li>Category: <span>Shoes</span></li>
+                  <li>Shipping Area: <span>All over the world</span></li>
+                  <li>Shipping Fee: <span>Free</span></li>
+                </ul>
+              </div>
 
-                <div class="social-links">
-                  <p>Share At:</p>
-                  <a href="#">
-                    <i class="fab fa-facebook-f"></i>
-                  </a>
-                  <a href="#">
-                    <i class="fab fa-twitter"></i>
-                  </a>
-                  <a href="#">
-                    <i class="fab fa-instagram"></i>
-                  </a>
-                  <a href="#">
-                    <i class="fab fa-whatsapp"></i>
-                  </a>
-                  <a href="#">
-                    <i class="fab fa-pinterest"></i>
-                  </a>
-                </div>
+              <div class="social-links">
+                <p>Share At:</p>
+                <a href="#">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#">
+                  <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="#">
+                  <i class="fab fa-pinterest"></i>
+                </a>
               </div>
             </div>
           </div>
         </div>
-      </article>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-top">
-        <div class="container">
-          <div class="footer-brand">
-            <a href="#" class="logo">
-              <img src="./assets/images/logo-light.png" alt="Homeverse logo" />
-            </a>
-
-            <p class="section-text">
-              Rumah Tangsel merupakan perusahaan penyedia jasa pembelian
-              rumah,penyedia informasi dan rekomendasi harga rumah, dan membantu
-              anda dalam penjualan properti
-            </p>
-
-            <ul class="contact-list">
-              <li>
-                <a href="#" class="contact-link">
-                  <ion-icon name="location-outline"></ion-icon>
-
-                  <address>Viktor,Pamulang,Tanggerang Selatan</address>
-                </a>
-              </li>
-
-              <li>
-                <a href="tel:+0123456789" class="contact-link">
-                  <ion-icon name="call-outline"></ion-icon>
-
-                  <span>+0123-456789</span>
-                </a>
-              </li>
-
-              <li>
-                <a href="mailto:contact@homeverse.com" class="contact-link">
-                  <ion-icon name="mail-outline"></ion-icon>
-
-                  <span>sales@rumahtangsel.com</span>
-                </a>
-              </li>
-            </ul>
-
-            <ul class="social-list">
-              <li>
-                <a href="#" class="social-link">
-                  <ion-icon name="logo-facebook"></ion-icon>
-                </a>
-              </li>
-
-              <li>
-                <a href="#" class="social-link">
-                  <ion-icon name="logo-twitter"></ion-icon>
-                </a>
-              </li>
-
-              <li>
-                <a href="#" class="social-link">
-                  <ion-icon name="logo-linkedin"></ion-icon>
-                </a>
-              </li>
-
-              <li>
-                <a href="#" class="social-link">
-                  <ion-icon name="logo-youtube"></ion-icon>
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="footer-link-box">
-            <ul class="footer-list">
-              <li>
-                <p class="footer-list-title">Perusahaan</p>
-              </li>
-
-              <li>
-                <a href="#" class="footer-link">Tentang Kami</a>
-              </li>
-
-              <li>
-                <a href="#" class="footer-link">Semua Produk</a>
-              </li>
-
-              <li>
-                <a href="#" class="footer-link">Peta Lokasi</a>
-              </li>
-
-              <li>
-                <a href="#" class="footer-link">Tanya Kami</a>
-              </li>
-
-              <li>
-                <a href="#" class="footer-link">Kontak Kami</a>
-              </li>
-            </ul>
-
-            <ul class="footer-list">
-              <li>
-                <p class="footer-list-title">Services</p>
-              </li>
-
-              <li>
-                <a href="#" class="footer-link">Beli Rumah</a>
-              </li>
-
-              <li>
-                <a href="#" class="footer-link">Rekomendasi Harga</a>
-              </li>
-
-              <li>
-                <a href="#" class="footer-link">Jual Rumah</a>
-              </li>
-
-              <li>
-                <a href="#" class="footer-link">Penawaran Spesial</a>
-              </li>
-            </ul>
-
-            <ul class="footer-list">
-              <li>
-                <p class="footer-list-title">Pelayanan Pelanggan</p>
-              </li>
-
-              <li>
-                <a href="#" class="footer-link">Hubungi Kami</a>
-              </li>
-            </ul>
-          </div>
-        </div>
       </div>
+    </article>
+  </main>
 
-      <div class="footer-bottom">
-        <div class="container">
-          <p class="copyright">
-            &copy; 2022 <a href="#">codewithsadee</a>. All Rights Reserved
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="footer-brand">
+          <a href="#" class="logo">
+            <img src="{{ url_for('static', filename='images/logo-light.png') }}" alt="Homeverse logo" />
+          </a>
+
+          <p class="section-text">
+            Rumah Tangsel merupakan perusahaan penyedia jasa pembelian
+            rumah,penyedia informasi dan rekomendasi harga rumah, dan membantu
+            anda dalam penjualan properti
           </p>
+
+          <ul class="contact-list">
+            <li>
+              <a href="#" class="contact-link">
+                <ion-icon name="location-outline"></ion-icon>
+
+                <address>Viktor,Pamulang,Tanggerang Selatan</address>
+              </a>
+            </li>
+
+            <li>
+              <a href="tel:+0123456789" class="contact-link">
+                <ion-icon name="call-outline"></ion-icon>
+
+                <span>+0123-456789</span>
+              </a>
+            </li>
+
+            <li>
+              <a href="mailto:contact@homeverse.com" class="contact-link">
+                <ion-icon name="mail-outline"></ion-icon>
+
+                <span>sales@rumahtangsel.com</span>
+              </a>
+            </li>
+          </ul>
+
+          <ul class="social-list">
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-linkedin"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-youtube"></ion-icon>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-link-box">
+          <ul class="footer-list">
+            <li>
+              <p class="footer-list-title">Perusahaan</p>
+            </li>
+
+            <li>
+              <a href="#" class="footer-link">Tentang Kami</a>
+            </li>
+
+            <li>
+              <a href="#" class="footer-link">Semua Produk</a>
+            </li>
+
+            <li>
+              <a href="#" class="footer-link">Peta Lokasi</a>
+            </li>
+
+            <li>
+              <a href="#" class="footer-link">Tanya Kami</a>
+            </li>
+
+            <li>
+              <a href="#" class="footer-link">Kontak Kami</a>
+            </li>
+          </ul>
+
+          <ul class="footer-list">
+            <li>
+              <p class="footer-list-title">Services</p>
+            </li>
+
+            <li>
+              <a href="#" class="footer-link">Beli Rumah</a>
+            </li>
+
+            <li>
+              <a href="#" class="footer-link">Rekomendasi Harga</a>
+            </li>
+
+            <li>
+              <a href="#" class="footer-link">Jual Rumah</a>
+            </li>
+
+            <li>
+              <a href="#" class="footer-link">Penawaran Spesial</a>
+            </li>
+          </ul>
+
+          <ul class="footer-list">
+            <li>
+              <p class="footer-list-title">Pelayanan Pelanggan</p>
+            </li>
+
+            <li>
+              <a href="#" class="footer-link">Hubungi Kami</a>
+            </li>
+          </ul>
         </div>
       </div>
-    </footer>
+    </div>
 
-    <script src="./assets/js/script.js"></script>
-    <script src="./assets/js/detail-rumah.js"></script>
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="copyright">
+          &copy; 2022 <a href="#">codewithsadee</a>. All Rights Reserved
+        </p>
+      </div>
+    </div>
+  </footer>
 
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
-    ></script>
-  </body>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/detail-rumah.js') }}"></script>
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
 </html>
