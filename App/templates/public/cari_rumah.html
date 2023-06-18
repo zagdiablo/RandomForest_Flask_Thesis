@@ -181,7 +181,18 @@
         margin-right: 0.65rem;
     }
 
-    /* End CheckbBox */
+    .contact-agen p{
+        margin-bottom: 0;
+    }
+
+    .card-footer{
+        display: none;
+    }
+
+    .tampil{
+        display: block;
+    }
+
 </style>
 
 
@@ -346,12 +357,19 @@
                                         <div class="card search-card mb-2" style="border-radius: 10em; ">
                                             <div class="card-body p-2">
                                                 <div class="input-group input-group-lg">
-                                                    <input type="text" name="search_bar_by_kecamatan"
+                                                    <!-- <input type="text" name="search_bar_by_kecamatan"
                                                         class="form-control form-control-lg rounde bg-transparent"
                                                         placeholder="Kecamatan" aria-label="Cari Lokasi"
                                                         aria-describedby="basic-addon2"
                                                         style="color: var(--prussian-blue)" />
-                                                    <span class="input-group-text border-0" id="basic-addon2">
+                                                    <span class="input-group-text border-0" id="basic-addon2"> -->
+                                                        <select class="form-select bg-transparent" name="search_bar_by_kecamatan" id="kecamatan" style="border: none;"
+                            aria-label="Default select example">
+                            <option selected>Kecamatan</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
                                                         <ion-icon id="search-icon" name="location"></ion-icon>
                                                     </span>
                                                 </div>
@@ -518,19 +536,20 @@
                                             <button class="banner-actions-btn">
                                                 <ion-icon name="location"></ion-icon>
 
-                                                <address>Serpong</address>
+                                                <address style="margin-bottom: 0;">Serpong</address>
                                             </button>
                                         </div>
                                     </figure>
 
                                     <div class="card-content">
                                         <div class="card-price">
-                                            <strong>Rp6.500.000</strong>/Bulan
-                                        </div>
+                                            <!-- Harga Disini -->
+                                            <strong>Rp6.500.000.0000</strong>                                        </div>
                                         <h3 class="h3 card-title">
-                                            <!-- TODO link detail rumah -->
+                                            <!-- Nama Perumahan / Rumah -->
                                             <a href="/detail_rumah">Perumahan Batang Indah</a>
                                         </h3>
+                                        <!--  -->
                                         <p class="card-text">
                                             Rumah yang nyaman dan cocok untuk keluarga
                                         </p>
@@ -555,19 +574,36 @@
                                         </ul>
                                     </div>
 
+                                    <!-- Kalau Login Tambahkan Class Tampil pada card-footer  -->
+                                    <!-- class="card-footer tampil" -->
                                     <div class="card-footer">
                                         <div class="card-author">
                                             <figure class="author-avatar">
                                                 <img src="{{ url_for('static', filename='images/author.jpg') }}"
                                                     alt="Habibi Qodri" class="w-100">
                                             </figure>
-                                            <div>
-                                                <!-- TODO sales link -->
+                                            <div class="contact-agen" >
                                                 <p class="author-name">
                                                     <a href="#">Habibi Qodri</a>
                                                 </p>
                                                 <p class="author-title">Agen Perumahan</p>
                                             </div>
+
+                                            <div class="card-footer-actions">
+
+                                                <button class="card-footer-actions-btn">
+                                                  <ion-icon name="mail-outline"></ion-icon>
+                                                </button>
+                            
+                                                <button class="card-footer-actions-btn">
+                                                  <ion-icon name="logo-whatsapp"></ion-icon>
+                                                </button>
+                            
+                                                <button class="card-footer-actions-btn">
+                                                  <ion-icon name="call-outline"></ion-icon>
+                                                </button>
+                            
+                                              </div>
                                         </div>
                                     </div>
                                 </div>
