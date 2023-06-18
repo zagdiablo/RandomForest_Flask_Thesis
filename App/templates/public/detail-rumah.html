@@ -181,6 +181,14 @@
     color: #fff;
   }
 
+  .fiture li{
+    display: flex;
+  }
+
+  .fiture-icon{
+    align-self: center;
+    font-size: 20px;
+  } 
 
 
   @media screen and (min-width: 992px) {
@@ -358,15 +366,15 @@
                 </div>
               </div>
             </div>
-            <!-- card right -->
             <div class="product-content">
+              <!-- Nama Perumahan / Rumah -->
               <h2 class="product-title">Pamulang Regency</h2>
 
               <div class="location">
                 <ion-icon name="location-outline"></ion-icon>
                 <address>Viktor</address>
               </div>
-
+              <!-- Kalau nanti pake rating -->
               <!-- <div class = "product-rating">
                   <i class = "fas fa-star"></i>
                   <i class = "fas fa-star"></i>
@@ -383,28 +391,42 @@
               </div>
 
               <div class="product-detail">
-                <h2>about this item:</h2>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Illo eveniet veniam tempora fuga tenetur placeat sapiente
-                  architecto illum soluta consequuntur, aspernatur quidem at
-                  sequi ipsa!
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Consequatur, perferendis eius. Dignissimos, labore suscipit.
-                  Unde.
-                </p>
-                <ul>
-                  <li>Color: <span>Black</span></li>
-                  <li>Available: <span>in stock</span></li>
-                  <li>Category: <span>Shoes</span></li>
-                  <li>Shipping Area: <span>All over the world</span></li>
-                  <li>Shipping Fee: <span>Free</span></li>
+                <h3>Fiture:</h3>
+                <ul class="fiture" style="margin-top: 0;">
+                  <li><ion-icon  class="fiture-icon" name="layers-outline"></ion-icon> <p>Lantai: <span>2 Lantai</span></p> </li>
+                  <li> <ion-icon class="fiture-icon" name="bed-outline"></ion-icon> <p>Kamar Tidur: <span>3 Kamar Tidur</span></p></li>
+                  <li><ion-icon class="fiture-icon" name="water-outline"></ion-icon> <p>Kamar Mandi: <span>4 Kamar Mandi</span></p></li>
+                  <li><ion-icon class="fiture-icon" name="map-outline"></ion-icon> <p>Luas: <span>100m2</span></p></li>
+                  <li><ion-icon class="fiture-icon" name="barbell-outline"></ion-icon> <p>Fasilitas: <span>bla,bla,bla</span></p></li>
                 </ul>
               </div>
+              <div class="detail-kontak-agen">
+                <h3>Kontak Agen :</h3>
+                <!-- Kontak Agen -->
+                <div class="contact-agen" >
+                  <p class="author-name" style="margin-bottom: 0;">
+                      <a href="#">Habibi Qodri</a>
+                  </p>
+                  <p class="author-title" style="margin-top: 0;">Agen Perumahan</p>
+              </div>
 
-              <div class="social-links">
+              <div class="card-footer-actions">
+
+                <button class="card-footer-actions-btn">
+                  <ion-icon name="mail-outline"></ion-icon>
+                </button>
+
+                <button class="card-footer-actions-btn">
+                  <ion-icon name="logo-whatsapp"></ion-icon>
+                </button>
+
+                <button class="card-footer-actions-btn">
+                  <ion-icon name="call-outline"></ion-icon>
+                </button>
+
+              </div>
+               </div>
+              <!-- <div class="social-links">
                 <p>Share At:</p>
                 <a href="#">
                   <i class="fab fa-facebook-f"></i>
@@ -421,7 +443,7 @@
                 <a href="#">
                   <i class="fab fa-pinterest"></i>
                 </a>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
