@@ -1,977 +1,986 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Homeverse - Find your dream house</title>
 
-    <link rel="shortcut icon" href="assets/images/icon.png" type="image/svg+xml" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}" />
+    <link
+      rel="shortcut icon"
+      href="assets/images/icon.png"
+      type="image/svg+xml"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css')}}"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap"
-        rel="stylesheet" />
-</head>
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<body>
-
-
-    <!-- 
-    - #HEADER
-  -->
+  <body>
+    <style>
+      .tampil {
+        display: block;
+      }
+    </style>
 
     <header class="header" data-header>
-        <div class="overlay" data-overlay></div>
+      <div class="overlay" data-overlay></div>
 
-        <div class="header-top">
-            <div class="container">
-                <ul class="header-top-list">
-                    <li>
-                        <a href="mailto:info@homeverse.com" class="header-top-link">
-                            <ion-icon name="mail-outline"></ion-icon>
+      <div class="header-top">
+        <div class="container">
+          <ul class="header-top-list">
+            <li>
+              <a href="mailto:info@homeverse.com" class="header-top-link">
+                <ion-icon name="mail-outline"></ion-icon>
 
-                            <span>rumahtangsel@gmail.com</span>
-                        </a>
-                    </li>
+                <span>rumahtangsel@gmail.com</span>
+              </a>
+            </li>
 
-                    <li>
-                        <a href="#" class="header-top-link">
-                            <ion-icon name="location-outline"></ion-icon>
+            <li>
+              <a href="#" class="header-top-link">
+                <ion-icon name="location-outline"></ion-icon>
 
-                            <address>Tanggerang Selatan,Banten,Indonesia</address>
-                        </a>
-                    </li>
-                </ul>
+                <address>Tanggerang Selatan,Banten,Indonesia</address>
+              </a>
+            </li>
+          </ul>
 
-                <div class="wrapper">
-                    <ul class="header-top-social-list">
-                        <li>
-                            <a href="#" class="header-top-social-link">
-                                <ion-icon name="logo-facebook"></ion-icon>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#" class="header-top-social-link">
-                                <ion-icon name="logo-twitter"></ion-icon>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#" class="header-top-social-link">
-                                <ion-icon name="logo-instagram"></ion-icon>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#" class="header-top-social-link">
-                                <ion-icon name="logo-pinterest"></ion-icon>
-                            </a>
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="header-bottom">
-            <div class="container">
-                <a href="#" class="logo">
-                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Homeverse logo" />
+          <div class="wrapper">
+            <ul class="header-top-social-list">
+              <li>
+                <a href="#" class="header-top-social-link">
+                  <ion-icon name="logo-facebook"></ion-icon>
                 </a>
+              </li>
 
-                <nav class="navbar" data-navbar>
-                    <div class="navbar-top">
-                        <a href="#" class="logo">
-                            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Homeverse logo" />
-                        </a>
+              <li>
+                <a href="#" class="header-top-social-link">
+                  <ion-icon name="logo-twitter"></ion-icon>
+                </a>
+              </li>
 
-                        <button class="nav-close-btn" data-nav-close-btn aria-label="Close Menu">
-                            <ion-icon name="close-outline"></ion-icon>
-                        </button>
-                    </div>
+              <li>
+                <a href="#" class="header-top-social-link">
+                  <ion-icon name="logo-instagram"></ion-icon>
+                </a>
+              </li>
 
-                    <div class="navbar-bottom">
-                        <ul class="navbar-list">
-                            <li>
-                                <a href="/" class="navbar-link" data-nav-link>Beranda</a>
-                            </li>
-
-                            <li>
-                                <a href="/cari_rumah" class="navbar-link" data-nav-link>Cari Rumah</a>
-                            </li>
-
-                            <li>
-                                <a href="/about" class="navbar-link" data-nav-link>Tentang</a>
-                            </li>
-
-                            <li>
-                                <a href="/contact" class="navbar-link" data-nav-link>Kontak</a>
-                            </li>
-                            {% if user_is_authenticated %}
-                            <li>
-                                <a href="/profile"><button class="header-top-btn">Profile</button></a>
-                            </li>
-                            <li>
-                                <a href="/logout"><button class="header-top-btn">Logout</button></a>
-                            </li>
-                            {% else %}
-                            <li>
-                                <a href="/login"><button class="header-top-btn">Login/Sign Up</button></a>
-                            </li>
-                            {% endif %}
-                        </ul>
-                    </div>
-                </nav>
-
-                <div class="header-bottom-actions">
-                    <button class="header-bottom-actions-btn" data-nav-open-btn aria-label="Open Menu">
-                        <ion-icon name="menu-outline"></ion-icon>
-
-                        <span>Menu</span>
-                    </button>
-                </div>
-            </div>
+              <li>
+                <a href="#" class="header-top-social-link">
+                  <ion-icon name="logo-pinterest"></ion-icon>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
+
+      <div class="header-bottom">
+        <div class="container">
+          <a href="#" class="logo">
+            <img
+              src="{{ url_for('static', filename='images/logo.png') }}"
+              alt="Homeverse logo"
+            />
+          </a>
+
+          <nav class="navbar" data-navbar>
+            <div class="navbar-top">
+              <a href="#" class="logo">
+                <img
+                  src="{{ url_for('static', filename='images/logo.png') }}"
+                  alt="Homeverse logo"
+                />
+              </a>
+
+              <button
+                class="nav-close-btn"
+                data-nav-close-btn
+                aria-label="Close Menu"
+              >
+                <ion-icon name="close-outline"></ion-icon>
+              </button>
+            </div>
+
+            <div class="navbar-bottom">
+              <ul class="navbar-list">
+                <li>
+                  <a href="/" class="navbar-link" data-nav-link>Beranda</a>
+                </li>
+
+                <li>
+                  <a href="/cari_rumah" class="navbar-link" data-nav-link
+                    >Cari Rumah</a
+                  >
+                </li>
+
+                <li>
+                  <a href="/about" class="navbar-link" data-nav-link>Tentang</a>
+                </li>
+
+                <li>
+                  <a href="/contact" class="navbar-link" data-nav-link
+                    >Kontak</a
+                  >
+                </li>
+                {% if user_is_authenticated %}
+                <li>
+                  <a href="/profile"
+                    ><button class="header-top-btn">Profile</button></a
+                  >
+                </li>
+                <li>
+                  <a href="/logout"
+                    ><button class="header-top-btn">Logout</button></a
+                  >
+                </li>
+                {% else %}
+                <li>
+                  <a href="/login"
+                    ><button class="header-top-btn">Login/Sign Up</button></a
+                  >
+                </li>
+                {% endif %}
+              </ul>
+            </div>
+          </nav>
+
+          <div class="header-bottom-actions">
+            <button
+              class="header-bottom-actions-btn"
+              data-nav-open-btn
+              aria-label="Open Menu"
+            >
+              <ion-icon name="menu-outline"></ion-icon>
+
+              <span>Menu</span>
+            </button>
+          </div>
+        </div>
+      </div>
     </header>
 
     <main>
-        <article>
-            <!-- 
+      <article>
+        <!-- 
         - #HERO
       -->
 
-            <section class="hero" id="home">
-                <div class="container">
-                    <div class="hero-content">
-                        <p class="hero-subtitle">
-                            <ion-icon name="home"></ion-icon>
+        <section class="hero" id="home">
+          <div class="container">
+            <div class="hero-content">
+              <p class="hero-subtitle">
+                <ion-icon name="home"></ion-icon>
 
-                            <span>Rumah Tangsel Property</span>
-                        </p>
+                <span>Rumah Tangsel Property</span>
+              </p>
 
-                        <h2 class="h1 hero-title">Temukan Harga Rumah Yang Sesuai</h2>
+              <h2 class="h1 hero-title">Temukan Harga Rumah Yang Sesuai</h2>
 
-                        <p class="hero-text">
-                            Kami menyediakan rekomendasi harga rumah yang cocok dengan
-                            pilihan kriteria anda
-                        </p>
+              <p class="hero-text">
+                Kami menyediakan rekomendasi harga rumah yang cocok dengan
+                pilihan kriteria anda
+              </p>
 
-                        <button class="btn">Temukan Harga Rumah</button>
-                    </div>
+              <button class="btn">Temukan Harga Rumah</button>
+            </div>
 
-                    <figure class="hero-banner">
-                        <img src="{{ url_for('static', filename='images/hero-banner.png') }}" alt="Modern house model"
-                            class="w-100" />
-                    </figure>
-                </div>
-            </section>
+            <figure class="hero-banner">
+              <img
+                src="{{ url_for('static', filename='images/hero-banner.png') }}"
+                alt="Modern house model"
+                class="w-100"
+              />
+            </figure>
+          </div>
+        </section>
 
-            <!-- 
+        <!-- 
         - #ABOUT
       -->
 
-            <section class="about" id="about">
-                <div class="container">
-                    <figure class="about-banner">
-                        <img src="{{ url_for('static', filename='images/about-banner-1.png') }}" alt="House interior" />
+        <section class="about" id="about">
+          <div class="container">
+            <figure class="about-banner">
+              <img
+                src="{{ url_for('static', filename='images/about-banner-1.png') }}"
+                alt="House interior"
+              />
 
-                        <img src="{{ url_for('static', filename='images/about-banner-2.jpg') }}" alt="House interior"
-                            class="abs-img" />
-                    </figure>
+              <img
+                src="{{ url_for('static', filename='images/about-banner-2.jpg') }}"
+                alt="House interior"
+                class="abs-img"
+              />
+            </figure>
 
-                    <div class="about-content">
-                        <p class="section-subtitle">Tentang Kami</p>
+            <div class="about-content">
+              <p class="section-subtitle">Tentang Kami</p>
 
-                        <h2 class="h2 section-title">
-                            Penyedia Informasi Perumahan Tanggerang Selatan Terkemuka
-                        </h2>
+              <h2 class="h2 section-title">
+                Penyedia Informasi Perumahan Tanggerang Selatan Terkemuka
+              </h2>
 
-                        <p class="about-text">
-                            Lebih dari ribuan orang yang telah menggunakan jasa kami dalam
-                            menemukan rumah yang sesuai dengan kriteria yang diinginkan
-                        </p>
+              <p class="about-text">
+                Lebih dari ribuan orang yang telah menggunakan jasa kami dalam
+                menemukan rumah yang sesuai dengan kriteria yang diinginkan
+              </p>
 
-                        <ul class="about-list">
-                            <li class="about-item">
-                                <div class="about-item-icon">
-                                    <ion-icon name="home-outline"></ion-icon>
-                                </div>
+              <ul class="about-list">
+                <li class="about-item">
+                  <div class="about-item-icon">
+                    <ion-icon name="home-outline"></ion-icon>
+                  </div>
 
-                                <p class="about-item-text">Pencarian Rumah</p>
-                            </li>
+                  <p class="about-item-text">Pencarian Rumah</p>
+                </li>
 
-                            <li class="about-item">
-                                <div class="about-item-icon">
-                                    <ion-icon name="leaf-outline"></ion-icon>
-                                </div>
+                <li class="about-item">
+                  <div class="about-item-icon">
+                    <ion-icon name="leaf-outline"></ion-icon>
+                  </div>
 
-                                <p class="about-item-text">Lingkungan yang indah</p>
-                            </li>
+                  <p class="about-item-text">Lingkungan yang indah</p>
+                </li>
 
-                            <li class="about-item">
-                                <div class="about-item-icon">
-                                    <ion-icon name="wine-outline"></ion-icon>
-                                </div>
+                <li class="about-item">
+                  <div class="about-item-icon">
+                    <ion-icon name="wine-outline"></ion-icon>
+                  </div>
 
-                                <p class="about-item-text">Keindahan Gaya Hidup</p>
-                            </li>
+                  <p class="about-item-text">Keindahan Gaya Hidup</p>
+                </li>
 
-                            <li class="about-item">
-                                <div class="about-item-icon">
-                                    <ion-icon name="shield-checkmark-outline"></ion-icon>
-                                </div>
+                <li class="about-item">
+                  <div class="about-item-icon">
+                    <ion-icon name="shield-checkmark-outline"></ion-icon>
+                  </div>
 
-                                <p class="about-item-text">Keamanan Perumahan</p>
-                            </li>
-                        </ul>
+                  <p class="about-item-text">Keamanan Perumahan</p>
+                </li>
+              </ul>
 
-                        <p class="callout">"Hubungi kami melalui"</p>
+              <p class="callout">"Hubungi kami melalui"</p>
 
-                        <a href="/contact" class="btn">Kontak</a>
-                    </div>
-                </div>
-            </section>
+              <a href="/contact" class="btn">Kontak</a>
+            </div>
+          </div>
+        </section>
 
-            <!-- 
+        <!-- 
         - #SERVICE
       -->
 
-            <section class="service" id="service">
-                <div class="container">
-                    <p class="section-subtitle">Layanan Kami</p>
+        <section class="service" id="service">
+          <div class="container">
+            <p class="section-subtitle">Layanan Kami</p>
 
-                    <h2 class="h2 section-title">Fokus Utama Kami</h2>
+            <h2 class="h2 section-title">Fokus Utama Kami</h2>
 
-                    <ul class="service-list">
-                        <li>
-                            <div class="service-card">
-                                <div class="card-icon">
-                                    <img src="{{ url_for('static', filename='images/service-1.png') }}"
-                                        alt="Service icon" />
-                                </div>
+            <ul class="service-list">
+              <li>
+                <div class="service-card">
+                  <div class="card-icon">
+                    <img
+                      src="{{ url_for('static', filename='images/service-1.png') }}"
+                      alt="Service icon"
+                    />
+                  </div>
 
-                                <h3 class="h3 card-title">
-                                    <a href="#">Pembelian Rumah</a>
-                                </h3>
+                  <h3 class="h3 card-title">
+                    <a href="#">Pembelian Rumah</a>
+                  </h3>
 
-                                <p class="card-text">
-                                    Menyediakan jasa pembelian rumah yang cocok dengan anda
-                                </p>
+                  <p class="card-text">
+                    Menyediakan jasa pembelian rumah yang cocok dengan anda
+                  </p>
 
-                                <a href="#" class="card-link">
-                                    <span>Cari Rumah</span>
+                  <a href="#" class="card-link">
+                    <span>Cari Rumah</span>
 
-                                    <ion-icon name="arrow-forward-outline"></ion-icon>
-                                </a>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="service-card">
-                                <div class="card-icon">
-                                    <img src="{{ url_for('static', filename='images/service-2.png') }}"
-                                        alt="Service icon" />
-                                </div>
-
-                                <h3 class="h3 card-title">
-                                    <a href="#">Informasi Perumahan</a>
-                                </h3>
-
-                                <p class="card-text">
-                                    Merekomendasikan pilihan rumah yang sesuai dengan kriteria
-                                    rumah yang anda inginkan
-                                </p>
-
-                                <a href="#" class="card-link">
-                                    <span>Cari Rumah</span>
-
-                                    <ion-icon name="arrow-forward-outline"></ion-icon>
-                                </a>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="service-card">
-                                <div class="card-icon">
-                                    <img src="{{ url_for('static', filename='images/service-3.png') }}"
-                                        alt="Service icon" />
-                                </div>
-
-                                <h3 class="h3 card-title">
-                                    <a href="#">Penjualan Rumah</a>
-                                </h3>
-
-                                <p class="card-text">
-                                    Membantu anda yang dalam memasarkan properti anda yang ingin
-                                    dijual
-                                </p>
-
-                                <a href="#" class="card-link">
-                                    <span>Hubungi Kami</span>
-
-                                    <ion-icon name="arrow-forward-outline"></ion-icon>
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
+                    <ion-icon name="arrow-forward-outline"></ion-icon>
+                  </a>
                 </div>
-            </section>
+              </li>
 
-            <!-- 
+              <li>
+                <div class="service-card">
+                  <div class="card-icon">
+                    <img
+                      src="{{ url_for('static', filename='images/service-2.png') }}"
+                      alt="Service icon"
+                    />
+                  </div>
+
+                  <h3 class="h3 card-title">
+                    <a href="#">Informasi Perumahan</a>
+                  </h3>
+
+                  <p class="card-text">
+                    Merekomendasikan pilihan rumah yang sesuai dengan kriteria
+                    rumah yang anda inginkan
+                  </p>
+
+                  <a href="#" class="card-link">
+                    <span>Cari Rumah</span>
+
+                    <ion-icon name="arrow-forward-outline"></ion-icon>
+                  </a>
+                </div>
+              </li>
+
+              <li>
+                <div class="service-card">
+                  <div class="card-icon">
+                    <img
+                      src="{{ url_for('static', filename='images/service-3.png') }}"
+                      alt="Service icon"
+                    />
+                  </div>
+
+                  <h3 class="h3 card-title">
+                    <a href="#">Penjualan Rumah</a>
+                  </h3>
+
+                  <p class="card-text">
+                    Membantu anda yang dalam memasarkan properti anda yang ingin
+                    dijual
+                  </p>
+
+                  <a href="#" class="card-link">
+                    <span>Hubungi Kami</span>
+
+                    <ion-icon name="arrow-forward-outline"></ion-icon>
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 
         - #PROPERTY
       -->
 
-            <section class="property" id="property">
-                <div class="container">
-                    <p class="section-subtitle">Properti</p>
-
-                    <h2 class="h2 section-title">Rekomendasi Kami</h2>
-
-                    <ul class="property-list has-scrollbar">
-                        <li>
-                            <div class="property-card">
-                                <figure class="card-banner">
-                                    <a href="#">
-                                        <img src="{{ url_for('static', filename='images/property-1.jpg') }}"
-                                            alt="New Apartment Nice View" class="w-100" />
-                                    </a>
-
-                                    <div class="card-badge orange">Dijual</div>
-
-                                    <div class="banner-actions">
-                                        <button class="banner-actions-btn">
-                                            <ion-icon name="location"></ion-icon>
-
-                                            <address>Pamulang</address>
-                                        </button>
-                                    </div>
-                                </figure>
-
-                                <div class="card-content">
-                                    <div class="card-price">
-                                        <strong>Rp5.000.000</strong>/Bulan
-                                    </div>
-
-                                    <h3 class="h3 card-title">
-                                        <a href="#">Pamulang Regency</a>
-                                    </h3>
-
-                                    <p class="card-text">
-                                        Rumah yang nyaman dan cocok untuk keluarga
-                                    </p>
-
-                                    <ul class="card-list">
-                                        <li class="card-item">
-                                            <strong>3</strong>
-
-                                            <ion-icon name="bed-outline"></ion-icon>
+        <section class="property" id="property">
+          <div class="container">
+            <p class="section-subtitle">Properti</p>
 
-                                            <span>Kamar</span>
-                                        </li>
+            <h2 class="h2 section-title">Rekomendasi Kami</h2>
 
-                                        <li class="card-item">
-                                            <strong>2</strong>
+            <ul class="property-list has-scrollbar">
+              <li>
+                <div class="property-card">
+                  <figure class="card-banner">
+                    <a href="#">
+                      <img
+                        src="{{ url_for('static', filename='images/property-1.jpg') }}"
+                        alt="New Apartment Nice View"
+                        class="w-100"
+                      />
+                    </a>
 
-                                            <ion-icon name="man-outline"></ion-icon>
+                    <div class="card-badge orange">Dijual</div>
 
-                                            <span>Kamar Mandi</span>
-                                        </li>
-
-                                        <li class="card-item">
-                                            <strong>3450</strong>
-
-                                            <ion-icon name="square-outline"></ion-icon>
-
-                                            <span>Luas M2</span>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="card-footer">
-                                    <div class="card-author">
-                                        <figure class="author-avatar">
-                                            <img src="{{ url_for('static', filename='images/author.jpg') }}"
-                                                alt="Habibi Qodri" class="w-100" />
-                                        </figure>
-
-                                        <div>
-                                            <p class="author-name">
-                                                <a href="#">Habibi Qodri</a>
-                                            </p>
-
-                                            <p class="author-title">Agen Perumahan</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="card-footer-actions">
-                                        <button class="card-footer-actions-btn">
-                                            <ion-icon name="call-outline"></ion-icon>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="property-card">
-                                <figure class="card-banner">
-                                    <a href="#">
-                                        <img src="{{ url_for('static', filename='images/property-2.jpg')}}"
-                                            alt="Modern Apartments" class="w-100" />
-                                    </a>
-
-                                    <div class="card-badge orange">Dijual</div>
-
-                                    <div class="banner-actions">
-                                        <button class="banner-actions-btn">
-                                            <ion-icon name="location"></ion-icon>
-
-                                            <address>Viktor,Pamulang</address>
-                                        </button>
-                                    </div>
-                                </figure>
-
-                                <div class="card-content">
-                                    <div class="card-price">
-                                        <strong>Rp2.500.000</strong>/Bulan
-                                    </div>
-
-                                    <h3 class="h3 card-title">
-                                        <a href="#">Paradise City</a>
-                                    </h3>
-
-                                    <p class="card-text">
-                                        Rumah yang nyaman dan cocok untuk keluarga
-                                    </p>
+                    <div class="banner-actions">
+                      <button class="banner-actions-btn">
+                        <ion-icon name="location"></ion-icon>
 
-                                    <ul class="card-list">
-                                        <li class="card-item">
-                                            <strong>3</strong>
+                        <address>Pamulang</address>
+                      </button>
+                    </div>
+                  </figure>
 
-                                            <ion-icon name="bed-outline"></ion-icon>
+                  <div class="card-content">
+                    <div class="card-price">
+                      <strong>Rp5.000.000.000</strong>
+                    </div>
 
-                                            <span>Kamar</span>
-                                        </li>
+                    <h3 class="h3 card-title">
+                      <a href="#">Pamulang Regency</a>
+                    </h3>
 
-                                        <li class="card-item">
-                                            <strong>2</strong>
+                    <p class="card-text">
+                      Rumah yang nyaman dan cocok untuk keluarga
+                    </p>
 
-                                            <ion-icon name="man-outline"></ion-icon>
+                    <ul class="card-list">
+                      <li class="card-item">
+                        <strong>3</strong>
 
-                                            <span>Kamar Mandi</span>
-                                        </li>
+                        <ion-icon name="bed-outline"></ion-icon>
 
-                                        <li class="card-item">
-                                            <strong>3450</strong>
+                        <span>Kamar</span>
+                      </li>
 
-                                            <ion-icon name="square-outline"></ion-icon>
+                      <li class="card-item">
+                        <strong>2</strong>
 
-                                            <span>Luas M2</span>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="card-footer">
-                                    <div class="card-author">
-                                        <figure class="author-avatar">
-                                            <img src="{{ url_for('static', filename='images/author.jpg') }}"
-                                                alt="Habibi Qodri" class="w-100" />
-                                        </figure>
-
-                                        <div>
-                                            <p class="author-name">
-                                                <a href="#">Habibi Qodri</a>
-                                            </p>
-
-                                            <p class="author-title">Agen Perumahan</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="card-footer-actions">
-                                        <button class="card-footer-actions-btn">
-                                            <ion-icon name="call-outline"></ion-icon>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="property-card">
-                                <figure class="card-banner">
-                                    <a href="#">
-                                        <img src="url_for('static', filename='images/property-3.jpg')"
-                                            alt="Comfortable Apartment" class="w-100" />
-                                    </a>
-
-                                    <div class="card-badge orange">Dijual</div>
-
-                                    <div class="banner-actions">
-                                        <button class="banner-actions-btn">
-                                            <ion-icon name="location"></ion-icon>
-
-                                            <address>Bintaro</address>
-                                        </button>
-                                    </div>
-                                </figure>
-
-                                <div class="card-content">
-                                    <div class="card-price">
-                                        <strong>Rp4.000.000</strong>/Bulan
-                                    </div>
-
-                                    <h3 class="h3 card-title">
-                                        <a href="#">Bintaro Jaya</a>
-                                    </h3>
-
-                                    <p class="card-text">
-                                        Rumah yang nyaman dan cocok untuk keluarga
-                                    </p>
-
-                                    <ul class="card-list">
-                                        <li class="card-item">
-                                            <strong>3</strong>
-
-                                            <ion-icon name="bed-outline"></ion-icon>
+                        <ion-icon name="man-outline"></ion-icon>
 
-                                            <span>Kamar</span>
-                                        </li>
+                        <span>Kamar Mandi</span>
+                      </li>
 
-                                        <li class="card-item">
-                                            <strong>2</strong>
+                      <li class="card-item">
+                        <strong>3450</strong>
 
-                                            <ion-icon name="man-outline"></ion-icon>
+                        <ion-icon name="square-outline"></ion-icon>
 
-                                            <span>Kamar Mandi</span>
-                                        </li>
-
-                                        <li class="card-item">
-                                            <strong>3450</strong>
-
-                                            <ion-icon name="square-outline"></ion-icon>
-
-                                            <span>Luas M2</span>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="card-footer">
-                                    <div class="card-author">
-                                        <figure class="author-avatar">
-                                            <img src="{{ url_for('static', filename='images/author.jpg') }}"
-                                                alt="William Seklo" class="w-100" />
-                                        </figure>
-
-                                        <div>
-                                            <p class="author-name">
-                                                <a href="#">Habibi Qodri</a>
-                                            </p>
-
-                                            <p class="author-title">Agen Perumahan</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="card-footer-actions">
-                                        <button class="card-footer-actions-btn">
-                                            <ion-icon name="call-outline"></ion-icon>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="property-card">
-                                <figure class="card-banner">
-                                    <a href="#">
-                                        <img src="{{ url_for('static', filename='images/property-4.png') }}"
-                                            alt="Luxury villa in Rego Park" class="w-100" />
-                                    </a>
-
-                                    <div class="card-badge orange">Dijual</div>
-
-                                    <div class="banner-actions">
-                                        <button class="banner-actions-btn">
-                                            <ion-icon name="location"></ion-icon>
-
-                                            <address>Serpong</address>
-                                        </button>
-                                    </div>
-                                </figure>
-
-                                <div class="card-content">
-                                    <div class="card-price">
-                                        <strong>Rp6.500.000</strong>/Bulan
-                                    </div>
-
-                                    <h3 class="h3 card-title">
-                                        <a href="#">Perumahan Batang Indah</a>
-                                    </h3>
-
-                                    <p class="card-text">
-                                        Rumah yang nyaman dan cocok untuk keluarga
-                                    </p>
-
-                                    <ul class="card-list">
-                                        <li class="card-item">
-                                            <strong>3</strong>
-
-                                            <ion-icon name="bed-outline"></ion-icon>
-
-                                            <span>Kamar</span>
-                                        </li>
-
-                                        <li class="card-item">
-                                            <strong>2</strong>
-
-                                            <ion-icon name="man-outline"></ion-icon>
-
-                                            <span>Kamar Mandi</span>
-                                        </li>
-
-                                        <li class="card-item">
-                                            <strong>3450</strong>
-
-                                            <ion-icon name="square-outline"></ion-icon>
-
-                                            <span>Luas M2</span>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="card-footer">
-                                    <div class="card-author">
-                                        <figure class="author-avatar">
-                                            <img src="{{ url_for('static', filename='images/author.jpg')}}"
-                                                alt="Habibi Qodri" class="w-100" />
-                                        </figure>
-
-                                        <div>
-                                            <p class="author-name">
-                                                <a href="#">Habibi Qodri</a>
-                                            </p>
-
-                                            <p class="author-title">Agen Perumahan</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="card-footer-actions">
-                                        <button class="card-footer-actions-btn">
-                                            <ion-icon name="call-outline"></ion-icon>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+                        <span>Luas M2</span>
+                      </li>
                     </ul>
-                </div>
-            </section>
+                  </div>
+                  <!-- Kalau Login Tambahkan Class Tampil pada card-footer  -->
+                  <!-- class="card-footer tampil" -->
+                  <div class="card-footer">
+                    <div class="card-author">
+                      <figure class="author-avatar">
+                        <img
+                          src="{{ url_for('static', filename='images/author.jpg') }}"
+                          alt="Habibi Qodri"
+                          class="w-100"
+                        />
+                      </figure>
+                      <div class="contact-agen">
+                        <p class="author-name">
+                          <a href="#">Habibi Qodri</a>
+                        </p>
+                        <p class="author-title">Agen Perumahan</p>
+                      </div>
 
-            <!-- 
+                      <div class="card-footer-actions">
+                        <button class="card-footer-actions-btn">
+                          <ion-icon name="mail-outline"></ion-icon>
+                        </button>
+
+                        <button class="card-footer-actions-btn">
+                          <ion-icon name="logo-whatsapp"></ion-icon>
+                        </button>
+
+                        <button class="card-footer-actions-btn">
+                          <ion-icon name="call-outline"></ion-icon>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="property-card">
+                  <figure class="card-banner">
+                    <a href="#">
+                      <img
+                        src="{{ url_for('static', filename='images/property-1.jpg') }}"
+                        alt="New Apartment Nice View"
+                        class="w-100"
+                      />
+                    </a>
+
+                    <div class="card-badge orange">Dijual</div>
+
+                    <div class="banner-actions">
+                      <button class="banner-actions-btn">
+                        <ion-icon name="location"></ion-icon>
+
+                        <address>Pamulang</address>
+                      </button>
+                    </div>
+                  </figure>
+
+                  <div class="card-content">
+                    <div class="card-price">
+                      <strong>Rp5.000.000.000</strong>
+                    </div>
+
+                    <h3 class="h3 card-title">
+                      <a href="#">Pamulang Regency</a>
+                    </h3>
+
+                    <p class="card-text">
+                      Rumah yang nyaman dan cocok untuk keluarga
+                    </p>
+
+                    <ul class="card-list">
+                      <li class="card-item">
+                        <strong>3</strong>
+
+                        <ion-icon name="bed-outline"></ion-icon>
+
+                        <span>Kamar</span>
+                      </li>
+
+                      <li class="card-item">
+                        <strong>2</strong>
+
+                        <ion-icon name="man-outline"></ion-icon>
+
+                        <span>Kamar Mandi</span>
+                      </li>
+
+                      <li class="card-item">
+                        <strong>3450</strong>
+
+                        <ion-icon name="square-outline"></ion-icon>
+
+                        <span>Luas M2</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <!-- Kalau Login Tambahkan Class Tampil pada card-footer  -->
+                  <!-- class="card-footer tampil" -->
+                  <div class="card-footer">
+                    <div class="card-author">
+                      <figure class="author-avatar">
+                        <img
+                          src="{{ url_for('static', filename='images/author.jpg') }}"
+                          alt="Habibi Qodri"
+                          class="w-100"
+                        />
+                      </figure>
+                      <div class="contact-agen">
+                        <p class="author-name">
+                          <a href="#">Habibi Qodri</a>
+                        </p>
+                        <p class="author-title">Agen Perumahan</p>
+                      </div>
+
+                      <div class="card-footer-actions">
+                        <button class="card-footer-actions-btn">
+                          <ion-icon name="mail-outline"></ion-icon>
+                        </button>
+
+                        <button class="card-footer-actions-btn">
+                          <ion-icon name="logo-whatsapp"></ion-icon>
+                        </button>
+
+                        <button class="card-footer-actions-btn">
+                          <ion-icon name="call-outline"></ion-icon>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="property-card">
+                  <figure class="card-banner">
+                    <a href="#">
+                      <img
+                        src="{{ url_for('static', filename='images/property-1.jpg') }}"
+                        alt="New Apartment Nice View"
+                        class="w-100"
+                      />
+                    </a>
+
+                    <div class="card-badge orange">Dijual</div>
+
+                    <div class="banner-actions">
+                      <button class="banner-actions-btn">
+                        <ion-icon name="location"></ion-icon>
+
+                        <address>Pamulang</address>
+                      </button>
+                    </div>
+                  </figure>
+
+                  <div class="card-content">
+                    <div class="card-price">
+                      <strong>Rp5.000.000.000</strong>
+                    </div>
+
+                    <h3 class="h3 card-title">
+                      <a href="#">Pamulang Regency</a>
+                    </h3>
+
+                    <p class="card-text">
+                      Rumah yang nyaman dan cocok untuk keluarga
+                    </p>
+
+                    <ul class="card-list">
+                      <li class="card-item">
+                        <strong>3</strong>
+
+                        <ion-icon name="bed-outline"></ion-icon>
+
+                        <span>Kamar</span>
+                      </li>
+
+                      <li class="card-item">
+                        <strong>2</strong>
+
+                        <ion-icon name="man-outline"></ion-icon>
+
+                        <span>Kamar Mandi</span>
+                      </li>
+
+                      <li class="card-item">
+                        <strong>3450</strong>
+
+                        <ion-icon name="square-outline"></ion-icon>
+
+                        <span>Luas M2</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <!-- Kalau Login Tambahkan Class Tampil pada card-footer  -->
+                  <!-- class="card-footer tampil" -->
+                  <div class="card-footer">
+                    <div class="card-author">
+                      <figure class="author-avatar">
+                        <img
+                          src="{{ url_for('static', filename='images/author.jpg') }}"
+                          alt="Habibi Qodri"
+                          class="w-100"
+                        />
+                      </figure>
+                      <div class="contact-agen">
+                        <p class="author-name">
+                          <a href="#">Habibi Qodri</a>
+                        </p>
+                        <p class="author-title">Agen Perumahan</p>
+                      </div>
+
+                      <div class="card-footer-actions">
+                        <button class="card-footer-actions-btn">
+                          <ion-icon name="mail-outline"></ion-icon>
+                        </button>
+
+                        <button class="card-footer-actions-btn">
+                          <ion-icon name="logo-whatsapp"></ion-icon>
+                        </button>
+
+                        <button class="card-footer-actions-btn">
+                          <ion-icon name="call-outline"></ion-icon>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 
         - #FEATURES
       -->
 
-            <section class="features">
-                <div class="container">
-                    <p class="section-subtitle">Pilihan Fasilitas</p>
+        <section class="features">
+          <div class="container">
+            <p class="section-subtitle">Pilihan Fasilitas</p>
 
-                    <h2 class="h2 section-title">Fasilitas Perumahan</h2>
+            <h2 class="h2 section-title">Fasilitas Perumahan</h2>
 
-                    <ul class="features-list">
-                        <li>
-                            <a href="#" class="features-card">
-                                <div class="card-icon">
-                                    <ion-icon name="car-sport-outline"></ion-icon>
-                                </div>
+            <ul class="features-list">
+              <li>
+                <a href="#" class="features-card">
+                  <div class="card-icon">
+                    <ion-icon name="car-sport-outline"></ion-icon>
+                  </div>
 
-                                <h3 class="card-title">Tempat Parkir</h3>
+                  <h3 class="card-title">Tempat Parkir</h3>
 
-                                <div class="card-btn">
-                                    <ion-icon name="arrow-forward-outline"></ion-icon>
-                                </div>
-                            </a>
-                        </li>
+                  <div class="card-btn">
+                    <ion-icon name="arrow-forward-outline"></ion-icon>
+                  </div>
+                </a>
+              </li>
 
-                        <li>
-                            <a href="#" class="features-card">
-                                <div class="card-icon">
-                                    <ion-icon name="water-outline"></ion-icon>
-                                </div>
+              <li>
+                <a href="#" class="features-card">
+                  <div class="card-icon">
+                    <ion-icon name="water-outline"></ion-icon>
+                  </div>
 
-                                <h3 class="card-title">Kolam Renang</h3>
+                  <h3 class="card-title">Kolam Renang</h3>
 
-                                <div class="card-btn">
-                                    <ion-icon name="arrow-forward-outline"></ion-icon>
-                                </div>
-                            </a>
-                        </li>
+                  <div class="card-btn">
+                    <ion-icon name="arrow-forward-outline"></ion-icon>
+                  </div>
+                </a>
+              </li>
 
-                        <li>
-                            <a href="#" class="features-card">
-                                <div class="card-icon">
-                                    <ion-icon name="shield-checkmark-outline"></ion-icon>
-                                </div>
+              <li>
+                <a href="#" class="features-card">
+                  <div class="card-icon">
+                    <ion-icon name="shield-checkmark-outline"></ion-icon>
+                  </div>
 
-                                <h3 class="card-title">Keamanan Pribadi</h3>
+                  <h3 class="card-title">Keamanan Pribadi</h3>
 
-                                <div class="card-btn">
-                                    <ion-icon name="arrow-forward-outline"></ion-icon>
-                                </div>
-                            </a>
-                        </li>
+                  <div class="card-btn">
+                    <ion-icon name="arrow-forward-outline"></ion-icon>
+                  </div>
+                </a>
+              </li>
 
-                        <li>
-                            <a href="#" class="features-card">
-                                <div class="card-icon">
-                                    <ion-icon name="fitness-outline"></ion-icon>
-                                </div>
+              <li>
+                <a href="#" class="features-card">
+                  <div class="card-icon">
+                    <ion-icon name="fitness-outline"></ion-icon>
+                  </div>
 
-                                <h3 class="card-title">Pusat Kesehatan</h3>
+                  <h3 class="card-title">Pusat Kesehatan</h3>
 
-                                <div class="card-btn">
-                                    <ion-icon name="arrow-forward-outline"></ion-icon>
-                                </div>
-                            </a>
-                        </li>
+                  <div class="card-btn">
+                    <ion-icon name="arrow-forward-outline"></ion-icon>
+                  </div>
+                </a>
+              </li>
 
-                        <li>
-                            <a href="#" class="features-card">
-                                <div class="card-icon">
-                                    <ion-icon name="library-outline"></ion-icon>
-                                </div>
+              <li>
+                <a href="#" class="features-card">
+                  <div class="card-icon">
+                    <ion-icon name="library-outline"></ion-icon>
+                  </div>
 
-                                <h3 class="card-title">Area Perpustakaan</h3>
+                  <h3 class="card-title">Area Perpustakaan</h3>
 
-                                <div class="card-btn">
-                                    <ion-icon name="arrow-forward-outline"></ion-icon>
-                                </div>
-                            </a>
-                        </li>
+                  <div class="card-btn">
+                    <ion-icon name="arrow-forward-outline"></ion-icon>
+                  </div>
+                </a>
+              </li>
 
-                        <li>
-                            <a href="#" class="features-card">
-                                <div class="card-icon">
-                                    <ion-icon name="bed-outline"></ion-icon>
-                                </div>
+              <li>
+                <a href="#" class="features-card">
+                  <div class="card-icon">
+                    <ion-icon name="bed-outline"></ion-icon>
+                  </div>
 
-                                <h3 class="card-title">Tempat Tidur Ukuran Besar</h3>
+                  <h3 class="card-title">Tempat Tidur Ukuran Besar</h3>
 
-                                <div class="card-btn">
-                                    <ion-icon name="arrow-forward-outline"></ion-icon>
-                                </div>
-                            </a>
-                        </li>
+                  <div class="card-btn">
+                    <ion-icon name="arrow-forward-outline"></ion-icon>
+                  </div>
+                </a>
+              </li>
 
-                        <li>
-                            <a href="#" class="features-card">
-                                <div class="card-icon">
-                                    <ion-icon name="home-outline"></ion-icon>
-                                </div>
+              <li>
+                <a href="#" class="features-card">
+                  <div class="card-icon">
+                    <ion-icon name="home-outline"></ion-icon>
+                  </div>
 
-                                <h3 class="card-title">Rumah Pintar</h3>
+                  <h3 class="card-title">Rumah Pintar</h3>
 
-                                <div class="card-btn">
-                                    <ion-icon name="arrow-forward-outline"></ion-icon>
-                                </div>
-                            </a>
-                        </li>
+                  <div class="card-btn">
+                    <ion-icon name="arrow-forward-outline"></ion-icon>
+                  </div>
+                </a>
+              </li>
 
-                        <li>
-                            <a href="#" class="features-card">
-                                <div class="card-icon">
-                                    <ion-icon name="football-outline"></ion-icon>
-                                </div>
+              <li>
+                <a href="#" class="features-card">
+                  <div class="card-icon">
+                    <ion-icon name="football-outline"></ion-icon>
+                  </div>
 
-                                <h3 class="card-title">Tempat Bermain Anak</h3>
+                  <h3 class="card-title">Tempat Bermain Anak</h3>
 
-                                <div class="card-btn">
-                                    <ion-icon name="arrow-forward-outline"></ion-icon>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </section>
+                  <div class="card-btn">
+                    <ion-icon name="arrow-forward-outline"></ion-icon>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </section>
 
-            <!-- 
+        <!-- 
         - #BLOG
       -->
 
-            <section class="blog" id="blog">
-                <div class="container">
-                    <p class="section-subtitle">Berita dan Blog</p>
+        <section class="blog" id="blog">
+          <div class="container">
+            <p class="section-subtitle">Berita dan Blog</p>
 
-                    <h2 class="h2 section-title">Berita Terbaru</h2>
+            <h2 class="h2 section-title">Berita Terbaru</h2>
 
-                    <ul class="blog-list has-scrollbar">
+            <ul class="blog-list has-scrollbar">
+              <li>
+                <div class="blog-card">
+                  <figure class="card-banner">
+                    <img
+                      src="{{ url_for('static', filename='images/blog-1.png') }}"
+                      alt="The Most Inspiring Interior Design Of 2021"
+                      class="w-100"
+                    />
+                  </figure>
+
+                  <div class="blog-content">
+                    <div class="blog-content-top">
+                      <ul class="card-meta-list">
                         <li>
-                            <div class="blog-card">
-                                <figure class="card-banner">
-                                    <img src="{{ url_for('static', filename='images/blog-1.png') }}"
-                                        alt="The Most Inspiring Interior Design Of 2021" class="w-100" />
-                                </figure>
+                          <a href="#" class="card-meta-link">
+                            <ion-icon name="person"></ion-icon>
 
-                                <div class="blog-content">
-                                    <div class="blog-content-top">
-                                        <ul class="card-meta-list">
-                                            <li>
-                                                <a href="#" class="card-meta-link">
-                                                    <ion-icon name="person"></ion-icon>
-
-                                                    <span>by: Admin</span>
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#" class="card-meta-link">
-                                                    <ion-icon name="pricetags"></ion-icon>
-
-                                                    <span>Interior</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-
-                                        <h3 class="h3 blog-title">
-                                            <a href="#">Inspirasi interior rumah edisi 2021</a>
-                                        </h3>
-                                    </div>
-
-                                    <div class="blog-content-bottom">
-                                        <div class="publish-date">
-                                            <ion-icon name="calendar"></ion-icon>
-
-                                            <time datetime="2022-27-04">Apr 27, 2022</time>
-                                        </div>
-
-                                        <a href="#" class="read-more-btn">Selengkapnya</a>
-                                    </div>
-                                </div>
-                            </div>
+                            <span>by: Admin</span>
+                          </a>
                         </li>
 
                         <li>
-                            <div class="blog-card">
-                                <figure class="card-banner">
-                                    <img src="{{ url_for('static', filename='images/blog-2.jpg') }}"
-                                        alt="Recent Commercial Real Estate Transactions" class="w-100" />
-                                </figure>
+                          <a href="#" class="card-meta-link">
+                            <ion-icon name="pricetags"></ion-icon>
 
-                                <div class="blog-content">
-                                    <div class="blog-content-top">
-                                        <ul class="card-meta-list">
-                                            <li>
-                                                <a href="#" class="card-meta-link">
-                                                    <ion-icon name="person"></ion-icon>
-
-                                                    <span>by: Admin</span>
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#" class="card-meta-link">
-                                                    <ion-icon name="pricetags"></ion-icon>
-
-                                                    <span>Rumah</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-
-                                        <h3 class="h3 blog-title">
-                                            <a href="#">Transaksi Properti Komersial Terbaru</a>
-                                        </h3>
-                                    </div>
-
-                                    <div class="blog-content-bottom">
-                                        <div class="publish-date">
-                                            <ion-icon name="calendar"></ion-icon>
-
-                                            <time datetime="2022-27-04">Mar 21, 2023</time>
-                                        </div>
-
-                                        <a href="#" class="read-more-btn">Selengkapnya</a>
-                                    </div>
-                                </div>
-                            </div>
+                            <span>Interior</span>
+                          </a>
                         </li>
+                      </ul>
 
-                        <li>
-                            <div class="blog-card">
-                                <figure class="card-banner">
-                                    <img src="{{ url_for('static', filename='images/blog-3.jpg') }}"
-                                        alt="Renovating a Living Room? Experts Share Their Secrets" class="w-100" />
-                                </figure>
+                      <h3 class="h3 blog-title">
+                        <a href="#">Inspirasi interior rumah edisi 2021</a>
+                      </h3>
+                    </div>
 
-                                <div class="blog-content">
-                                    <div class="blog-content-top">
-                                        <ul class="card-meta-list">
-                                            <li>
-                                                <a href="#" class="card-meta-link">
-                                                    <ion-icon name="person"></ion-icon>
+                    <div class="blog-content-bottom">
+                      <div class="publish-date">
+                        <ion-icon name="calendar"></ion-icon>
 
-                                                    <span>by: Admin</span>
-                                                </a>
-                                            </li>
+                        <time datetime="2022-27-04">Apr 27, 2022</time>
+                      </div>
 
-                                            <li>
-                                                <a href="#" class="card-meta-link">
-                                                    <ion-icon name="pricetags"></ion-icon>
-
-                                                    <span>Kamar/Ruangan</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-
-                                        <h3 class="h3 blog-title">
-                                            <a href="#">Renovasi ruang tamu ? Ahli membagikan rahasia
-                                                mereka</a>
-                                        </h3>
-                                    </div>
-
-                                    <div class="blog-content-bottom">
-                                        <div class="publish-date">
-                                            <ion-icon name="calendar"></ion-icon>
-
-                                            <time datetime="2022-27-04">Apr 27, 2022</time>
-                                        </div>
-
-                                        <a href="#" class="read-more-btn">Selengkapnya</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                      <a href="#" class="read-more-btn">Selengkapnya</a>
+                    </div>
+                  </div>
                 </div>
-            </section>
+              </li>
 
-            <!-- 
+              <li>
+                <div class="blog-card">
+                  <figure class="card-banner">
+                    <img
+                      src="{{ url_for('static', filename='images/blog-2.jpg') }}"
+                      alt="Recent Commercial Real Estate Transactions"
+                      class="w-100"
+                    />
+                  </figure>
+
+                  <div class="blog-content">
+                    <div class="blog-content-top">
+                      <ul class="card-meta-list">
+                        <li>
+                          <a href="#" class="card-meta-link">
+                            <ion-icon name="person"></ion-icon>
+
+                            <span>by: Admin</span>
+                          </a>
+                        </li>
+
+                        <li>
+                          <a href="#" class="card-meta-link">
+                            <ion-icon name="pricetags"></ion-icon>
+
+                            <span>Rumah</span>
+                          </a>
+                        </li>
+                      </ul>
+
+                      <h3 class="h3 blog-title">
+                        <a href="#">Transaksi Properti Komersial Terbaru</a>
+                      </h3>
+                    </div>
+
+                    <div class="blog-content-bottom">
+                      <div class="publish-date">
+                        <ion-icon name="calendar"></ion-icon>
+
+                        <time datetime="2022-27-04">Mar 21, 2023</time>
+                      </div>
+
+                      <a href="#" class="read-more-btn">Selengkapnya</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <div class="blog-card">
+                  <figure class="card-banner">
+                    <img
+                      src="{{ url_for('static', filename='images/blog-3.jpg') }}"
+                      alt="Renovating a Living Room? Experts Share Their Secrets"
+                      class="w-100"
+                    />
+                  </figure>
+
+                  <div class="blog-content">
+                    <div class="blog-content-top">
+                      <ul class="card-meta-list">
+                        <li>
+                          <a href="#" class="card-meta-link">
+                            <ion-icon name="person"></ion-icon>
+
+                            <span>by: Admin</span>
+                          </a>
+                        </li>
+
+                        <li>
+                          <a href="#" class="card-meta-link">
+                            <ion-icon name="pricetags"></ion-icon>
+
+                            <span>Kamar/Ruangan</span>
+                          </a>
+                        </li>
+                      </ul>
+
+                      <h3 class="h3 blog-title">
+                        <a href="#"
+                          >Renovasi ruang tamu ? Ahli membagikan rahasia
+                          mereka</a
+                        >
+                      </h3>
+                    </div>
+
+                    <div class="blog-content-bottom">
+                      <div class="publish-date">
+                        <ion-icon name="calendar"></ion-icon>
+
+                        <time datetime="2022-27-04">Apr 27, 2022</time>
+                      </div>
+
+                      <a href="#" class="read-more-btn">Selengkapnya</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 
         - #CTA
       -->
 
-            <section class="cta">
-                <div class="container">
-                    <div class="cta-card">
-                        <div class="card-content">
-                            <h2 class="h2 card-title">Mencari rumah impian?</h2>
+        <section class="cta">
+          <div class="container">
+            <div class="cta-card">
+              <div class="card-content">
+                <h2 class="h2 card-title">Mencari rumah impian?</h2>
 
-                            <p class="card-text">
-                                Kami dapat membantu anda dalam merealisasikan rumah impian
-                                anda
-                            </p>
-                        </div>
+                <p class="card-text">
+                  Kami dapat membantu anda dalam merealisasikan rumah impian
+                  anda
+                </p>
+              </div>
 
-                        <button class="btn cta-btn">
-                            <span>Cari Rumah</span>
+              <button class="btn cta-btn">
+                <span>Cari Rumah</span>
 
-                            <ion-icon name="arrow-forward-outline"></ion-icon>
-                        </button>
-                    </div>
-                </div>
-            </section>
-        </article>
+                <ion-icon name="arrow-forward-outline"></ion-icon>
+              </button>
+            </div>
+          </div>
+        </section>
+      </article>
     </main>
 
     <!-- 
@@ -979,141 +988,144 @@
   -->
 
     <footer class="footer">
-        <div class="footer-top">
-            <div class="container">
-                <div class="footer-brand">
-                    <a href="#" class="logo">
-                        <img src="{{ url_for('static', filename='images/logo-light.png') }}" alt="Homeverse logo" />
-                    </a>
+      <div class="footer-top">
+        <div class="container">
+          <div class="footer-brand">
+            <a href="#" class="logo">
+              <img
+                src="{{ url_for('static', filename='images/logo-light.png') }}"
+                alt="Homeverse logo"
+              />
+            </a>
 
-                    <p class="section-text">
-                        Rumah Tangsel merupakan perusahaan penyedia jasa pembelian
-                        rumah,penyedia informasi dan rekomendasi harga rumah, dan membantu
-                        anda dalam penjualan properti
-                    </p>
+            <p class="section-text">
+              Rumah Tangsel merupakan perusahaan penyedia jasa pembelian
+              rumah,penyedia informasi dan rekomendasi harga rumah, dan membantu
+              anda dalam penjualan properti
+            </p>
 
-                    <ul class="contact-list">
-                        <li>
-                            <a href="#" class="contact-link">
-                                <ion-icon name="location-outline"></ion-icon>
+            <ul class="contact-list">
+              <li>
+                <a href="#" class="contact-link">
+                  <ion-icon name="location-outline"></ion-icon>
 
-                                <address>Viktor,Pamulang,Tanggerang Selatan</address>
-                            </a>
-                        </li>
+                  <address>Viktor,Pamulang,Tanggerang Selatan</address>
+                </a>
+              </li>
 
-                        <li>
-                            <a href="tel:+0123456789" class="contact-link">
-                                <ion-icon name="call-outline"></ion-icon>
+              <li>
+                <a href="tel:+0123456789" class="contact-link">
+                  <ion-icon name="call-outline"></ion-icon>
 
-                                <span>+0123-456789</span>
-                            </a>
-                        </li>
+                  <span>+0123-456789</span>
+                </a>
+              </li>
 
-                        <li>
-                            <a href="mailto:contact@homeverse.com" class="contact-link">
-                                <ion-icon name="mail-outline"></ion-icon>
+              <li>
+                <a href="mailto:contact@homeverse.com" class="contact-link">
+                  <ion-icon name="mail-outline"></ion-icon>
 
-                                <span>sales@rumahtangsel.com</span>
-                            </a>
-                        </li>
-                    </ul>
+                  <span>sales@rumahtangsel.com</span>
+                </a>
+              </li>
+            </ul>
 
-                    <ul class="social-list">
-                        <li>
-                            <a href="#" class="social-link">
-                                <ion-icon name="logo-facebook"></ion-icon>
-                            </a>
-                        </li>
+            <ul class="social-list">
+              <li>
+                <a href="#" class="social-link">
+                  <ion-icon name="logo-facebook"></ion-icon>
+                </a>
+              </li>
 
-                        <li>
-                            <a href="#" class="social-link">
-                                <ion-icon name="logo-twitter"></ion-icon>
-                            </a>
-                        </li>
+              <li>
+                <a href="#" class="social-link">
+                  <ion-icon name="logo-twitter"></ion-icon>
+                </a>
+              </li>
 
-                        <li>
-                            <a href="#" class="social-link">
-                                <ion-icon name="logo-linkedin"></ion-icon>
-                            </a>
-                        </li>
+              <li>
+                <a href="#" class="social-link">
+                  <ion-icon name="logo-linkedin"></ion-icon>
+                </a>
+              </li>
 
-                        <li>
-                            <a href="#" class="social-link">
-                                <ion-icon name="logo-youtube"></ion-icon>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+              <li>
+                <a href="#" class="social-link">
+                  <ion-icon name="logo-youtube"></ion-icon>
+                </a>
+              </li>
+            </ul>
+          </div>
 
-                <div class="footer-link-box">
-                    <ul class="footer-list">
-                        <li>
-                            <p class="footer-list-title">Perusahaan</p>
-                        </li>
+          <div class="footer-link-box">
+            <ul class="footer-list">
+              <li>
+                <p class="footer-list-title">Perusahaan</p>
+              </li>
 
-                        <li>
-                            <a href="#" class="footer-link">Tentang Kami</a>
-                        </li>
+              <li>
+                <a href="#" class="footer-link">Tentang Kami</a>
+              </li>
 
-                        <li>
-                            <a href="#" class="footer-link">Semua Produk</a>
-                        </li>
+              <li>
+                <a href="#" class="footer-link">Semua Produk</a>
+              </li>
 
-                        <li>
-                            <a href="#" class="footer-link">Peta Lokasi</a>
-                        </li>
+              <li>
+                <a href="#" class="footer-link">Peta Lokasi</a>
+              </li>
 
-                        <li>
-                            <a href="#" class="footer-link">Tanya Kami</a>
-                        </li>
+              <li>
+                <a href="#" class="footer-link">Tanya Kami</a>
+              </li>
 
-                        <li>
-                            <a href="#" class="footer-link">Kontak Kami</a>
-                        </li>
-                    </ul>
+              <li>
+                <a href="#" class="footer-link">Kontak Kami</a>
+              </li>
+            </ul>
 
-                    <ul class="footer-list">
-                        <li>
-                            <p class="footer-list-title">Services</p>
-                        </li>
+            <ul class="footer-list">
+              <li>
+                <p class="footer-list-title">Services</p>
+              </li>
 
-                        <li>
-                            <a href="#" class="footer-link">Beli Rumah</a>
-                        </li>
+              <li>
+                <a href="#" class="footer-link">Beli Rumah</a>
+              </li>
 
-                        <li>
-                            <a href="#" class="footer-link">Rekomendasi Harga</a>
-                        </li>
+              <li>
+                <a href="#" class="footer-link">Rekomendasi Harga</a>
+              </li>
 
-                        <li>
-                            <a href="#" class="footer-link">Jual Rumah</a>
-                        </li>
+              <li>
+                <a href="#" class="footer-link">Jual Rumah</a>
+              </li>
 
-                        <li>
-                            <a href="#" class="footer-link">Penawaran Spesial</a>
-                        </li>
-                    </ul>
+              <li>
+                <a href="#" class="footer-link">Penawaran Spesial</a>
+              </li>
+            </ul>
 
-                    <ul class="footer-list">
-                        <li>
-                            <p class="footer-list-title">Pelayanan Pelanggan</p>
-                        </li>
+            <ul class="footer-list">
+              <li>
+                <p class="footer-list-title">Pelayanan Pelanggan</p>
+              </li>
 
-                        <li>
-                            <a href="#" class="footer-link">Hubungi Kami</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+              <li>
+                <a href="#" class="footer-link">Hubungi Kami</a>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
 
-        <div class="footer-bottom">
-            <div class="container">
-                <p class="copyright">
-                    &copy; 2022 <a href="#">codewithsadee</a>. All Rights Reserved
-                </p>
-            </div>
+      <div class="footer-bottom">
+        <div class="container">
+          <p class="copyright">
+            &copy; 2022 <a href="#">codewithsadee</a>. All Rights Reserved
+          </p>
         </div>
+      </div>
     </footer>
 
     <!-- 
@@ -1124,8 +1136,13 @@
     <!-- 
     - ionicon link
   -->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-</body>
-
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
 </html>
