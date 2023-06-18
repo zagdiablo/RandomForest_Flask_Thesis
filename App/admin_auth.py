@@ -20,6 +20,9 @@ def admin_login_page():
         if not user_check.is_admin:
             return redirect(url_for("public_views_loggedin.profile_page"))
 
+    if current_user.is_authenticated:
+        return redirect(url_for("admin_views.admin_dashboard"))
+
     return render_template("admin/auth-login.html")
 
 

@@ -30,7 +30,8 @@
                 <div class="sidebar-header">
                     <div class="d-flex justify-content-between">
                         <div class="logo">
-                            <a href="index.html"><img src="assets/images/logo/logo.png" alt="Logo"
+                            <a href="/admin_dashboard"><img
+                                    src="{{ url_for('static', filename='images/logo/logo.png') }}" alt="Logo"
                                     style="height: 3rem;"></a>
                         </div>
                         <div class="toggler">
@@ -39,45 +40,57 @@
                     </div>
                 </div>
                 <div class="sidebar-menu">
+                    <!-- side bar menu -->
                     <ul class="menu">
-                        <li class="sidebar-title">Menu</li>
 
-                        <li class="sidebar-item active ">
-                            <a href="index.html" class='sidebar-link'>
+                        <!-- menu -->
+                        <li class="sidebar-title">Menu</li>
+                        <li class="sidebar-item">
+                            <a href="/admin_dashboard" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-item">
-                            <a href="kecamatan.html" class='sidebar-link'>
+                        <li class="sidebar-item active">
+                            <a href="/admin_kecamatan" class='sidebar-link'>
                                 <i class="bi bi-geo-fill"></i>
                                 <span>Kecamatan</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item">
-                            <a href="rumah.html" class='sidebar-link'>
+                            <a href="/admin_rumah" class='sidebar-link'>
                                 <i class="bi bi-house-fill"></i>
                                 <span>Rumah</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="kontak-agen.html" class='sidebar-link'>
+                            <a href="/admin_kontak_agen" class='sidebar-link'>
                                 <i class="bi bi-person-lines-fill"></i>
                                 <span>Kontak Agen</span>
                             </a>
                         </li>
-                        <li class="sidebar-title">Users</li>
-
                         <li class="sidebar-item">
-                            <a href="user.html" class='sidebar-link'>
+                            <a href="/admin_logout" class='sidebar-link'>
+                                <i class="bi bi-box-arrow-left"></i>
+                                <span>Log out</span>
+                            </a>
+                        </li>
+                        <!-- menu end -->
+
+                        <!-- user -->
+                        <li class="sidebar-title">Users</li>
+                        <li class="sidebar-item">
+                            <a href="/admin_user" class='sidebar-link'>
                                 <i class="bi bi-people-fill"></i>
                                 <span>User</span>
                             </a>
                         </li>
+                        <!-- user end -->
 
                     </ul>
+                    <!-- side bar menu end -->
                 </div>
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
             </div>
@@ -111,7 +124,7 @@
                             <div class="row mt-2 mb-3">
                                 <div class="col-md-6">
 
-                                    <a href="tambah-kecamatan.html" class="btn btn-primary"
+                                    <a href="/tambah_kecamatan" class="btn btn-primary"
                                         style="display: flex; align-items: center;width: 200px;">
                                         <i class="bi bi-plus-circle" style="font-size: 20px;margin-top: -5px;"></i>
                                         <div class="txt" style="margin-left: 8px;">Tambah Kecamatan</div>
@@ -135,7 +148,7 @@
                                             <td>{{ num+1 }}</td>
                                             <td>Viktor Pamulang</td>
                                             <td>
-                                                <span class="badge bg-warning">Edit</span>
+                                                <a href="/edit_kecamatan"><span class="badge bg-warning">Edit</span></a>
                                                 <span class="badge bg-danger">Delete</span>
                                             </td>
                                         </tr>
@@ -159,17 +172,17 @@
             </footer>
         </div>
     </div>
-    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
 
-    <script src="assets/vendors/simple-datatables/simple-datatables.js"></script>
+    <script src="{{ url_for('static', filename='vendors/simple-datatables/simple-datatables.js') }}"></script>
     <script>
         // Simple Datatable
         let table1 = document.querySelector('#table1');
         let dataTable = new simpleDatatables.DataTable(table1);
     </script>
 
-    <script src="assets/js/main.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 
 </html>

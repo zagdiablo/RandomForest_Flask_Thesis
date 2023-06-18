@@ -19,3 +19,31 @@ class User(db.Model, UserMixin):
 
     # profile komplit
     is_filled = db.Column(db.Boolean, nullable=False, default=False)
+
+
+class Kecamatan(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nama_kecamatan = db.Column(db.String(50), nullable=False, default="")
+
+
+class Rumah(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    gambar = db.Column(db.String(200), nullable=True, default="")
+    alamat = db.Column(db.String(500), nullable=False, default="")
+    nama_perumahan = db.Column(db.String(200), nullable=False, default="")
+    luas = db.Column(db.Integer, nullable=False, default=0)
+    harga = db.Column(db.String(200), nullable=False, default="")
+    lantai = db.Column(db.Integer, nullable=False, default=0)
+    kamar_tidur = db.Column(db.Integer, nullable=False, default=0)
+    kamar_mandi = db.Column(db.Integer, nullable=False, default=0)
+    kecamatan = db.Column(db.String(100), nullable=False, default="")
+    koordinat = db.Column(db.String(100), nullable=False, default="")
+    kontak_agen = db.Column(db.String(100), nullable=False, default="")
+
+
+class Agen(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nama_agen = db.Column(db.String(100), nullable=False, default="")
+    nomor_telepon = db.Column(db.String(100), nullable=False, default="")
+    email = db.Column(db.String(100), nullable=False, default="")
+    whatsapp = db.Column(db.String(100), nullable=False, default="")

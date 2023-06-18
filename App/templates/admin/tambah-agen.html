@@ -8,19 +8,19 @@
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
 
-    <link rel="stylesheet" href="assets/vendors/iconly/bold.css">
-<!--     
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendors/iconly/bold.css') }}">
+    <!--     
     <link rel="stylesheet" href="assets/vendors/dripicons/webfont.css">
     <link rel="stylesheet" href="assets/css/pages/dripicons.css"> -->
-    <link rel="stylesheet" href="assets/vendors/simple-datatables/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendors/simple-datatables/style.css') }}">
 
-    <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendors/bootstrap-icons/bootstrap-icons.css') }}">
 
-    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
-    <link rel="stylesheet" href="assets/css/app.css">
-    <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.svg') }}" type="image/x-icon">
 </head>
 
 <body>
@@ -30,7 +30,9 @@
                 <div class="sidebar-header">
                     <div class="d-flex justify-content-between">
                         <div class="logo">
-                            <a href="index.html"><img src="assets/images/logo/logo.png" alt="Logo"  style="height: 3rem;"></a>
+                            <a href="/admin_dashboard"><img
+                                    src="{{ url_for('static', filename='images/logo/logo.png') }}" alt="Logo"
+                                    style="height: 3rem;"></a>
                         </div>
                         <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -38,45 +40,57 @@
                     </div>
                 </div>
                 <div class="sidebar-menu">
+                    <!-- side bar menu -->
                     <ul class="menu">
-                        <li class="sidebar-title">Menu</li>
 
-                        <li class="sidebar-item active ">
-                            <a href="index.html" class='sidebar-link'>
+                        <!-- menu -->
+                        <li class="sidebar-title">Menu</li>
+                        <li class="sidebar-item">
+                            <a href="/admin_dashboard" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
-                        
+
                         <li class="sidebar-item">
-                            <a href="kecamatan.html" class='sidebar-link'>
+                            <a href="/admin_kecamatan" class='sidebar-link'>
                                 <i class="bi bi-geo-fill"></i>
                                 <span>Kecamatan</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item">
-                            <a href="rumah.html" class='sidebar-link'>
+                            <a href="/admin_rumah" class='sidebar-link'>
                                 <i class="bi bi-house-fill"></i>
                                 <span>Rumah</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
-                            <a href="kontak-agen.html" class='sidebar-link'>
+                        <li class="sidebar-item active">
+                            <a href="/admin_kontak_agen" class='sidebar-link'>
                                 <i class="bi bi-person-lines-fill"></i>
                                 <span>Kontak Agen</span>
                             </a>
                         </li>
-                        <li class="sidebar-title">Users</li>
-
                         <li class="sidebar-item">
-                            <a href="user.html" class='sidebar-link'>
+                            <a href="/admin_logout" class='sidebar-link'>
+                                <i class="bi bi-box-arrow-left"></i>
+                                <span>Log out</span>
+                            </a>
+                        </li>
+                        <!-- menu end -->
+
+                        <!-- user -->
+                        <li class="sidebar-title">Users</li>
+                        <li class="sidebar-item">
+                            <a href="/admin_user" class='sidebar-link'>
                                 <i class="bi bi-people-fill"></i>
                                 <span>User</span>
                             </a>
                         </li>
+                        <!-- user end -->
 
                     </ul>
+                    <!-- side bar menu end -->
                 </div>
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
             </div>
@@ -92,11 +106,13 @@
                 <div class="page-title">
                     <div class="row">
                         <div class="col-12 col-md-6 order-md-1 order-last">
-                            <strong><h3>Kontak Agen</h3></strong>
+                            <strong>
+                                <h3>Kontak Agen</h3>
+                            </strong>
                         </div>
                         <div class="col-12 col-md-6 order-md-2 order-first">
                             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                               
+
                             </nav>
                         </div>
                     </div>
@@ -115,34 +131,34 @@
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="form-group">
-                                                            <label for="first-name-vertical"><strong>Nama Agen</strong></label>
+                                                            <label for="first-name-vertical"><strong>Nama
+                                                                    Agen</strong></label>
                                                             <input type="text" id="first-name-vertical"
-                                                                class="form-control" name="fname"
-                                                                placeholder="nama">
+                                                                class="form-control" name="fname" placeholder="nama">
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="form-group">
-                                                            <label for="first-name-vertical"><strong>Telepon</strong></label>
+                                                            <label
+                                                                for="first-name-vertical"><strong>Telepon</strong></label>
                                                             <input type="text" id="first-name-vertical"
-                                                                class="form-control" name="fname"
-                                                                placeholder="nama">
+                                                                class="form-control" name="fname" placeholder="nama">
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="form-group">
-                                                            <label for="first-name-vertical"><strong>Email</strong></label>
+                                                            <label
+                                                                for="first-name-vertical"><strong>Email</strong></label>
                                                             <input type="text" id="first-name-vertical"
-                                                                class="form-control" name="fname"
-                                                                placeholder="nama">
+                                                                class="form-control" name="fname" placeholder="nama">
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="form-group">
-                                                            <label for="first-name-vertical"><strong>Whatsapp</strong></label>
+                                                            <label
+                                                                for="first-name-vertical"><strong>Whatsapp</strong></label>
                                                             <input type="text" id="first-name-vertical"
-                                                                class="form-control" name="fname"
-                                                                placeholder="nama">
+                                                                class="form-control" name="fname" placeholder="nama">
                                                         </div>
                                                     </div>
                                                     <div class="col-12 d-flex justify-content-end">
@@ -158,10 +174,10 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </section>
-           
+
             </div>
 
             <footer>
@@ -173,17 +189,17 @@
             </footer>
         </div>
     </div>
-    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
 
-    <script src="assets/vendors/simple-datatables/simple-datatables.js"></script>
+    <script src="{{ url_for('static', filename='vendors/simple-datatables/simple-datatables.js') }}"></script>
     <script>
         // Simple Datatable
         let table1 = document.querySelector('#table1');
         let dataTable = new simpleDatatables.DataTable(table1);
     </script>
 
-    <script src="assets/js/main.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 
 </html>

@@ -8,19 +8,19 @@
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
 
-    <link rel="stylesheet" href="assets/vendors/iconly/bold.css">
-<!--     
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendors/iconly/bold.css') }}">
+    <!--     
     <link rel="stylesheet" href="assets/vendors/dripicons/webfont.css">
     <link rel="stylesheet" href="assets/css/pages/dripicons.css"> -->
-    <link rel="stylesheet" href="assets/vendors/simple-datatables/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendors/simple-datatables/style.css') }}">
 
-    <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendors/bootstrap-icons/bootstrap-icons.css') }}">
 
-    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
-    <link rel="stylesheet" href="assets/css/app.css">
-    <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.svg') }}" type="image/x-icon">
 </head>
 
 <body>
@@ -30,7 +30,9 @@
                 <div class="sidebar-header">
                     <div class="d-flex justify-content-between">
                         <div class="logo">
-                            <a href="index.html"><img src="assets/images/logo/logo.png" alt="Logo"  style="height: 3rem;"></a>
+                            <a href="/admin_dashboard"><img
+                                    src="{{ url_for('static', filename='images/logo/logo.png') }}" alt="Logo"
+                                    style="height: 3rem;"></a>
                         </div>
                         <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -38,45 +40,57 @@
                     </div>
                 </div>
                 <div class="sidebar-menu">
+                    <!-- side bar menu -->
                     <ul class="menu">
-                        <li class="sidebar-title">Menu</li>
 
-                        <li class="sidebar-item active ">
-                            <a href="index.html" class='sidebar-link'>
+                        <!-- menu -->
+                        <li class="sidebar-title">Menu</li>
+                        <li class="sidebar-item">
+                            <a href="/admin_dashboard" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
-                        
+
                         <li class="sidebar-item">
-                            <a href="kecamatan.html" class='sidebar-link'>
+                            <a href="/admin_kecamatan" class='sidebar-link'>
                                 <i class="bi bi-geo-fill"></i>
                                 <span>Kecamatan</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item">
-                            <a href="rumah.html" class='sidebar-link'>
+                            <a href="/admin_rumah" class='sidebar-link'>
                                 <i class="bi bi-house-fill"></i>
                                 <span>Rumah</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
-                            <a href="kontak-agen.html" class='sidebar-link'>
+                        <li class="sidebar-item active">
+                            <a href="/admin_kontak_agen" class='sidebar-link'>
                                 <i class="bi bi-person-lines-fill"></i>
                                 <span>Kontak Agen</span>
                             </a>
                         </li>
-                        <li class="sidebar-title">Users</li>
-
                         <li class="sidebar-item">
-                            <a href="user.html" class='sidebar-link'>
+                            <a href="/admin_logout" class='sidebar-link'>
+                                <i class="bi bi-box-arrow-left"></i>
+                                <span>Log out</span>
+                            </a>
+                        </li>
+                        <!-- menu end -->
+
+                        <!-- user -->
+                        <li class="sidebar-title">Users</li>
+                        <li class="sidebar-item">
+                            <a href="/admin_user" class='sidebar-link'>
                                 <i class="bi bi-people-fill"></i>
                                 <span>User</span>
                             </a>
                         </li>
+                        <!-- user end -->
 
                     </ul>
+                    <!-- side bar menu end -->
                 </div>
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
             </div>
@@ -92,7 +106,9 @@
                 <div class="page-title">
                     <div class="row">
                         <div class="col-12 col-md-6 order-md-1 order-last">
-                            <strong><h3>Agen</h3></strong>
+                            <strong>
+                                <h3>Agen</h3>
+                            </strong>
                         </div>
                         <div class="col-12 col-md-6 order-md-2 order-first">
                             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -108,42 +124,43 @@
 
                             <div class="row mt-2 mb-3">
                                 <div class="col-md-6">
-                                    
-                                    <a class="btn btn-primary" style="display: flex; align-items: center;width: 150px;" >
+
+                                    <a href="/tambah_agen" class="btn btn-primary"
+                                        style="display: flex; align-items: center;width: 150px;">
                                         <i class="bi bi-plus-circle" style="font-size: 20px;margin-top: -5px;"></i>
                                         <div class="txt" style="margin-left: 7px;">Tambah Agen</div>
                                     </a>
                                 </div>
                             </div>
 
-                           <div class="table-responsive">
-                            <table class="table table-striped" id="table1">
-                                <thead>
-                                    <tr>
-                                        <th>Nomor</th>
-                                        <th>Nama Agen</th>
-                                        <th>Telepon</th>
-                                        <th>Email</th>
-                                        <th>Whatsapp</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                    
-                                    <tr>
-                                        <td>1</td>
-                                       <td>Agen1</td>
-                                       <td>02132424</td>
-                                       <td>Agen1@gmail.com</td>
-                                       <td>0824448484</td>
-                                        <td>
-                                            <span class="badge bg-warning">Edit</span>
-                                            <span class="badge bg-danger">Delete</span>
-                                        </td>
-                                    </tr>
-                                    
-                                </tbody>
-                            </table>
-                           </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped" id="table1">
+                                    <thead>
+                                        <tr>
+                                            <th>Nomor</th>
+                                            <th>Nama Agen</th>
+                                            <th>Telepon</th>
+                                            <th>Email</th>
+                                            <th>Whatsapp</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Agen1</td>
+                                            <td>02132424</td>
+                                            <td>Agen1@gmail.com</td>
+                                            <td>0824448484</td>
+                                            <td>
+                                                <a href="/edit_agen"><span class="badge bg-warning">Edit</span></a>
+                                                <span class="badge bg-danger">Delete</span>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
 
@@ -159,17 +176,17 @@
             </footer>
         </div>
     </div>
-    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
 
-    <script src="assets/vendors/simple-datatables/simple-datatables.js"></script>
+    <script src="{{ url_for('static', filename='vendors/simple-datatables/simple-datatables.js') }}"></script>
     <script>
         // Simple Datatable
         let table1 = document.querySelector('#table1');
         let dataTable = new simpleDatatables.DataTable(table1);
     </script>
 
-    <script src="assets/js/main.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 
 </html>
