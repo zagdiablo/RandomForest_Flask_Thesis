@@ -337,143 +337,158 @@
                     <div class="mask d-flex align-items-center h-100">
                         <div class="container">
                             <div class="row">
-                                <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-                                    <div class="card search-card mb-2" style="border-radius: 10em; ">
-                                        <div class="card-body p-2">
-                                            <div class="input-group input-group-lg">
-                                                <input type="text"
-                                                    class="form-control form-control-lg rounde bg-transparent"
-                                                    placeholder="Kecamatan" aria-label="Cari Lokasi"
-                                                    aria-describedby="basic-addon2"
-                                                    style="color: var(--prussian-blue)" />
-                                                <span class="input-group-text border-0" id="basic-addon2">
-                                                    <ion-icon id="search-icon" name="location"></ion-icon>
-                                                </span>
+                                <form action="/handle_cari_rumah" method="post">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                                    <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+
+                                        <!-- search bar cari rumah by kecamatan -->
+                                        <div class="card search-card mb-2" style="border-radius: 10em; ">
+                                            <div class="card-body p-2">
+                                                <div class="input-group input-group-lg">
+                                                    <input type="text" name="search_bar_by_kecamatan"
+                                                        class="form-control form-control-lg rounde bg-transparent"
+                                                        placeholder="Kecamatan" aria-label="Cari Lokasi"
+                                                        aria-describedby="basic-addon2"
+                                                        style="color: var(--prussian-blue)" />
+                                                    <span class="input-group-text border-0" id="basic-addon2">
+                                                        <ion-icon id="search-icon" name="location"></ion-icon>
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="card mt-3 ly-detail-search">
-                                        <div class="card-body p-4">
-                                            <h6 class="text-uppercase mt-3 mb-4"
-                                                style="color: var(--prussian-blue);font-weight: bold;">Pencarian Detail
-                                            </h6>
-                                            <div class="row">
-                                                <div class="col-md-4 mb-3">
-                                                    <select class="form-select btn btn-light"
-                                                        aria-label="Default select example">
-                                                        <option selected>Lantai</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-4 mb-3">
-                                                    <select class="form-select btn btn-light"
-                                                        aria-label="Default select example">
-                                                        <option selected>Luas</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-4 mb-3">
-                                                    <select class="form-select btn btn-light"
-                                                        aria-label="Default select example">
-                                                        <option selected>Kamar Tidur</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-4 mb-3">
-                                                    <select class="form-select btn btn-light"
-                                                        aria-label="Default select example">
-                                                        <option selected>Kamar Mandi</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-4 mb-3">
-                                                    <select class="form-select btn btn-light"
-                                                        aria-label="Default select example">
-                                                        <option selected>Harga</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
-                                                    </select>
-                                                </div>
-                                                <!-- <div class="col-md-4 mb-3">
-                          <select class="form-select btn btn-light" aria-label="Default select example">
-                            <option selected>Lantai</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                          </select> 
-                        </div> -->
-                                            </div>
 
-                                            <div class="row">
-                                                <fieldset>
-                                                    <h5>Fasilitas</h5>
-                                                    <div class="row">
+                                        <div class="card mt-3 ly-detail-search">
+                                            <div class="card-body p-4">
 
-                                                        <div class="col-xl-3">
-                                                            <div class="form__group">
-                                                                <input type="checkbox" value="strawberries"
-                                                                    name="berries">
-                                                                <label for="berries_1">Gym</label>
-                                                            </div>
-                                                            <div class="form__group">
-                                                                <input type="checkbox" value="blueberries"
-                                                                    name="berries">
-                                                                <label for="berries_2">Masjid</label>
-                                                            </div>
-                                                            <div class="form__group">
-                                                                <input type="checkbox" value="bananas" name="berries">
-                                                                <label for="berries_3">Kamar</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xl-5">
-                                                            <div class="form__group">
-                                                                <input type="checkbox" value="strawberries"
-                                                                    name="berries">
-                                                                <label for="berries_1">Taman</label>
-                                                            </div>
-                                                            <div class="form__group">
-                                                                <input type="checkbox" value="blueberries"
-                                                                    name="berries">
-                                                                <label for="berries_2">Playground Anak</label>
-                                                            </div>
-                                                            <div class="form__group">
-                                                                <input type="checkbox" value="bananas" name="berries">
-                                                                <label for="berries_3">Kolam Renang</label>
-                                                            </div>
-                                                        </div>
+                                                <!-- dropdown option parameter lantai, luas, kamar tidur, kamar mandi, harga -->
+                                                <h6 class="text-uppercase mt-3 mb-4"
+                                                    style="color: var(--prussian-blue);font-weight: bold;">Pencarian
+                                                    Detail
+                                                </h6>
+                                                <div class="row">
+                                                    <div class="col-md-4 mb-3">
+                                                        <select class="form-select btn btn-light" name="dropdown_lantai"
+                                                            aria-label="Default select example">
+                                                            <option selected>Lantai</option>
+                                                            <option value="1">One</option>
+                                                            <option value="2">Two</option>
+                                                            <option value="3">Three</option>
+                                                        </select>
                                                     </div>
-                                                </fieldset>
-                                            </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <select class="form-select btn btn-light" name="dropdown_luas"
+                                                            aria-label="Default select example">
+                                                            <option selected>Luas</option>
+                                                            <option value="1">One</option>
+                                                            <option value="2">Two</option>
+                                                            <option value="3">Three</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <select class="form-select btn btn-light"
+                                                            name="dropdown_kamar_tidur"
+                                                            aria-label="Default select example">
+                                                            <option selected>Kamar Tidur</option>
+                                                            <option value="1">One</option>
+                                                            <option value="2">Two</option>
+                                                            <option value="3">Three</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4 mb-3">
+                                                        <select class="form-select btn btn-light"
+                                                            name="dropdown_kamar_mandi"
+                                                            aria-label="Default select example">
+                                                            <option selected>Kamar Mandi</option>
+                                                            <option value="1">One</option>
+                                                            <option value="2">Two</option>
+                                                            <option value="3">Three</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <select class="form-select btn btn-light" name="dropdown_harga"
+                                                            aria-label="Default select example">
+                                                            <option selected>Harga</option>
+                                                            <option value="1">One</option>
+                                                            <option value="2">Two</option>
+                                                            <option value="3">Three</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <!-- end dropdown option -->
 
-                                            <div class="d-flex justify-content-between align-items-center mt-4">
-                                                <p class="mb-0 " style="color: var(--prussian-blue);"><strong>Kisaran
-                                                        Harga</strong><span
-                                                        class="font-weight-bold"><strong>Rp300.000.000 -
-                                                            Rp500.000.000</strong></span></p>
-                                                <div>
-                                                    <button type="button"
-                                                        class="btn btn-link btn-rounded mt-1 mb-1 button-hapus">
-                                                        Hapus
-                                                    </button>
-                                                    <button type="button"
-                                                        class="btn btn-rounded button-cari mt-1 mb-1">Cari
-                                                        Rumah</button>
+                                                <!-- checkboxes parameter fasilitas -->
+                                                <div class="row">
+                                                    <fieldset>
+                                                        <h5>Fasilitas</h5>
+                                                        <div class="row">
+
+                                                            <div class="col-xl-3">
+                                                                <div class="form__group">
+                                                                    <input type="checkbox" value="gym"
+                                                                        name="checkbox_gym">
+                                                                    <label for="berries_1">Gym</label>
+                                                                </div>
+                                                                <div class="form__group">
+                                                                    <input type="checkbox" value="masjid"
+                                                                        name="checkbox_masjid">
+                                                                    <label for="berries_2">Masjid</label>
+                                                                </div>
+                                                                <div class="form__group">
+                                                                    <input type="checkbox" value="kamar"
+                                                                        name="checkbox_kamar">
+                                                                    <label for="berries_3">Kamar</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-5">
+                                                                <div class="form__group">
+                                                                    <input type="checkbox" value="taman"
+                                                                        name="checkbox_taman">
+                                                                    <label for="berries_1">Taman</label>
+                                                                </div>
+                                                                <div class="form__group">
+                                                                    <input type="checkbox" value="playground"
+                                                                        name="checkbox_playground">
+                                                                    <label for="berries_2">Playground Anak</label>
+                                                                </div>
+                                                                <div class="form__group">
+                                                                    <input type="checkbox" value="kolam_renang"
+                                                                        name="checkbox_kolam_renang">
+                                                                    <label for="berries_3">Kolam Renang</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                                <!-- end dropdown parameter fasilitas -->
+
+                                                <div class="d-flex justify-content-between align-items-center mt-4">
+                                                    <p class="mb-0 " style="color: var(--prussian-blue);">
+                                                        <strong>Kisaran
+                                                            Harga</strong><span
+                                                            class="font-weight-bold"><strong>Rp300.000.000 -
+                                                                Rp500.000.000</strong></span>
+                                                    </p>
+
+                                                    <!-- action buttons -->
+                                                    <div>
+                                                        <button type="button"
+                                                            class="btn btn-link btn-rounded mt-1 mb-1 button-hapus">
+                                                            Hapus
+                                                        </button>
+                                                        <button type="submit"
+                                                            class="btn btn-rounded button-cari mt-1 mb-1">Cari
+                                                            Rumah
+                                                        </button>
+                                                    </div>
+                                                    <!-- end action buttons -->
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>

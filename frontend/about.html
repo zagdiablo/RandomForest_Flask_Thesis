@@ -7,21 +7,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Homeverse - Find your dream house</title>
 
-  <link
-    rel="shortcut icon"
-    href="assets/images/icon.png"
-    type="image/svg+xml"
-  />
+  <link rel="shortcut icon" href="assets/images/icon.png" type="image/svg+xml" />
   <link rel="stylesheet" href="./assets/css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
+    rel="stylesheet" />
 </head>
 <style>
-    /* *{
+  /* *{
         margin: 0;
         padding: 0;
         font-family: var(--ff-poppins);
@@ -35,67 +30,69 @@
         background-color: var(--white);
     } */
 
-    .about-session{
-        background: url(assets/images/about-banner-2.jpg);
-        background-size: 55%;
-        background-color: var(--white);
-        overflow: hidden;
-        padding: 200px 0;
+  .about-session {
+    background: url(assets/images/about-banner-2.jpg);
+    background-size: 55%;
+    background-color: var(--white);
+    overflow: hidden;
+    padding: 200px 0;
+  }
+
+  .inner-container {
+    width: 55%;
+    float: right;
+    padding: 100px;
+    background-color: var(--white);
+  }
+
+  .inner-container h1 {
+    margin-bottom: 30px;
+    font-size: 40px;
+    font-weight: 900;
+  }
+
+  .text {
+    font-size: 16px;
+    color: var(--black);
+    line-height: 30px;
+    text-align: justify;
+    margin-bottom: 40px;
+  }
+
+  .skills {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  @media screen and (max-width:1200px) {
+    .inner-container {
+      padding: 80px;
+    }
+  }
+
+
+  @media screen and (max-width:1000px) {
+    .about-session {
+      background-size: 100%;
+      padding: 100px 40px;
     }
 
-    .inner-container{
-        width: 55%;
-        float: right;
-        padding: 100px;
-        background-color: var(--white);
+    .inner-container {
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width:1000px) {
+    .about-session {
+      padding: 0;
     }
 
-    .inner-container h1{
-        margin-bottom: 30px;
-        font-size: 40px;
-        font-weight: 900;
+    .inner-container {
+      padding: 60px
     }
-
-    .text{
-        font-size: 16px;
-        color: var(--black);
-        line-height: 30px;
-        text-align: justify;
-        margin-bottom: 40px;
-    }
-
-    .skills{
-        display: flex;
-        justify-content: space-between;
-        font-weight: 700;
-        font-size: 16px;
-    }
-
-    @media screen and (max-width:1200px) {
-        .inner-container{
-            padding: 80px;
-        }
-    }
-    
-
-    @media screen and (max-width:1000px) {
-        .about-session{
-            background-size: 100%;
-            padding: 100px 40px;
-        }
-        .inner-container{
-            width: 100%;
-        }
-    }
-
-    @media screen and (max-width:1000px) {
-        .about-session{
-            padding: 0;
-        }
-        .inner-container{
-            padding: 60px
-        }
-    }
+  }
 </style>
 
 
@@ -159,7 +156,7 @@
 
           </ul>
 
-          
+
         </div>
 
       </div>
@@ -233,19 +230,20 @@
 
   <main>
     <article>
-        <div class="about-session">
-            <div class="inner-container">
-                <h1>Tentang Kami</h1>
-                <p class="text">
-                  Kami merupakan perusahaan yang bergerak di bidang properti seperti penjualan rumah,pembelian rumah,penyewaan rumah,penjualan interior rumah dan masih banyak lainnya.
-                </p>
-                <div class="skills">
-                    <span>Pembelian Rumah</span>
-                    <span>Informasi Properti</span>
-                    <span>Penjualan Rumah</span>
-                </div>
-            </div>
+      <div class="about-session">
+        <div class="inner-container">
+          <h1>Tentang Kami</h1>
+          <p class="text">
+            Kami merupakan perusahaan yang bergerak di bidang properti seperti penjualan rumah,pembelian rumah,penyewaan
+            rumah,penjualan interior rumah dan masih banyak lainnya.
+          </p>
+          <div class="skills">
+            <span>Pembelian Rumah</span>
+            <span>Informasi Properti</span>
+            <span>Penjualan Rumah</span>
+          </div>
         </div>
+      </div>
 
     </article>
   </main>
@@ -258,7 +256,7 @@
     - #FOOTER
   -->
 
- 
+
   <footer class="footer">
 
     <div class="footer-top">
@@ -271,7 +269,8 @@
           </a>
 
           <p class="section-text">
-            Rumah Tangsel merupakan perusahaan penyedia jasa pembelian rumah,penyedia informasi dan rekomendasi harga rumah, dan membantu anda dalam penjualan properti
+            Rumah Tangsel merupakan perusahaan penyedia jasa pembelian rumah,penyedia informasi dan rekomendasi harga
+            rumah, dan membantu anda dalam penjualan properti
           </p>
 
           <ul class="contact-list">

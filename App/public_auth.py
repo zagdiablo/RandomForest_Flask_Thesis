@@ -72,6 +72,7 @@ def handle_register():
             new_user = User(
                 email=email,
                 password=generate_password_hash(password, "sha256"),
+                is_admin=False,
             )
             db.session.add(new_user)
             db.session.commit()
