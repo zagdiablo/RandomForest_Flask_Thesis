@@ -128,42 +128,45 @@
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <form class="form">
+                                        <!-- form tambah rumah -->
+                                        <form class="form" action="/handle_tambah_rumah" method="post">
+                                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
                                             <div class="row">
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="first-name-column"><strong>Nama
                                                                 Perumahan</strong></label>
                                                         <input type="text" id="first-name-column" class="form-control"
-                                                            placeholder="First Name" name="fname-column">
+                                                            placeholder="First Name" name="nama_perumahan">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="last-name-column"><strong>Alamat</strong></label>
                                                         <input type="text" id="last-name-column" class="form-control"
-                                                            placeholder="Last Name" name="lname-column">
+                                                            placeholder="Last Name" name="alamat">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="city-column"><strong>Luas</strong></label>
                                                         <input type="text" id="city-column" class="form-control"
-                                                            placeholder="City" name="city-column">
+                                                            placeholder="City" name="luas">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="country-floating"><strong>Harga</strong></label>
                                                         <input type="text" id="country-floating" class="form-control"
-                                                            name="country-floating" placeholder="Country">
+                                                            name="harga" placeholder="Country">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="company-column"><strong>Lantai</strong></label>
                                                         <input type="text" id="company-column" class="form-control"
-                                                            name="company-column" placeholder="Company">
+                                                            name="lantai" placeholder="Company">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
@@ -171,7 +174,7 @@
                                                         <label for="email-id-column"><strong>Kamar
                                                                 Tidur</strong></label>
                                                         <input type="email" id="email-id-column" class="form-control"
-                                                            name="email-id-column" placeholder="Email">
+                                                            name="kamar_tidur" placeholder="Email">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
@@ -179,7 +182,7 @@
                                                         <label for="email-id-column"><strong>Kamar
                                                                 Mandi</strong></label>
                                                         <input type="email" id="email-id-column" class="form-control"
-                                                            name="email-id-column" placeholder="Email">
+                                                            name="kamar_mandi" placeholder="Email">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">

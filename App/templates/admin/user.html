@@ -140,7 +140,7 @@
                     <td>Rp10.000.000 - Rp20.000.000</td>
                     <td>Viktor Pamulang</td>
                     <td>
-                      <span class="badge bg-warning">Edit</span>
+                      <a href="/edit_user"><span class="badge bg-warning">Edit</span></a>
                       <span class="badge bg-danger">Delete</span>
                     </td>
                   </tr>
@@ -160,18 +160,17 @@
       </footer>
     </div>
   </div>
-  <!-- TODO fix this -->
-  <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ url_for('static', filename='vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
 
-  <script src="assets/vendors/simple-datatables/simple-datatables.js"></script>
+  <script src="{{ url_for('static', filename='vendors/simple-datatables/simple-datatables.js') }}"></script>
   <script>
     // Simple Datatable
     let table1 = document.querySelector("#table1");
     let dataTable = new simpleDatatables.DataTable(table1);
   </script>
 
-  <script src="assets/js/main.js"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 
 </html>

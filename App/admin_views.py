@@ -1,8 +1,9 @@
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_required, current_user
 
 
-from .models import User
+from .models import User, Kecamatan, Rumah, Agen
+from . import db
 
 
 admin_views = Blueprint("admin_views", __name__)
@@ -55,6 +56,22 @@ def tambah_kecamatan():
     return render_template("admin/tambah-kecamatan.html")
 
 
+@admin_views.route("/handle_tambah_kecamatan", methods=["POST"])
+@login_required
+def handle_tambah_kecamatan():
+    if not check_admin():
+        return redirect(url_for("public_views_loggedin.profile_page"))
+
+    kecamatan = request.form.get("kecamatan")
+
+    to_add_kecamatan = Kecamatan(nama_kecamatan=kecamatan)
+    db.session.add(to_add_kecamatan)
+    db.session.commit()
+
+    flash(f"Berhasil menambah kecamatan {kecamatan}", category="success")
+    return redirect("/tambah_kecamatan")
+
+
 @admin_views.route("/edit_kecamatan", methods=["GET"])
 @login_required
 def edit_kecamatan():
@@ -62,15 +79,6 @@ def edit_kecamatan():
         return redirect(url_for("public_views_loggedin.profile_page"))
 
     return render_template("admin/edit-kecamatan.html")
-
-
-@admin_views.route("/handle_tambah_kecamatan", methods=["POST"])
-@login_required
-def handle_tambah_kecamatan():
-    if not check_admin():
-        return redirect(url_for("public_views_loggedin.profile_page"))
-
-    return redirect("/tambah_kecamatan")
 
 
 #
@@ -92,6 +100,16 @@ def tambah_rumah():
         return redirect(url_for("public_views_loggedin.profile_page"))
 
     return render_template("admin/tambah-rumah.html")
+
+
+@admin_views.route("/handle_tambah_rumah", methods=["GET"])
+@login_required
+def handle_tambah_rumah():
+    if not check_admin():
+        return redirect(url_for("public_views_loggedin.profile_page"))
+
+    # flash(f"Rumah {alamat_rumah} berhasil ditambah", category="success")
+    return redirect("/tambah_rumah")
 
 
 @admin_views.route("/edit_rumah", methods=["GET"])
@@ -122,6 +140,30 @@ def tambah_agen():
         return redirect(url_for("public_views_loggedin.profile_page"))
 
     return render_template("admin/tambah-agen.html")
+
+
+@admin_views.route("/handle_tambah_agen", methods=["POST"])
+@login_required
+def handle_tambah_agen():
+    if not check_admin():
+        return redirect(url_for("public_views_loggedin.profile_page"))
+
+    nama = request.form.get("nama_agen")
+    nomor_telepon = request.form.get("nomor_telepon")
+    email_agen = request.form.get("email")
+    whatsapp_agen = request.form.get("whatsapp")
+
+    to_add_agen = Agen(
+        nama_agen=nama,
+        nomor_telepon=nomor_telepon,
+        email=email_agen,
+        whatsapp=whatsapp_agen,
+    )
+    db.session.add(to_add_agen)
+    db.session.commit()
+
+    flash(f"Berhasil menambahkan agen {nama}")
+    return redirect("/tambah_agen")
 
 
 @admin_views.route("/edit_agen", methods=["GET"])
