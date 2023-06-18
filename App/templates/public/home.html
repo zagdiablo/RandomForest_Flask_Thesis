@@ -4,13 +4,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Homeverse - Find your dream house</title>
+    <title>Rumah Tangsel</title>
 
-    <link
-      rel="shortcut icon"
-      href="assets/images/icon.png"
-      type="image/svg+xml"
-    />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/icon.png') }}" type="image/svg+xml" />
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/style.css')}}"
@@ -190,7 +186,7 @@
                 pilihan kriteria anda
               </p>
 
-              <button class="btn">Temukan Harga Rumah</button>
+              <a href="/cari_rumah" class="btn" style="width: 273px;">Temukan Harga Rumah</a>
             </div>
 
             <figure class="hero-banner">
