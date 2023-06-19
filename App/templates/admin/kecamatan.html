@@ -132,6 +132,24 @@
                                 </div>
                             </div>
 
+                            <!-- Alert logic -->
+                            {% with messages = get_flashed_messages(with_categories=true) %} {% if
+                            messages %} {% for category, message in messages %} {% if category ==
+                            'error' %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ message }}
+                            </div>
+                            {% elif category == 'warning' %}
+                            <div class="alert alert-warning" role="alert">
+                                {{ message }}
+                            </div>
+                            {% else %}
+                            <div class="alert alert-success" role="alert">
+                                {{ message }}
+                            </div>
+                            {% endif %} {% endfor %} {% endif %} {% endwith %}
+                            <!-- end alert logic -->
+
                             <div class="table-responsive">
                                 <table class="table table-striped" id="table1">
                                     <thead>
@@ -143,13 +161,18 @@
                                     </thead>
                                     <tbody>
 
-                                        {% for num in range(20) %}
+                                        {% for kecamatan in all_kecamatan %}
                                         <tr>
-                                            <td>{{ num+1 }}</td>
-                                            <td>Viktor Pamulang</td>
+                                            <td>{{ loop.index }}</td>
+                                            <td>{{ kecamatan.nama_kecamatan }}</td>
                                             <td>
-                                                <a href="/edit_kecamatan"><span class="badge bg-warning">Edit</span></a>
-                                                <span class="badge bg-danger">Delete</span>
+                                                <a href="/edit_kecamatan/{{ kecamatan.id }}"><span
+                                                        class="badge bg-warning">Edit</span></a>
+
+                                                <form action="/delete_kecamatan/{{ kecamatan.id }}" method="post">
+                                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                                    <button type="submit" class="badge bg-danger">Delete</button>
+                                                </form>
                                             </td>
                                         </tr>
                                         {% endfor %}

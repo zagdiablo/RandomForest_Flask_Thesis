@@ -124,93 +124,123 @@
                                 <div class="card-header">
                                     <h4 class="card-title">Edit Rumah</h4>
                                 </div>
+
+                                <!-- Alert logic -->
+                                {% with messages = get_flashed_messages(with_categories=true) %} {% if
+                                messages %} {% for category, message in messages %} {% if category ==
+                                'error' %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{ message }}
+                                </div>
+                                {% elif category == 'warning' %}
+                                <div class="alert alert-warning" role="alert">
+                                    {{ message }}
+                                </div>
+                                {% else %}
+                                <div class="alert alert-success" role="alert">
+                                    {{ message }}
+                                </div>
+                                {% endif %} {% endfor %} {% endif %} {% endwith %}
+                                <!-- end alert logic -->
+
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <form class="form">
+
+                                        <!-- edit rumah form -->
+                                        <form class="form" action="/handle_edit_rumah/{{ to_edit_rumah.id }}"
+                                            method="post">
+                                            <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+
                                             <div class="row">
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="first-name-column"><strong>Nama
                                                                 Perumahan</strong></label>
                                                         <input type="text" id="first-name-column" class="form-control"
-                                                            placeholder="First Name" name="fname-column">
+                                                            placeholder="Nama Perumahan" name="nama_perumahan"
+                                                            value="{{ to_edit_rumah.nama_perumahan }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="last-name-column"><strong>Alamat</strong></label>
                                                         <input type="text" id="last-name-column" class="form-control"
-                                                            placeholder="Last Name" name="lname-column">
+                                                            placeholder="Alamat" name="alamat"
+                                                            value="{{ to_edit_rumah.alamat }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="city-column"><strong>Luas</strong></label>
                                                         <input type="text" id="city-column" class="form-control"
-                                                            placeholder="City" name="city-column">
+                                                            placeholder="Luas" name="luas"
+                                                            value="{{ to_edit_rumah.luas}}">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="country-floating"><strong>Harga</strong></label>
                                                         <input type="text" id="country-floating" class="form-control"
-                                                            name="country-floating" placeholder="Country">
+                                                            placeholder="Country" name="harga"
+                                                            value="{{ to_edit_rumah.harga }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="company-column"><strong>Lantai</strong></label>
                                                         <input type="text" id="company-column" class="form-control"
-                                                            name="company-column" placeholder="Company">
+                                                            name="lantai" placeholder="Lantai"
+                                                            value="{{ to_edit_rumah.lantai }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="email-id-column"><strong>Kamar
                                                                 Tidur</strong></label>
-                                                        <input type="email" id="email-id-column" class="form-control"
-                                                            name="email-id-column" placeholder="Email">
+                                                        <input type="text" id="email-id-column" class="form-control"
+                                                            name="kamar_tidur" placeholder="Kamar Tidur"
+                                                            value="{{ to_edit_rumah.kamar_tidur }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="email-id-column"><strong>Kamar
                                                                 Mandi</strong></label>
-                                                        <input type="email" id="email-id-column" class="form-control"
-                                                            name="email-id-column" placeholder="Email">
+                                                        <input type="text" id="email-id-column" class="form-control"
+                                                            name="kamar_mandi" placeholder="Kamar Mandi"
+                                                            value="{{ to_edit_rumah.kamar_mandi }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="email-id-column">Kontak</label>
-                                                        <select class="form-select">
-                                                            <option selected>Kontak Agen</option>
-                                                            <option value="1">One</option>
-                                                            <option value="2">Two</option>
-                                                            <option value="3">Three</option>
+                                                        <select class="form-select" name="kontak_agen">
+                                                            <option value="{{to_edit_rumah.kontak_agen}}" selected>{{
+                                                                to_edit_rumah.kontak_agen }}</option>
+                                                            {% for agen in all_agen %}
+                                                            {% if to_edit_rumah.kontak_agen != agen.nama_agen %}
+                                                            <option value="{{agen.nama_agen}}">{{agen.nama_agen}}
+                                                            </option>
+                                                            {% endif %}
+                                                            {% endfor %}
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="form-group mt-2 mb-2 col-12">
                                                     <label for="add-image"><strong>Gambar</strong></label>
                                                     <input type="file" id="add-image" class="image-preview-filepond">
-                                                    <!-- <div class="input-group mt-2">
-                                                        <div class="input-group mb-3">
-                                                            <label class="input-group-text" for="inputGroupFile01"><i
-                                                                    class="bi bi-upload"></i></label>
-                                                            <input type="file" class="form-control" id="inputGroupFile01">
-                                                        </div>
-                                                    </div>
-     -->
                                                 </div>
                                             </div>
                                             <div class="col-12 d-flex justify-content-end">
                                                 <button type="submit" class="btn btn-primary me-1 mb-1">Edit</button>
-                                                <button type="reset"
-                                                    class="btn btn-light-secondary me-1 mb-1">Batal</button>
+                                                <a href="/admin_rumah">
+                                                    <span class="btn btn-light-secondary me-1 mb-1">Batal</span>
+                                                </a>
                                             </div>
                                     </div>
                                     </form>
+                                    <!-- edit rumah form end -->
+
                                 </div>
                             </div>
                         </div>

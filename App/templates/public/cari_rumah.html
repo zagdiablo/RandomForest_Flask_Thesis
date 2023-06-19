@@ -181,18 +181,17 @@
         margin-right: 0.65rem;
     }
 
-    .contact-agen p{
+    .contact-agen p {
         margin-bottom: 0;
     }
 
-    .card-footer{
+    .card-footer {
         display: none;
     }
 
-    .tampil{
+    .tampil {
         display: block;
     }
-
 </style>
 
 
@@ -363,14 +362,18 @@
                                                         aria-describedby="basic-addon2"
                                                         style="color: var(--prussian-blue)" />
                                                     <span class="input-group-text border-0" id="basic-addon2"> -->
-                                                        <select class="form-select bg-transparent" name="search_bar_by_kecamatan" id="kecamatan" style="border: none;"
-                            aria-label="Default select example">
-                            <option selected>Kecamatan</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                          </select>
-                                                        <ion-icon id="search-icon" name="location" style="margin-top: 4px;"></ion-icon>
+                                                    <select class="form-select bg-transparent"
+                                                        name="search_bar_by_kecamatan" id="kecamatan"
+                                                        style="border: none;" aria-label="Default select example">
+                                                        <option selected>Kecamatan</option>
+                                                        {% for kecamatan in all_kecamatan %}
+                                                        <option value="{{ kecamatan.nama_kecamatan }}">{{
+                                                            kecamatan.nama_kecamatan
+                                                            }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                    <ion-icon id="search-icon" name="location"
+                                                        style="margin-top: 4px;"></ion-icon>
                                                     </span>
                                                 </div>
                                             </div>
@@ -514,15 +517,19 @@
             </section>
 
             <!-- Recommendation section -->
-            {% if user_is_authenticated %}
             <div class="container" style="margin-top: -100px;">
                 <section class="property" id="property">
                     <div class="container">
                         <p class="section-subtitle">Properti</p>
+                        {% if user_is_authenticated %}
                         <h2 class="h2 section-title">Rekomendasi Kami</h2>
+                        {% else %}
+                        <h2 class="h2 section-title">Hasil Pencarian</h2>
+                        {% endif %}
                         <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
 
-                            {% for num in range(3) %}
+                            {% for rumah in query_rumah %}
+                            <!-- {% if rumah.kecamatan == kecamatan_query %} -->
                             <div class="col">
                                 <div class="property-card">
                                     <figure class="card-banner">
@@ -531,12 +538,12 @@
                                             <img src="{{ url_for('static', filename='images/property-4.png') }}"
                                                 alt="Luxury villa in Rego Park" class="w-100">
                                         </a>
-                                        <div class="card-badge orange">Dijual</div>
+                                        <div class="card-badge orange">{{ loop.index }}</div>
                                         <div class="banner-actions">
                                             <button class="banner-actions-btn">
                                                 <ion-icon name="location"></ion-icon>
 
-                                                <address style="margin-bottom: 0;">Serpong</address>
+                                                <address style="margin-bottom: 0;">{{ rumah.alamat }}</address>
                                             </button>
                                         </div>
                                     </figure>
@@ -544,10 +551,11 @@
                                     <div class="card-content">
                                         <div class="card-price">
                                             <!-- Harga Disini -->
-                                            <strong>Rp6.500.000.0000</strong>                                        </div>
+                                            <strong>{{ rumah.harga }}</strong>
+                                        </div>
                                         <h3 class="h3 card-title">
                                             <!-- Nama Perumahan / Rumah -->
-                                            <a href="/detail_rumah">Perumahan Batang Indah</a>
+                                            <a href="/detail_rumah">{{ rumah.nama_perumahan }}</a>
                                         </h3>
                                         <!--  -->
                                         <p class="card-text">
@@ -555,19 +563,19 @@
                                         </p>
                                         <ul class="card-list">
                                             <li class="card-item">
-                                                <strong>3</strong>
+                                                <strong>{{ rumah.kamar_tidur }}</strong>
 
                                                 <ion-icon name="bed-outline"></ion-icon>
 
                                                 <span>Kamar</span>
                                             </li>
                                             <li class="card-item">
-                                                <strong>2</strong>
+                                                <strong>{{ rumah.kamar_mandi }}</strong>
                                                 <ion-icon name="man-outline"></ion-icon>
                                                 <span>Kamar Mandi</span>
                                             </li>
                                             <li class="card-item">
-                                                <strong>3450</strong>
+                                                <strong>{{ rumah.luas }}</strong>
                                                 <ion-icon name="square-outline"></ion-icon>
                                                 <span>Luas M2</span>
                                             </li>
@@ -576,45 +584,49 @@
 
                                     <!-- Kalau Login Tambahkan Class Tampil pada card-footer  -->
                                     <!-- class="card-footer tampil" -->
-                                    <div class="card-footer">
-                                        <div class="card-author">
-                                            <figure class="author-avatar">
-                                                <img src="{{ url_for('static', filename='images/author.jpg') }}"
-                                                    alt="Habibi Qodri" class="w-100">
-                                            </figure>
-                                            <div class="contact-agen" >
-                                                <p class="author-name">
-                                                    <a href="#">Habibi Qodri</a>
-                                                </p>
-                                                <p class="author-title">Agen Perumahan</p>
+                                    {% if user_is_authenticated %}
+                                    <div class="card-footer tampil">
+                                        {%else%}
+                                        <div class="card-footer">
+                                            {% endif %}
+                                            <div class="card-author">
+                                                <figure class="author-avatar">
+                                                    <img src="{{ url_for('static', filename='images/author.jpg') }}"
+                                                        alt="Habibi Qodri" class="w-100">
+                                                </figure>
+                                                <div class="contact-agen">
+                                                    <p class="author-name">
+                                                        <a href="#">Habibi Qodri</a>
+                                                    </p>
+                                                    <p class="author-title">Agen Perumahan</p>
+                                                </div>
+
+                                                <div class="card-footer-actions">
+
+                                                    <button class="card-footer-actions-btn">
+                                                        <ion-icon name="mail-outline"></ion-icon>
+                                                    </button>
+
+                                                    <button class="card-footer-actions-btn">
+                                                        <ion-icon name="logo-whatsapp"></ion-icon>
+                                                    </button>
+
+                                                    <button class="card-footer-actions-btn">
+                                                        <ion-icon name="call-outline"></ion-icon>
+                                                    </button>
+
+                                                </div>
                                             </div>
-
-                                            <div class="card-footer-actions">
-
-                                                <button class="card-footer-actions-btn">
-                                                  <ion-icon name="mail-outline"></ion-icon>
-                                                </button>
-                            
-                                                <button class="card-footer-actions-btn">
-                                                  <ion-icon name="logo-whatsapp"></ion-icon>
-                                                </button>
-                            
-                                                <button class="card-footer-actions-btn">
-                                                  <ion-icon name="call-outline"></ion-icon>
-                                                </button>
-                            
-                                              </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            {% endfor %}
+                                <!-- {% endif %} -->
+                                {% endfor %}
 
+                            </div>
                         </div>
-                    </div>
                 </section>
             </div>
-            {% endif %}
             <!-- End of recommendation section -->
 
         </article>

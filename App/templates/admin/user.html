@@ -133,17 +133,21 @@
                   </tr>
                 </thead>
                 <tbody>
+                  {% for user in non_admin_user %}
+                  <!-- user table -->
                   <tr>
-                    <td>1</td>
-                    <td>Jaka Sembung</td>
-                    <td>jaka@gmail.com</td>
-                    <td>Rp10.000.000 - Rp20.000.000</td>
-                    <td>Viktor Pamulang</td>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ user.nama_lengkap }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.range_gaji }}</td>
+                    <td>kecamatan</td>
                     <td>
                       <a href="/edit_user"><span class="badge bg-warning">Edit</span></a>
                       <span class="badge bg-danger">Delete</span>
                     </td>
                   </tr>
+                  <!-- user tabel end -->
+                  {% endfor %}
                 </tbody>
               </table>
             </div>

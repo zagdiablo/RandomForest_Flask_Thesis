@@ -126,9 +126,33 @@
                                 <div class="card-header">
                                     <h4 class="card-title">Edit Kecamatan</h4>
                                 </div>
+
+                                <!-- Alert logic -->
+                                {% with messages = get_flashed_messages(with_categories=true) %} {% if
+                                messages %} {% for category, message in messages %} {% if category ==
+                                'error' %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{ message }}
+                                </div>
+                                {% elif category == 'warning' %}
+                                <div class="alert alert-warning" role="alert">
+                                    {{ message }}
+                                </div>
+                                {% else %}
+                                <div class="alert alert-success" role="alert">
+                                    {{ message }}
+                                </div>
+                                {% endif %} {% endfor %} {% endif %} {% endwith %}
+                                <!-- end alert logic -->
+
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <form class="form form-vertical">
+
+                                        <!-- edit kecamatan form -->
+                                        <form class="form form-vertical"
+                                            action="/handle_edit_kecamatan/{{ to_edit_kecamatan.id }}" method="post">
+                                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
                                             <div class="form-body">
                                                 <div class="row">
                                                     <div class="col-12">
@@ -136,19 +160,23 @@
                                                             <label for="first-name-vertical"><strong>Nama
                                                                     Kecamatan</strong></label>
                                                             <input type="text" id="first-name-vertical"
-                                                                class="form-control" name="fname"
-                                                                placeholder="Kecamatan">
+                                                                class="form-control" name="kecamatan"
+                                                                placeholder="Kecamatan"
+                                                                value="{{ to_edit_kecamatan.nama_kecamatan }}" required>
                                                         </div>
                                                     </div>
                                                     <div class="col-12 d-flex justify-content-end">
                                                         <button type="submit"
                                                             class="btn btn-primary me-1 mb-1">Edit</button>
-                                                        <button type="reset"
-                                                            class="btn btn-light-secondary me-1 mb-1">Batal</button>
+                                                        <a href="/admin_kecamatan">
+                                                            <span class="btn btn-light-secondary me-1 mb-1">Batal</span>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </form>
+                                        <!-- edit kecamatan form end -->
+
                                     </div>
                                 </div>
                             </div>

@@ -133,6 +133,24 @@
                                 </div>
                             </div>
 
+                            <!-- Alert logic -->
+                            {% with messages = get_flashed_messages(with_categories=true) %} {% if
+                            messages %} {% for category, message in messages %} {% if category ==
+                            'error' %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ message }}
+                            </div>
+                            {% elif category == 'warning' %}
+                            <div class="alert alert-warning" role="alert">
+                                {{ message }}
+                            </div>
+                            {% else %}
+                            <div class="alert alert-success" role="alert">
+                                {{ message }}
+                            </div>
+                            {% endif %} {% endfor %} {% endif %} {% endwith %}
+                            <!-- end alert logic -->
+
                             <table class="table table-striped" id="table1">
                                 <thead>
                                     <tr>
@@ -152,25 +170,33 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                    <!-- Row tabel rumah -->
+                                    {% for rumah in all_rumah %}
                                     <tr>
-                                        <td>1</td>
-                                        <td>http:://gambar.com</td>
-                                        <td>Viktor Pamulang</td>
-                                        <td>Serpong Paradise</td>
-                                        <td>80m</td>
-                                        <td>Rp.769.000.000</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                        <td>4</td>
-                                        <td>pamulang</td>
-                                        <td>1.0.8</td>
-                                        <td>Agen1</td>
+                                        <td>{{ loop.index }}</td>
+                                        <td>{{ rumah.gambar }}</td>
+                                        <td>{{ rumah.alamat }}</td>
+                                        <td>{{ rumah.nama_perumahan }}</td>
+                                        <td>{{ rumah.luas }}m</td>
+                                        <td>Rp{{ rumah.harga }}</td>
+                                        <td>{{ rumah.lantai }}</td>
+                                        <td>{{ rumah.kamar_tidur }}</td>
+                                        <td>{{ rumah.kamar_mandi }}</td>
+                                        <td>{{ rumah.kecamatan }}</td>
+                                        <td>{{ rumah.kordinat }}</td>
+                                        <td>{{ rumah.kontak_agen }}</td>
                                         <td>
-                                            <a href="/edit_rumah"><span class="badge bg-warning">Edit</span></a>
-                                            <span class="badge bg-danger">Delete</span>
+                                            <a href="/edit_rumah/{{rumah.id}}"><span
+                                                    class="badge bg-warning">Edit</span></a>
+                                            <form action="/delete_rumah/{{rumah.id}}" method="post">
+                                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                                                <button type="submit" class="badge bg-danger">Delete</button>
+                                            </form>
                                         </td>
                                     </tr>
+                                    {% endfor %}
+
                                 </tbody>
                             </table>
                         </div>

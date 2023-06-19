@@ -148,7 +148,6 @@
                                             <!-- tambah kecamatan form -->
                                             <div class="form-body">
                                                 <div class="row">
-                                                    <!-- FIXME csrf token -->
                                                     <form class="form form-vertical" action="/handle_tambah_kecamatan"
                                                         method="post">
                                                         <input type="hidden" name="csrf_token"
@@ -159,14 +158,16 @@
                                                                         Kecamatan</strong></label>
                                                                 <input type="text" id="first-name-vertical"
                                                                     class="form-control" name="kecamatan"
-                                                                    placeholder="Kecamatan">
+                                                                    placeholder="Kecamatan" required>
                                                             </div>
                                                         </div>
                                                         <div class="col-12 d-flex justify-content-end">
                                                             <input type="submit" class="btn btn-primary me-1 mb-1"
-                                                                value="tambah">
-                                                            <button type="reset"
-                                                                class="btn btn-light-secondary me-1 mb-1">Batal</button>
+                                                                value="Tambah">
+                                                            <a href="/admin_kecamatan">
+                                                                <span
+                                                                    class="btn btn-light-secondary me-1 mb-1">Batal</span>
+                                                            </a>
                                                         </div>
                                                     </form>
                                                 </div>

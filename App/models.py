@@ -36,9 +36,9 @@ class Rumah(db.Model):
     lantai = db.Column(db.Integer, nullable=False, default=0)
     kamar_tidur = db.Column(db.Integer, nullable=False, default=0)
     kamar_mandi = db.Column(db.Integer, nullable=False, default=0)
-    kecamatan = db.Column(db.String(100), nullable=False, default="")
-    koordinat = db.Column(db.String(100), nullable=False, default="")
-    kontak_agen = db.Column(db.String(100), nullable=False, default="")
+    kecamatan = db.Column(db.String(100), nullable=True, default="")
+    kordinat = db.Column(db.String(100), nullable=True, default="")
+    kontak_agen = db.Column(db.String(100), nullable=True, default="")
 
 
 class Agen(db.Model):

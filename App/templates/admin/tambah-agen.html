@@ -126,6 +126,26 @@
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
+
+                                        <!-- Alert logic -->
+                                        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+                                        messages %} {% for category, message in messages %} {% if category ==
+                                        'error' %}
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ message }}
+                                        </div>
+                                        {% elif category == 'warning' %}
+                                        <div class="alert alert-warning" role="alert">
+                                            {{ message }}
+                                        </div>
+                                        {% else %}
+                                        <div class="alert alert-success" role="alert">
+                                            {{ message }}
+                                        </div>
+                                        {% endif %} {% endfor %} {% endif %} {% endwith %}
+                                        <!-- end alert logic -->
+
+                                        <!-- tambah agen form -->
                                         <form class="form form-vertical" action="/handle_tambah_agen" method="post">
                                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                                             <div class="form-body">
@@ -136,7 +156,7 @@
                                                                     Agen</strong></label>
                                                             <input type="text" id="first-name-vertical"
                                                                 class="form-control" name="nama_agen"
-                                                                placeholder="nama">
+                                                                placeholder="Nama Agen">
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
@@ -145,7 +165,7 @@
                                                                 for="first-name-vertical"><strong>Telepon</strong></label>
                                                             <input type="text" id="first-name-vertical"
                                                                 class="form-control" name="nomor_telepon"
-                                                                placeholder="nama">
+                                                                placeholder="Nomor Telepon">
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
@@ -153,7 +173,7 @@
                                                             <label
                                                                 for="first-name-vertical"><strong>Email</strong></label>
                                                             <input type="text" id="first-name-vertical"
-                                                                class="form-control" name="email" placeholder="nama">
+                                                                class="form-control" name="email" placeholder="Email">
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
@@ -161,14 +181,15 @@
                                                             <label
                                                                 for="first-name-vertical"><strong>Whatsapp</strong></label>
                                                             <input type="text" id="first-name-vertical"
-                                                                class="form-control" name="whatsapp" placeholder="nama">
+                                                                class="form-control" name="whatsapp"
+                                                                placeholder="Whatsapp">
                                                         </div>
                                                     </div>
                                                     <div class="col-12 d-flex justify-content-end">
                                                         <button type="submit"
                                                             class="btn btn-primary me-1 mb-1">Tambah</button>
-                                                        <button type="reset"
-                                                            class="btn btn-light-secondary me-1 mb-1">Batal</button>
+                                                        <a href="/admin_kontak_agen"><span
+                                                                class="btn btn-light-secondary me-1 mb-1">Batal</span></a>
                                                     </div>
                                                 </div>
                                             </div>
