@@ -170,8 +170,13 @@
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="last-name-column"><strong>Kecamatan</strong></label>
-                                                        <input type="text" id="last-name-column" class="form-control"
-                                                            placeholder="Kecamatan" name="kecamatan">
+                                                        <select class="form-select" name="kontak_agen">
+                                                            <option selected>Pilih Kecamatan</option>
+                                                            {% for kecamatan in all_kecamatan %}
+                                                            <option value="{{ kecamatan.id }}">{{ kecamatan.nama_kecamatan }}
+                                                            </option>
+                                                            {% endfor %}
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
@@ -215,7 +220,7 @@
                                                     <div class="form-group">
                                                         <label for="email-id-column">Kontak</label>
                                                         <select class="form-select" name="kontak_agen">
-                                                            <option selected>Kontak Agen</option>
+                                                            <option selected>Pilih Agen</option>
                                                             {% for agen in all_agen %}
                                                             <option value="{{ agen.nama_agen }}">{{ agen.nama_agen }}
                                                             </option>
