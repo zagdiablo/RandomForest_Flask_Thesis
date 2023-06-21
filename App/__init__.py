@@ -2,11 +2,9 @@ from flask import Flask
 from flask_wtf import CSRFProtect
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-from flask_admin import Admin
-
+from werkzeug.security import generate_password_hash
 
 import os
-import pathlib
 
 
 app = Flask(__name__)
@@ -29,7 +27,6 @@ def start_app():
     login_manager.login_message = "Silahkan login terlebih dahulu."
 
     # database
-    from . import models
     from .models import User
 
     db.init_app(app)
@@ -57,6 +54,7 @@ def start_app():
 
     # generate database
     create_database(app)
+    generate_admin_account(app)
 
     return app
 
@@ -67,3 +65,24 @@ def create_database(app):
         print(f"[+] Database successfully created!")
         return
     print(f"[-] Dabase already exist!")
+
+
+def generate_admin_account(app):
+    with app.app_context():
+        from .models import User
+
+        master_admin_account = User.query.get(1)
+
+        if not master_admin_account:
+            generate_admin = User(
+                email="admin@admin.com",
+                password=generate_password_hash("admin", "sha256"),
+                is_admin=True,
+            )
+            db.session.add(generate_admin)
+            db.session.commit()
+            print("[+] berhasil membuat akun admin master")
+            return
+
+        print("[-] akun admin master sudah ada")
+        return

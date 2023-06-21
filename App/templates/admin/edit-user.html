@@ -127,7 +127,11 @@
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <form class="form form-vertical">
+                                        <!-- edit user form -->
+                                        <form class="form form-vertical" action="/handle_edit_user/{{to_edit_user.id}}"
+                                            method="post">
+                                            <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+
                                             <div class="form-body">
                                                 <div class="row">
                                                     <div class="col-12">
@@ -135,15 +139,18 @@
                                                             <label
                                                                 for="first-name-vertical"><strong>Nama</strong></label>
                                                             <input type="text" id="first-name-vertical"
-                                                                class="form-control" name="fname" placeholder="nama">
+                                                                class="form-control" name="nama_lengkap"
+                                                                placeholder="Nama Lengkap"
+                                                                value="{{to_edit_user.nama_lengkap}}">
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label
                                                                 for="first-name-vertical"><strong>Email</strong></label>
-                                                            <input type="text" id="first-name-vertical"
-                                                                class="form-control" name="fname" placeholder="nama">
+                                                            <input type="email" id="first-name-vertical"
+                                                                class="form-control" name="email" placeholder="Email"
+                                                                value="{{to_edit_user.email}}">
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
@@ -151,7 +158,9 @@
                                                             <label for="first-name-vertical"><strong>Range
                                                                     Gaji</strong></label>
                                                             <input type="text" id="first-name-vertical"
-                                                                class="form-control" name="fname" placeholder="nama">
+                                                                class="form-control" name="range_gaji"
+                                                                placeholder="Range Gaji"
+                                                                value="{{to_edit_user.range_gaji}}">
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
@@ -159,18 +168,20 @@
                                                             <label for="first-name-vertical"><strong>Lokasi
                                                                     Kerja</strong></label>
                                                             <input type="text" id="first-name-vertical"
-                                                                class="form-control" name="fname" placeholder="nama">
+                                                                class="form-control" name="lokasi_kerja"
+                                                                placeholder="Lokasi Kerja" value="Lokasi_tempat_kerja">
                                                         </div>
                                                     </div>
                                                     <div class="col-12 d-flex justify-content-end">
                                                         <button type="submit"
                                                             class="btn btn-primary me-1 mb-1">Edit</button>
-                                                        <button type="reset"
-                                                            class="btn btn-light-secondary me-1 mb-1">Batal</button>
+                                                        <a href="/admin_user"><span
+                                                                class="btn btn-light-secondary me-1 mb-1">Batal</span></a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </form>
+                                        <!-- edit user form end -->
                                     </div>
                                 </div>
                             </div>

@@ -391,10 +391,59 @@ def admin_user():
     return render_template("admin/user.html", non_admin_user=non_admin_user)
 
 
-@admin_views.route("/edit_user", methods=["GET"])
+@admin_views.route("/edit_user/<int:id>", methods=["GET"])
 @login_required
-def edit_user():
+def edit_user(id):
     if not check_admin():
         return redirect(url_for("public_views_loggedin.profile_page"))
 
-    return render_template("admin/edit-user.html")
+    to_edit_user = User.query.get(id)
+
+    return render_template("admin/edit-user.html", to_edit_user=to_edit_user)
+
+
+@admin_views.route("/handle_edit_user/<int:id>", methods=["POST"])
+@login_required
+def handle_edit_user(id):
+    if not check_admin():
+        return redirect(url_for("public_views_loggedin.profile_page"))
+
+    to_edit_user = User.query.get(id)
+
+    nama_lengkap = request.form.get("nama_lengkap")
+    email = request.form.get("email")
+    range_gaji = request.form.get("range_gaji")
+
+    if to_edit_user:
+        to_edit_user.nama_lengkap = nama_lengkap
+        to_edit_user.email = email
+        to_edit_user.range_gaji = range_gaji
+        db.session.commit()
+        flash(
+            f"berhasil edit data user {to_edit_user.nama_lengkap}", category="success"
+        )
+        return redirect(f"/edit_user/{id}")
+
+    flash(f"gagal edit data user {to_edit_user.nama_lengkap}", category="error")
+    return redirect(f"/edit_user/{id}")
+
+
+@admin_views.route("/delete_user/<int:id>", methods=["POST"])
+@login_required
+def delete_user(id):
+    if not check_admin():
+        return redirect(url_for("public_views_loggedin.profile_page"))
+
+    to_delete_user = User.query.get(id)
+
+    if to_delete_user:
+        flash(
+            f"berhasil delete data user {to_delete_user.nama_lengkap}",
+            category="success",
+        )
+        db.session.delete(to_delete_user)
+        db.session.commit()
+        return redirect("/admin_user")
+
+    flash(f"gagal delete data user {to_delete_user.nama_lengkap}", category="error")
+    return redirect("/admin_user")

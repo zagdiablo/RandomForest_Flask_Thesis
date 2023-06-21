@@ -22,30 +22,8 @@ public_views = Blueprint("public_views", __name__)
 
 #
 #
-# API untuk handle inisialisasi keperluan webapp
-@public_views.route("/", methods=["GET"])
-def init():
-    master_admin_account = User.query.get(1)
-
-    if not master_admin_account:
-        generate_admin = User(
-            email="admin@admin.com",
-            password=generate_password_hash("admin", "sha256"),
-            is_admin=True,
-        )
-        db.session.add(generate_admin)
-        db.session.commit()
-        print("[+] berhasil membuat akun admin master")
-        return redirect("/home")
-
-    print("[-] akun admin master sudah ada")
-    return redirect("/home")
-
-
-#
-#
 # API untuk handle halaman home
-@public_views.route("/home", methods=["GET"])
+@public_views.route("/", methods=["GET"])
 def home_page():
     user_is_authenticated = current_user.is_authenticated
 

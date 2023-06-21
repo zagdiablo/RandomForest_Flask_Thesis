@@ -142,8 +142,14 @@
                     <td>{{ user.range_gaji }}</td>
                     <td>kecamatan</td>
                     <td>
-                      <a href="/edit_user"><span class="badge bg-warning">Edit</span></a>
-                      <span class="badge bg-danger">Delete</span>
+                      <a href="/edit_user/{{ user.id }}"><span class="badge bg-warning">Edit</span></a>
+                      <form action="/delete_user/{{ user.id }}" method="post">
+                        <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+
+                        <button type="submit" class="badge bg-danger">
+                          Delete
+                        </button>
+                      </form>
                     </td>
                   </tr>
                   <!-- user tabel end -->
