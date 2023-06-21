@@ -16,11 +16,11 @@ var optionsProfileVisit = {
 	},
 	series: [{
 		name: 'sales',
-		data: [9,20,30,20,10,20,30,20,10,20,30,20]
+		data: [9,20,30,20,10,20]
 	}],
 	colors: '#435ebe',
 	xaxis: {
-		categories: ["Jan","Feb","Mar","Apr","May","Jun","Jul", "Aug","Sep","Oct","Nov","Dec"],
+		categories: ["Serpong","Serpong Utara","Ciputat","Ciputat Timur","Pndok Aren","Pamulang"],
 	},
 }
 let optionsVisitorsProfile  = {

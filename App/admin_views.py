@@ -33,9 +33,11 @@ def check_admin():
 def admin_dashboard():
     if not check_admin():
         return redirect(url_for("public_views_loggedin.profile_page"))
-
+    count_rumah = Rumah.query.count()
+    count_kecamatan = Kecamatan.query.count()
+    count_user = User.query.count()
     admin_user = User.query.get(current_user.get_id())
-    return render_template("admin/dashboard.html", admin_user=admin_user)
+    return render_template("admin/dashboard.html", admin_user=admin_user , count_rumah=count_rumah , count_kecamatan = count_kecamatan,count_user=count_user)
 
 
 #
@@ -157,9 +159,10 @@ def tambah_rumah():
 
     all_rumah = Rumah.query.all()
     all_agen = Agen.query.all()
+    all_kecamatan = Kecamatan.query.all()
 
     return render_template(
-        "admin/tambah-rumah.html", all_rumah=all_rumah, all_agen=all_agen
+        "admin/tambah-rumah.html", all_rumah=all_rumah, all_agen=all_agen,all_kecamatan=all_kecamatan
     )
 
 
