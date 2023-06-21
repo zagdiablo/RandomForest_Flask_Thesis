@@ -1,6 +1,5 @@
-import pandas as pd
+import json
 import os
-from IPython.display import display
 
 
 # TODO make a function that check all file inside dataset
@@ -8,11 +7,33 @@ from IPython.display import display
 
 
 def collect_data():
-    if os.path.exists("App/datasets/houses_dummy_datasets.json"):
-        df = pd.read_json(os.path.join("App/datasets/houses_dummy_datasets.json"))
+    with open("./houses_dummy_datasets.json", "r") as dataset:
+        list_rumah = json.load(dataset)
 
-    # TODO return dataframe
-    display(df)
+    for (
+        alamat,
+        nama_perumahan,
+        luas,
+        harga,
+        lantai,
+        jumlah_kamar_tidur,
+        jumlah_kamar_mandi,
+        kecamatan,
+        kordinat,
+        kontak_agen_penjual,
+    ) in list_rumah:
+        print(
+            alamat,
+            nama_perumahan,
+            luas,
+            harga,
+            lantai,
+            jumlah_kamar_tidur,
+            jumlah_kamar_mandi,
+            kecamatan,
+            kordinat,
+            kontak_agen_penjual,
+        )
 
 
 if __name__ == "__main__":

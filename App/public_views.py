@@ -66,20 +66,6 @@ def handle_cari_rumah():
     checkbox_kolam_renang = request.form.get("checkbox_kolam_renang")
 
     # TODO pengolahan data dan rekomendation system
-    print(
-        kecamatan,
-        dropdown_lantai,
-        dropdown_luas,
-        dropdown_kamar_tidur,
-        dropdown_kamar_mandi,
-        dropdown_harga,
-        checbox_gym,
-        checkbox_masjid,
-        checkbox_taman,
-        checkbox_playground,
-        checkbox_kolam_renang,
-    )
-
     # TODO flask query builder
     query_rumah = Rumah.query.filter(Rumah.kecamatan == kecamatan)
 
