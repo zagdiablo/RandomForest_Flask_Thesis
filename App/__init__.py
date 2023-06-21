@@ -5,6 +5,7 @@ from flask_login import LoginManager
 from werkzeug.security import generate_password_hash
 
 import os
+import pandas as pd
 
 
 app = Flask(__name__)
@@ -55,6 +56,7 @@ def start_app():
     # generate database
     create_database(app)
     generate_admin_account(app)
+    datasets_to_database(app)
 
     return app
 
@@ -86,3 +88,49 @@ def generate_admin_account(app):
 
         print("[-] akun admin master sudah ada")
         return
+
+
+# read datasets from datasets folder, read and put it in the database
+def datasets_to_database(app):
+    from .models import Rumah
+    from .models import Kecamatan
+
+    if os.path.exists(f"App/datasets/houses_dummy_datasets.json"):
+        df = pd.read_json(os.path.join(f"App/datasets/houses_dummy_datasets.json"))
+
+        with app.app_context():
+            for _, rs in df.iterrows():
+                new_rumah_data = Rumah(
+                    alamat=str(rs[0]),
+                    nama_perumahan=str(rs[1]),
+                    luas=int(rs[2]),
+                    harga=str(rs[3]),
+                    lantai=int(rs[4]),
+                    kamar_tidur=int(rs[5]),
+                    kamar_mandi=int(rs[6]),
+                    kecamatan=str(rs[7]),
+                    kordinat=str(rs[8]),
+                    kontak_agen=str(rs[9]),
+                )
+                db.session.add(new_rumah_data)
+            db.session.commit()
+
+            for _, rs in df.iterrows():
+                to_check_kecamatan = Kecamatan.query.filter_by(
+                    nama_kecamatan=str(rs[7])
+                ).first()
+
+                if not to_check_kecamatan:
+                    new_kecamatan = Kecamatan(nama_kecamatan=str(rs[7]))
+                    db.session.add(new_kecamatan)
+            db.session.commit()
+
+        os.rename(
+            os.path.join(f"App/datasets/houses_dummy_datasets.json"),
+            os.path.join(f"App/datasets/houses_dummy_datasets_DONE.json"),
+        )
+        print("[+] berhasil menambahkan dataset ke database")
+        return
+
+    print("[-] dataset sudah ada dalam database")
+    return

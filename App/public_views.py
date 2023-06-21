@@ -1,20 +1,8 @@
 from flask import Blueprint, render_template, redirect, request, flash
-from flask_login import login_required, current_user
-from werkzeug.security import generate_password_hash
-from sqlalchemy import text
-import sqlite3
+from flask_login import current_user
 
 from .models import User, Rumah, Agen, Kecamatan
 from . import db
-
-
-conn = sqlite3.connect("database.db")
-cursor = conn.cursor()
-
-
-#####
-# file ini menghandle tampilan halaman yang tidak membutuhkan user login
-#####
 
 
 public_views = Blueprint("public_views", __name__)

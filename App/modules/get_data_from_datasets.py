@@ -1,4 +1,4 @@
-import json
+import pandas as pd
 import os
 
 
@@ -6,35 +6,19 @@ import os
 # TODO make a function to load all dataset into panda dataframe and return the dataframe
 
 
-def collect_data():
-    with open("./houses_dummy_datasets.json", "r") as dataset:
-        list_rumah = json.load(dataset)
+def datasets_to_database(dataset_file_name):
+    if os.path.exists(f"App/datasets/{dataset_file_name}"):
+        df = pd.read_json(os.path.join(f"App/datasets/{dataset_file_name}"))
 
-    for (
-        alamat,
-        nama_perumahan,
-        luas,
-        harga,
-        lantai,
-        jumlah_kamar_tidur,
-        jumlah_kamar_mandi,
-        kecamatan,
-        kordinat,
-        kontak_agen_penjual,
-    ) in list_rumah:
-        print(
-            alamat,
-            nama_perumahan,
-            luas,
-            harga,
-            lantai,
-            jumlah_kamar_tidur,
-            jumlah_kamar_mandi,
-            kecamatan,
-            kordinat,
-            kontak_agen_penjual,
-        )
-
-
-if __name__ == "__main__":
-    collect_data()
+    # TODO return dataframe
+    for _, rs in df.iterrows():
+        print(str(rs[0]))
+        print(str(rs[1]))
+        print(int(rs[2]))
+        print(str(rs[3]))
+        print(int(rs[4]))
+        print(int(rs[5]))
+        print(int(rs[6]))
+        print(str(rs[7]))
+        print(str(rs[8]))
+        print(str(rs[9]))

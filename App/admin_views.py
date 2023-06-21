@@ -37,7 +37,13 @@ def admin_dashboard():
     count_kecamatan = Kecamatan.query.count()
     count_user = User.query.count()
     admin_user = User.query.get(current_user.get_id())
-    return render_template("admin/dashboard.html", admin_user=admin_user , count_rumah=count_rumah , count_kecamatan = count_kecamatan,count_user=count_user)
+    return render_template(
+        "admin/dashboard.html",
+        admin_user=admin_user,
+        count_rumah=count_rumah,
+        count_kecamatan=count_kecamatan,
+        count_user=count_user,
+    )
 
 
 #
@@ -162,7 +168,10 @@ def tambah_rumah():
     all_kecamatan = Kecamatan.query.all()
 
     return render_template(
-        "admin/tambah-rumah.html", all_rumah=all_rumah, all_agen=all_agen,all_kecamatan=all_kecamatan
+        "admin/tambah-rumah.html",
+        all_rumah=all_rumah,
+        all_agen=all_agen,
+        all_kecamatan=all_kecamatan,
     )
 
 
