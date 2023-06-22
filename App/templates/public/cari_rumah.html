@@ -534,7 +534,7 @@
                                     <div class="card-content">
                                         <div class="card-price">
                                             <!-- Harga Disini -->
-                                            <strong>{{ rumah.harga }}</strong>
+                                            <strong class="hargaRumah">{{ rumah.harga }}</strong>
                                         </div>
                                         <h3 class="h3 card-title">
                                             <!-- Nama Perumahan / Rumah -->
@@ -794,6 +794,27 @@
   -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script>
+        function formatRupiah(angka) {
+          var formatter = new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0
+          });
+      
+          return formatter.format(angka);
+        }
+        // Ambil elemen-elemen harga rumah
+        var elemenHargaRumah = document.querySelectorAll('.hargaRumah');
+        // // Ubah format menjadi rupiah untuk setiap elemen harga rumah
+        elemenHargaRumah.forEach(function(elemen) {
+          var harga = parseFloat(elemen.innerHTML.replace(/[^\d.-]/g, ''));
+          if (!isNaN(harga)) {
+            var hargaRupiah = formatRupiah(harga);
+            elemen.innerHTML = hargaRupiah;
+          }
+        });
+      </script>
 
 </body>
 
