@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, redirect, request, flash
 from flask_login import current_user
 
+import requests
+
 from .models import User, Rumah, Agen, Kecamatan
 from . import db
 
@@ -11,6 +13,17 @@ public_views = Blueprint("public_views", __name__)
 #################################################
 # Functions
 #################################################
+
+
+def get_distance_api(tempat, tujuan):
+    url = f"https://maps.googleapis.com/maps/api/distancematrix/json?origins={tempat}&destinations={tujuan}&key=AIzaSyAwqGQ5BbN_hu-bSFX7aHvqMDW2C2tK5Yo"
+
+    payload = {}
+    headers = {}
+
+    response = requests.request("GET", url, headers=headers, data=payload)
+
+    print(response.text)
 
 
 # TODO pengolahan data dan rekomendation system
@@ -29,11 +42,11 @@ def handle_query(
     checkbox_kolam_renang,
 ):
     number = list("12345")
+    query = Rumah.query.filter(Rumah.kecamatan == kecamatan)
     if user_is_authenticated:
         rekomendasi_harga_rumah = (((gaji_user * 40) / 100) * 12) * 30
         print(rekomendasi_harga_rumah)
         query = query.filter(Rumah.harga <= rekomendasi_harga_rumah)
-    query = Rumah.query.filter(Rumah.kecamatan == kecamatan)
 
     if dropdown_lantai in number:
         print("lantai")

@@ -12,10 +12,7 @@ class User(db.Model, UserMixin):
     # Data diri
     nama_lengkap = db.Column(db.String(200), nullable=True, default="")
     range_gaji = db.Column(db.Integer, nullable=True, default=0)
-    kordinat_longitude_tempat_kerja = db.Column(
-        db.String(50), nullable=True, default=""
-    )
-    kordinat_latitude_tempat_kerja = db.Column(db.String(50), nullable=True, default="")
+    alamat_tempat_kerja = db.Column(db.String(300), nullable=False, default="")
 
     # profile komplit
     is_filled = db.Column(db.Boolean, nullable=False, default=False)

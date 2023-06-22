@@ -30,23 +30,19 @@ def handle_submit_profile():
     nama_lengkap = request.form.get("nama_lengkap")
     email = request.form.get("email")
     range_gaji = request.form.get("range_gaji")
-    kordinat_longitude = request.form.get("kordinat_longitude")
-    kordinat_latitude = request.form.get("kordinat_latitude")
+    alamat_tempat_kerja = request.form.get("alamat_tempat_kerja")
 
     to_commit_profile = User.query.get(current_user.get_id())
     # TODO front end, jika profil lengkap maka adakan rekomendasi, jika tidak suruh lengkapi
     profile_is_complete = (
-        True
-        if nama_lengkap and range_gaji and kordinat_latitude and kordinat_latitude
-        else False
+        True if nama_lengkap and range_gaji and alamat_tempat_kerja else False
     )
 
     if to_commit_profile:
         to_commit_profile.nama_lengkap = nama_lengkap
         to_commit_profile.email = email
         to_commit_profile.range_gaji = range_gaji
-        to_commit_profile.kordinat_longitude_tempat_kerja = kordinat_longitude
-        to_commit_profile.kordinat_latitude_tempat_kerja = kordinat_latitude
+        to_commit_profile.alamat_tempat_kerja = alamat_tempat_kerja
         to_commit_profile.is_filled = profile_is_complete
 
     db.session.commit()
