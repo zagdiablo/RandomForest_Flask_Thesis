@@ -1,307 +1,261 @@
 [
     {
-        "alamat": "Jl. Melati No. 1",
-        "nama_perumahan": "Perumahan Melati Indah",
+        "alamat": "Jl. Flamboyan No. 155",
+        "nama_perumahan": "Perumahan Flamboyan Permai",
         "luas": 150,
-        "harga": 1800000000,
+        "harga": 1850000000,
         "lantai": 2,
-        "jumlah_kamar_tidur": 4,
-        "jumlah_kamar_mandi": 3,
-        "kecamatan": "Ciputat",
-        "kordinat": {
-            "latitude": -6.2834,
-            "longitude": 106.7145
-        },
-        "kontak_agen_penjual": "08123456789"
-    },
-    {
-        "alamat": "Jl. Anggrek No. 5",
-        "nama_perumahan": "Perumahan Anggrek Permai",
-        "luas": 200,
-        "harga": 2500000000,
-        "lantai": 1,
-        "jumlah_kamar_tidur": 3,
-        "jumlah_kamar_mandi": 2,
-        "kecamatan": "Pamulang",
-        "kordinat": {
-            "latitude": -6.3342,
-            "longitude": 106.7458
-        },
-        "kontak_agen_penjual": "08234567890"
-    },
-    {
-        "alamat": "Jl. Kenanga No. 10",
-        "nama_perumahan": "Perumahan Kenanga Sejahtera",
-        "luas": 120,
-        "harga": 1500000000,
-        "lantai": 1,
-        "jumlah_kamar_tidur": 2,
-        "jumlah_kamar_mandi": 1,
-        "kecamatan": "Serpong",
-        "kordinat": {
-            "latitude": -6.3287,
-            "longitude": 106.6609
-        },
-        "kontak_agen_penjual": "08345678901"
-    },
-    {
-        "alamat": "Jl. Mawar No. 15",
-        "nama_perumahan": "Perumahan Mawar Sari",
-        "luas": 180,
-        "harga": 2200000000,
-        "lantai": 2,
-        "jumlah_kamar_tidur": 4,
-        "jumlah_kamar_mandi": 3,
-        "kecamatan": "Ciputat",
-        "kordinat": {
-            "latitude": -6.2872,
-            "longitude": 106.7173
-        },
-        "kontak_agen_penjual": "08456789012"
-    },
-    {
-        "alamat": "Jl. Dahlia No. 20",
-        "nama_perumahan": "Perumahan Dahlia Residence",
-        "luas": 160,
-        "harga": 1950000000,
-        "lantai": 1,
-        "jumlah_kamar_tidur": 3,
-        "jumlah_kamar_mandi": 2,
-        "kecamatan": "Pamulang",
-        "kordinat": {
-            "latitude": -6.3421,
-            "longitude": 106.7376
-        },
-        "kontak_agen_penjual": "08567890123"
-    },
-    {
-        "alamat": "Jl. Cendana No. 25",
-        "nama_perumahan": "Perumahan Cendana Asri",
-        "luas": 140,
-        "harga": 1700000000,
-        "lantai": 1,
         "jumlah_kamar_tidur": 3,
         "jumlah_kamar_mandi": 2,
         "kecamatan": "Serpong",
         "kordinat": {
-            "latitude": -6.3379,
-            "longitude": 106.6534
+            "latitude": -6.3385,
+            "longitude": 106.6481
         },
-        "kontak_agen_penjual": "08678901234"
+        "kontak_agen_penjual": {
+            "nama": "Ryan Johnson",
+            "nomor_telepon": "08956789012",
+            "email": "ryanjohnson@example.com",
+            "nomor_whatsapp": "628992345678"
+        },
+        "njop": 1750000000,
+        "fasilitas": [
+            "masjid",
+            "taman"
+        ]
     },
     {
-        "alamat": "Jl. Kenari No. 30",
-        "nama_perumahan": "Perumahan Kenari Residence",
-        "luas": 130,
-        "harga": 1600000000,
-        "lantai": 2,
-        "jumlah_kamar_tidur": 3,
-        "jumlah_kamar_mandi": 2,
-        "kecamatan": "Ciputat",
-        "kordinat": {
-            "latitude": -6.2775,
-            "longitude": 106.7047
-        },
-        "kontak_agen_penjual": "08789012345"
-    },
-    {
-        "alamat": "Jl. Flamboyan No. 35",
-        "nama_perumahan": "Perumahan Flamboyan Indah",
-        "luas": 200,
-        "harga": 2450000000,
-        "lantai": 1,
-        "jumlah_kamar_tidur": 4,
-        "jumlah_kamar_mandi": 3,
-        "kecamatan": "Pamulang",
-        "kordinat": {
-            "latitude": -6.3306,
-            "longitude": 106.7372
-        },
-        "kontak_agen_penjual": "08890123456"
-    },
-    {
-        "alamat": "Jl. Sakura No. 40",
-        "nama_perumahan": "Perumahan Sakura Garden",
-        "luas": 180,
-        "harga": 2250000000,
-        "lantai": 2,
-        "jumlah_kamar_tidur": 3,
-        "jumlah_kamar_mandi": 3,
-        "kecamatan": "Serpong",
-        "kordinat": {
-            "latitude": -6.3459,
-            "longitude": 106.6489
-        },
-        "kontak_agen_penjual": "08901234567"
-    },
-    {
-        "alamat": "Jl. Anggrek No. 45",
-        "nama_perumahan": "Perumahan Anggrek Permai",
-        "luas": 150,
-        "harga": 1800000000,
-        "lantai": 2,
-        "jumlah_kamar_tidur": 4,
-        "jumlah_kamar_mandi": 3,
-        "kecamatan": "Ciputat",
-        "kordinat": {
-            "latitude": -6.2817,
-            "longitude": 106.7166
-        },
-        "kontak_agen_penjual": "08912345678"
-    },
-    {
-        "alamat": "Jl. Kenanga No. 50",
-        "nama_perumahan": "Perumahan Kenanga Sejahtera",
-        "luas": 140,
-        "harga": 1700000000,
-        "lantai": 1,
-        "jumlah_kamar_tidur": 3,
-        "jumlah_kamar_mandi": 2,
-        "kecamatan": "Pamulang",
-        "kordinat": {
-            "latitude": -6.3322,
-            "longitude": 106.7451
-        },
-        "kontak_agen_penjual": "08923456789"
-    },
-    {
-        "alamat": "Jl. Bunga Rampai No. 55",
-        "nama_perumahan": "Perumahan Bunga Indah",
-        "luas": 160,
-        "harga": 1950000000,
-        "lantai": 2,
-        "jumlah_kamar_tidur": 3,
-        "jumlah_kamar_mandi": 2,
-        "kecamatan": "Ciputat",
-        "kordinat": {
-            "latitude": -6.2861,
-            "longitude": 106.7192
-        },
-        "kontak_agen_penjual": "08934567890"
-    },
-    {
-        "alamat": "Jl. Cempaka No. 60",
-        "nama_perumahan": "Perumahan Cempaka Permai",
+        "alamat": "Jl. Sakura No. 160",
+        "nama_perumahan": "Perumahan Sakura Indah",
         "luas": 170,
-        "harga": 2100000000,
+        "harga": 2150000000,
         "lantai": 1,
         "jumlah_kamar_tidur": 4,
         "jumlah_kamar_mandi": 3,
-        "kecamatan": "Serpong",
+        "kecamatan": "Pamulang",
         "kordinat": {
-            "latitude": -6.3467,
-            "longitude": 106.6523
+            "latitude": -6.3452,
+            "longitude": 106.7348
         },
-        "kontak_agen_penjual": "08945678901"
+        "kontak_agen_penjual": {
+            "nama": "Emma Davis",
+            "nomor_telepon": "08967890123",
+            "email": "emmadavis@example.com",
+            "nomor_whatsapp": "628993456789"
+        },
+        "njop": 2050000000,
+        "fasilitas": [
+            "park",
+            "gym"
+        ]
     },
     {
-        "alamat": "Jl. Mawar No. 65",
-        "nama_perumahan": "Perumahan Mawar Indah",
-        "luas": 180,
-        "harga": 2250000000,
+        "alamat": "Jl. Anggrek No. 165",
+        "nama_perumahan": "Perumahan Anggrek Indah",
+        "luas": 160,
+        "harga": 1950000000,
         "lantai": 2,
-        "jumlah_kamar_tidur": 4,
-        "jumlah_kamar_mandi": 3,
+        "jumlah_kamar_tidur": 3,
+        "jumlah_kamar_mandi": 2,
+        "kecamatan": "Ciputat",
+        "kordinat": {
+            "latitude": -6.2842,
+            "longitude": 106.7189
+        },
+        "kontak_agen_penjual": {
+            "nama": "Noah Wilson",
+            "nomor_telepon": "08978901234",
+            "email": "noahwilson@example.com",
+            "nomor_whatsapp": "628994567890"
+        },
+        "njop": 1850000000,
+        "fasilitas": [
+            "masjid",
+            "playground"
+        ]
+    },
+    {
+        "alamat": "Jl. Kenanga No. 170",
+        "nama_perumahan": "Perumahan Kenanga Indah",
+        "luas": 150,
+        "harga": 1800000000,
+        "lantai": 1,
+        "jumlah_kamar_tidur": 3,
+        "jumlah_kamar_mandi": 2,
         "kecamatan": "Pamulang",
         "kordinat": {
             "latitude": -6.3298,
-            "longitude": 106.7386
+            "longitude": 106.7401
         },
-        "kontak_agen_penjual": "08956789012"
+        "kontak_agen_penjual": {
+            "nama": "Olivia Thompson",
+            "nomor_telepon": "08989012345",
+            "email": "oliviathompson@example.com",
+            "nomor_whatsapp": "628995678901"
+        },
+        "njop": 1750000000,
+        "fasilitas": [
+            "taman",
+            "kolam renang"
+        ]
     },
     {
-        "alamat": "Jl. Anggrek No. 70",
-        "nama_perumahan": "Perumahan Anggrek Sari",
-        "luas": 150,
-        "harga": 1800000000,
-        "lantai": 1,
-        "jumlah_kamar_tidur": 3,
-        "jumlah_kamar_mandi": 2,
-        "kecamatan": "Ciputat",
-        "kordinat": {
-            "latitude": -6.2786,
-            "longitude": 106.7051
-        },
-        "kontak_agen_penjual": "08967890123"
-    },
-    {
-        "alamat": "Jl. Kenari No. 75",
-        "nama_perumahan": "Perumahan Kenari Surya",
-        "luas": 140,
-        "harga": 1700000000,
-        "lantai": 1,
-        "jumlah_kamar_tidur": 3,
-        "jumlah_kamar_mandi": 2,
+        "alamat": "Jl. Bunga Mawar No. 175",
+        "nama_perumahan": "Perumahan Bunga Mawar",
+        "luas": 160,
+        "harga": 1900000000,
+        "lantai": 2,
+        "jumlah_kamar_tidur": 4,
+        "jumlah_kamar_mandi": 3,
         "kecamatan": "Serpong",
         "kordinat": {
-            "latitude": -6.3387,
-            "longitude": 106.6504
+            "latitude": -6.3365,
+            "longitude": 106.6489
         },
-        "kontak_agen_penjual": "08978901234"
+        "kontak_agen_penjual": {
+            "nama": "Sophia Hernandez",
+            "nomor_telepon": "08990123456",
+            "email": "sophiahernandez@example.com",
+            "nomor_whatsapp": "628996789012"
+        },
+        "njop": 1800000000,
+        "fasilitas": [
+            "gym",
+            "playground"
+        ]
     },
     {
-        "alamat": "Jl. Flamboyan No. 80",
-        "nama_perumahan": "Perumahan Flamboyan Permai",
-        "luas": 200,
-        "harga": 2400000000,
+        "alamat": "Jl. Dahlia No. 180",
+        "nama_perumahan": "Perumahan Dahlia Sejahtera",
+        "luas": 170,
+        "harga": 2100000000,
         "lantai": 2,
         "jumlah_kamar_tidur": 4,
         "jumlah_kamar_mandi": 3,
         "kecamatan": "Pamulang",
         "kordinat": {
-            "latitude": -6.3315,
-            "longitude": 106.7365
+            "latitude": -6.3469,
+            "longitude": 106.7337
         },
-        "kontak_agen_penjual": "08989012345"
+        "kontak_agen_penjual": {
+            "nama": "Liam Anderson",
+            "nomor_telepon": "08901234567",
+            "email": "liamanderson@example.com",
+            "nomor_whatsapp": "628997890123"
+        },
+        "njop": 2000000000,
+        "fasilitas": [
+            "masjid",
+            "park",
+            "kolam renang"
+        ]
     },
     {
-        "alamat": "Jl. Sakura No. 85",
-        "nama_perumahan": "Perumahan Sakura Residence",
-        "luas": 180,
-        "harga": 2200000000,
-        "lantai": 2,
-        "jumlah_kamar_tidur": 3,
-        "jumlah_kamar_mandi": 3,
-        "kecamatan": "Serpong",
-        "kordinat": {
-            "latitude": -6.3432,
-            "longitude": 106.6478
-        },
-        "kontak_agen_penjual": "08990123456"
-    },
-    {
-        "alamat": "Jl. Anggrek No. 90",
-        "nama_perumahan": "Perumahan Anggrek Asri",
-        "luas": 160,
-        "harga": 2000000000,
+        "alamat": "Jl. Melati No. 185",
+        "nama_perumahan": "Perumahan Melati Asri",
+        "luas": 150,
+        "harga": 1950000000,
         "lantai": 1,
         "jumlah_kamar_tidur": 3,
         "jumlah_kamar_mandi": 2,
         "kecamatan": "Ciputat",
         "kordinat": {
-            "latitude": -6.2845,
-            "longitude": 106.7184
+            "latitude": -6.2837,
+            "longitude": 106.7185
         },
-        "kontak_agen_penjual": "08912345678"
+        "kontak_agen_penjual": {
+            "nama": "Mia Walker",
+            "nomor_telepon": "08912345678",
+            "email": "miawalker@example.com",
+            "nomor_whatsapp": "628998901234"
+        },
+        "njop": 1900000000,
+        "fasilitas": [
+            "gym",
+            "kolam renang"
+        ]
     },
     {
-        "alamat": "Jl. Kenanga No. 95",
-        "nama_perumahan": "Perumahan Kenanga Indah",
-        "luas": 150,
-        "harga": 1850000000,
+        "alamat": "Jl. Kenari No. 190",
+        "nama_perumahan": "Perumahan Kenari Murni",
+        "luas": 140,
+        "harga": 1750000000,
         "lantai": 1,
         "jumlah_kamar_tidur": 3,
         "jumlah_kamar_mandi": 2,
         "kecamatan": "Pamulang",
         "kordinat": {
-            "latitude": -6.3293,
-            "longitude": 106.7433
+            "latitude": -6.3274,
+            "longitude": 106.7389
         },
-        "kontak_agen_penjual": "08923456789"
+        "kontak_agen_penjual": {
+            "nama": "Benjamin Martinez",
+            "nomor_telepon": "08923456789",
+            "email": "benjaminmartinez@example.com",
+            "nomor_whatsapp": "628999012345"
+        },
+        "njop": 1650000000,
+        "fasilitas": [
+            "masjid",
+            "taman",
+            "playground"
+        ]
     },
     {
-        "alamat": "Jl. Mawar No. 100",
-        "nama_perumahan": "Perumahan Mawar Sari",
+        "alamat": "Jl. Melati No. 195",
+        "nama_perumahan": "Perumahan Melati Indah",
+        "luas": 160,
+        "harga": 2000000000,
+        "lantai": 2,
+        "jumlah_kamar_tidur": 4,
+        "jumlah_kamar_mandi": 3,
+        "kecamatan": "Serpong",
+        "kordinat": {
+            "latitude": -6.3371,
+            "longitude": 106.6479
+        },
+        "kontak_agen_penjual": {
+            "nama": "Harper Taylor",
+            "nomor_telepon": "08934567890",
+            "email": "harpertaylor@example.com",
+            "nomor_whatsapp": "628990123456"
+        },
+        "njop": 1950000000,
+        "fasilitas": [
+            "taman",
+            "kolam renang"
+        ]
+    },
+    {
+        "alamat": "Jl. Kenanga No. 200",
+        "nama_perumahan": "Perumahan Kenanga Sejahtera",
+        "luas": 180,
+        "harga": 2200000000,
+        "lantai": 2,
+        "jumlah_kamar_tidur": 4,
+        "jumlah_kamar_mandi": 3,
+        "kecamatan": "Pamulang",
+        "kordinat": {
+            "latitude": -6.3289,
+            "longitude": 106.7392
+        },
+        "kontak_agen_penjual": {
+            "nama": "Ella Moore",
+            "nomor_telepon": "08945678901",
+            "email": "ellamoore@example.com",
+            "nomor_whatsapp": "628991234567"
+        },
+        "njop": 2100000000,
+        "fasilitas": [
+            "gym",
+            "masjid",
+            "playground",
+            "kolam renang"
+        ]
+    },
+    {
+        "alamat": "Jl. Mawar No. 205",
+        "nama_perumahan": "Perumahan Mawar Asri",
         "luas": 170,
         "harga": 2050000000,
         "lantai": 2,
@@ -309,9 +263,257 @@
         "jumlah_kamar_mandi": 3,
         "kecamatan": "Serpong",
         "kordinat": {
-            "latitude": -6.3479,
-            "longitude": 106.6467
+            "latitude": -6.3347,
+            "longitude": 106.6485
         },
-        "kontak_agen_penjual": "08934567890"
+        "kontak_agen_penjual": {
+            "nama": "Liam Anderson",
+            "nomor_telepon": "08901234567",
+            "email": "liamanderson@example.com",
+            "nomor_whatsapp": "628997890123"
+        },
+        "njop": 1950000000,
+        "fasilitas": [
+            "gym",
+            "masjid",
+            "taman"
+        ]
+    },
+    {
+        "alamat": "Jl. Cempaka No. 210",
+        "nama_perumahan": "Perumahan Cempaka Indah",
+        "luas": 150,
+        "harga": 1900000000,
+        "lantai": 1,
+        "jumlah_kamar_tidur": 3,
+        "jumlah_kamar_mandi": 2,
+        "kecamatan": "Pamulang",
+        "kordinat": {
+            "latitude": -6.3259,
+            "longitude": 106.7378
+        },
+        "kontak_agen_penjual": {
+            "nama": "Mia Walker",
+            "nomor_telepon": "08912345678",
+            "email": "miawalker@example.com",
+            "nomor_whatsapp": "628998901234"
+        },
+        "njop": 1800000000,
+        "fasilitas": [
+            "park",
+            "playground",
+            "kolam renang"
+        ]
+    },
+    {
+        "alamat": "Jl. Kenari No. 215",
+        "nama_perumahan": "Perumahan Kenari Sejahtera",
+        "luas": 180,
+        "harga": 2150000000,
+        "lantai": 2,
+        "jumlah_kamar_tidur": 4,
+        "jumlah_kamar_mandi": 3,
+        "kecamatan": "Serpong",
+        "kordinat": {
+            "latitude": -6.3284,
+            "longitude": 106.7385
+        },
+        "kontak_agen_penjual": {
+            "nama": "Benjamin Martinez",
+            "nomor_telepon": "08923456789",
+            "email": "benjaminmartinez@example.com",
+            "nomor_whatsapp": "628999012345"
+        },
+        "njop": 2050000000,
+        "fasilitas": [
+            "gym",
+            "taman",
+            "kolam renang"
+        ]
+    },
+    {
+        "alamat": "Jl. Melati No. 220",
+        "nama_perumahan": "Perumahan Melati Murni",
+        "luas": 160,
+        "harga": 2000000000,
+        "lantai": 2,
+        "jumlah_kamar_tidur": 4,
+        "jumlah_kamar_mandi": 3,
+        "kecamatan": "Ciputat",
+        "kordinat": {
+            "latitude": -6.2875,
+            "longitude": 106.7172
+        },
+        "kontak_agen_penjual": {
+            "nama": "Harper Taylor",
+            "nomor_telepon": "08934567890",
+            "email": "harpertaylor@example.com",
+            "nomor_whatsapp": "628990123456"
+        },
+        "njop": 1900000000,
+        "fasilitas": [
+            "masjid",
+            "kolam renang"
+        ]
+    },
+    {
+        "alamat": "Jl. Kenanga No. 225",
+        "nama_perumahan": "Perumahan Kenanga Indah",
+        "luas": 190,
+        "harga": 2250000000,
+        "lantai": 2,
+        "jumlah_kamar_tidur": 5,
+        "jumlah_kamar_mandi": 4,
+        "kecamatan": "Pamulang",
+        "kordinat": {
+            "latitude": -6.3267,
+            "longitude": 106.7399
+        },
+        "kontak_agen_penjual": {
+            "nama": "Ella Moore",
+            "nomor_telepon": "08945678901",
+            "email": "ellamoore@example.com",
+            "nomor_whatsapp": "628991234567"
+        },
+        "njop": 2150000000,
+        "fasilitas": [
+            "gym",
+            "masjid",
+            "taman",
+            "playground",
+            "kolam renang"
+        ]
+    },
+    {
+        "alamat": "Jl. Mawar No. 230",
+        "nama_perumahan": "Perumahan Mawar Sejahtera",
+        "luas": 170,
+        "harga": 2200000000,
+        "lantai": 2,
+        "jumlah_kamar_tidur": 4,
+        "jumlah_kamar_mandi": 3,
+        "kecamatan": "Serpong",
+        "kordinat": {
+            "latitude": -6.3331,
+            "longitude": 106.6482
+        },
+        "kontak_agen_penjual": {
+            "nama": "Oliver Davis",
+            "nomor_telepon": "08956789012",
+            "email": "oliverdavis@example.com",
+            "nomor_whatsapp": "628992345678"
+        },
+        "njop": 2100000000,
+        "fasilitas": [
+            "park",
+            "kolam renang"
+        ]
+    },
+    {
+        "alamat": "Jl. Cempaka No. 235",
+        "nama_perumahan": "Perumahan Cempaka Murni",
+        "luas": 150,
+        "harga": 2000000000,
+        "lantai": 1,
+        "jumlah_kamar_tidur": 3,
+        "jumlah_kamar_mandi": 2,
+        "kecamatan": "Pamulang",
+        "kordinat": {
+            "latitude": -6.3249,
+            "longitude": 106.7371
+        },
+        "kontak_agen_penjual": {
+            "nama": "Emma Garcia",
+            "nomor_telepon": "08967890123",
+            "email": "emmagarcia@example.com",
+            "nomor_whatsapp": "628993456789"
+        },
+        "njop": 1900000000,
+        "fasilitas": [
+            "gym",
+            "taman",
+            "playground",
+            "kolam renang"
+        ]
+    },
+    {
+        "alamat": "Jl. Kenari No. 240",
+        "nama_perumahan": "Perumahan Kenari Indah",
+        "luas": 180,
+        "harga": 2300000000,
+        "lantai": 2,
+        "jumlah_kamar_tidur": 4,
+        "jumlah_kamar_mandi": 3,
+        "kecamatan": "Serpong",
+        "kordinat": {
+            "latitude": -6.3281,
+            "longitude": 106.7388
+        },
+        "kontak_agen_penjual": {
+            "nama": "Noah Martinez",
+            "nomor_telepon": "08978901234",
+            "email": "noahmartinez@example.com",
+            "nomor_whatsapp": "628994567890"
+        },
+        "njop": 2200000000,
+        "fasilitas": [
+            "gym",
+            "masjid",
+            "playground",
+            "kolam renang"
+        ]
+    },
+    {
+        "alamat": "Jl. Melati No. 245",
+        "nama_perumahan": "Perumahan Melati Sejahtera",
+        "luas": 160,
+        "harga": 2100000000,
+        "lantai": 2,
+        "jumlah_kamar_tidur": 4,
+        "jumlah_kamar_mandi": 3,
+        "kecamatan": "Ciputat",
+        "kordinat": {
+            "latitude": -6.2874,
+            "longitude": 106.7168
+        },
+        "kontak_agen_penjual": {
+            "nama": "Sophia Thompson",
+            "nomor_telepon": "08989012345",
+            "email": "sophiathompson@example.com",
+            "nomor_whatsapp": "628995678901"
+        },
+        "njop": 2000000000,
+        "fasilitas": [
+            "masjid",
+            "kolam renang"
+        ]
+    },
+    {
+        "alamat": "Jl. Kenanga No. 250",
+        "nama_perumahan": "Perumahan Kenanga Murni",
+        "luas": 190,
+        "harga": 2350000000,
+        "lantai": 2,
+        "jumlah_kamar_tidur": 5,
+        "jumlah_kamar_mandi": 4,
+        "kecamatan": "Pamulang",
+        "kordinat": {
+            "latitude": -6.3272,
+            "longitude": 106.7395
+        },
+        "kontak_agen_penjual": {
+            "nama": "Ava Rodriguez",
+            "nomor_telepon": "08990123456",
+            "email": "avarodriguez@example.com",
+            "nomor_whatsapp": "628996789012"
+        },
+        "njop": 2250000000,
+        "fasilitas": [
+            "gym",
+            "masjid",
+            "taman",
+            "playground",
+            "kolam renang"
+        ]
     }
 ]

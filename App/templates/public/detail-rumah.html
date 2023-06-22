@@ -181,14 +181,14 @@
     color: #fff;
   }
 
-  .fiture li{
+  .fiture li {
     display: flex;
   }
 
-  .fiture-icon{
+  .fiture-icon {
     align-self: center;
     font-size: 20px;
-  } 
+  }
 
 
   @media screen and (min-width: 992px) {
@@ -368,11 +368,11 @@
             </div>
             <div class="product-content">
               <!-- Nama Perumahan / Rumah -->
-              <h2 class="product-title">Pamulang Regency</h2>
+              <h2 class="product-title">{{ detail_rumah.nama_perumahan }}</h2>
 
               <div class="location">
                 <ion-icon name="location-outline"></ion-icon>
-                <address>Viktor</address>
+                <address>{{ detail_rumah.kecamatan }}</address>
               </div>
               <!-- Kalau nanti pake rating -->
               <!-- <div class = "product-rating">
@@ -386,46 +386,56 @@
 
               <div class="product-price">
                 <strong>
-                  <h1>Rp1.500.000.000</h1>
+                  <h1>{{ detail_rumah.harga }}</h1>
                 </strong>
               </div>
 
               <div class="product-detail">
                 <h3>Fiture:</h3>
                 <ul class="fiture" style="margin-top: 0;">
-                  <li><ion-icon  class="fiture-icon" name="layers-outline"></ion-icon> <p>Lantai: <span>2 Lantai</span></p> </li>
-                  <li> <ion-icon class="fiture-icon" name="bed-outline"></ion-icon> <p>Kamar Tidur: <span>3 Kamar Tidur</span></p></li>
-                  <li><ion-icon class="fiture-icon" name="water-outline"></ion-icon> <p>Kamar Mandi: <span>4 Kamar Mandi</span></p></li>
-                  <li><ion-icon class="fiture-icon" name="map-outline"></ion-icon> <p>Luas: <span>100m2</span></p></li>
-                  <li><ion-icon class="fiture-icon" name="barbell-outline"></ion-icon> <p>Fasilitas: <span>bla,bla,bla</span></p></li>
+                  <li><ion-icon class="fiture-icon" name="layers-outline"></ion-icon>
+                    <p>Lantai: <span>{{ detail_rumah.lantai }} Lantai</span></p>
+                  </li>
+                  <li> <ion-icon class="fiture-icon" name="bed-outline"></ion-icon>
+                    <p>Kamar Tidur: <span>{{ detail_rumah.kamar_tidur }} Kamar Tidur</span></p>
+                  </li>
+                  <li><ion-icon class="fiture-icon" name="water-outline"></ion-icon>
+                    <p>Kamar Mandi: <span>{{ detail_rumah.kamar_mandi }} Kamar Mandi</span></p>
+                  </li>
+                  <li><ion-icon class="fiture-icon" name="map-outline"></ion-icon>
+                    <p>Luas: <span>{{ detail_rumah.luas }}m2</span></p>
+                  </li>
+                  <li><ion-icon class="fiture-icon" name="barbell-outline"></ion-icon>
+                    <p>Fasilitas: <span>{{ fasilitas_rumah }}</span></p>
+                  </li>
                 </ul>
               </div>
               <div class="detail-kontak-agen">
                 <h3>Kontak Agen :</h3>
                 <!-- Kontak Agen -->
-                <div class="contact-agen" >
+                <div class="contact-agen">
                   <p class="author-name" style="margin-bottom: 0;">
-                      <a href="#">Habibi Qodri</a>
+                    <a href="#">{{ detail_rumah.kontak_agen }}</a>
                   </p>
                   <p class="author-title" style="margin-top: 0;">Agen Perumahan</p>
+                </div>
+
+                <div class="card-footer-actions">
+
+                  <button class="card-footer-actions-btn">
+                    <ion-icon name="mail-outline"></ion-icon>
+                  </button>
+
+                  <button class="card-footer-actions-btn">
+                    <ion-icon name="logo-whatsapp"></ion-icon>
+                  </button>
+
+                  <button class="card-footer-actions-btn">
+                    <ion-icon name="call-outline"></ion-icon>
+                  </button>
+
+                </div>
               </div>
-
-              <div class="card-footer-actions">
-
-                <button class="card-footer-actions-btn">
-                  <ion-icon name="mail-outline"></ion-icon>
-                </button>
-
-                <button class="card-footer-actions-btn">
-                  <ion-icon name="logo-whatsapp"></ion-icon>
-                </button>
-
-                <button class="card-footer-actions-btn">
-                  <ion-icon name="call-outline"></ion-icon>
-                </button>
-
-              </div>
-               </div>
               <!-- <div class="social-links">
                 <p>Share At:</p>
                 <a href="#">

@@ -31,14 +31,17 @@ class Rumah(db.Model):
     gambar = db.Column(db.String(200), nullable=True, default="")
     alamat = db.Column(db.String(500), nullable=False, default="")
     nama_perumahan = db.Column(db.String(200), nullable=False, default="")
+    harga = db.Column(db.Integer, nullable=False, default="")
+    kecamatan = db.Column(db.String(100), nullable=True, default="")
+    latitude = db.Column(db.String(100), nullable=True, default="")
+    longitude = db.Column(db.String(100), nullable=True, default="")
+    kontak_agen = db.Column(db.String(100), nullable=True, default="")
+    fasilitas = db.Column(db.String(500), nullable=False, default="")
     luas = db.Column(db.Integer, nullable=False, default=0)
-    harga = db.Column(db.String(200), nullable=False, default="")
     lantai = db.Column(db.Integer, nullable=False, default=0)
     kamar_tidur = db.Column(db.Integer, nullable=False, default=0)
     kamar_mandi = db.Column(db.Integer, nullable=False, default=0)
-    kecamatan = db.Column(db.String(100), nullable=True, default="")
-    kordinat = db.Column(db.String(100), nullable=True, default="")
-    kontak_agen = db.Column(db.String(100), nullable=True, default="")
+    njop = db.Column(db.Integer, nullable=False, default=0)
 
 
 class Agen(db.Model):

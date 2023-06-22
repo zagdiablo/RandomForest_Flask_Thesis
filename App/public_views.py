@@ -8,6 +8,66 @@ from . import db
 public_views = Blueprint("public_views", __name__)
 
 
+#################################################
+# Functions
+#################################################
+
+
+# TODO pengolahan data dan rekomendation system
+# TODO flask query builder
+def handle_query(
+    user_is_authenticated,
+    gaji_user,
+    kecamatan,
+    dropdown_lantai,
+    dropdown_kamar_tidur,
+    dropdown_kamar_mandi,
+    checkbox_gym,
+    checkbox_masjid,
+    checkbox_taman,
+    checkbox_playground,
+    checkbox_kolam_renang,
+):
+    number = list("12345")
+    if user_is_authenticated:
+        rekomendasi_harga_rumah = (((gaji_user * 40) / 100) * 12) * 30
+        print(rekomendasi_harga_rumah)
+        query = query.filter(Rumah.harga <= rekomendasi_harga_rumah)
+    query = Rumah.query.filter(Rumah.kecamatan == kecamatan)
+
+    if dropdown_lantai in number:
+        print("lantai")
+        query = query.filter(Rumah.lantai >= int(dropdown_lantai))
+    if dropdown_kamar_tidur in number:
+        print("kamar tidur")
+        query = query.filter(Rumah.kamar_tidur >= int(dropdown_kamar_tidur))
+    if dropdown_kamar_mandi in number:
+        print("kamar mandi")
+        query = query.filter(Rumah.kamar_mandi >= int(dropdown_kamar_mandi))
+
+    if checkbox_gym:
+        print("gym")
+        query = query.filter(Rumah.fasilitas.contains("gym"))
+    if checkbox_masjid:
+        print("masjid")
+        query = query.filter(Rumah.fasilitas.contains("masjid"))
+    if checkbox_taman:
+        print("taman")
+        query = query = query.filter(Rumah.fasilitas.contains("taman"))
+    if checkbox_playground:
+        print("playground")
+        query = query.filter(Rumah.fasilitas.contains("playground"))
+    if checkbox_kolam_renang:
+        print("kolam renang")
+        query = query.filter(Rumah.fasilitas.contains("kolam renang"))
+
+    query_results = query.all()
+    return query_results
+
+
+#################################################
+
+
 #
 #
 # API untuk handle halaman home
@@ -42,22 +102,35 @@ def handle_cari_rumah():
 
     all_rumah = Rumah.query.all()
     all_kecamatan = Kecamatan.query.all()
+    gaji_user = None
 
     kecamatan = request.form.get("search_bar_by_kecamatan")
     dropdown_lantai = request.form.get("dropdown_lantai")
-    dropdown_luas = request.form.get("dropdown_luas")
     dropdown_kamar_tidur = request.form.get("dropdown_kamar_tidur")
     dropdown_kamar_mandi = request.form.get("dropdown_kamar_mandi")
-    dropdown_harga = request.form.get("dropdown_harga")
-    checbox_gym = request.form.get("checkbox_gym")
+    checkbox_gym = request.form.get("checkbox_gym")
     checkbox_masjid = request.form.get("checkbox_masjid")
     checkbox_taman = request.form.get("checkbox_taman")
     checkbox_playground = request.form.get("checkbox_playground")
     checkbox_kolam_renang = request.form.get("checkbox_kolam_renang")
 
-    # TODO pengolahan data dan rekomendation system
-    # TODO flask query builder
-    query_rumah = Rumah.query.filter(Rumah.kecamatan == kecamatan)
+    if user_is_authenticated:
+        the_user = User.query.get(current_user.get_id())
+        gaji_user = the_user.range_gaji
+
+    query_rumah = handle_query(
+        user_is_authenticated,
+        gaji_user,
+        kecamatan,
+        dropdown_lantai,
+        dropdown_kamar_tidur,
+        dropdown_kamar_mandi,
+        checkbox_gym,
+        checkbox_masjid,
+        checkbox_taman,
+        checkbox_playground,
+        checkbox_kolam_renang,
+    )
 
     return render_template(
         "public/cari_rumah.html",
@@ -85,9 +158,16 @@ def get_price_suggestion():
 #
 #
 # API untuk handle detail rumah
-@public_views.route("/detail_rumah", methods=["GET"])
-def detail_rumah():
-    return render_template("public/detail-rumah.html")
+@public_views.route("/detail_rumah/<int:id>", methods=["GET"])
+def detail_rumah(id):
+    detail_rumah = Rumah.query.get(id)
+    fasilitas_rumah = detail_rumah.fasilitas
+
+    return render_template(
+        "public/detail-rumah.html",
+        detail_rumah=detail_rumah,
+        fasilitas_rumah=fasilitas_rumah,
+    )
 
 
 #

@@ -207,7 +207,9 @@
                                     </div>
                                     <div class="col-md-12">
                                         <label class="labels">Range Gaji</label>
-                                        <select class="form-select" aria-label="Default select example"
+                                        <input class="form-control" type="number" name="range_gaji" placeholder="Gaji"
+                                            value="{{ user_profile_data.range_gaji }}">
+                                        <!-- <select class="form-select" aria-label="Default select example"
                                             name="range_gaji">
                                             {% if user_profile_data.range_gaji == 1 %}
                                             <option>Pilih Range</option>
@@ -230,7 +232,7 @@
                                             <option value="2">3jt - 6jt</option>
                                             <option value="3">>6jt</option>
                                             {% endif %}
-                                        </select>
+                                        </select> -->
                                     </div>
                                     <div class="col-md-12 mt-5">
                                         <label class="labels">Lokasi tempat kerja</label><input type="text"

@@ -289,7 +289,7 @@ def delete_rumah(id):
 @login_required
 def admin_kontak_agen():
     if not check_admin():
-        return redirect(url_for("admin_views_loggedin.profile_page"))
+        return redirect(url_for("public_views_loggedin.profile_page"))
 
     all_agen = Agen.query.all()
 
@@ -396,7 +396,7 @@ def delete_agen(id):
 @login_required
 def admin_user():
     if not check_admin():
-        return redirect(url_for("admin_views_loggedin.profile_page"))
+        return redirect(url_for("public_views_loggedin.profile_page"))
 
     non_admin_user = User.query.filter(User.is_admin == False)
 

@@ -390,51 +390,34 @@
                                                 <div class="row">
                                                     <div class="col-md-4 mb-3">
                                                         <select class="form-select btn btn-light" name="dropdown_lantai"
-                                                            aria-label="Default select example">
-                                                            <option selected>Lantai</option>
-                                                            <option value="1">One</option>
-                                                            <option value="2">Two</option>
-                                                            <option value="3">Three</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-4 mb-3">
-                                                        <select class="form-select btn btn-light" name="dropdown_luas"
-                                                            aria-label="Default select example">
-                                                            <option selected>Luas</option>
-                                                            <option value="1">One</option>
-                                                            <option value="2">Two</option>
-                                                            <option value="3">Three</option>
+                                                            aria-label="Default select example" aria-placeholder="">
+                                                            <option value=0 selected>Lantai</option>
+                                                            <option value=1>Satu</option>
+                                                            <option value=2>Dua</option>
+                                                            <option value=3>Tiga</option>
+                                                            <option value=3>Lebih dari tiga</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-md-4 mb-3">
                                                         <select class="form-select btn btn-light"
                                                             name="dropdown_kamar_tidur"
                                                             aria-label="Default select example">
-                                                            <option selected>Kamar Tidur</option>
-                                                            <option value="1">One</option>
-                                                            <option value="2">Two</option>
-                                                            <option value="3">Three</option>
+                                                            <option selected value="0">Kamar Tidur</option>
+                                                            <option value="1">Satu</option>
+                                                            <option value="2">Dua</option>
+                                                            <option value="3">Tiga</option>
+                                                            <option value="3+">Lebih dari tiga</option>
                                                         </select>
                                                     </div>
-                                                </div>
-                                                <div class="row">
                                                     <div class="col-md-4 mb-3">
                                                         <select class="form-select btn btn-light"
                                                             name="dropdown_kamar_mandi"
                                                             aria-label="Default select example">
-                                                            <option selected>Kamar Mandi</option>
-                                                            <option value="1">One</option>
-                                                            <option value="2">Two</option>
-                                                            <option value="3">Three</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-4 mb-3">
-                                                        <select class="form-select btn btn-light" name="dropdown_harga"
-                                                            aria-label="Default select example">
-                                                            <option selected>Harga</option>
-                                                            <option value="1">One</option>
-                                                            <option value="2">Two</option>
-                                                            <option value="3">Three</option>
+                                                            <option selected value="0">Kamar Mandi</option>
+                                                            <option value="1">Satu</option>
+                                                            <option value="2">Dua</option>
+                                                            <option value="3">Tiga</option>
+                                                            <option value="3+">Lebih dari tiga</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -489,8 +472,8 @@
                                                     <p class="mb-0 " style="color: var(--prussian-blue);">
                                                         <strong>Kisaran
                                                             Harga</strong><span
-                                                            class="font-weight-bold"><strong>Rp300.000.000 -
-                                                                Rp500.000.000</strong></span>
+                                                            class="font-weight-bold"><strong>Berdasarkan dengan kriteria
+                                                                yang anda pilih.</strong></span>
                                                     </p>
 
                                                     <!-- action buttons -->
@@ -534,7 +517,7 @@
                                 <div class="property-card">
                                     <figure class="card-banner">
                                         <!-- TODO link detail rumah -->
-                                        <a href="/detail_rumah">
+                                        <a href="/detail_rumah/{{ rumah.id }}">
                                             <img src="{{ url_for('static', filename='images/property-4.png') }}"
                                                 alt="Luxury villa in Rego Park" class="w-100">
                                         </a>
@@ -555,7 +538,7 @@
                                         </div>
                                         <h3 class="h3 card-title">
                                             <!-- Nama Perumahan / Rumah -->
-                                            <a href="/detail_rumah">{{ rumah.nama_perumahan }}</a>
+                                            <a href="/detail_rumah/{{ rumah.id }}">{{ rumah.nama_perumahan }}</a>
                                         </h3>
                                         <!--  -->
                                         <p class="card-text">
@@ -596,7 +579,7 @@
                                                 </figure>
                                                 <div class="contact-agen">
                                                     <p class="author-name">
-                                                        <a href="#">Habibi Qodri</a>
+                                                        <a href="#">{{ rumah.kontak_agen }}</a>
                                                     </p>
                                                     <p class="author-title">Agen Perumahan</p>
                                                 </div>
