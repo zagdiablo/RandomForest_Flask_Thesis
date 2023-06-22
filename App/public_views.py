@@ -38,6 +38,8 @@ def cari_rumah_page():
 
 @public_views.route("/handle_cari_rumah", methods=["POST"])
 def handle_cari_rumah():
+    user_is_authenticated = current_user.is_authenticated
+
     all_rumah = Rumah.query.all()
     all_kecamatan = Kecamatan.query.all()
 
@@ -59,6 +61,7 @@ def handle_cari_rumah():
 
     return render_template(
         "public/cari_rumah.html",
+        user_is_authenticated=user_is_authenticated,
         all_rumah=all_rumah,
         all_kecamatan=all_kecamatan,
         kecamatan_query=kecamatan,
