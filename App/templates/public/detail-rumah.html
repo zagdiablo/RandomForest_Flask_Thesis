@@ -418,8 +418,8 @@
                     <p>Fasilitas: <span>{{ fasilitas_rumah }}</span></p>
                   </li>
                   {% if user_is_authenticated %}
-                  <li><ion-icon class="fiture-icon" name="barbell-outline"></ion-icon>
-                    <p>Jarak tempuh: <span>{{ jarak }} Km</span></p>
+                  <li><ion-icon class="fiture-icon" name="car-outline"></ion-icon>
+                    <p>Jarak tempuh dari lokasi kerja anda: <span>{{ jarak }} Km</span></p>
                   </li>
                   {% endif %}
                 </ul>
@@ -618,6 +618,8 @@
 
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
   <script src="{{ url_for('static', filename='js/detail-rumah.js') }}"></script>
+  
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
