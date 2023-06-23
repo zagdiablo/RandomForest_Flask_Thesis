@@ -64,6 +64,10 @@ def start_app():
 
 def create_database(app):
     if not os.path.exists(f"App/{DB_NAME}"):
+        os.rename(
+            os.path.join(f"App/datasets/houses_dummy_datasets_DONE.json"),
+            os.path.join(f"App/datasets/houses_dummy_datasets.json"),
+        )
         db.create_all(app=app)
         print(f"[+] Database successfully created!")
         return
@@ -96,8 +100,6 @@ def datasets_to_database(app):
     from .models import Rumah
     from .models import Kecamatan
     from .models import Agen
-
-    locale.setlocale(locale.LC_ALL, "id_ID")
 
     if os.path.exists(f"App/datasets/houses_dummy_datasets.json"):
         df = pd.read_json(os.path.join(f"App/datasets/houses_dummy_datasets.json"))

@@ -17,6 +17,7 @@ public_views = Blueprint("public_views", __name__)
 
 def get_distance_api(tempat, tujuan):
     url = f"https://maps.googleapis.com/maps/api/distancematrix/json?origins={tempat}&destinations={tujuan}&key=AIzaSyAwqGQ5BbN_hu-bSFX7aHvqMDW2C2tK5Yo"
+    print(url)
 
     payload = {}
     headers = {}
@@ -29,6 +30,7 @@ def get_distance_api(tempat, tujuan):
 # TODO pengolahan data dan rekomendation system
 # TODO flask query builder
 def handle_query(
+    the_user,
     user_is_authenticated,
     gaji_user,
     kecamatan,
@@ -75,6 +77,12 @@ def handle_query(
         query = query.filter(Rumah.fasilitas.contains("kolam renang"))
 
     query_results = query.all()
+    if user_is_authenticated:
+        for query in query_results:
+            get_distance_api(the_user.alamat_tempat_kerja, query.kecamatan)
+
+    results = zip(query_results, )
+
     return query_results
 
 
@@ -132,6 +140,7 @@ def handle_cari_rumah():
         gaji_user = the_user.range_gaji
 
     query_rumah = handle_query(
+        the_user,
         user_is_authenticated,
         gaji_user,
         kecamatan,
