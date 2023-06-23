@@ -177,33 +177,46 @@
                         <div class="col-md-4 border-right">
                             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                                 <img class="rounded-circle"
-                                    src="https://images.unsplash.com/photo-1635107510862-53886e926b74?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80" 
+                                    src="https://images.unsplash.com/photo-1635107510862-53886e926b74?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80"
                                     style="width: 250px;" />
-                                    <span
-                                    class="font-weight-bold">
+                                <span class="font-weight-bold">
                                     {% if user_profile_data.nama_lengkap %}
                                     {{ user_profile_data.nama_lengkap }}
                                     {% else %}
                                     -
                                     {% endif %}
                                 </span>
-                           >
                                 <span class="text-black-50" style="display: block;">
-                                   
+
                                     <h6>{{user_profile_data.email }}</h6>
                                 </span>
-                                <ion-icon
-                                name="mail-outline"
-                                style="margin-right: 2px;font-size: 28px;"
-                              ></ion-icon>
-                                </div>
-                            
+                                <ion-icon name="mail-outline" style="margin-right: 2px;font-size: 28px;"></ion-icon>
+                            </div>
+
                         </div>
                         <div class="col-md-5 border-right">
                             <div class="p-3 py-5">
                                 <div class="d-flex align-items-center">
                                     <h4 class="text-right">Profile Settings</h4>
                                 </div>
+
+                                <!-- Alert logic -->
+                                {% with messages = get_flashed_messages(with_categories=true) %} {% if
+                                messages %} {% for category, message in messages %} {% if category ==
+                                'error' %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{ message }}
+                                </div>
+                                {% elif category == 'warning' %}
+                                <div class="alert alert-warning" role="alert">
+                                    {{ message }}
+                                </div>
+                                {% else %}
+                                <div class="alert alert-success" role="alert">
+                                    {{ message }}
+                                </div>
+                                {% endif %} {% endfor %} {% endif %} {% endwith %}
+                                <!-- end alert logic -->
 
                                 <div class="row mt-3">
                                     <div class="col-md-12">
