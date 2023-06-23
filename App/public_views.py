@@ -129,6 +129,7 @@ def cari_rumah_page():
 
     all_kecamatan = Kecamatan.query.all()
     all_agen = Agen.query.all()
+    status_profil_user = None
 
     kecamatan = request.form.get("kecamatan")
 
@@ -151,6 +152,7 @@ def handle_cari_rumah():
     all_agen = Agen.query.all()
     gaji_user = None
     the_user = None
+    user_is_authenticated = None
 
     kecamatan = request.form.get("search_bar_by_kecamatan")
     dropdown_lantai = request.form.get("dropdown_lantai")
