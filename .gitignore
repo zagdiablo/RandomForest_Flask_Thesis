@@ -3,6 +3,7 @@
 vscode/
 App/database.db
 details.txt
+database.db
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
