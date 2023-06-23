@@ -310,9 +310,18 @@
               <li>
                 <a href="/contact" class="navbar-link" data-nav-link>Kontak</a>
               </li>
+              {% if user_is_authenticated %}
               <li>
-                <button class="header-top-btn">Login</button>
+                <a href="/profile"><button class="header-top-btn">Profile</button></a>
               </li>
+              <li>
+                <a href="/logout"><button class="header-top-btn">Logout</button></a>
+              </li>
+              {% else %}
+              <li>
+                <a href="/login"><button class="header-top-btn">Login/Sign Up</button></a>
+              </li>
+              {% endif %}
             </ul>
           </div>
         </nav>
@@ -408,8 +417,15 @@
                   <li><ion-icon class="fiture-icon" name="barbell-outline"></ion-icon>
                     <p>Fasilitas: <span>{{ fasilitas_rumah }}</span></p>
                   </li>
+                  {% if user_is_authenticated %}
+                  <li><ion-icon class="fiture-icon" name="barbell-outline"></ion-icon>
+                    <p>Jarak tempuh: <span>{{ jarak }} Km</span></p>
+                  </li>
+                  {% endif %}
                 </ul>
               </div>
+
+              {% if user_is_authenticated %}
               <div class="detail-kontak-agen">
                 <h3>Kontak Agen :</h3>
                 <!-- Kontak Agen -->
@@ -436,6 +452,7 @@
 
                 </div>
               </div>
+              {% endif %}
               <!-- <div class="social-links">
                 <p>Share At:</p>
                 <a href="#">

@@ -153,7 +153,6 @@ def handle_cari_rumah():
     the_user = None
 
     kecamatan = request.form.get("search_bar_by_kecamatan")
-    print(kecamatan)
     dropdown_lantai = request.form.get("dropdown_lantai")
     dropdown_kamar_tidur = request.form.get("dropdown_kamar_tidur")
     dropdown_kamar_mandi = request.form.get("dropdown_kamar_mandi")
@@ -215,13 +214,21 @@ def get_price_suggestion():
 # API untuk handle detail rumah
 @public_views.route("/detail_rumah/<int:id>", methods=["GET"])
 def detail_rumah(id):
+    user_is_authenticated = current_user.is_authenticated
     detail_rumah = Rumah.query.get(id)
     fasilitas_rumah = detail_rumah.fasilitas
+
+    if user_is_authenticated:
+        the_user = User.query.get(current_user.get_id())
+        kordinat_rumah = ",".join([detail_rumah.latitude, detail_rumah.longitude])
+        jarak = get_distance_api(the_user.alamat_tempat_kerja, kordinat_rumah)
 
     return render_template(
         "public/detail-rumah.html",
         detail_rumah=detail_rumah,
         fasilitas_rumah=fasilitas_rumah,
+        jarak=jarak,
+        user_is_authenticated=user_is_authenticated,
     )
 
 
