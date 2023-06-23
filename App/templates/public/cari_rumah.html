@@ -515,7 +515,7 @@
                         {% endif %}
                         <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
 
-                            {% for rumah in query_rumah %}
+                            {% for rumah, jarak in query_rumah %}
                             <!-- {% if rumah.kecamatan == kecamatan_query %} -->
                             <div class="col">
                                 <div class="property-card">
@@ -548,6 +548,11 @@
                                         <p class="card-text">
                                             Rumah yang nyaman dan cocok untuk keluarga
                                         </p>
+                                        {% if user_is_authenticated %}
+                                        <p class="card-text">
+                                            <strong>jarak dari lokasi kerja: {{ jarak }} Km</strong>
+                                        </p>
+                                        {% endif %}
                                         <ul class="card-list">
                                             <li class="card-item">
                                                 <strong>{{ rumah.kamar_tidur }}</strong>

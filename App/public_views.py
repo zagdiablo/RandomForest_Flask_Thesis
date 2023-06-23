@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, redirect, request, flash
 from flask_login import current_user
 
 import requests
+import re
 
 from .models import User, Rumah, Agen, Kecamatan
 from . import db
@@ -24,7 +25,8 @@ def get_distance_api(tempat, tujuan):
 
     response = requests.request("GET", url, headers=headers, data=payload)
     distance_data = dict(response.json())["rows"][0]["elements"][0]["distance"]["text"]
-    # TODO get distance_data
+    distance = float(re.findall(r"\d+\.\d+", distance_data)[0])
+    return distance
 
 
 # TODO pengolahan data dan rekomendation system
@@ -89,13 +91,15 @@ def handle_query(
     if user_is_authenticated:
         for query in query_results:
             query_cordinates = ",".join([query.latitude, query.longitude])
-            get_distance_api(the_user.alamat_tempat_kerja, query_cordinates)
+            distances.append(
+                get_distance_api(the_user.alamat_tempat_kerja, query_cordinates)
+            )
+    else:
+        for query in query_results:
+            distances.append(0)
 
-    results = zip(
-        query_results,
-    )
-
-    return query_results
+    results = zip(query_results, distances)
+    return results
 
 
 #################################################
