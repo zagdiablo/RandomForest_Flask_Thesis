@@ -386,7 +386,7 @@
 
               <div class="product-price">
                 <strong>
-                  <h1>{{ detail_rumah.harga }}</h1>
+                  <h1 id="hargaRumah">{{ detail_rumah.harga }}</h1>
                 </strong>
               </div>
 
@@ -604,6 +604,25 @@
 
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script>
+    function formatRupiah(angka) {
+        var formatter = new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 2
+        });
+
+        return formatter.format(angka);
+    }
+    // Ambil elemen-elemen harga rumah
+    var hargaRumah = document.getElementById('hargaRumah');
+    var harga = parseFloat(hargaRumah.innerHTML.replace(/[^\d.-]/g, ''));
+    var hargaRupiah =  formatRupiah(harga);
+    hargaRumah.innerHTML = hargaRupiah;
+    // // Ubah format menjadi rupiah untuk setiap elemen harga rumah
+
+
+</script>
 </body>
 
 </html>
