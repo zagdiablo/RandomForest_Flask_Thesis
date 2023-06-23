@@ -183,6 +183,7 @@ def handle_cari_rumah():
         kecamatan_query=kecamatan,
         query_rumah=query_rumah,
         kecamatan=kecamatan,
+        the_user=the_user
     )
 
 
