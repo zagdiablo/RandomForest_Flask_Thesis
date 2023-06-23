@@ -567,15 +567,15 @@
                                         <!--  -->
                                         <p class="card-text">
                                         <h5>Fasilitas:</h5>{{ rumah.fasilitas }}</span>
-                                        <br>
-                                        <strong>Kecamatan: {{ rumah.kecamatan }}</strong>
                                         </p>
-                                        {% if user_is_authenticated %}
                                         <p class="card-text">
+                                            {% if user_is_authenticated %}
                                         <div id="kecamatan" hidden>{{ rumah.kecamatan }}</div>
                                         <div id="lokasiKerja" hidden>{{ the_user.alamat_tempat_kerja }}</div>
-                                        </p>
+                                        {%else%}
 
+                                        {% endif %}
+                                        </p>
                                         {% if user_is_authenticated %}
                                         <p class="card-text">
                                         <h6>Jarak tempuh dari lokasi kerja anda:</h6>
@@ -857,6 +857,47 @@
             }
         });
 
+
+
+        var directionsService = new google.maps.DirectionsService();
+        //define calcRoute function
+        function calcRoute() {
+            //create request
+            var request = {
+                origin: document.getElementById("kecamatan").value,
+                destination: document.getElementById("to").value,
+                travelMode: google.maps.TravelMode.DRIVING, //WALKING, BYCYCLING, TRANSIT
+                unitSystem: google.maps.UnitSystem.IMPERIAL
+            }
+
+            console.log(document.getElementById("from").value);
+
+            //pass the request to the route method
+            directionsService.route(request, function (result, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+
+                    //Get distance and time
+                    const output = document.querySelector('#output');
+                    output.innerHTML = "<div class='alert-info'>From: "
+                        + document.getElementById("from").value + ".<br />To: "
+                        + document.getElementById("to").value + ".<br /> Driving distance <i class='fas fa-road'></i> : "
+                        + result.routes[0].legs[0].distance.text + ".<br />Duration <i class='fas fa-hourglass-start'></i> : "
+                        + result.routes[0].legs[0].duration.text + ".</div>";
+
+                    //display route
+                    directionsDisplay.setDirections(result);
+                } else {
+                    //delete route from map
+                    directionsDisplay.setDirections({ routes: [] });
+                    //center map in London
+                    map.setCenter(myLatLng);
+
+                    //show error message
+                    output.innerHTML = "<div class='alert-danger'><i class='fas fa-exclamation-triangle'></i> Could not retrieve driving distance.</div>";
+                }
+            });
+
+        }
     </script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
