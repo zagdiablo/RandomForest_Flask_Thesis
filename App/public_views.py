@@ -123,6 +123,9 @@ def home_page():
 @public_views.route("/cari_rumah", methods=["GET"])
 def cari_rumah_page():
     user_is_authenticated = current_user.is_authenticated
+    if user_is_authenticated:
+        the_user = User.query.get(current_user.get_id())
+        status_profil_user = the_user.is_filled
 
     all_kecamatan = Kecamatan.query.all()
     all_agen = Agen.query.all()
@@ -135,6 +138,7 @@ def cari_rumah_page():
         all_kecamatan=all_kecamatan,
         all_agen=all_agen,
         kecamatan=kecamatan,
+        status_profil_user=status_profil_user,
     )
 
 
@@ -187,7 +191,7 @@ def handle_cari_rumah():
         kecamatan_query=kecamatan,
         query_rumah=query_rumah,
         kecamatan=kecamatan,
-        the_user=the_user
+        the_user=the_user,
     )
 
 
