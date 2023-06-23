@@ -25,7 +25,10 @@ def get_distance_api(tempat, tujuan):
 
     response = requests.request("GET", url, headers=headers, data=payload)
     distance_data = dict(response.json())["rows"][0]["elements"][0]["distance"]["text"]
-    distance = float(re.findall(r"\d+\.\d+", distance_data)[0])
+    try:
+        distance = float(re.findall(r"\d+\.\d+", distance_data)[0])
+    except IndexError:
+        distance = "Tidak ada jalur darat."
     return distance
 
 
