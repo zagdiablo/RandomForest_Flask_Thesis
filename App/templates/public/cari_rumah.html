@@ -365,7 +365,11 @@
                                                     <select class="form-select bg-transparent"
                                                         name="search_bar_by_kecamatan" id="kecamatan"
                                                         style="border: none;" aria-label="Default select example">
+                                                        {% if not kecamatan %}
                                                         <option selected>Kecamatan</option>
+                                                        {% else %}
+                                                        <option selected>{{ kecamatan }}</option>
+                                                        {% endif %}
                                                         {% for kecamatan in all_kecamatan %}
                                                         <option value="{{ kecamatan.nama_kecamatan }}">{{
                                                             kecamatan.nama_kecamatan
@@ -796,25 +800,25 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script>
         function formatRupiah(angka) {
-          var formatter = new Intl.NumberFormat('id-ID', {
-            style: 'currency',
-            currency: 'IDR',
-            minimumFractionDigits: 0
-          });
-      
-          return formatter.format(angka);
+            var formatter = new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            });
+
+            return formatter.format(angka);
         }
         // Ambil elemen-elemen harga rumah
         var elemenHargaRumah = document.querySelectorAll('.hargaRumah');
         // // Ubah format menjadi rupiah untuk setiap elemen harga rumah
-        elemenHargaRumah.forEach(function(elemen) {
-          var harga = parseFloat(elemen.innerHTML.replace(/[^\d.-]/g, ''));
-          if (!isNaN(harga)) {
-            var hargaRupiah = formatRupiah(harga);
-            elemen.innerHTML = hargaRupiah;
-          }
+        elemenHargaRumah.forEach(function (elemen) {
+            var harga = parseFloat(elemen.innerHTML.replace(/[^\d.-]/g, ''));
+            if (!isNaN(harga)) {
+                var hargaRupiah = formatRupiah(harga);
+                elemen.innerHTML = hargaRupiah;
+            }
         });
-      </script>
+    </script>
 
 </body>
 

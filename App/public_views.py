@@ -23,8 +23,8 @@ def get_distance_api(tempat, tujuan):
     headers = {}
 
     response = requests.request("GET", url, headers=headers, data=payload)
-    distance_data = dict(response.json())["rows"][0]["elements"][0]["distance"]["value"]
-    # distance_data
+    distance_data = dict(response.json())["rows"][0]["elements"][0]["distance"]["text"]
+    # TODO get distance_data
 
 
 # TODO pengolahan data dan rekomendation system
@@ -52,13 +52,21 @@ def handle_query(
 
     if dropdown_lantai in number:
         print("lantai")
-        query = query.filter(Rumah.lantai >= int(dropdown_lantai))
+        if int(dropdown_lantai) < 3:
+            query = query.filter(Rumah.lantai == int(dropdown_lantai))
+        else:
+            query = query.filter(Rumah.lantai >= int(dropdown_lantai))
     if dropdown_kamar_tidur in number:
         print("kamar tidur")
-        query = query.filter(Rumah.kamar_tidur >= int(dropdown_kamar_tidur))
+        if int(dropdown_kamar_tidur) < 3:
+            query = query.filter(Rumah.kamar_tidur == int(dropdown_kamar_tidur))
+        else:
+            query = query.filter(Rumah.kamar_tidur >= int(dropdown_kamar_tidur))
     if dropdown_kamar_mandi in number:
-        print("kamar mandi")
-        query = query.filter(Rumah.kamar_mandi >= int(dropdown_kamar_mandi))
+        if int(dropdown_kamar_mandi) < 3:
+            query = query.filter(Rumah.kamar_mandi == int(dropdown_kamar_mandi))
+        else:
+            query = query.filter(Rumah.kamar_mandi >= int(dropdown_kamar_mandi))
 
     if checkbox_gym:
         print("gym")
@@ -113,11 +121,16 @@ def cari_rumah_page():
     user_is_authenticated = current_user.is_authenticated
 
     all_kecamatan = Kecamatan.query.all()
+    all_agen = Agen.query.all()
+
+    kecamatan = request.form.get("kecamatan")
 
     return render_template(
         "public/cari_rumah.html",
         user_is_authenticated=user_is_authenticated,
         all_kecamatan=all_kecamatan,
+        all_agen=all_agen,
+        kecamatan=kecamatan,
     )
 
 
@@ -127,10 +140,12 @@ def handle_cari_rumah():
 
     all_rumah = Rumah.query.all()
     all_kecamatan = Kecamatan.query.all()
+    all_agen = Agen.query.all()
     gaji_user = None
     the_user = None
 
     kecamatan = request.form.get("search_bar_by_kecamatan")
+    print(kecamatan)
     dropdown_lantai = request.form.get("dropdown_lantai")
     dropdown_kamar_tidur = request.form.get("dropdown_kamar_tidur")
     dropdown_kamar_mandi = request.form.get("dropdown_kamar_mandi")
@@ -164,8 +179,10 @@ def handle_cari_rumah():
         user_is_authenticated=user_is_authenticated,
         all_rumah=all_rumah,
         all_kecamatan=all_kecamatan,
+        all_agen=all_agen,
         kecamatan_query=kecamatan,
         query_rumah=query_rumah,
+        kecamatan=kecamatan,
     )
 
 
