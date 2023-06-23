@@ -222,6 +222,7 @@ def detail_rumah(id):
     user_is_authenticated = current_user.is_authenticated
     detail_rumah = Rumah.query.get(id)
     fasilitas_rumah = detail_rumah.fasilitas
+    jarak = None
 
     if user_is_authenticated:
         the_user = User.query.get(current_user.get_id())
