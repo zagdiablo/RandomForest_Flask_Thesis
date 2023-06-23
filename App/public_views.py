@@ -23,8 +23,8 @@ def get_distance_api(tempat, tujuan):
     headers = {}
 
     response = requests.request("GET", url, headers=headers, data=payload)
-
-    print(response.text)
+    distance_data = dict(response.json())["rows"][0]["elements"][0]["distance"]["value"]
+    # distance_data
 
 
 # TODO pengolahan data dan rekomendation system
@@ -77,6 +77,7 @@ def handle_query(
         query = query.filter(Rumah.fasilitas.contains("kolam renang"))
 
     query_results = query.all()
+    distances = []
     if user_is_authenticated:
         for query in query_results:
             query_cordinates = ",".join([query.latitude, query.longitude])
