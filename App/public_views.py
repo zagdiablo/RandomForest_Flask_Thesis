@@ -79,9 +79,12 @@ def handle_query(
     query_results = query.all()
     if user_is_authenticated:
         for query in query_results:
-            get_distance_api(the_user.alamat_tempat_kerja, query.kecamatan)
+            query_cordinates = ",".join([query.latitude, query.longitude])
+            get_distance_api(the_user.alamat_tempat_kerja, query_cordinates)
 
-    results = zip(query_results, )
+    results = zip(
+        query_results,
+    )
 
     return query_results
 
@@ -124,6 +127,7 @@ def handle_cari_rumah():
     all_rumah = Rumah.query.all()
     all_kecamatan = Kecamatan.query.all()
     gaji_user = None
+    the_user = None
 
     kecamatan = request.form.get("search_bar_by_kecamatan")
     dropdown_lantai = request.form.get("dropdown_lantai")
