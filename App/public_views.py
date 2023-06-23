@@ -165,6 +165,7 @@ def handle_cari_rumah():
 
     if user_is_authenticated:
         the_user = User.query.get(current_user.get_id())
+        status_profil_user = the_user.is_filled
         gaji_user = the_user.range_gaji
 
     query_rumah = handle_query(
@@ -192,6 +193,7 @@ def handle_cari_rumah():
         query_rumah=query_rumah,
         kecamatan=kecamatan,
         the_user=the_user,
+        status_profil_user=status_profil_user,
     )
 
 
