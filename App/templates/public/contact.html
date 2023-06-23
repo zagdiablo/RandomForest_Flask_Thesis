@@ -114,7 +114,7 @@
         <div class="container">
           <ul class="header-top-list">
             <li>
-              <a href="mailto:info@homeverse.com" class="header-top-link">
+              <a href="mailto:info@rumahtangsel.com" class="header-top-link">
                 <ion-icon name="mail-outline"></ion-icon>
 
                 <span>rumahtangsel@gmail.com</span>
@@ -261,7 +261,7 @@
                   name="mail-outline"
                   style="margin-right: 2px;font-size: 28px;"
                 ></ion-icon>
-                <div class="wa"  style="margin-top: 4px;">Email</div>
+                <a class="wa" href="mailto:email@domain.com" style="margin-top: 4px;text-decoration: none;color: white;">Email</a>
               </span>
               <span
                 style="
@@ -276,7 +276,7 @@
                   name="logo-whatsapp"
                   style="margin-right: 2px;font-size: 28px;"
                 ></ion-icon>
-                <div class="wa" style="margin-top: 4px;">Whatsapp</div>
+                <a href="https://wa.me/0832432432" class="wa" style="margin-top: 4px;text-decoration: none;color: white;">Whatsapp</a>
               </span>
               <span style="display: flex;
                 color: white;
@@ -288,7 +288,7 @@
                   name="call-outline"
                   style="margin-right: 2px;font-size: 28px;"
                 ></ion-icon>
-                <div class="wa"  style="margin-top: 4px;">Telepon</div>
+                <a href="tel:+62832423342" class="wa" style="margin-top: 4px;text-decoration: none;color: white;">Telepon</a>
               </span>
             </div>
           </div>
@@ -449,6 +449,7 @@
     <!-- 
     - ionicon link
   -->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script
       type="module"
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
@@ -457,5 +458,35 @@
       nomodule
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
     ></script>
+    <!-- <script>
+      function copyText() {
+
+          var text = '0832434324';
+
+          // Salin teks ke clipboard
+          navigator.clipboard.writeText(text).then(function() {
+              copySuccess()
+          }, function() {
+            copyFailed();
+          });
+      }
+
+      function copySuccess() {
+      Swal.fire(
+        'Berhasil!',
+        'Berhasil Copy Ke Clipboard',
+        'success'
+      )
+    }
+
+      function copyFailed() {
+      Swal.fire(
+        'Gagal!',
+        'Gagal Copy Ke Clipboard',
+        'success'
+      )
+    }
+
+  </script> -->
   </body>
 </html>
