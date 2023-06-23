@@ -550,17 +550,15 @@
                                         </h3>
                                         <!--  -->
                                         <p class="card-text">
-                                            <h5>Fasilitas:</h5>{{ rumah.fasilitas }}</span>
-                                        </p>
-                                        <p class="card-text">
-                                            {% if user_is_authenticated %}
-                                            <div id="kecamatan" hidden>{{ rumah.kecamatan }}</div>
-                                            <div id="lokasiKerja" hidden>{{ the_user.alamat_tempat_kerja }}</div>
-                                                {%else%}
-                                                
-                                                    {% endif %}
+                                        <h5>Fasilitas:</h5>{{ rumah.fasilitas }}</span>
+                                        <br>
+                                        <strong>Kecamatan: {{ rumah.kecamatan }}</strong>
                                         </p>
                                         {% if user_is_authenticated %}
+                                        <p class="card-text">
+                                        <div id="kecamatan" hidden>{{ rumah.kecamatan }}</div>
+                                        <div id="lokasiKerja" hidden>{{ the_user.alamat_tempat_kerja }}</div>
+                                        </p>
                                         <p class="card-text">
                                             <strong>jarak dari lokasi kerja: {{ jarak }} Km</strong>
                                         </p>
@@ -607,11 +605,13 @@
 
                                                 <div class="card-footer-actions">
 
-                                                    <a href="mailto:info@rumahtangsel.com" class="card-footer-actions-btn">
+                                                    <a href="mailto:info@rumahtangsel.com"
+                                                        class="card-footer-actions-btn">
                                                         <ion-icon name="mail-outline"></ion-icon>
                                                     </a>
 
-                                                    <a href="https://wa.me/0832432432" onclick="copyText()" class="card-footer-actions-btn">
+                                                    <a href="https://wa.me/0832432432" onclick="copyText()"
+                                                        class="card-footer-actions-btn">
                                                         <ion-icon name="logo-whatsapp"></ion-icon>
                                                     </a>
 
@@ -815,8 +815,8 @@
   -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwqGQ5BbN_hu-bSFX7aHvqMDW2C2tK5Yo"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwqGQ5BbN_hu-bSFX7aHvqMDW2C2tK5Yo"></script>
     <script>
         function formatRupiah(angka) {
             var formatter = new Intl.NumberFormat('id-ID', {
@@ -841,44 +841,44 @@
 
 
         var directionsService = new google.maps.DirectionsService();
-//define calcRoute function
-function calcRoute() {
-    //create request
-    var request = {
-        origin: document.getElementById("kecamatan").value,
-        destination: document.getElementById("to").value,
-        travelMode: google.maps.TravelMode.DRIVING, //WALKING, BYCYCLING, TRANSIT
-        unitSystem: google.maps.UnitSystem.IMPERIAL
-    }
+        //define calcRoute function
+        function calcRoute() {
+            //create request
+            var request = {
+                origin: document.getElementById("kecamatan").value,
+                destination: document.getElementById("to").value,
+                travelMode: google.maps.TravelMode.DRIVING, //WALKING, BYCYCLING, TRANSIT
+                unitSystem: google.maps.UnitSystem.IMPERIAL
+            }
 
-    console.log(document.getElementById("from").value);
+            console.log(document.getElementById("from").value);
 
-    //pass the request to the route method
-    directionsService.route(request, function (result, status) {
-        if (status == google.maps.DirectionsStatus.OK) {
+            //pass the request to the route method
+            directionsService.route(request, function (result, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
 
-            //Get distance and time
-            const output = document.querySelector('#output');
-            output.innerHTML = "<div class='alert-info'>From: " 
-            + document.getElementById("from").value + ".<br />To: " 
-            + document.getElementById("to").value + ".<br /> Driving distance <i class='fas fa-road'></i> : " 
-            + result.routes[0].legs[0].distance.text + ".<br />Duration <i class='fas fa-hourglass-start'></i> : " 
-            + result.routes[0].legs[0].duration.text + ".</div>";
+                    //Get distance and time
+                    const output = document.querySelector('#output');
+                    output.innerHTML = "<div class='alert-info'>From: "
+                        + document.getElementById("from").value + ".<br />To: "
+                        + document.getElementById("to").value + ".<br /> Driving distance <i class='fas fa-road'></i> : "
+                        + result.routes[0].legs[0].distance.text + ".<br />Duration <i class='fas fa-hourglass-start'></i> : "
+                        + result.routes[0].legs[0].duration.text + ".</div>";
 
-            //display route
-            directionsDisplay.setDirections(result);
-        } else {
-            //delete route from map
-            directionsDisplay.setDirections({ routes: [] });
-            //center map in London
-            map.setCenter(myLatLng);
+                    //display route
+                    directionsDisplay.setDirections(result);
+                } else {
+                    //delete route from map
+                    directionsDisplay.setDirections({ routes: [] });
+                    //center map in London
+                    map.setCenter(myLatLng);
 
-            //show error message
-            output.innerHTML = "<div class='alert-danger'><i class='fas fa-exclamation-triangle'></i> Could not retrieve driving distance.</div>";
+                    //show error message
+                    output.innerHTML = "<div class='alert-danger'><i class='fas fa-exclamation-triangle'></i> Could not retrieve driving distance.</div>";
+                }
+            });
+
         }
-    });
-
-}
     </script>
 </body>
 
