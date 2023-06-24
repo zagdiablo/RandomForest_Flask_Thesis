@@ -1,3 +1,5 @@
+# views handling halaman dashboard admin
+
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_required, current_user
 
@@ -14,6 +16,7 @@ admin_views = Blueprint("admin_views", __name__)
 ######################################
 
 
+# fungsi untuk mengecek apakah user adalah admin atau tidak
 def check_admin():
     user_object = User.query.get(current_user.get_id())
     return user_object.is_admin
@@ -27,7 +30,8 @@ def check_admin():
 
 #
 #
-# API untuk handle admin dashboard
+# API untuk handle admin dashboard, query jumlah rumah, kecamatan, user
+# untuk di tampilkan di halaman dashboard admin
 @admin_views.route("/admin_dashboard", methods=["GET"])
 @login_required
 def admin_dashboard():
@@ -48,7 +52,9 @@ def admin_dashboard():
 
 #
 #
-# API untuk handle admin kecamatan
+# API untuk handle halaman kecamatan pada admin dashboard
+# query semua kecamatan dalam database dan ditampilkan pada
+# dahsboard admin
 @admin_views.route("/admin_kecamatan", methods=["GEt"])
 @login_required
 def admin_kecamatan():
@@ -60,6 +66,7 @@ def admin_kecamatan():
     return render_template("admin/kecamatan.html", all_kecamatan=all_kecamatan)
 
 
+# menampilkan halaman penambahan kecamatan pada dashboard admin
 @admin_views.route("/tambah_kecamatan", methods=["GET"])
 @login_required
 def tambah_kecamatan():
@@ -69,6 +76,7 @@ def tambah_kecamatan():
     return render_template("admin/tambah-kecamatan.html")
 
 
+# handle penambahan kecamatan pada halaman tambah kecamatan
 @admin_views.route("/handle_tambah_kecamatan", methods=["POST"])
 @login_required
 def handle_tambah_kecamatan():
@@ -85,6 +93,7 @@ def handle_tambah_kecamatan():
     return redirect("/tambah_kecamatan")
 
 
+# menampilkan halaman edit kecamatan pada admin dashboard
 @admin_views.route("/edit_kecamatan/<int:id>", methods=["GET"])
 @login_required
 def edit_kecamatan(id):
@@ -98,6 +107,7 @@ def edit_kecamatan(id):
     )
 
 
+# handle edit kecamatan pada halaman edit kecamatan
 @admin_views.route("/handle_edit_kecamatan/<int:id>", methods=["POST"])
 @login_required
 def handle_edit_kecamatan(id):
@@ -124,6 +134,7 @@ def handle_edit_kecamatan(id):
     return redirect(f"/edit_kecamatan/{id}")
 
 
+# handle penghapusan data kecamatan melalui admin dashboard
 @admin_views.route("/delete_kecamatan/<int:id>", methods=["POST"])
 def delete_kecamatan(id):
     to_delete_kecamatan = Kecamatan.query.get(id)
@@ -146,6 +157,8 @@ def delete_kecamatan(id):
 #
 #
 # API untuk handle admin rumah
+# mengqueru semua rumah dan ditampilkan di halaman dashboard admin
+# pada menu rumah
 @admin_views.route("/admin_rumah", methods=["GET"])
 @login_required
 def admin_rumah():
@@ -157,6 +170,7 @@ def admin_rumah():
     return render_template("admin/rumah.html", all_rumah=all_rumah)
 
 
+# menampilkan halaman tambah rumah pada dashboard admin
 @admin_views.route("/tambah_rumah", methods=["GET"])
 @login_required
 def tambah_rumah():
@@ -175,6 +189,7 @@ def tambah_rumah():
     )
 
 
+# handle penambahan rummah pada dashboard admin
 @admin_views.route("/handle_tambah_rumah", methods=["POST"])
 @login_required
 def handle_tambah_rumah():
@@ -209,6 +224,7 @@ def handle_tambah_rumah():
     return redirect("/tambah_rumah")
 
 
+# menampilkan halaman edit rumah pada dashboard admin
 @admin_views.route("/edit_rumah/<int:id>", methods=["GET"])
 @login_required
 def edit_rumah(id):
@@ -223,6 +239,7 @@ def edit_rumah(id):
     )
 
 
+# handle pengeditan data rummah pada dashboard admin
 @admin_views.route("/handle_edit_rumah/<int:id>", methods=["POST"])
 @login_required
 def handle_edit_rumah(id):
@@ -261,6 +278,7 @@ def handle_edit_rumah(id):
     return redirect(f"/edit_rumah/{id}")
 
 
+# handle penghapusan rumah pada dashboard admin
 @admin_views.route("/delete_rumah/<int:id>", methods=["POST"])
 @login_required
 def delete_rumah(id):
@@ -285,6 +303,8 @@ def delete_rumah(id):
 #
 #
 # API untuk handle kontak agen
+# query semua data agen untuk di tampilkan pada halaman
+# dashboard admin pada menu rumah
 @admin_views.route("/admin_kontak_agen", methods=["GET"])
 @login_required
 def admin_kontak_agen():
@@ -296,6 +316,7 @@ def admin_kontak_agen():
     return render_template("admin/kontak-agen.html", all_agen=all_agen)
 
 
+# menampilkan halaman penambahan admin pada admin dashboard
 @admin_views.route("/tambah_agen", methods=["GET"])
 @login_required
 def tambah_agen():
@@ -305,6 +326,7 @@ def tambah_agen():
     return render_template("admin/tambah-agen.html")
 
 
+# handle penambahan agen pada dashboard admin
 @admin_views.route("/handle_tambah_agen", methods=["POST"])
 @login_required
 def handle_tambah_agen():
@@ -329,6 +351,7 @@ def handle_tambah_agen():
     return redirect("/tambah_agen")
 
 
+# menampilkan halaman edit agen pada dashboard admin
 @admin_views.route("/edit_agen/<int:id>", methods=["GET"])
 @login_required
 def edit_agen(id):
@@ -340,6 +363,7 @@ def edit_agen(id):
     return render_template("admin/edit-agen.html", to_edit_agen=to_edit_agen)
 
 
+# handle pengeditan data agen pada dashboard admin
 @admin_views.route("/handle_edit_agen/<int:id>", methods=["POST"])
 @login_required
 def handle_edit_agen(id):
@@ -369,6 +393,7 @@ def handle_edit_agen(id):
     return redirect("/admin_agen")
 
 
+# handle penghapusan data agen pada halaman dashboard admin
 @admin_views.route("/delete_agen/<int:id>", methods=["POST"])
 @login_required
 def delete_agen(id):
@@ -403,6 +428,7 @@ def admin_user():
     return render_template("admin/user.html", non_admin_user=non_admin_user)
 
 
+# untuk menampilkan halaman edit user pada dashboard admin
 @admin_views.route("/edit_user/<int:id>", methods=["GET"])
 @login_required
 def edit_user(id):
@@ -414,6 +440,7 @@ def edit_user(id):
     return render_template("admin/edit-user.html", to_edit_user=to_edit_user)
 
 
+# handle pengeditan data user pada dashboard admin
 @admin_views.route("/handle_edit_user/<int:id>", methods=["POST"])
 @login_required
 def handle_edit_user(id):
@@ -440,6 +467,7 @@ def handle_edit_user(id):
     return redirect(f"/edit_user/{id}")
 
 
+# handle penghapusan user pada halaman dashboard admin
 @admin_views.route("/delete_user/<int:id>", methods=["POST"])
 @login_required
 def delete_user(id):

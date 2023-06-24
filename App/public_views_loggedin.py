@@ -10,7 +10,7 @@ public_views_loggedin = Blueprint("public_views_loggedin", __name__)
 
 #
 #
-# API untuk handle profile
+# API untuk menampilkan halaman profile
 @public_views_loggedin.route("/profile", methods=["GET"])
 @login_required
 def profile_page():
@@ -24,6 +24,9 @@ def profile_page():
     )
 
 
+# handle pengeditan data user pada halaman profile
+# mengambil data dari halama profle menggunakan request
+# dan menyimpanya dalam database
 @public_views_loggedin.route("/handle_submit_profile", methods=["POST"])
 @login_required
 def handle_submit_profile():

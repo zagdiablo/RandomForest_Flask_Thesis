@@ -9,10 +9,17 @@ import pandas as pd
 import locale
 
 
+# file inisialisasi saat menjalankan aplikasi web
+
+
+# deklarasi aplikasi flask
 app = Flask(__name__)
+# deklarasi terhadap perlidungan dari cross site request forgery
 csrf = CSRFProtect()
+# deklarasi database
 db = SQLAlchemy()
 
+# deklarasi nama database
 DB_NAME = "database.db"
 
 
@@ -33,13 +40,14 @@ def start_app():
 
     db.init_app(app)
 
-    # blueprint import
+    # import blueprint
     from .admin_views import admin_views
     from .admin_auth import admin_auth
     from .public_views import public_views
     from .public_auth import public_auth
     from .public_views_loggedin import public_views_loggedin
 
+    # register blueprint
     app.register_blueprint(admin_views, url_prefix="/")
     app.register_blueprint(admin_auth, url_prefix="/")
     app.register_blueprint(public_views, url_prefix="/")
@@ -62,8 +70,13 @@ def start_app():
     return app
 
 
+#
+#
+# membuat database berdasarkan object relational mapping dari file models.py
 def create_database(app):
+    # cek apakah  database sudah ada
     if not os.path.exists(f"App/{DB_NAME}"):
+        # jika belum generate database
         os.rename(
             os.path.join(f"App/datasets/houses_dummy_datasets_DONE.json"),
             os.path.join(f"App/datasets/houses_dummy_datasets.json"),
@@ -71,15 +84,22 @@ def create_database(app):
         db.create_all(app=app)
         print(f"[+] Database successfully created!")
         return
+
+    # jika sudah tidak perlu generate database
     print(f"[-] Dabase already exist!")
 
 
+#
+#
+# membuat akun admin jika akun admin belum ada
 def generate_admin_account(app):
     with app.app_context():
         from .models import User
 
+        # cek admin akun menggunakan query database
         master_admin_account = User.query.get(1)
 
+        # jika akun tidak ada maka buat akun
         if not master_admin_account:
             generate_admin = User(
                 email="admin@admin.com",
@@ -91,24 +111,30 @@ def generate_admin_account(app):
             print("[+] berhasil membuat akun admin master")
             return
 
+        # jika ada tidak perlu buat akun
         print("[-] akun admin master sudah ada")
         return
 
 
-# read datasets from datasets folder, read and put it in the database
+#
+#
+# membaca file houses_dummy_datasets.json dari folder datasets untuk dimasukkan ke dataabse
 def datasets_to_database(app):
     from .models import Rumah
     from .models import Kecamatan
     from .models import Agen
 
+    # cek apakah data houses_dummy_datasets.json ada atau tidak
     if os.path.exists(f"App/datasets/houses_dummy_datasets.json"):
         df = pd.read_json(os.path.join(f"App/datasets/houses_dummy_datasets.json"))
 
+        # jika ada baca dan baca dan masukkan data per kunci ke database
         with app.app_context():
             for _, rs in df.iterrows():
                 kontak_agen = dict(rs[9])
                 kordinat = dict(rs[8])
 
+                # data rumah
                 new_rumah_data = Rumah(
                     alamat=str(rs[0]),
                     nama_perumahan=str(rs[1]),
@@ -127,6 +153,7 @@ def datasets_to_database(app):
                 db.session.add(new_rumah_data)
             db.session.commit()
 
+            # data kecamatan
             for _, rs in df.iterrows():
                 to_check_kecamatan = Kecamatan.query.filter_by(
                     nama_kecamatan=str(rs[7])
@@ -137,6 +164,7 @@ def datasets_to_database(app):
                     db.session.add(new_kecamatan)
             db.session.commit()
 
+            # data agen
             for _, rs in df.iterrows():
                 kontak_agen = dict(rs[9])
 
@@ -160,5 +188,6 @@ def datasets_to_database(app):
         print("[+] berhasil menambahkan dataset ke database")
         return
 
+    # jika dataset sudah ada di database maka tidak perlu di masukkan
     print("[-] dataset sudah ada dalam database")
     return

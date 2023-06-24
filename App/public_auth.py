@@ -15,7 +15,7 @@ public_auth = Blueprint("public_auth", __name__)
 
 #
 #
-# API untuk handle halaman login
+# API untuk menampilkan halaman login
 @public_auth.route("/login", methods=["GET"])
 def login_page():
     if current_user.is_authenticated:
@@ -23,6 +23,8 @@ def login_page():
     return render_template("public/login_register.html")
 
 
+# handle login request dengan ceking email dan password pada database
+# jika email dan password terdapat pada database maka login berhasil
 @public_auth.route("/handle_login", methods=["POST"])
 def handle_login():
     email = request.form.get("email")
@@ -52,7 +54,7 @@ def logout():
 
 #
 #
-# API untuk handle halaman register
+# API untuk menampilkan halaman register
 @public_auth.route("/register", methods=["GET"])
 def register_page():
     if current_user.is_authenticated:
@@ -60,6 +62,9 @@ def register_page():
     return render_template("public/login_register.html")
 
 
+# handle halaman register
+# menambahkan user email dan password ke database user dengan enkripsi sha256
+# jika email sudah pernah terdaftar maka register gagal
 @public_auth.route("/handle_register", methods=["POST"])
 def handle_register():
     email = request.form.get("email")

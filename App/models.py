@@ -1,6 +1,8 @@
 from . import db
 from flask_login import UserMixin
 
+# file ORM untuk kerangka database
+
 
 class User(db.Model, UserMixin):
     # Data otentikasi akun
@@ -39,6 +41,7 @@ class Rumah(db.Model):
     kamar_tidur = db.Column(db.Integer, nullable=False, default=0)
     kamar_mandi = db.Column(db.Integer, nullable=False, default=0)
     njop = db.Column(db.Integer, nullable=False, default=0)
+    click_count = db.Column(db.Integer, nullable=False, default=0)
 
 
 class Agen(db.Model):

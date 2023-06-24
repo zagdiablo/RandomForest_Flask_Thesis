@@ -417,6 +417,9 @@
                   <li><ion-icon class="fiture-icon" name="barbell-outline"></ion-icon>
                     <p>Fasilitas: <span>{{ fasilitas_rumah }}</span></p>
                   </li>
+                  <li><ion-icon class="fiture-icon" name="barbell-outline"></ion-icon>
+                    <p>Fasilitas: <span>{{ detail_rumah.click_count}}</span></p>
+                  </li>
                   {% if user_is_authenticated %}
                   <li><ion-icon class="fiture-icon" name="car-outline"></ion-icon>
                     <p>Jarak tempuh dari lokasi kerja anda: <span>{{ jarak }} Km</span></p>
@@ -618,30 +621,30 @@
 
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
   <script src="{{ url_for('static', filename='js/detail-rumah.js') }}"></script>
-  
+
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   <script>
     function formatRupiah(angka) {
-        var formatter = new Intl.NumberFormat('id-ID', {
-            style: 'currency',
-            currency: 'IDR',
-            minimumFractionDigits: 2
-        });
+      var formatter = new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 2
+      });
 
-        return formatter.format(angka);
+      return formatter.format(angka);
     }
     // Ambil elemen-elemen harga rumah
     var hargaRumah = document.getElementById('hargaRumah');
     var harga = parseFloat(hargaRumah.innerHTML.replace(/[^\d.-]/g, ''));
-    var hargaRupiah =  formatRupiah(harga);
+    var hargaRupiah = formatRupiah(harga);
     hargaRumah.innerHTML = hargaRupiah;
     // // Ubah format menjadi rupiah untuk setiap elemen harga rumah
 
 
-</script>
+  </script>
 </body>
 
 </html>

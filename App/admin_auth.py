@@ -12,10 +12,11 @@ admin_auth = Blueprint("admin_auth", __name__)
 #
 #
 # API untuk handle admin login
+# cek user adalah admin atau tidak, jika user bukan admin
+# maka tidak dapat mengakses halaman login admin
 @admin_auth.route("/admin_login", methods=["GET"])
 def admin_login_page():
     user_check = User.query.get(current_user.get_id())
-
     if user_check:
         if not user_check.is_admin:
             return redirect(url_for("public_views_loggedin.profile_page"))
@@ -26,6 +27,7 @@ def admin_login_page():
     return render_template("admin/auth-login.html")
 
 
+# handle login request dari halaman login
 @admin_auth.route("/handle_admin_login", methods=["POST"])
 def handle_admin_login():
     email = request.form.get("email")

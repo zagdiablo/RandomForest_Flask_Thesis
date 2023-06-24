@@ -10,7 +10,7 @@ from . import db
 
 public_views = Blueprint("public_views", __name__)
 
-
+# TODO bikin dokumentasi untuk file ini
 #################################################
 # Functions
 #################################################
@@ -89,15 +89,16 @@ def handle_query(
         print("kolam renang")
         query = query.filter(Rumah.fasilitas.contains("kolam renang"))
 
-    query_results = query.all()
     distances = []
     if user_is_authenticated:
+        query_results = query.order_by(Rumah.click_count.desc()).all()
         for query in query_results:
             query_cordinates = ",".join([query.latitude, query.longitude])
             distances.append(
                 get_distance_api(the_user.alamat_tempat_kerja, query_cordinates)
             )
     else:
+        query_results = query.order_by(Rumah.click_count.desc()).all()
         for query in query_results:
             distances.append(0)
 
@@ -223,6 +224,10 @@ def detail_rumah(id):
     detail_rumah = Rumah.query.get(id)
     fasilitas_rumah = detail_rumah.fasilitas
     jarak = None
+
+    # add click count
+    detail_rumah.click_count += 1
+    db.session.commit()
 
     if user_is_authenticated:
         the_user = User.query.get(current_user.get_id())
