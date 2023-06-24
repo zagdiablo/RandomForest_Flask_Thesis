@@ -89,21 +89,20 @@ def handle_query(
         print("kolam renang")
         query = query.filter(Rumah.fasilitas.contains("kolam renang"))
 
-    distances = []
+    query_with_distances = {}
     if user_is_authenticated:
         query_results = query.order_by(Rumah.click_count.desc()).all()
         for query in query_results:
             query_cordinates = ",".join([query.latitude, query.longitude])
-            distances.append(
-                get_distance_api(the_user.alamat_tempat_kerja, query_cordinates)
-            )
+            distance = get_distance_api(the_user.alamat_tempat_kerja, query_cordinates)
+            query_with_distances[distance] = query
+        query_with_distances = dict(sorted(query_with_distances.items()))
     else:
         query_results = query.order_by(Rumah.click_count.desc()).all()
-        for query in query_results:
-            distances.append(0)
+        for index, query in enumerate(query_results):
+            query_with_distances[index] = query
 
-    results = zip(query_results, distances)
-    return results
+    return query_with_distances
 
 
 #################################################
@@ -134,6 +133,8 @@ def cari_rumah_page():
     all_kecamatan = Kecamatan.query.all()
     all_agen = Agen.query.all()
     status_profil_user = None
+    the_user = None
+    query_rumah = None
 
     kecamatan = request.form.get("kecamatan")
 
@@ -144,6 +145,8 @@ def cari_rumah_page():
         all_agen=all_agen,
         kecamatan=kecamatan,
         status_profil_user=status_profil_user,
+        query_rumah=query_rumah,
+        the_user=the_user,
     )
 
 

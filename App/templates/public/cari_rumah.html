@@ -535,7 +535,8 @@
                         {% endif %}
                         <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
 
-                            {% for rumah, jarak in query_rumah %}
+                            {% if query_rumah %}
+                            {% for jarak, rumah in query_rumah.items() %}
                             <!-- {% if rumah.kecamatan == kecamatan_query %} -->
                             <div class="col">
                                 <div class="property-card">
@@ -646,7 +647,7 @@
                                 </div>
                                 <!-- {% endif %} -->
                                 {% endfor %}
-
+                                {% endif %}
                             </div>
                         </div>
                 </section>
