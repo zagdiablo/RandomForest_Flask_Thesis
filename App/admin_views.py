@@ -4,7 +4,7 @@ from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_required, current_user
 
 
-from .models import User, Kecamatan, Rumah, Agen
+from .models import User, Kecamatan, Rumah, Agen, FixedBunga
 from . import db
 
 
@@ -37,17 +37,45 @@ def check_admin():
 def admin_dashboard():
     if not check_admin():
         return redirect(url_for("public_views_loggedin.profile_page"))
+
     count_rumah = Rumah.query.count()
     count_kecamatan = Kecamatan.query.count()
     count_user = User.query.count()
     admin_user = User.query.get(current_user.get_id())
+    fixed_bunga = FixedBunga.query.get(1)
+
     return render_template(
         "admin/dashboard.html",
         admin_user=admin_user,
         count_rumah=count_rumah,
         count_kecamatan=count_kecamatan,
         count_user=count_user,
+        fixed_bunga=fixed_bunga,
     )
+
+
+# handle editing fixed bunga ke dalam database
+@admin_views.route("/handle_edit_bunga", methods=["POST"])
+@login_required
+def handle_edit_bunga():
+    if not check_admin():
+        return redirect(url_for("public_views_loggedin.profile_page"))
+
+    fixed_bunga = request.form.get("fixed_bunga")
+
+    to_edit_bunga = FixedBunga.query.get(1)
+
+    if to_edit_bunga:
+        to_edit_bunga.fixed_bunga = fixed_bunga
+        db.session.commit()
+        flash(
+            f"berhasil mengedit fixed bunga menjadi {to_edit_bunga.fixed_bunga}",
+            category="success",
+        )
+        return redirect("/admin_dashboard")
+
+    flash(f"gagal mengedit fixed bunga")
+    return redirect("/admin_dashboard")
 
 
 #

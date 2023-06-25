@@ -32,7 +32,7 @@ def handle_login():
 
     to_login_user = User.query.filter_by(email=email).first()
 
-    if to_login_user:
+    if to_login_user and to_login_user.is_admin == False:
         if check_password_hash(to_login_user.password, password):
             login_user(to_login_user)
             flash(f"Selamat datang!", category="success")

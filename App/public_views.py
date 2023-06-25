@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, request, flash
+from flask import Blueprint, render_template, redirect, request, url_for
 from flask_login import current_user
 
 import requests
@@ -33,22 +33,8 @@ def get_distance_api(tempat, tujuan):
     return distance
 
 
-# fungsi untuk menghitung cicilan rumah perbulanya
-def hitung_cicilan(dp, lama_cicilan, id_rumah):
-    lama_cicilan = 12 * lama_cicilan
-    fixed_bunga = FixedBunga.query.get(1)
-    harga_rumah = Rumah.query.get(id_rumah).harga
-
-    pokok_kredit = harga_rumah - dp
-
-    cicilan_rumah = (pokok_kredit + (pokok_kredit * (fixed_bunga / 100))) / lama_cicilan
-
-    print(cicilan_rumah)
-    return cicilan_rumah
-
-
-# TODO pengolahan data dan rekomendation system
-# TODO flask query builder
+# fungsi untuk mencari data dalam database menggunakan parameter query
+# yang didapat dari halaman cari_rumah.html
 def handle_query(
     the_user,
     user_is_authenticated,
@@ -64,6 +50,8 @@ def handle_query(
     checkbox_kolam_renang,
 ):
     number = list("12345")
+
+    # query rumah berdasarkan kecamatan dan fasilitas yang di passing dari halaman cari rumah
     query = Rumah.query.filter(Rumah.kecamatan == kecamatan)
     if user_is_authenticated:
         rekomendasi_harga_rumah = (((gaji_user * 40) / 100) * 12) * 30
@@ -105,18 +93,23 @@ def handle_query(
         query = query.filter(Rumah.fasilitas.contains("kolam renang"))
 
     query_with_distances = {}
+    # jika user telah login, query dan hitung jarak menggunakan fungsi get_distance_api
     if user_is_authenticated:
         query_results = query.order_by(Rumah.click_count.desc()).all()
         for query in query_results:
             query_cordinates = ",".join([query.latitude, query.longitude])
             distance = get_distance_api(the_user.alamat_tempat_kerja, query_cordinates)
             query_with_distances[distance] = query
+        # sorted(query_with_distances.items()) mengurutkan hasil query berdasarkan jarak
         query_with_distances = dict(sorted(query_with_distances.items()))
+    # jika tidak isi jarak dengan angka index saja, dan tidak ditampilkan pada halaman hasil pencarian
     else:
+        # click_count.desc() query data yang di urutkan berdasarkan click count terbanyak
         query_results = query.order_by(Rumah.click_count.desc()).all()
         for index, query in enumerate(query_results):
             query_with_distances[index] = query
 
+    # return data hasil query database
     return query_with_distances
 
 
@@ -140,19 +133,23 @@ def home_page():
 # API untuk handle halaman pencarian rumah
 @public_views.route("/cari_rumah", methods=["GET"])
 def cari_rumah_page():
+    # jika user login maka query data user
     user_is_authenticated = current_user.is_authenticated
     if user_is_authenticated:
         the_user = User.query.get(current_user.get_id())
         status_profil_user = the_user.is_filled
 
+    # query list kecamatan dan agen
     all_kecamatan = Kecamatan.query.all()
     all_agen = Agen.query.all()
     status_profil_user = None
     the_user = None
     query_rumah = None
 
+    # menarik parameter kecamatan dari halaman cari rumah
     kecamatan = request.form.get("kecamatan")
 
+    # manmpilkan halaman cari rumah dengan hasil query yg telah di dapat
     return render_template(
         "public/cari_rumah.html",
         user_is_authenticated=user_is_authenticated,
@@ -165,10 +162,16 @@ def cari_rumah_page():
     )
 
 
+# handle query rumah berdasarkan detail dan parameter pencarian yang ada di halaman cari rumah
+# mengecek parameter pencarian seperti fasilitas, lantai, kamar mandi, dan kamar tidur
+# di olang menggunakan fungsi handle_query() lalu di tampilkan hasil querinya
+# pada halama cari rumah
 @public_views.route("/handle_cari_rumah", methods=["POST"])
 def handle_cari_rumah():
+    # cek user login atau tidak
     user_is_authenticated = current_user.is_authenticated
 
+    # qery semua data rumah dari database
     all_rumah = Rumah.query.all()
     all_kecamatan = Kecamatan.query.all()
     all_agen = Agen.query.all()
@@ -176,6 +179,7 @@ def handle_cari_rumah():
     the_user = None
     status_profil_user = None
 
+    # penarikan parameter dari form pencarian rumah
     kecamatan = request.form.get("search_bar_by_kecamatan")
     dropdown_lantai = request.form.get("dropdown_lantai")
     dropdown_kamar_tidur = request.form.get("dropdown_kamar_tidur")
@@ -186,11 +190,13 @@ def handle_cari_rumah():
     checkbox_playground = request.form.get("checkbox_playground")
     checkbox_kolam_renang = request.form.get("checkbox_kolam_renang")
 
+    # jika user login maka query data user dari database
     if user_is_authenticated:
         the_user = User.query.get(current_user.get_id())
         status_profil_user = the_user.is_filled
         gaji_user = the_user.range_gaji
 
+    # pemanggilan fungsi handle_query() untuk query data rumah dengan parameter yang diinginkan
     query_rumah = handle_query(
         the_user,
         user_is_authenticated,
@@ -206,6 +212,7 @@ def handle_cari_rumah():
         checkbox_kolam_renang,
     )
 
+    # tampilkan hasil query ke halaman cari rumah
     return render_template(
         "public/cari_rumah.html",
         user_is_authenticated=user_is_authenticated,
@@ -225,59 +232,50 @@ def handle_cari_rumah():
 # API untuk handle detail rumah
 @public_views.route("/detail_rumah/<int:id>/<int:from_cari_rumah>", methods=["GET"])
 def detail_rumah(id, from_cari_rumah):
+    # query data detail dan fasilitas rumah
     user_is_authenticated = current_user.is_authenticated
     detail_rumah = Rumah.query.get(id)
     fasilitas_rumah = detail_rumah.fasilitas
+    fixed_bunga = FixedBunga.query.get(1)
     jarak = None
     cicilan = None
 
-    # add click count
-    if from_cari_rumah:
-        from_cari_rumah = 0
-        detail_rumah.click_count += 1
-        db.session.commit()
-
+    # jika user login maka query data user
     if user_is_authenticated:
         the_user = User.query.get(current_user.get_id())
         kordinat_rumah = ",".join([detail_rumah.latitude, detail_rumah.longitude])
         jarak = get_distance_api(the_user.alamat_tempat_kerja, kordinat_rumah)
 
+    # jika user click detail rumah pada halaman cari rumah maka dihitung click count
+    # pengurutan rumah rekomendasi jika user tidak login adalah berdasarkan click count
+    # urutan paling atas adalah rumah yang paling banyak click count nya
+    if from_cari_rumah == 1:
+        detail_rumah.click_count += 1
+        db.session.commit()
+
+        return redirect(
+            url_for(
+                "public_views.detail_rumah",
+                id=id,
+                from_cari_rumah=0,
+                detail_rumah=detail_rumah,
+                fasilitas_rumah=fasilitas_rumah,
+                jarak=jarak,
+                user_is_authenticated=user_is_authenticated,
+                cicilan=cicilan,
+                fixed_bunga=fixed_bunga,
+            )
+        )
+
+    # menampilkan data hasil query pada halaman detail rumah
     return render_template(
-        "public/detail-rumah.html",
+        f"public/detail-rumah.html",
         detail_rumah=detail_rumah,
         fasilitas_rumah=fasilitas_rumah,
         jarak=jarak,
         user_is_authenticated=user_is_authenticated,
         cicilan=cicilan,
-    )
-
-
-# handle perhitungan simulasi pada detail rumah
-@public_views.route("/detail_rumah/simulasi/<int:id>", methods=["POST"])
-def detail_rumah_simulasi(id):
-    user_is_authenticated = current_user.is_authenticated
-    detail_rumah = Rumah.query.get(id)
-    fasilitas_rumah = detail_rumah.fasilitas
-    cicilan = None
-
-    if user_is_authenticated:
-        the_user = User.query.get(current_user.get_id())
-        kordiat_rumah = ",".join([detail_rumah.latitude, detail_rumah.longitude])
-        jarak = get_distance_api(the_user.alamat_tempat_kerja, kordiat_rumah)
-
-    dp = request.form.get("dp")
-    lama_cicilan = request.form.get("lama_cicilan")
-
-    # TODO finish perhitungan cicilan rumah
-    cicilan = hitung_cicilan(dp, lama_cicilan, id)
-
-    return render_template(
-        "public/detail-rumah.html",
-        detail_rumah=detail_rumah,
-        fasilitas_rumah=fasilitas_rumah,
-        jarak=jarak,
-        user_is_authenticated=user_is_authenticated,
-        cicilan=cicilan,
+        fixed_bunga=fixed_bunga,
     )
 
 
