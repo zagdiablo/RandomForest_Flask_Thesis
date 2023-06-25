@@ -22,6 +22,17 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.svg') }}" type="image/x-icon">
 </head>
 
+<style>
+    .show{
+       display: inline-block; 
+    }
+    .hide{
+       display: none; 
+    }
+
+
+</style>
+
 <body>
     <div id="app">
         <div id="sidebar" class="active">
@@ -184,8 +195,14 @@
                                         <img src="{{ url_for('static', filename='images/faces/1.jpg') }}" alt="Face 1">
                                     </div>
                                     <div class="ms-3 name">
-                                        <h5 class="font-bold">Admin</h5>
-                                        <h6 class="text-muted mb-0">@admin.com</h6>
+                                        <h5 class="font-bold">Bunga Fixed</h5>
+                                        <div class="form-group show">
+                                            <input type="text" class="form-control" id="basicInput"
+                                                placeholder="besaran bunga">
+                                        </div>
+                                        <h5 class="mb-0 hide" style="text-align: center;color: #25396f;">8%</h5>
+                                        <center id="editBunga" class="hide" title="Edit Bunga" style="margin-top: 5px;margin-bottom: 3px;"><a class="btn btn-sm btn-warning"><i class="bi bi-pencil-fill" style="color: white;"></i></a></center>
+                                        <center><a class="btn btn-sm btn-warning">Edit</a></center>
                                     </div>
                                 </div>
                             </div>
