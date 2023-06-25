@@ -4,7 +4,7 @@ from flask_login import current_user
 import requests
 import re
 
-from .models import User, Rumah, Agen, Kecamatan
+from .models import User, Rumah, Agen, Kecamatan, FixedBunga
 from . import db
 
 
@@ -16,6 +16,7 @@ public_views = Blueprint("public_views", __name__)
 #################################################
 
 
+# fungsi untuk mendapatkan perhitungan jarak dari google API
 def get_distance_api(tempat, tujuan):
     url = f"https://maps.googleapis.com/maps/api/distancematrix/json?origins={tempat}&destinations={tujuan}&key=AIzaSyAwqGQ5BbN_hu-bSFX7aHvqMDW2C2tK5Yo"
     print(url)
@@ -30,6 +31,20 @@ def get_distance_api(tempat, tujuan):
     except IndexError:
         distance = "Tidak ada jalur darat."
     return distance
+
+
+# fungsi untuk menghitung cicilan rumah perbulanya
+def hitung_cicilan(dp, lama_cicilan, id_rumah):
+    lama_cicilan = 12 * lama_cicilan
+    fixed_bunga = FixedBunga.query.get(1)
+    harga_rumah = Rumah.query.get(id_rumah).harga
+
+    pokok_kredit = harga_rumah - dp
+
+    cicilan_rumah = (pokok_kredit + (pokok_kredit * (fixed_bunga / 100))) / lama_cicilan
+
+    print(cicilan_rumah)
+    return cicilan_rumah
 
 
 # TODO pengolahan data dan rekomendation system
@@ -205,32 +220,22 @@ def handle_cari_rumah():
     )
 
 
-@public_views.route("/get_price_suggestion", methods=["POST"])
-def get_price_suggestion():
-    #####
-    # TODO handle logika machine learning & query data hasil
-    # TODO requirement: untuk user yang belum login range parameter gaji dan kontak sales rumah di tiadakan
-    lantai = request.form.get("lantai")
-    ukuran = request.form.get("ukuran")
-    print(lantai, ukuran)
-    #####
-
-    return redirect("/cari_rumah")
-
-
 #
 #
 # API untuk handle detail rumah
-@public_views.route("/detail_rumah/<int:id>", methods=["GET"])
-def detail_rumah(id):
+@public_views.route("/detail_rumah/<int:id>/<int:from_cari_rumah>", methods=["GET"])
+def detail_rumah(id, from_cari_rumah):
     user_is_authenticated = current_user.is_authenticated
     detail_rumah = Rumah.query.get(id)
     fasilitas_rumah = detail_rumah.fasilitas
     jarak = None
+    cicilan = None
 
     # add click count
-    detail_rumah.click_count += 1
-    db.session.commit()
+    if from_cari_rumah:
+        from_cari_rumah = 0
+        detail_rumah.click_count += 1
+        db.session.commit()
 
     if user_is_authenticated:
         the_user = User.query.get(current_user.get_id())
@@ -243,6 +248,36 @@ def detail_rumah(id):
         fasilitas_rumah=fasilitas_rumah,
         jarak=jarak,
         user_is_authenticated=user_is_authenticated,
+        cicilan=cicilan,
+    )
+
+
+# handle perhitungan simulasi pada detail rumah
+@public_views.route("/detail_rumah/simulasi/<int:id>", methods=["POST"])
+def detail_rumah_simulasi(id):
+    user_is_authenticated = current_user.is_authenticated
+    detail_rumah = Rumah.query.get(id)
+    fasilitas_rumah = detail_rumah.fasilitas
+    cicilan = None
+
+    if user_is_authenticated:
+        the_user = User.query.get(current_user.get_id())
+        kordiat_rumah = ",".join([detail_rumah.latitude, detail_rumah.longitude])
+        jarak = get_distance_api(the_user.alamat_tempat_kerja, kordiat_rumah)
+
+    dp = request.form.get("dp")
+    lama_cicilan = request.form.get("lama_cicilan")
+
+    # TODO finish perhitungan cicilan rumah
+    cicilan = hitung_cicilan(dp, lama_cicilan, id)
+
+    return render_template(
+        "public/detail-rumah.html",
+        detail_rumah=detail_rumah,
+        fasilitas_rumah=fasilitas_rumah,
+        jarak=jarak,
+        user_is_authenticated=user_is_authenticated,
+        cicilan=cicilan,
     )
 
 

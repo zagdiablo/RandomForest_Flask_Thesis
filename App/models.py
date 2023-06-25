@@ -50,3 +50,8 @@ class Agen(db.Model):
     nomor_telepon = db.Column(db.String(100), nullable=False, default="")
     email = db.Column(db.String(100), nullable=False, default="")
     whatsapp = db.Column(db.String(100), nullable=False, default="")
+
+
+class FixedBunga(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    fixed_bunga = db.Column(db.Integer, nullable=False, default=0)

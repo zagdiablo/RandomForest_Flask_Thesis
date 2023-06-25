@@ -66,6 +66,7 @@ def start_app():
     create_database(app)
     generate_admin_account(app)
     datasets_to_database(app)
+    generate_fixed_bunga(app)
 
     return app
 
@@ -113,6 +114,23 @@ def generate_admin_account(app):
 
         # jika ada tidak perlu buat akun
         print("[-] akun admin master sudah ada")
+        return
+
+
+def generate_fixed_bunga(app):
+    with app.app_context():
+        from .models import FixedBunga
+
+        fixed_bunga = FixedBunga.query.get(1)
+
+        if not fixed_bunga:
+            generate_fixed_bunga = FixedBunga(fixed_bunga=0)
+            db.session.add(generate_fixed_bunga)
+            db.session.commit()
+            print("[+] berhasil membuat tabel fixed bunga")
+            return
+
+        print("[-] table fixed bunga sudah ada")
         return
 
 
