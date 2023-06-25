@@ -399,11 +399,11 @@
                                                     <div class="col-md-4 mb-3">
                                                         <select class="form-select btn btn-light" name="dropdown_lantai"
                                                             aria-label="Default select example" aria-placeholder="">
-                                                            <option value=0 selected>Lantai</option>
-                                                            <option value=1>Satu</option>
-                                                            <option value=2>Dua</option>
-                                                            <option value=3>Tiga</option>
-                                                            <option value=3>Lebih dari tiga</option>
+                                                            <option value="0" selected>Lantai</option>
+                                                            <option value="1">Satu</option>
+                                                            <option value="2">Dua</option>
+                                                            <option value="3">Tiga</option>
+                                                            <option value="3">Lebih dari tiga</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-md-4 mb-3">
@@ -537,7 +537,6 @@
 
                             {% if query_rumah %}
                             {% for jarak, rumah in query_rumah.items() %}
-                            <!-- {% if rumah.kecamatan == kecamatan_query %} -->
                             <div class="col">
                                 <div class="property-card">
                                     <figure class="card-banner">
@@ -555,7 +554,6 @@
                                             </button>
                                         </div>
                                     </figure>
-
                                     <div class="card-content">
                                         <div class="card-price">
                                             <!-- Harga Disini -->
@@ -645,7 +643,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- {% endif %} -->
                                 {% endfor %}
                                 {% endif %}
                             </div>

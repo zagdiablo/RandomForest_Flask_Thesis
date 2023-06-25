@@ -142,12 +142,16 @@ def cari_rumah_page():
     # query list kecamatan dan agen
     all_kecamatan = Kecamatan.query.all()
     all_agen = Agen.query.all()
+    all_rumah = Rumah.query.filter(Rumah.kamar_mandi > 0)
     status_profil_user = None
     the_user = None
-    query_rumah = None
 
-    # menarik parameter kecamatan dari halaman cari rumah
-    kecamatan = request.form.get("kecamatan")
+    # query semua rumah
+    query_rumah = {}
+    for index, rumah in enumerate(all_rumah):
+        query_results = all_rumah.order_by(Rumah.click_count.desc()).all()
+        for index, rumah in enumerate(query_results):
+            query_rumah[index] = rumah
 
     # manmpilkan halaman cari rumah dengan hasil query yg telah di dapat
     return render_template(
@@ -155,7 +159,6 @@ def cari_rumah_page():
         user_is_authenticated=user_is_authenticated,
         all_kecamatan=all_kecamatan,
         all_agen=all_agen,
-        kecamatan=kecamatan,
         status_profil_user=status_profil_user,
         query_rumah=query_rumah,
         the_user=the_user,
