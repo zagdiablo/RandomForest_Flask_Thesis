@@ -325,6 +325,14 @@
       flex-direction: row;
     }
   }
+  .containerSimulasi{
+    display: none;
+  }
+  .containerSimulasiShow{
+    display: block;
+  }
+
+
 </style>
 
 <body>
@@ -602,8 +610,11 @@
           </div>
         </div>
       </div>
-
-      <div class="container" style="padding: 100px">
+ {% if user_is_authenticated %}
+      <div class="container containerSimulasiShow" style="padding: 100px">
+        {%else%}
+        <div class="container containerSimulasi" style="padding: 100px">
+          {%endif%}
         <h4 class="product-title">Simulasi KPR Rumah</h4>
 
         <div class="simulasi">
