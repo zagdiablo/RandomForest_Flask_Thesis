@@ -1,232 +1,287 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard - Mazer Admin Dashboard</title>
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/bootstrap.css') }}"
+    />
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='vendors/iconly/bold.css') }}">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='vendors/iconly/bold.css') }}"
+    />
     <!--     
     <link rel="stylesheet" href="assets/vendors/dripicons/webfont.css">
     <link rel="stylesheet" href="assets/css/pages/dripicons.css"> -->
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='vendors/bootstrap-icons/bootstrap-icons.css') }}">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='vendors/bootstrap-icons/bootstrap-icons.css') }}"
+    />
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.svg') }}" type="image/x-icon">
-</head>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='vendors/perfect-scrollbar/perfect-scrollbar.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/app.css') }}"
+    />
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='images/favicon.svg') }}"
+      type="image/x-icon"
+    />
+  </head>
 
-<style>
-    .show{
-       display: inline-block; 
+  <style>
+    .show {
+      display: inline-block;
     }
-    .hide{
-       display: none; 
+    .show2 {
+      display: block;
     }
+    .hide {
+      display: none;
+    }
+  </style>
 
-
-</style>
-
-<body>
+  <body>
     <div id="app">
-        <div id="sidebar" class="active">
-            <div class="sidebar-wrapper active">
-                <div class="sidebar-header">
-                    <div class="d-flex justify-content-between">
-                        <div class="logo">
-                            <a href="/admin_dashboard"><img
-                                    src="{{ url_for('static', filename='images/logo/logo.png') }}" alt="Logo"
-                                    style="height: 3rem;"></a>
-                        </div>
-                        <div class="toggler">
-                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="sidebar-menu">
-                    <!-- side bar menu -->
-                    <ul class="menu">
-
-                        <!-- menu -->
-                        <li class="sidebar-title">Menu</li>
-                        <li class="sidebar-item active ">
-                            <a href="/admin_dashboard" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
-                                <span>Dashboard</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item">
-                            <a href="/admin_kecamatan" class='sidebar-link'>
-                                <i class="bi bi-geo-fill"></i>
-                                <span>Kecamatan</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item">
-                            <a href="/admin_rumah" class='sidebar-link'>
-                                <i class="bi bi-house-fill"></i>
-                                <span>Rumah</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="/admin_kontak_agen" class='sidebar-link'>
-                                <i class="bi bi-person-lines-fill"></i>
-                                <span>Kontak Agen</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="/admin_logout" class='sidebar-link'>
-                                <i class="bi bi-box-arrow-left"></i>
-                                <span>Log out</span>
-                            </a>
-                        </li>
-                        <!-- menu end -->
-
-                        <!-- user -->
-                        <li class="sidebar-title">Users</li>
-                        <li class="sidebar-item">
-                            <a href="/admin_user" class='sidebar-link'>
-                                <i class="bi bi-people-fill"></i>
-                                <span>User</span>
-                            </a>
-                        </li>
-                        <!-- user end -->
-
-                    </ul>
-                    <!-- side bar menu end -->
-
-                </div>
-                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+      <div id="sidebar" class="active">
+        <div class="sidebar-wrapper active">
+          <div class="sidebar-header">
+            <div class="d-flex justify-content-between">
+              <div class="logo">
+                <a href="/admin_dashboard"
+                  ><img
+                    src="{{ url_for('static', filename='images/logo/logo.png') }}"
+                    alt="Logo"
+                    style="height: 3rem"
+                /></a>
+              </div>
+              <div class="toggler">
+                <a href="#" class="sidebar-hide d-xl-none d-block"
+                  ><i class="bi bi-x bi-middle"></i
+                ></a>
+              </div>
             </div>
-        </div>
-        <div id="main">
-            <header class="mb-3">
-                <a href="#" class="burger-btn d-block d-xl-none">
-                    <i class="bi bi-justify fs-3"></i>
+          </div>
+          <div class="sidebar-menu">
+            <!-- side bar menu -->
+            <ul class="menu">
+              <!-- menu -->
+              <li class="sidebar-title">Menu</li>
+              <li class="sidebar-item active">
+                <a href="/admin_dashboard" class="sidebar-link">
+                  <i class="bi bi-grid-fill"></i>
+                  <span>Dashboard</span>
                 </a>
-            </header>
+              </li>
 
-            <div class="page-heading">
-                <h3>Dashboard Admin Rumah Tangsel</h3>
-            </div>
-            <div class="page-content">
-                <section class="row">
-                    <div class="col-12 col-lg-9">
-                        <div class="row">
-                            <div class="col-6 col-lg-4 col-md-6">
-                                <div class="card">
-                                    <div class="card-body px-3 py-4-5">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="stats-icon purple">
-                                                    <i class="iconly-boldShow"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <h6 class="text-muted font-semibold">Rumah</h6>
-                                                <h6 class="font-extrabold mb-0">{{ count_rumah }}</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6 col-lg-4 col-md-6">
-                                <div class="card">
-                                    <div class="card-body px-3 py-4-5">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="stats-icon blue">
-                                                    <i class="iconly-boldProfile"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <h6 class="text-muted font-semibold">Kecamatan</h6>
-                                                <h6 class="font-extrabold mb-0">{{ count_kecamatan }}</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6 col-lg-4 col-md-6">
-                                <div class="card">
-                                    <div class="card-body px-3 py-4-5">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="stats-icon green">
-                                                    <i class="iconly-boldAdd-User"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <h6 class="text-muted font-semibold">User</h6>
-                                                <h6 class="font-extrabold mb-0">{{ count_user }}</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+              <li class="sidebar-item">
+                <a href="/admin_kecamatan" class="sidebar-link">
+                  <i class="bi bi-geo-fill"></i>
+                  <span>Kecamatan</span>
+                </a>
+              </li>
 
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4>Data Banyak Perumahan per Kecamatan</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <div id="chart-profile-visit"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+              <li class="sidebar-item">
+                <a href="/admin_rumah" class="sidebar-link">
+                  <i class="bi bi-house-fill"></i>
+                  <span>Rumah</span>
+                </a>
+              </li>
+              <li class="sidebar-item">
+                <a href="/admin_kontak_agen" class="sidebar-link">
+                  <i class="bi bi-person-lines-fill"></i>
+                  <span>Kontak Agen</span>
+                </a>
+              </li>
+              <li class="sidebar-item">
+                <a href="/admin_logout" class="sidebar-link">
+                  <i class="bi bi-box-arrow-left"></i>
+                  <span>Log out</span>
+                </a>
+              </li>
+              <!-- menu end -->
 
-                    </div>
-                    <div class="col-12 col-lg-3">
-                        <div class="card">
-                            <div class="card-body py-4 px-5">
-                                <div class="d-flex align-items-center">
-                                    <div class="avatar avatar-xl">
-                                        <img src="{{ url_for('static', filename='images/faces/1.jpg') }}" alt="Face 1">
-                                    </div>
-                                    <div class="ms-3 name">
-                                        <h5 class="font-bold">Bunga Fixed</h5>
-                                        <div class="form-group show">
-                                            <input type="text" class="form-control" id="basicInput"
-                                                placeholder="besaran bunga">
-                                        </div>
-                                        <h5 class="mb-0 hide" style="text-align: center;color: #25396f;">8%</h5>
-                                        <center id="editBunga" class="hide" title="Edit Bunga" style="margin-top: 5px;margin-bottom: 3px;"><a class="btn btn-sm btn-warning"><i class="bi bi-pencil-fill" style="color: white;"></i></a></center>
-                                        <center><a class="btn btn-sm btn-warning">Edit</a></center>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Visitors Profile</h4>
-                            </div>
-                            <div class="card-body">
-                                <div id="chart-visitors-profile"></div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <footer>
-                <div class="footer clearfix mb-0 text-muted">
-                    <div class="float-start">
-                        <p>2023 &copy; Rumah Tangsel</p>
-                    </div>
-                </div>
-            </footer>
+              <!-- user -->
+              <li class="sidebar-title">Users</li>
+              <li class="sidebar-item">
+                <a href="/admin_user" class="sidebar-link">
+                  <i class="bi bi-people-fill"></i>
+                  <span>User</span>
+                </a>
+              </li>
+              <!-- user end -->
+            </ul>
+            <!-- side bar menu end -->
+          </div>
+          <button class="sidebar-toggler btn x">
+            <i data-feather="x"></i>
+          </button>
         </div>
+      </div>
+      <div id="main">
+        <header class="mb-3">
+          <a href="#" class="burger-btn d-block d-xl-none">
+            <i class="bi bi-justify fs-3"></i>
+          </a>
+        </header>
+
+        <div class="page-heading">
+          <h3>Dashboard Admin Rumah Tangsel</h3>
+        </div>
+        <div class="page-content">
+          <section class="row">
+            <div class="col-12 col-lg-9">
+              <div class="row">
+                <div class="col-6 col-lg-4 col-md-6">
+                  <div class="card">
+                    <div class="card-body px-3 py-4-5">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="stats-icon purple">
+                            <i class="iconly-boldShow"></i>
+                          </div>
+                        </div>
+                        <div class="col-md-8">
+                          <h6 class="text-muted font-semibold">Rumah</h6>
+                          <h6 class="font-extrabold mb-0">{{ count_rumah }}</h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6 col-lg-4 col-md-6">
+                  <div class="card">
+                    <div class="card-body px-3 py-4-5">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="stats-icon blue">
+                            <i class="iconly-boldProfile"></i>
+                          </div>
+                        </div>
+                        <div class="col-md-8">
+                          <h6 class="text-muted font-semibold">Kecamatan</h6>
+                          <h6 class="font-extrabold mb-0">
+                            {{ count_kecamatan }}
+                          </h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6 col-lg-4 col-md-6">
+                  <div class="card">
+                    <div class="card-body px-3 py-4-5">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="stats-icon green">
+                            <i class="iconly-boldAdd-User"></i>
+                          </div>
+                        </div>
+                        <div class="col-md-8">
+                          <h6 class="text-muted font-semibold">User</h6>
+                          <h6 class="font-extrabold mb-0">{{ count_user }}</h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <h4>Data Banyak Perumahan per Kecamatan</h4>
+                    </div>
+                    <div class="card-body">
+                      <div id="chart-profile-visit"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-3">
+              <div class="card">
+                <div class="card-body py-4 px-5">
+                  <div class="d-flex align-items-center">
+                    <div class="avatar avatar-xl">
+                      <img
+                        src="{{ url_for('static', filename='images/service-2.png') }}"
+                        alt="Face 1"
+                      />
+                    </div>
+                    <div class="ms-3 name">
+                      <h5 class="font-bold">Bunga Fixed</h5>
+                      <div id="inputBunga" class="form-group hide">
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="bungaBaru"
+                          placeholder="besaran bunga(%)"
+                        />
+                      </div>
+                      <h5
+                        id="bungaFixed"
+                        class="mb-0 show2"
+                        style="text-align: center; color: #25396f"
+                      >
+                        <span id="besarBunga">8</span>%
+                      </h5>
+                      <center
+                        onclick="showEditBunga()"
+                        id="editBunga"
+                        class="show2"
+                        title="Edit Bunga"
+                        style="margin-top: 5px; margin-bottom: 3px"
+                      >
+                        <a class="btn btn-sm btn-warning"
+                          ><i class="bi bi-pencil-fill" style="color: white"></i
+                        ></a>
+                      </center>
+                      <center onclick="closeEditBunga()">
+                        <a
+                          id="handleEditBunga"
+                          class="btn btn-sm btn-warning hide"
+                          >Edit</a
+                        >
+                      </center>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header">
+                  <h4>Visitors Profile</h4>
+                </div>
+                <div class="card-body">
+                  <div id="chart-visitors-profile"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <footer>
+          <div class="footer clearfix mb-0 text-muted">
+            <div class="float-start">
+              <p>2023 &copy; Rumah Tangsel</p>
+            </div>
+          </div>
+        </footer>
+      </div>
     </div>
     <script src="{{ url_for('static', filename='vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
@@ -235,6 +290,54 @@
     <script src="{{ url_for('static', filename='js/pages/dashboard.js') }}"></script>
 
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-</body>
 
+    <script>
+      // tampil bersamaan
+      // pasangan tag 1
+      var bungaFixed = document.getElementById("bungaFixed");
+      var editBunga = document.getElementById("editBunga");
+      var besarBunga = document.getElementById("besarBunga");
+
+      // pasangan tag 2
+      var inputBunga = document.getElementById("inputBunga");
+      var handleEditBunga = document.getElementById("handleEditBunga");
+      var bungaBaru = document.getElementById("bungaBaru");
+      function showEditBunga() {
+        bungaFixed.classList.remove("show2");
+        bungaFixed.classList.add("hide");
+        editBunga.classList.remove("show2");
+        editBunga.classList.add("hide");
+
+        inputBunga.classList.remove("hide");
+        inputBunga.classList.add("show");
+        handleEditBunga.classList.remove("hide");
+        handleEditBunga.classList.add("show");
+      }
+
+      function closeEditBunga() {
+        if (bungaBaru.value == "") {
+          Swal.fire({
+            icon: "warning",
+            title: "Kolom Tidak Boleh Kosong",
+            text: "Silahkan Masukkan Bunga Baru!",
+          });
+        } else {
+          bungaFixed.classList.remove("hide");
+          bungaFixed.classList.add("show2");
+          editBunga.classList.remove("hide");
+          editBunga.classList.add("show2");
+
+          inputBunga.classList.remove("show");
+          inputBunga.classList.add("hide");
+          handleEditBunga.classList.remove("show");
+          handleEditBunga.classList.add("hide");
+
+          besarBunga.innerHTML = bungaBaru.value;
+          besarBunga.textContent = bungaBaru.value;
+        }
+      }
+    </script>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  </body>
 </html>
