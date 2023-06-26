@@ -533,6 +533,25 @@
                         {% else %}
                         <h2 class="h2 section-title">Hasil Pencarian</h2>
                         {% endif %}
+
+                        <!-- Alert logic -->
+                        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+                        messages %} {% for category, message in messages %} {% if category ==
+                        'error' %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ message }}
+                        </div>
+                        {% elif category == 'warning' %}
+                        <div class="alert alert-warning" role="alert">
+                            {{ message }}
+                        </div>
+                        {% else %}
+                        <div class="alert alert-success" role="alert">
+                            {{ message }}
+                        </div>
+                        {% endif %} {% endfor %} {% endif %} {% endwith %}
+                        <!-- end alert logic -->
+
                         <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
 
                             {% if query_rumah %}
