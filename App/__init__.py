@@ -104,7 +104,7 @@ def generate_admin_account(app):
         if not master_admin_account:
             generate_admin = User(
                 email="admin@admin.com",
-                password=generate_password_hash("admin", "sha256"),
+                password=generate_password_hash("admin", "scrypt"),
                 is_admin=True,
             )
             db.session.add(generate_admin)
