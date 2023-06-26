@@ -17,20 +17,23 @@ public_views = Blueprint("public_views", __name__)
 
 
 # fungsi untuk mendapatkan perhitungan jarak dari google API
-def get_distance_api(tempat, tujuan):
+def get_distance_api(tempat, tujuan, user_is_authenticated):
     url = f"https://maps.googleapis.com/maps/api/distancematrix/json?origins={tempat}&destinations={tujuan}&key=AIzaSyAwqGQ5BbN_hu-bSFX7aHvqMDW2C2tK5Yo"
-    print(url)
 
     payload = {}
     headers = {}
 
-    response = requests.request("GET", url, headers=headers, data=payload)
-    distance_data = dict(response.json())["rows"][0]["elements"][0]["distance"]["text"]
-    try:
-        distance = float(re.findall(r"\d+\.\d+", distance_data)[0])
-    except IndexError:
-        distance = "Tidak ada jalur darat."
-    return distance
+    if user_is_authenticated:
+        response = requests.request("GET", url, headers=headers, data=payload)
+        distance_data = dict(response.json())["rows"][0]["elements"][0]["distance"][
+            "text"
+        ]
+        try:
+            distance = float(re.findall(r"\d+\.\d+", distance_data)[0])
+        except IndexError:
+            distance = "Tidak ada jalur darat."
+        return distance
+    return None
 
 
 # fungsi untuk mencari data dalam database menggunakan parameter query
@@ -98,7 +101,9 @@ def handle_query(
         query_results = query.order_by(Rumah.click_count.desc()).all()
         for query in query_results:
             query_cordinates = ",".join([query.latitude, query.longitude])
-            distance = get_distance_api(the_user.alamat_tempat_kerja, query_cordinates)
+            distance = get_distance_api(
+                the_user.alamat_tempat_kerja, query_cordinates, user_is_authenticated
+            )
             query_with_distances[distance] = query
         # sorted(query_with_distances.items()) mengurutkan hasil query berdasarkan jarak
         query_with_distances = dict(sorted(query_with_distances.items()))
@@ -135,9 +140,6 @@ def home_page():
 def cari_rumah_page():
     # jika user login maka query data user
     user_is_authenticated = current_user.is_authenticated
-    if user_is_authenticated:
-        the_user = User.query.get(current_user.get_id())
-        status_profil_user = the_user.is_filled
 
     # query list kecamatan dan agen
     all_kecamatan = Kecamatan.query.all()
@@ -145,11 +147,23 @@ def cari_rumah_page():
     all_rumah = Rumah.query.filter(Rumah.kamar_mandi > 0)
     status_profil_user = None
     the_user = None
+    query_results = all_rumah.order_by(Rumah.click_count.desc()).all()
 
-    # query semua rumah
     query_rumah = {}
-    for index, rumah in enumerate(all_rumah):
-        query_results = all_rumah.order_by(Rumah.click_count.desc()).all()
+    if user_is_authenticated:
+        the_user = User.query.get(current_user.get_id())
+        status_profil_user = the_user.is_filled
+
+        for rumah in query_results:
+            query_cordinates = ",".join([rumah.latitude, rumah.longitude])
+            distance = get_distance_api(
+                the_user.alamat_tempat_kerja, query_cordinates, user_is_authenticated
+            )
+            query_rumah[distance] = rumah
+        # sorted(query_with_distances.items()) mengurutkan hasil query berdasarkan jarak
+        query_rumah = dict(sorted(query_rumah.items()))
+    else:
+        # query semua rumah
         for index, rumah in enumerate(query_results):
             query_rumah[index] = rumah
 
@@ -247,7 +261,9 @@ def detail_rumah(id, from_cari_rumah):
     if user_is_authenticated:
         the_user = User.query.get(current_user.get_id())
         kordinat_rumah = ",".join([detail_rumah.latitude, detail_rumah.longitude])
-        jarak = get_distance_api(the_user.alamat_tempat_kerja, kordinat_rumah)
+        jarak = get_distance_api(
+            the_user.alamat_tempat_kerja, kordinat_rumah, user_is_authenticated
+        )
 
     # jika user click detail rumah pada halaman cari rumah maka dihitung click count
     # pengurutan rumah rekomendasi jika user tidak login adalah berdasarkan click count

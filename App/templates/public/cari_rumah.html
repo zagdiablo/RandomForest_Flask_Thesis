@@ -578,7 +578,11 @@
                                         {% if user_is_authenticated %}
                                         <p class="card-text">
                                         <h6>Jarak tempuh dari lokasi kerja anda:</h6>
+                                        {% if jarak %}
                                         <strong> {{ jarak }} Km</strong>
+                                        {% else %}
+                                        <strong> Jarak tempuh tidak ditemukan, atau tidak valid. </strong>
+                                        {% endif %}
                                         </p>
                                         {% endif %}
                                         <ul class="card-list">

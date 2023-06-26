@@ -488,15 +488,6 @@
                 <ion-icon name="location-outline"></ion-icon>
                 <address>{{ detail_rumah.kecamatan }}</address>
               </div>
-              <!-- Kalau nanti pake rating -->
-              <!-- <div class = "product-rating">
-                  <i class = "fas fa-star"></i>
-                  <i class = "fas fa-star"></i>
-                  <i class = "fas fa-star"></i>
-                  <i class = "fas fa-star"></i>
-                  <i class = "fas fa-star-half-alt"></i>
-                  <span>4.7(21)</span>
-                </div> -->
 
               <div class="product-price">
                 <strong>
@@ -545,7 +536,11 @@
                     <ion-icon class="fiture-icon" name="car-outline"></ion-icon>
                     <p>
                       Jarak tempuh dari lokasi kerja anda:
+                      {% if jarak %}
                       <span>{{ jarak }} Km</span>
+                      {% else %}
+                      <span>Tidak ditemukan, atau tidak valid.</span>
+                      {% endif %}
                     </p>
                   </li>
                   {% endif %}
@@ -603,6 +598,8 @@
         </div>
       </div>
 
+      <!-- simulasi KPR rumah -->
+      {% if user_is_authenticated %}
       <div class="container" style="padding: 100px">
         <h4 class="product-title">Simulasi KPR Rumah</h4>
 
@@ -653,6 +650,8 @@
           </div>
         </div>
       </div>
+      {% endif %}
+      <!-- simulasi KPR rumah end -->
     </article>
   </main>
 
