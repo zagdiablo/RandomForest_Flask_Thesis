@@ -80,7 +80,7 @@ def handle_register():
         if not check_user:
             new_user = User(
                 email=email,
-                password=generate_password_hash(password, "sha256"),
+                password=generate_password_hash(password, "scrypt"),
                 is_admin=False,
             )
             db.session.add(new_user)

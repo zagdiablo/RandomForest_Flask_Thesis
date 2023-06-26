@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, request, url_for
+from flask import Blueprint, render_template, redirect, request, url_for, flash
 from flask_login import current_user
 
 import requests
@@ -22,8 +22,9 @@ def get_distance_api(tempat, tujuan, user_is_authenticated):
 
     payload = {}
     headers = {}
+    profil_lengkap = User.query.get(current_user.get_id()).is_filled
 
-    if user_is_authenticated:
+    if user_is_authenticated and profil_lengkap:
         response = requests.request("GET", url, headers=headers, data=payload)
         distance_data = dict(response.json())["rows"][0]["elements"][0]["distance"][
             "text"
@@ -33,6 +34,10 @@ def get_distance_api(tempat, tujuan, user_is_authenticated):
         except IndexError:
             distance = "Tidak ada jalur darat."
         return distance
+
+    flash(
+        "Profile anda belum lengkap, silahkan lengkapi terlebih dahulu untuk mendapatkan rekomendasi rumah."
+    )
     return None
 
 
