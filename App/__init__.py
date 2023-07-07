@@ -5,6 +5,7 @@ from flask_login import LoginManager
 from werkzeug.security import generate_password_hash
 
 import os
+import pathlib
 import pandas as pd
 import locale
 
@@ -24,7 +25,17 @@ DB_NAME = "database.db"
 
 
 def start_app():
+    # check os platform
+    if os.name == "nt":
+        UPLOAD_FOLDER = f"{pathlib.Path().absolute()}/App/static/images/"
+    else:
+        UPLOAD_FOLDER = (
+            f"{pathlib.Path().absolute()}/SMK_Perwira_Backend/App/static/images/"
+        )
+
     # application config
+    app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+    app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024
     app.config["DEBUG"] = True
     app.config["SECRET_KEY"] = "katakakekukukukakikakakukakukenapaku6969"
     app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_NAME}"

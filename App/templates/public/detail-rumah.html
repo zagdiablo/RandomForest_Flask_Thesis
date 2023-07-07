@@ -451,32 +451,11 @@
             <div class="product-imgs">
               <div class="img-display">
                 <div class="img-showcase">
-                  <img src="{{ url_for('static', filename='images/blog-1.png') }}" alt="shoe image" />
-                  <img src="{{ url_for('static', filename='images/blog-1.png') }}" alt="shoe image" />
-                  <img src="{{ url_for('static', filename='images/blog-1.png') }}" alt="shoe image" />
-                  <img src="{{ url_for('static', filename='images/blog-1.png') }}" alt="shoe image" />
-                </div>
-              </div>
-              <div class="img-select">
-                <div class="img-item">
-                  <a href="#" data-id="1">
-                    <img src="{{ url_for('static', filename='images/blog-1.png') }}" alt="shoe image" />
-                  </a>
-                </div>
-                <div class="img-item">
-                  <a href="#" data-id="1">
-                    <img src="{{ url_for('static', filename='images/blog-1.png') }}" alt="shoe image" />
-                  </a>
-                </div>
-                <div class="img-item">
-                  <a href="#" data-id="1">
-                    <img src="{{ url_for('static', filename='images/blog-1.png') }}" alt="shoe image" />
-                  </a>
-                </div>
-                <div class="img-item">
-                  <a href="#" data-id="1">
-                    <img src="{{ url_for('static', filename='images/blog-1.png') }}" alt="shoe image" />
-                  </a>
+                  {% if detail_rumah.gambar %}
+                  <img src="../../static/images/{{ detail_rumah.gambar }}" alt="shoe image" />
+                  {% else %}
+                  <img src="{{ url_for('static', filename='images/property-4.png') }}" />
+                  {% endif %}
                 </div>
               </div>
             </div>

@@ -30,7 +30,6 @@ def get_distance_api(tempat, tujuan, user_is_authenticated):
             "text"
         ]
 
-        print(distance_data, tempat, tujuan)
         try:
             distance = float(re.findall(r"\d+\.\d+", distance_data)[0])
         except IndexError:
@@ -257,12 +256,15 @@ def handle_cari_rumah():
 @public_views.route("/detail_rumah/<int:id>/<int:from_cari_rumah>", methods=["GET"])
 def detail_rumah(id, from_cari_rumah):
     # query data detail dan fasilitas rumah
-    user_is_authenticated = current_user.is_authenticated
     detail_rumah = Rumah.query.get(id)
+    user_is_authenticated = current_user.is_authenticated
     fasilitas_rumah = detail_rumah.fasilitas
     fixed_bunga = FixedBunga.query.get(1)
     jarak = None
     cicilan = None
+
+    if not detail_rumah:
+        return redirect("/cari_rumah")
 
     # jika user login maka query data user
     if user_is_authenticated:

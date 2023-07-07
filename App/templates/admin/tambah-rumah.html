@@ -148,7 +148,8 @@
                                         <!-- end alert logic -->
 
                                         <!-- form tambah rumah -->
-                                        <form class="form" action="/handle_tambah_rumah" method="post">
+                                        <form class="form" action="/handle_tambah_rumah" method="post"
+                                            enctype="multipart/form-data">
                                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
                                             <div class="row">
@@ -247,7 +248,8 @@
                                                 </div>
                                                 <div class="form-group mt-2 mb-2 col-12">
                                                     <label for="add-image"><strong>Gambar</strong></label>
-                                                    <input type="file" id="add-image" class="image-preview-filepond">
+                                                    <input type="file" id="add-image" class="image-preview-filepond"
+                                                        name="gambar-rumah">
                                                 </div>
                                             </div>
                                             <div class="col-12 d-flex justify-content-end">

@@ -5,6 +5,7 @@ from flask_login import login_required, current_user
 
 
 from .models import User, Kecamatan, Rumah, Agen, FixedBunga
+from .handle_image_upload import upload_image, delete_image
 from . import db
 
 
@@ -235,6 +236,14 @@ def handle_tambah_rumah():
     kontak_agen = request.form.get("kontak_agen")
     latitude = request.form.get("latitude")
     longitude = request.form.get("longitude")
+    gambar = request.files["gambar-rumah"]
+
+    if gambar:
+        if gambar == "":
+            flash("Gambar Kosong", category="error")
+            return redirect("/tambah_rumah")
+
+        nama_file_gambar = upload_image(gambar, None)
 
     to_add_rumah = Rumah(
         nama_perumahan=nama_perumahan,
@@ -248,6 +257,7 @@ def handle_tambah_rumah():
         kontak_agen=kontak_agen,
         latitude=latitude,
         longitude=longitude,
+        gambar=nama_file_gambar,
     )
     db.session.add(to_add_rumah)
     db.session.commit()
@@ -293,9 +303,19 @@ def handle_edit_rumah(id):
     kamar_tidur = request.form.get("kamar_tidur")
     kamar_mandi = request.form.get("kamar_mandi")
     kontak_agen = request.form.get("kontak_agen")
-    print(kontak_agen)
     latitude = request.form.get("latitude")
     longitude = request.form.get("longitude")
+    gambar = request.files["gambar-rumah"]
+
+    if gambar:
+        old_gambar = to_edit_rumah.gambar
+        delete_image(old_gambar)
+
+        if gambar == "":
+            flash("Gambar kosong", category="error")
+            return redirect(f"/edit_rumah/{id}")
+
+        upload_image(gambar, to_edit_rumah)
 
     if to_edit_rumah:
         to_edit_rumah.nama_perumahan = nama_perumahan
@@ -309,6 +329,7 @@ def handle_edit_rumah(id):
         to_edit_rumah.kontak_agen = kontak_agen
         to_edit_rumah.latitude = latitude
         to_edit_rumah.longitude = longitude
+        to_edit_rumah.gambar = to_edit_rumah.gambar
         db.session.commit()
         flash(
             f"berhasil mengedit data rumah {to_edit_rumah.alamat}", category="warning"
@@ -329,6 +350,8 @@ def delete_rumah(id):
     to_delete_rumah = Rumah.query.get(id)
 
     if to_delete_rumah:
+        delete_image(to_delete_rumah.gambar)
+
         flash(
             f"berhasil menghapus data rumah {to_delete_rumah.alamat}",
             category="warning",

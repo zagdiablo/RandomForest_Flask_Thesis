@@ -561,8 +561,13 @@
                                     <figure class="card-banner">
                                         <!-- TODO link detail rumah -->
                                         <a href="/detail_rumah/{{ rumah.id }}/1">
+                                            {% if rumah.gambar %}
+                                            <img src="../../static/images/{{ rumah.gambar }}"
+                                                alt="Luxury villa in Rego Park" class="w-100">
+                                            {% else %}
                                             <img src="{{ url_for('static', filename='images/property-4.png') }}"
                                                 alt="Luxury villa in Rego Park" class="w-100">
+                                            {% endif %}
                                         </a>
                                         <div class="card-badge orange">{{ loop.index }}</div>
                                         <div class="banner-actions">
