@@ -233,6 +233,8 @@ def handle_tambah_rumah():
     kamar_tidur = request.form.get("kamar_tidur")
     kamar_mandi = request.form.get("kamar_mandi")
     kontak_agen = request.form.get("kontak_agen")
+    latitude = request.form.get("latitude")
+    longitude = request.form.get("longitude")
 
     to_add_rumah = Rumah(
         nama_perumahan=nama_perumahan,
@@ -244,6 +246,8 @@ def handle_tambah_rumah():
         kamar_tidur=kamar_tidur,
         kamar_mandi=kamar_mandi,
         kontak_agen=kontak_agen,
+        latitude=latitude,
+        longitude=longitude,
     )
     db.session.add(to_add_rumah)
     db.session.commit()
@@ -261,9 +265,13 @@ def edit_rumah(id):
 
     to_edit_rumah = Rumah.query.get(id)
     all_agen = Agen.query.all()
+    all_kecamatan = Kecamatan.query.all()
 
     return render_template(
-        "admin/edit-rumah.html", to_edit_rumah=to_edit_rumah, all_agen=all_agen
+        "admin/edit-rumah.html",
+        to_edit_rumah=to_edit_rumah,
+        all_agen=all_agen,
+        all_kecamatan=all_kecamatan,
     )
 
 
@@ -285,6 +293,9 @@ def handle_edit_rumah(id):
     kamar_tidur = request.form.get("kamar_tidur")
     kamar_mandi = request.form.get("kamar_mandi")
     kontak_agen = request.form.get("kontak_agen")
+    print(kontak_agen)
+    latitude = request.form.get("latitude")
+    longitude = request.form.get("longitude")
 
     if to_edit_rumah:
         to_edit_rumah.nama_perumahan = nama_perumahan
@@ -296,6 +307,8 @@ def handle_edit_rumah(id):
         to_edit_rumah.kamar_tidur = kamar_tidur
         to_edit_rumah.kamar_mandi = kamar_mandi
         to_edit_rumah.kontak_agen = kontak_agen
+        to_edit_rumah.latitude = latitude
+        to_edit_rumah.longitude = longitude
         db.session.commit()
         flash(
             f"berhasil mengedit data rumah {to_edit_rumah.alamat}", category="warning"

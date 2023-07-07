@@ -29,6 +29,8 @@ def get_distance_api(tempat, tujuan, user_is_authenticated):
         distance_data = dict(response.json())["rows"][0]["elements"][0]["distance"][
             "text"
         ]
+
+        print(distance_data, tempat, tujuan)
         try:
             distance = float(re.findall(r"\d+\.\d+", distance_data)[0])
         except IndexError:

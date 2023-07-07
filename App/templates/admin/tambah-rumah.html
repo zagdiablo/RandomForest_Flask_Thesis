@@ -169,11 +169,28 @@
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
+                                                        <label for="last-name-column"><strong>Kordinat
+                                                                Latitude</strong></label>
+                                                        <input type="text" id="last-name-column" class="form-control"
+                                                            placeholder="Kordinat Latitude" name="latitude" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="last-name-column"><strong>Kordinat
+                                                                Longitude</strong></label>
+                                                        <input type="text" id="last-name-column" class="form-control"
+                                                            placeholder="Kordinat Longitude" name="longitude" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
                                                         <label for="last-name-column"><strong>Kecamatan</strong></label>
-                                                        <select class="form-select" name="kontak_agen">
+                                                        <select class="form-select" name="kecamatan">
                                                             <option selected>Pilih Kecamatan</option>
                                                             {% for kecamatan in all_kecamatan %}
-                                                            <option value="{{ kecamatan.id }}">{{ kecamatan.nama_kecamatan }}
+                                                            <option value="{{ kecamatan.nama_kecamatan }}">{{
+                                                                kecamatan.nama_kecamatan }}
                                                             </option>
                                                             {% endfor %}
                                                         </select>
@@ -189,7 +206,7 @@
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="country-floating"><strong>Harga</strong></label>
-                                                        <input type="text" id="country-floating" class="form-control"
+                                                        <input type="number" id="country-floating" class="form-control"
                                                             name="harga" placeholder="Harga">
                                                     </div>
                                                 </div>

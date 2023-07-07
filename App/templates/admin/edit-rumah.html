@@ -171,9 +171,33 @@
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
-                                                        <label for="last-name-column"><strong>Kecamatan</strong></label>
+                                                        <label for="last-name-column"><strong>Kordinat
+                                                                Latitude</strong></label>
                                                         <input type="text" id="last-name-column" class="form-control"
-                                                            placeholder="Kecamatan" name="kecamatan">
+                                                            value="{{ to_edit_rumah.latitude }}"
+                                                            placeholder="Kordinat Latitude" name="latitude" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="last-name-column"><strong>Kordinat
+                                                                Longitude</strong></label>
+                                                        <input type="text" id="last-name-column" class="form-control"
+                                                            value="{{ to_edit_rumah.longitude }}"
+                                                            placeholder="Kordinat Longitude" name="longitude" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="last-name-column"><strong>Kecamatan</strong></label>
+                                                        <select class="form-select" name="kecamatan">
+                                                            <option selected>{{ to_edit_rumah.kecamatan }}</option>
+                                                            {% for kecamatan in all_kecamatan %}
+                                                            <option value="{{ kecamatan.nama_kecamatan }}">{{
+                                                                kecamatan.nama_kecamatan }}
+                                                            </option>
+                                                            {% endfor %}
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
@@ -187,7 +211,7 @@
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="country-floating"><strong>Harga</strong></label>
-                                                        <input type="text" id="country-floating" class="form-control"
+                                                        <input type="number" id="country-floating" class="form-control"
                                                             placeholder="Country" name="harga"
                                                             value="{{ to_edit_rumah.harga }}">
                                                     </div>
@@ -222,13 +246,10 @@
                                                     <div class="form-group">
                                                         <label for="email-id-column">Kontak</label>
                                                         <select class="form-select" name="kontak_agen">
-                                                            <option value="{{to_edit_rumah.kontak_agen}}" selected>{{
-                                                                to_edit_rumah.kontak_agen }}</option>
+                                                            <option selected>{{ to_edit_rumah.kontak_agen }}</option>
                                                             {% for agen in all_agen %}
-                                                            {% if to_edit_rumah.kontak_agen != agen.nama_agen %}
                                                             <option value="{{agen.nama_agen}}">{{agen.nama_agen}}
                                                             </option>
-                                                            {% endif %}
                                                             {% endfor %}
                                                         </select>
                                                     </div>
