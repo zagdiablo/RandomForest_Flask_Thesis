@@ -236,7 +236,22 @@ def handle_tambah_rumah():
     kontak_agen = request.form.get("kontak_agen")
     latitude = request.form.get("latitude")
     longitude = request.form.get("longitude")
+    deskripsi = request.form.get("deskripsi")
     gambar = request.files["gambar-rumah"]
+
+    fasilitas = []
+
+    # get form request fasilitas
+    if request.form.get("checkbox_gym"):
+        fasilitas.append("gym")
+    if request.form.get("checkbox_masjid"):
+        fasilitas.append("masjid")
+    if request.form.get("checkbox_taman"):
+        fasilitas.append("taman")
+    if request.form.get("checkbox_playground"):
+        fasilitas.append("playground")
+    if request.form.get("checkbox_kolam_renang"):
+        fasilitas.append("kolam renang")
 
     if gambar:
         if gambar == "":
@@ -257,7 +272,9 @@ def handle_tambah_rumah():
         kontak_agen=kontak_agen,
         latitude=latitude,
         longitude=longitude,
+        deskripsi=deskripsi,
         gambar=nama_file_gambar,
+        fasilitas=", ".join(fasilitas),
     )
     db.session.add(to_add_rumah)
     db.session.commit()

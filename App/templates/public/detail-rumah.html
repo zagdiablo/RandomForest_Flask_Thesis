@@ -475,6 +475,17 @@
               </div>
 
               <div class="product-detail">
+                <h3>Deskripsi:</h3>
+                <ul class="fiture" style="margin-top: 0">
+                  <li>
+                    <ion-icon class="fiture-icon" name="document-text-outline"></ion-icon>
+                    <p>
+                      {{ detail_rumah.deskripsi }}
+                    </p>
+                  </li>
+              </div>
+
+              <div class="product-detail">
                 <h3>Fiture:</h3>
                 <ul class="fiture" style="margin-top: 0">
                   <li>
@@ -524,6 +535,41 @@
                   </li>
                   {% endif %}
                 </ul>
+              </div>
+
+              <div class="product-detail">
+                <h3>Transportasi Umum:</h3>
+                <ul class="fiture" style="margin-top: 0">
+                  <li>
+                    <ion-icon class="fiture-icon" name="airplane-outline"></ion-icon>
+                    <p>
+                      {% if jarak_bandara %}
+                      Bandara: <span>{{ bandara }} {{ jarak_bandara }}Km</span>
+                      {% else %}
+                      Bandara: <span>Tidak ditemukan, atau tidak valid.</span>
+                      {% endif %}
+                    </p>
+                  </li>
+                  <li>
+                    <ion-icon class="fiture-icon" name="train-outline"></ion-icon>
+                    <p>
+                      {% if jarak_krl %}
+                      KRL: <span>{{ krl }} {{ jarak_krl }}Km</span>
+                      {% else %}
+                      KRL: <span>Tidak ditemukan, atau tidak valid.</span>
+                      {% endif %}
+                    </p>
+                  </li>
+                  <li>
+                    <ion-icon class="fiture-icon" name="bus-outline"></ion-icon>
+                    <p>
+                      {% if jarak_bus_stop %}
+                      Bus Stop: <span>{{ bus_stop }} {{ jarak_bus_stop }}Km</span>
+                      {% else %}
+                      Bus Stop: <span>Tidak ditemukan, atau tidak valid.</span>
+                      {% endif %}
+                    </p>
+                  </li>
               </div>
 
               {% if user_is_authenticated %}

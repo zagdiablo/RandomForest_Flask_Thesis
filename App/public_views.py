@@ -6,6 +6,7 @@ import re
 
 from .models import User, Rumah, Agen, Kecamatan, FixedBunga
 from . import db
+from .hitung_jarak_kendaraan_umum import hitung_jarak_kendaraan_umum
 
 
 public_views = Blueprint("public_views", __name__)
@@ -26,9 +27,13 @@ def get_distance_api(tempat, tujuan, user_is_authenticated):
 
     if user_is_authenticated and profil_lengkap:
         response = requests.request("GET", url, headers=headers, data=payload)
-        distance_data = dict(response.json())["rows"][0]["elements"][0]["distance"][
-            "text"
-        ]
+
+        try:
+            distance_data = dict(response.json())["rows"][0]["elements"][0]["distance"][
+                "text"
+            ]
+        except KeyError:
+            distance_data = "0.0"
 
         try:
             distance = float(re.findall(r"\d+\.\d+", distance_data)[0])
@@ -267,6 +272,26 @@ def detail_rumah(id, from_cari_rumah):
     if not detail_rumah:
         return redirect("/cari_rumah")
 
+    # hitung jarak ke fasilitas umum (kendaraan)
+    bandara = hitung_jarak_kendaraan_umum(
+        ",".join([detail_rumah.latitude, detail_rumah.longitude])
+    )["bandara"][0]
+    jarak_bandara = hitung_jarak_kendaraan_umum(
+        ",".join([detail_rumah.latitude, detail_rumah.longitude])
+    )["bandara"][1]
+    krl = hitung_jarak_kendaraan_umum(
+        ",".join([detail_rumah.latitude, detail_rumah.longitude])
+    )["krl"][0]
+    jarak_krl = hitung_jarak_kendaraan_umum(
+        ",".join([detail_rumah.latitude, detail_rumah.longitude])
+    )["krl"][1]
+    bus_stop = hitung_jarak_kendaraan_umum(
+        ",".join([detail_rumah.latitude, detail_rumah.longitude])
+    )["bus_stop"][0]
+    jarak_bus_stop = hitung_jarak_kendaraan_umum(
+        ",".join([detail_rumah.latitude, detail_rumah.longitude])
+    )["bus_stop"][1]
+
     # jika user login maka query data user
     if user_is_authenticated:
         the_user = User.query.get(current_user.get_id())
@@ -274,6 +299,7 @@ def detail_rumah(id, from_cari_rumah):
         jarak = get_distance_api(
             the_user.alamat_tempat_kerja, kordinat_rumah, user_is_authenticated
         )
+        print(jarak)
 
     # jika user click detail rumah pada halaman cari rumah maka dihitung click count
     # pengurutan rumah rekomendasi jika user tidak login adalah berdasarkan click count
@@ -293,6 +319,12 @@ def detail_rumah(id, from_cari_rumah):
                 user_is_authenticated=user_is_authenticated,
                 cicilan=cicilan,
                 fixed_bunga=fixed_bunga,
+                bandara=bandara,
+                jarak_bandara=jarak_bandara,
+                krl=krl,
+                jarak_krl=jarak_krl,
+                bus_stop=bus_stop,
+                jarak_bus_stop=jarak_bus_stop,
             )
         )
 
@@ -305,6 +337,12 @@ def detail_rumah(id, from_cari_rumah):
         user_is_authenticated=user_is_authenticated,
         cicilan=cicilan,
         fixed_bunga=fixed_bunga,
+        bandara=bandara,
+        jarak_bandara=jarak_bandara,
+        krl=krl,
+        jarak_krl=jarak_krl,
+        bus_stop=bus_stop,
+        jarak_bus_stop=jarak_bus_stop,
     )
 
 
