@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='vendors/iconly/bold.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendors/choices.js/choices.min.css') }}">
     <!--     
     <link rel="stylesheet" href="assets/vendors/dripicons/webfont.css">
     <link rel="stylesheet" href="assets/css/pages/dripicons.css"> -->
@@ -236,7 +237,7 @@
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
-                                                        <label for="email-id-column">Kontak</label>
+                                                        <label for="country-floating"><strong>Kontak</strong></label>
                                                         <select class="form-select" name="kontak_agen">
                                                             <option selected>Pilih Agen</option>
                                                             {% for agen in all_agen %}
@@ -244,6 +245,28 @@
                                                             </option>
                                                             {% endfor %}
                                                         </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="country-floating"><strong>Fasilitas</strong></label>
+                                                        <select class="choices form-select multiple-remove"
+                                                            multiple="multiple">
+                                                            <optgroup label="Fasilitas">
+                                                                <option value="gym">Gym</option>
+                                                                <option value="masjid" selected>Masjid</option>
+                                                                <option value="taman">Taman</option>
+                                                                <option value="playground">Playground</option>
+                                                                <option value="kolam renang">Kolam Renang</option>
+                                                            </optgroup>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group mt-2 mb-2 col-12">
+                                                    <div class="form-group mb-3">
+                                                        <label for="country-floating"><strong>Deskripsi Rumah</strong></label>
+                                                        <textarea class="form-control" id="exampleFormControlTextarea1"
+                                                            rows="3"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group mt-2 mb-2 col-12">
@@ -303,6 +326,9 @@
     </script>
 
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    
+    <script src="{{ url_for('static', filename='vendors/choices.js/choices.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
 </body>
 
 </html>
