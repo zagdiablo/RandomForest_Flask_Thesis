@@ -63,6 +63,7 @@ def handle_query(
     # query rumah berdasarkan kecamatan dan fasilitas yang di passing dari halaman cari rumah
     query = Rumah.query.filter(Rumah.kecamatan == kecamatan)
     if user_is_authenticated:
+        # FIXME dynamic perhitungan di bagian persentase gaji dan lama waktu cicilan (5 - 25 bulan dropdown)
         rekomendasi_harga_rumah = (((gaji_user * 40) / 100) * 12) * 30
         print(rekomendasi_harga_rumah)
         query = query.filter(Rumah.harga <= rekomendasi_harga_rumah)
