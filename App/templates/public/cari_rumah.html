@@ -195,6 +195,11 @@
     .tampil {
         display: block;
     }
+
+    .form-check-input:checked{
+        background-color: var(--orange-soda);
+        border-color: var(--orange-soda);
+    }
 </style>
 
 
@@ -532,6 +537,16 @@
                         <h2 class="h2 section-title">Hasil Pencarian</h2>
                         {% endif %}
 
+                        <div class="row">
+                            <div class="col-md-12 d-flex justify-content-center align-items-center">
+                                <div class="form-check d-flex form-switch">
+                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
+                                        checked>
+                                   <strong class="align-self-center"><h5>Urutkan Berdasakan Jarak</h5></strong>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Alert logic -->
                         {% with messages = get_flashed_messages(with_categories=true) %} {% if
                         messages %} {% for category, message in messages %} {% if category ==
@@ -551,6 +566,20 @@
                         <!-- end alert logic -->
 
                         <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
+
+                            <script>
+
+                                window.onload = function () {
+                                    Swal.fire({
+                                        icon: 'warning',
+                                        title: 'Rumah Tidak Tersedia',
+                                        text: 'Maaf tidak menemukan rumah yang sesuai dengan profil anda! :(',
+                                    })
+                                    setTimeout(function () {
+                                        window.location.href = "http://localhost:5000/profile";
+                                    }, 1500);
+                                };
+                            </script>
 
                             {% if query_rumah %}
                             {% for jarak, rumah in query_rumah.items() %}
