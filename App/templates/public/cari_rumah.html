@@ -16,7 +16,6 @@
     - custom css link
   -->
 
-
     <!-- 
     - google font link
   -->
@@ -671,6 +670,16 @@
                                     </div>
                                 </div>
                                 {% endfor %}
+                                {% else %}
+                                <script>
+                                    window.onload = function () {
+                                        Swal.fire({
+                                            icon: 'warning',
+                                            title: 'Hasil Pencarian',
+                                            text: 'Maaf, Tidak Ada Hasil Yang Sesuai Dengan Profil Anda.',
+                                        });
+                                    };
+                                </script>
                                 {% endif %}
                             </div>
                         </div>

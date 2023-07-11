@@ -174,23 +174,26 @@ def cari_rumah_page():
     status_profil_user = None
     the_user = User.query.get(current_user.get_id())
 
-    if the_user.range_gaji >= 1000000 and the_user.range_gaji <= 15000000:
-        print("hit 1")
-        all_rumah = query.filter(Rumah.harga <= 800000000)
-    elif the_user.range_gaji > 15000000 and the_user.range_gaji <= 20000000:
-        print("hit 2")
-        all_rumah = query.filter(Rumah.harga <= 1100000000)
-    elif the_user.range_gaji > 20000000 and the_user.range_gaji <= 30000000:
-        print("hit 3")
-        all_rumah = query.filter(Rumah.harga <= 1500000000)
-    elif the_user.range_gaji > 30000000 and the_user.range_gaji <= 40000000:
-        print("hit 4")
-        all_rumah = query.filter(Rumah.harga <= 2500000000)
-    else:
-        print("hit 5")
-        all_rumah = query.filter(Rumah.harga > 2500000000)
+    if the_user:
+        if the_user.range_gaji >= 1000000 and the_user.range_gaji <= 15000000:
+            print("hit 1")
+            all_rumah = query.filter(Rumah.harga <= 800000000)
+        elif the_user.range_gaji > 15000000 and the_user.range_gaji <= 20000000:
+            print("hit 2")
+            all_rumah = query.filter(Rumah.harga <= 1100000000)
+        elif the_user.range_gaji > 20000000 and the_user.range_gaji <= 30000000:
+            print("hit 3")
+            all_rumah = query.filter(Rumah.harga <= 1500000000)
+        elif the_user.range_gaji > 30000000 and the_user.range_gaji <= 40000000:
+            print("hit 4")
+            all_rumah = query.filter(Rumah.harga <= 2500000000)
+        else:
+            print("hit 5")
+            all_rumah = query.filter(Rumah.harga > 2500000000)
 
-    query_results = all_rumah.order_by(Rumah.click_count.desc()).all()
+        query_results = all_rumah.order_by(Rumah.click_count.desc()).all()
+    else:
+        query_results = query.order_by(Rumah.click_count.desc()).all()
 
     query_rumah = {}
     if user_is_authenticated:
