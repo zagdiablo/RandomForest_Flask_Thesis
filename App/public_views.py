@@ -64,14 +64,28 @@ def handle_query(
     checkbox_kolam_renang,
 ):
     number = list("12345")
-
+    print("handle query func hit")
     # query rumah berdasarkan kecamatan dan fasilitas yang di passing dari halaman cari rumah
     query = Rumah.query.filter(Rumah.kecamatan == kecamatan)
     if user_is_authenticated:
+        print("is authenticated")
         # FIXME dynamic perhitungan di bagian persentase gaji dan lama waktu cicilan (5 - 25 bulan dropdown)
-        rekomendasi_harga_rumah = (((gaji_user * 40) / 100) * 12) * 30
-        print(rekomendasi_harga_rumah)
-        query = query.filter(Rumah.harga <= rekomendasi_harga_rumah)
+        # rekomendasi_harga_rumah = (((gaji_user * 40) / 100) * 12) * 30
+        if gaji_user >= 1000000 and gaji_user <= 15000000:
+            print("hit 1")
+            query = query.filter(Rumah.harga <= 800000000)
+        elif gaji_user > 15000000 and gaji_user <= 20000000:
+            print("hit 2")
+            query = query.filter(Rumah.harga <= 1100000000)
+        elif gaji_user > 20000000 and gaji_user <= 30000000:
+            print("hit 3")
+            query = query.filter(Rumah.harga <= 1500000000)
+        elif gaji_user > 30000000 and gaji_user <= 40000000:
+            print("hit 4")
+            query = query.filter(Rumah.harga <= 2500000000)
+        else:
+            print("hit 5")
+            query = query.filter(Rumah.harga > 2500000000)
 
     if dropdown_lantai in number:
         print("lantai")
@@ -156,9 +170,26 @@ def cari_rumah_page():
     # query list kecamatan dan agen
     all_kecamatan = Kecamatan.query.all()
     all_agen = Agen.query.all()
-    all_rumah = Rumah.query.filter(Rumah.kamar_mandi > 0)
+    query = Rumah.query.filter(Rumah.kamar_mandi > 0)
     status_profil_user = None
-    the_user = None
+    the_user = User.query.get(current_user.get_id())
+
+    if the_user.range_gaji >= 1000000 and the_user.range_gaji <= 15000000:
+        print("hit 1")
+        all_rumah = query.filter(Rumah.harga <= 800000000)
+    elif the_user.range_gaji > 15000000 and the_user.range_gaji <= 20000000:
+        print("hit 2")
+        all_rumah = query.filter(Rumah.harga <= 1100000000)
+    elif the_user.range_gaji > 20000000 and the_user.range_gaji <= 30000000:
+        print("hit 3")
+        all_rumah = query.filter(Rumah.harga <= 1500000000)
+    elif the_user.range_gaji > 30000000 and the_user.range_gaji <= 40000000:
+        print("hit 4")
+        all_rumah = query.filter(Rumah.harga <= 2500000000)
+    else:
+        print("hit 5")
+        all_rumah = query.filter(Rumah.harga > 2500000000)
+
     query_results = all_rumah.order_by(Rumah.click_count.desc()).all()
 
     query_rumah = {}

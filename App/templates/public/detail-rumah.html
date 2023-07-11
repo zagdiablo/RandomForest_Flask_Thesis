@@ -480,7 +480,11 @@
                   <li>
                     <ion-icon class="fiture-icon" name="document-text-outline"></ion-icon>
                     <p>
+                      {% if detail_rumah.deskripsi %}
                       {{ detail_rumah.deskripsi }}
+                      {% else %}
+                      Deskripsi kosong.
+                      {% endif %}
                     </p>
                   </li>
               </div>

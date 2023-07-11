@@ -236,22 +236,9 @@ def handle_tambah_rumah():
     kontak_agen = request.form.get("kontak_agen")
     latitude = request.form.get("latitude")
     longitude = request.form.get("longitude")
-    deskripsi = request.form.get("deskripsi")
     gambar = request.files["gambar-rumah"]
-
-    fasilitas = []
-
-    # get form request fasilitas
-    if request.form.get("checkbox_gym"):
-        fasilitas.append("gym")
-    if request.form.get("checkbox_masjid"):
-        fasilitas.append("masjid")
-    if request.form.get("checkbox_taman"):
-        fasilitas.append("taman")
-    if request.form.get("checkbox_playground"):
-        fasilitas.append("playground")
-    if request.form.get("checkbox_kolam_renang"):
-        fasilitas.append("kolam renang")
+    deskripsi = request.form.get("deskripsi")
+    fasilitas = request.values.getlist("fasilitas")
 
     if gambar:
         if gambar == "":
@@ -323,6 +310,8 @@ def handle_edit_rumah(id):
     latitude = request.form.get("latitude")
     longitude = request.form.get("longitude")
     gambar = request.files["gambar-rumah"]
+    deskripsi = request.form.get("deskripsi")
+    fasilitas = request.values.getlist("fasilitas")
 
     if gambar:
         old_gambar = to_edit_rumah.gambar
@@ -347,6 +336,8 @@ def handle_edit_rumah(id):
         to_edit_rumah.latitude = latitude
         to_edit_rumah.longitude = longitude
         to_edit_rumah.gambar = to_edit_rumah.gambar
+        to_edit_rumah.deskripsi = deskripsi
+        to_edit_rumah.fasilitas = ", ".join(fasilitas)
         db.session.commit()
         flash(
             f"berhasil mengedit data rumah {to_edit_rumah.alamat}", category="warning"
