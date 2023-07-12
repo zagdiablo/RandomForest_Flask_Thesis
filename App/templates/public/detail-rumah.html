@@ -327,6 +327,135 @@
   }
 </style>
 
+<style>
+  ul.slides {
+    display: block;
+    position: relative;
+    height: 600px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    list-style: none;
+  }
+
+  .slides * {
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  ul.slides input {
+    display: none;
+  }
+
+
+  .slide-container {
+    display: block;
+  }
+
+  .slide-image {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    opacity: 0;
+    transition: all .7s ease-in-out;
+  }
+
+  .slide-image img {
+    width: auto;
+    min-width: 100%;
+    height: 100%;
+  }
+
+  .carousel-controls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    font-size: 100px;
+    line-height: 600px;
+    color: #fff;
+  }
+
+  .carousel-controls label {
+    display: none;
+    position: absolute;
+    padding: 0 20px;
+    opacity: 0;
+    transition: opacity .2s;
+    cursor: pointer;
+  }
+
+  .slide-image:hover+.carousel-controls label {
+    opacity: 0.5;
+  }
+
+  .carousel-controls label:hover {
+    opacity: 1;
+  }
+
+  .carousel-controls .prev-slide {
+    width: 49%;
+    text-align: left;
+    left: 0;
+  }
+
+  .carousel-controls .next-slide {
+    width: 49%;
+    text-align: right;
+    right: 0;
+  }
+
+  .carousel-dots {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 20px;
+    z-index: 999;
+    text-align: center;
+  }
+
+  .carousel-dots .carousel-dot {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #fff;
+    opacity: 0.5;
+    margin: 10px;
+  }
+
+  input:checked+.slide-container .slide-image {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 1s ease-in-out;
+  }
+
+  input:checked+.slide-container .carousel-controls label {
+    display: block;
+  }
+
+  input#img-1:checked~.carousel-dots label#img-dot-1,
+  input#img-2:checked~.carousel-dots label#img-dot-2,
+  input#img-3:checked~.carousel-dots label#img-dot-3,
+  input#img-4:checked~.carousel-dots label#img-dot-4,
+  input#img-5:checked~.carousel-dots label#img-dot-5,
+  input#img-6:checked~.carousel-dots label#img-dot-6 {
+    opacity: 1;
+  }
+
+
+  input:checked+.slide-container .nav label {
+    display: block;
+  }
+</style>
+
 <body>
   <header class="header" data-header>
     <div class="overlay" data-overlay></div>
@@ -449,7 +578,7 @@
           <div class="card">
             <!-- card left -->
             <div class="product-imgs">
-              <div class="img-display">
+              <!-- <div class="img-display">
                 <div class="img-showcase">
                   {% if detail_rumah.gambar %}
                   <img src="../../static/images/{{ detail_rumah.gambar }}" alt="shoe image" />
@@ -457,7 +586,36 @@
                   <img src="{{ url_for('static', filename='images/property-4.png') }}" />
                   {% endif %}
                 </div>
+              </div> -->
+              <div class="carousel">
+                <ul class="slides">
+
+                  {% for gambar in detail_rumah.gambar %}
+                  <input type="radio" name="radio-buttons" id="img-{{loop.index}}" checked />
+                  <li class="slide-container">
+                    <div class="slide-image">
+                      <img src="../../static/images/{{ gambar.nama_gambar }}">
+                    </div>
+                    <div class="carousel-controls">
+                      <label for="img-{{loop.index - 1}}" class="prev-slide">
+                        <span>&lsaquo;</span>
+                      </label>
+                      <label for="img-{{loop.index + 1}}" class="next-slide">
+                        <span>&rsaquo;</span>
+                      </label>
+                    </div>
+                  </li>
+                  {% endfor %}
+
+                  <div class="carousel-dots">
+                    {% for gambar in detail_rumah.gambar %}
+                    <label for="img-{{loop.index}}" class="carousel-dot" id="img-dot-{{loop.index}}"></label>
+                    {% endfor %}
+                  </div>
+                </ul>
               </div>
+
+
             </div>
             <div class="product-content">
               <!-- Nama Perumahan / Rumah -->
@@ -472,6 +630,21 @@
                 <strong>
                   <h1 id="hargaRumah">{{ detail_rumah.harga }}</h1>
                 </strong>
+              </div>
+
+              <div class="product-detail">
+                <h3>Deskripsi:</h3>
+                <ul class="fiture" style="margin-top: 0">
+                  <li>
+                    <ion-icon class="fiture-icon" name="document-text-outline"></ion-icon>
+                    <p>
+                      {% if detail_rumah.deskripsi %}
+                      {{ detail_rumah.deskripsi }}
+                      {% else %}
+                      Deskripsi kosong.
+                      {% endif %}
+                    </p>
+                  </li>
               </div>
 
               <div class="product-detail">
@@ -524,6 +697,41 @@
                   </li>
                   {% endif %}
                 </ul>
+              </div>
+
+              <div class="product-detail">
+                <h3>Transportasi Umum:</h3>
+                <ul class="fiture" style="margin-top: 0">
+                  <li>
+                    <ion-icon class="fiture-icon" name="airplane-outline"></ion-icon>
+                    <p>
+                      {% if jarak_bandara %}
+                      Bandara: <span>{{ bandara }} {{ jarak_bandara }}Km</span>
+                      {% else %}
+                      Bandara: <span>Tidak ditemukan, atau tidak valid.</span>
+                      {% endif %}
+                    </p>
+                  </li>
+                  <li>
+                    <ion-icon class="fiture-icon" name="train-outline"></ion-icon>
+                    <p>
+                      {% if jarak_krl %}
+                      KRL: <span>{{ krl }} {{ jarak_krl }}Km</span>
+                      {% else %}
+                      KRL: <span>Tidak ditemukan, atau tidak valid.</span>
+                      {% endif %}
+                    </p>
+                  </li>
+                  <li>
+                    <ion-icon class="fiture-icon" name="bus-outline"></ion-icon>
+                    <p>
+                      {% if jarak_bus_stop %}
+                      Bus Stop: <span>{{ bus_stop }} {{ jarak_bus_stop }}Km</span>
+                      {% else %}
+                      Bus Stop: <span>Tidak ditemukan, atau tidak valid.</span>
+                      {% endif %}
+                    </p>
+                  </li>
               </div>
 
               {% if user_is_authenticated %}

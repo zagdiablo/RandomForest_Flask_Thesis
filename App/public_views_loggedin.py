@@ -32,19 +32,30 @@ def profile_page():
 def handle_submit_profile():
     nama_lengkap = request.form.get("nama_lengkap")
     email = request.form.get("email")
-    range_gaji = request.form.get("range_gaji")
     alamat_tempat_kerja = request.form.get("alamat_tempat_kerja")
+    total_gaji = 0
+
+    gaji_user = request.form.get("gaji_user")
+    gaji_pasangan = request.form.get("gaji_pasangan")
+    print(gaji_user, gaji_pasangan, "<--- gajinye")
+
+    if gaji_pasangan:
+        total_gaji = int(gaji_user) + int(gaji_pasangan)
+    elif gaji_user:
+        total_gaji = int(gaji_user)
+    else:
+        total_gaji = int(request.form.get("range_gaji"))
 
     to_commit_profile = User.query.get(current_user.get_id())
     # TODO front end, jika profil lengkap maka adakan rekomendasi, jika tidak suruh lengkapi
     profile_is_complete = (
-        True if nama_lengkap and range_gaji and alamat_tempat_kerja else False
+        True if nama_lengkap and total_gaji and alamat_tempat_kerja else False
     )
 
     if to_commit_profile:
         to_commit_profile.nama_lengkap = nama_lengkap
         to_commit_profile.email = email
-        to_commit_profile.range_gaji = range_gaji
+        to_commit_profile.range_gaji = total_gaji
         to_commit_profile.alamat_tempat_kerja = alamat_tempat_kerja
         to_commit_profile.is_filled = profile_is_complete
 

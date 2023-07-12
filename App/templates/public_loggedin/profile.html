@@ -2,451 +2,520 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Homeverse - Find your dream house</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Homeverse - Find your dream house</title>
 
-    <link rel="shortcut icon" href="{{ url_for('static', filename='images/icon.png') }}" type="image/svg+xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap"
-        rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link rel="shortcut icon" href="{{ url_for('static', filename='images/icon.png') }}" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 </head>
 
 <style>
-    body {
-        font-family: var(--ff-poppins);
-    }
+  body {
+    font-family: var(--ff-poppins);
+  }
 
-    .form-control:focus {
-        box-shadow: none;
-        border-color: #ba68c8;
-    }
+  .form-control:focus {
+    box-shadow: none;
+    border-color: #ba68c8;
+  }
 
-    .labels {
-        font-size: 11px;
-    }
+  .labels {
+    font-size: 11px;
+  }
 
-    .add-experience:hover {
-        background: var(--orange-soda);
-        color: #fff;
-        cursor: pointer;
-        border: solid 1px var(--prussian-blue);
-    }
+  .add-experience:hover {
+    background: var(--orange-soda);
+    color: #fff;
+    cursor: pointer;
+    border: solid 1px var(--prussian-blue);
+  }
 
-    #googleMap {
-        width: 80%;
-        height: 400px;
-        margin: 10px auto;
-    }
+  #googleMap {
+    width: 80%;
+    height: 400px;
+    margin: 10px auto;
+  }
+
+  .show {
+    display: inline-block;
+  }
+
+  .show2 {
+    display: block;
+  }
+
+  .hide {
+    display: none;
+  }
 </style>
 
 <body>
-    <header class="header" data-header>
-        <div class="overlay" data-overlay></div>
+  <header class="header" data-header>
+    <div class="overlay" data-overlay></div>
 
-        <div class="header-top">
-            <div class="container">
-                <ul class="header-top-list">
-                    <li>
-                        <a href="mailto:info@homeverse.com" class="header-top-link">
-                            <ion-icon name="mail-outline"></ion-icon>
+    <div class="header-top">
+      <div class="container">
+        <ul class="header-top-list">
+          <li>
+            <a href="mailto:info@homeverse.com" class="header-top-link">
+              <ion-icon name="mail-outline"></ion-icon>
 
-                            <span>rumahtangsel@gmail.com</span>
-                        </a>
-                    </li>
+              <span>rumahtangsel@gmail.com</span>
+            </a>
+          </li>
 
-                    <li>
-                        <a href="#" class="header-top-link">
-                            <ion-icon name="location-outline"></ion-icon>
+          <li>
+            <a href="#" class="header-top-link">
+              <ion-icon name="location-outline"></ion-icon>
 
-                            <address style="display: block; margin-bottom: 0">
-                                Tanggerang Selatan,Banten,Indonesia
-                            </address>
-                        </a>
-                    </li>
-                </ul>
+              <address style="display: block; margin-bottom: 0">
+                Tanggerang Selatan,Banten,Indonesia
+              </address>
+            </a>
+          </li>
+        </ul>
 
-                <div class="wrapper">
-                    <ul class="header-top-social-list">
-                        <li>
-                            <a href="#" class="header-top-social-link">
-                                <ion-icon name="logo-facebook"></ion-icon>
-                            </a>
-                        </li>
+        <div class="wrapper">
+          <ul class="header-top-social-list">
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+            </li>
 
-                        <li>
-                            <a href="#" class="header-top-social-link">
-                                <ion-icon name="logo-twitter"></ion-icon>
-                            </a>
-                        </li>
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </a>
+            </li>
 
-                        <li>
-                            <a href="#" class="header-top-social-link">
-                                <ion-icon name="logo-instagram"></ion-icon>
-                            </a>
-                        </li>
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+            </li>
 
-                        <li>
-                            <a href="#" class="header-top-social-link">
-                                <ion-icon name="logo-pinterest"></ion-icon>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-pinterest"></ion-icon>
+              </a>
+            </li>
+          </ul>
         </div>
+      </div>
+    </div>
 
-        <div class="header-bottom">
-            <div class="container">
-                <a href="/" class="logo">
-                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Homeverse logo" />
-                </a>
+    <div class="header-bottom">
+      <div class="container">
+        <a href="/" class="logo">
+          <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Homeverse logo" />
+        </a>
 
-                <nav class="navbar" data-navbar style="display: block">
-                    <div class="navbar-top">
-                        <a href="/" class="logo">
-                            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Homeverse logo" />
-                        </a>
+        <nav class="navbar" data-navbar style="display: block">
+          <div class="navbar-top">
+            <a href="/" class="logo">
+              <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Homeverse logo" />
+            </a>
 
-                        <button class="nav-close-btn" data-nav-close-btn aria-label="Close Menu">
-                            <ion-icon name="close-outline"></ion-icon>
-                        </button>
-                    </div>
+            <button class="nav-close-btn" data-nav-close-btn aria-label="Close Menu">
+              <ion-icon name="close-outline"></ion-icon>
+            </button>
+          </div>
 
-                    <div class="navbar-bottom">
-                        <ul class="navbar-list">
-                            <li>
-                                <a href="/" class="navbar-link" data-nav-link>Beranda</a>
-                            </li>
+          <div class="navbar-bottom">
+            <ul class="navbar-list">
+              <li>
+                <a href="/" class="navbar-link" data-nav-link>Beranda</a>
+              </li>
 
-                            <li>
-                                <a href="/cari_rumah" class="navbar-link" data-nav-link>Cari Rumah</a>
-                            </li>
+              <li>
+                <a href="/cari_rumah" class="navbar-link" data-nav-link>Cari Rumah</a>
+              </li>
 
-                            <li>
-                                <a href="/about" class="navbar-link" data-nav-link>Tentang</a>
-                            </li>
+              <li>
+                <a href="/about" class="navbar-link" data-nav-link>Tentang</a>
+              </li>
 
-                            <li>
-                                <a href="/contact" class="navbar-link" data-nav-link>Kontak</a>
-                            </li>
-                            {% if user_is_authenticated %}
-                            <li>
-                                <a href="/logout"><button class="header-top-btn">Logout</button></a>
-                            </li>
-                            {% else %}
-                            <li>
-                                <a href="/login"><button class="header-top-btn">Login/Sign Up</button></a>
-                            </li>
-                            {% endif %}
-                        </ul>
-                    </div>
-                </nav>
+              <li>
+                <a href="/contact" class="navbar-link" data-nav-link>Kontak</a>
+              </li>
+              {% if user_is_authenticated %}
+              <li>
+                <a href="/logout"><button class="header-top-btn">Logout</button></a>
+              </li>
+              {% else %}
+              <li>
+                <a href="/login"><button class="header-top-btn">Login/Sign Up</button></a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </nav>
 
-                <div class="header-bottom-actions">
-                    <button class="header-bottom-actions-btn" data-nav-open-btn aria-label="Open Menu">
-                        <ion-icon name="menu-outline"></ion-icon>
+        <div class="header-bottom-actions">
+          <button class="header-bottom-actions-btn" data-nav-open-btn aria-label="Open Menu">
+            <ion-icon name="menu-outline"></ion-icon>
 
-                        <span>Menu</span>
-                    </button>
-                </div>
-            </div>
+            <span>Menu</span>
+          </button>
         </div>
-    </header>
+      </div>
+    </div>
+  </header>
 
-    <main>
-        <article>
-            <div class="container rounded bg-white mt-5 mb-5" style="
+  <main>
+    <article>
+      <div class="container rounded bg-white mt-5 mb-5" style="
             box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
               rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
           ">
+        <form action="/handle_submit_profile" method="post">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 
-                <form action="/handle_submit_profile" method="post">
-                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <div class="row">
+            <div class="col-md-4 border-right">
+              <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <img class="rounded-circle"
+                  src="https://images.unsplash.com/photo-1635107510862-53886e926b74?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80"
+                  style="width: 250px" />
+                <span class="font-weight-bold">
+                  {% if user_profile_data.nama_lengkap %} {{
+                  user_profile_data.nama_lengkap }} {% else %} - {% endif %}
+                </span>
+                <span class="text-black-50" style="display: block">
+                  <h6>{{user_profile_data.email }}</h6>
+                </span>
+                <ion-icon name="mail-outline" style="margin-right: 2px; font-size: 28px"></ion-icon>
+              </div>
+            </div>
+            <div class="col-md-5 border-right">
+              <div class="p-3 py-5">
+                <div class="d-flex align-items-center">
+                  <h4 class="text-right">Profile Settings</h4>
+                </div>
 
-                    <div class="row">
-                        <div class="col-md-4 border-right">
-                            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                                <img class="rounded-circle"
-                                    src="https://images.unsplash.com/photo-1635107510862-53886e926b74?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80"
-                                    style="width: 250px;" />
-                                <span class="font-weight-bold">
-                                    {% if user_profile_data.nama_lengkap %}
-                                    {{ user_profile_data.nama_lengkap }}
-                                    {% else %}
-                                    -
-                                    {% endif %}
-                                </span>
-                                <span class="text-black-50" style="display: block;">
+                <!-- Alert logic -->
+                {% with messages = get_flashed_messages(with_categories=true)
+                %} {% if messages %} {% for category, message in messages %}
+                {% if category == 'error' %}
+                <div class="alert alert-danger" role="alert">
+                  {{ message }}
+                </div>
+                {% elif category == 'warning' %}
+                <div class="alert alert-warning" role="alert">
+                  {{ message }}
+                </div>
+                {% else %}
+                <div class="alert alert-success" role="alert">
+                  {{ message }}
+                </div>
+                {% endif %} {% endfor %} {% endif %} {% endwith %}
+                <!-- end alert logic -->
 
-                                    <h6>{{user_profile_data.email }}</h6>
-                                </span>
-                                <ion-icon name="mail-outline" style="margin-right: 2px;font-size: 28px;"></ion-icon>
-                            </div>
-
-                        </div>
-                        <div class="col-md-5 border-right">
-                            <div class="p-3 py-5">
-                                <div class="d-flex align-items-center">
-                                    <h4 class="text-right">Profile Settings</h4>
-                                </div>
-
-                                <!-- Alert logic -->
-                                {% with messages = get_flashed_messages(with_categories=true) %} {% if
-                                messages %} {% for category, message in messages %} {% if category ==
-                                'error' %}
-                                <div class="alert alert-danger" role="alert">
-                                    {{ message }}
-                                </div>
-                                {% elif category == 'warning' %}
-                                <div class="alert alert-warning" role="alert">
-                                    {{ message }}
-                                </div>
-                                {% else %}
-                                <div class="alert alert-success" role="alert">
-                                    {{ message }}
-                                </div>
-                                {% endif %} {% endfor %} {% endif %} {% endwith %}
-                                <!-- end alert logic -->
-
-                                <div class="row mt-3">
-                                    <div class="col-md-12">
-                                        <label class="labels">Nama Lengkap</label><input type="text"
-                                            class="form-control" placeholder="Nama" name="nama_lengkap"
-                                            value="{{ user_profile_data.nama_lengkap}}" />
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label class="labels">Email</label><input type="text" class="form-control"
-                                            placeholder="Email" name="email" value="{{ user_profile_data.email }}"
-                                            required />
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label class="labels">Range Gaji</label>
-                                        <input class="form-control" type="number" name="range_gaji" placeholder="Gaji"
-                                            value="{{ user_profile_data.range_gaji }}">
-                                        <!-- <select class="form-select" aria-label="Default select example"
-                                            name="range_gaji">
-                                            {% if user_profile_data.range_gaji == 1 %}
-                                            <option>Pilih Range</option>
-                                            <option value="1" selected>1jt - 3jt</option>
-                                            <option value="2">3jt - 6jt</option>
-                                            <option value="3">>6jt</option>
-                                            {% elif user_profile_data.range_gaji == 2 %}
-                                            <option>Pilih Range</option>
-                                            <option value="1">1jt - 3jt</option>
-                                            <option value="2" selected>3jt - 6jt</option>
-                                            <option value="3">>6jt</option>
-                                            {% elif user_profile_data.range_gaji == 3 %}
-                                            <option>Pilih Range</option>
-                                            <option value="1">1jt - 3jt</option>
-                                            <option value="2">3jt - 6jt</option>
-                                            <option value="3" selected>>6jt</option>
-                                            {% else %}
-                                            <option selected>Pilih Range</option>
-                                            <option value="1">1jt - 3jt</option>
-                                            <option value="2">3jt - 6jt</option>
-                                            <option value="3">>6jt</option>
-                                            {% endif %}
-                                        </select> -->
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label class="labels">Lokasi tempat kerja</label>
-                                        <input type="text" name="alamat_tempat_kerja" class="form-control"
-                                            placeholder="Lokasi Kerja" id="alamat_tempat_kerja"
-                                            value="{{ user_profile_data.alamat_tempat_kerja }}" />
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-
+                <div class="row mt-3">
+                  <div class="col-md-12">
+                    <label class="labels">Nama Lengkap</label><input type="text" class="form-control" placeholder="Nama"
+                      name="nama_lengkap" value="{{ user_profile_data.nama_lengkap}}" />
+                  </div>
+                  <div class="col-md-12">
+                    <label class="labels">Email</label><input type="text" class="form-control" placeholder="Email"
+                      name="email" value="{{ user_profile_data.email }}" required />
+                  </div>
+                  <div class="col-md-12">
+                    <label class="labels">Status:</label>
+                    <div class="d-flex fs-6">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="menikah" value="belum" checked />
+                        <label class="form-check-label" for="exampleRadios1">
+                          Belum Menikah
+                        </label>
+                      </div>
+                      <div class="form-check ms-2" data-bs-toggle="collapse">
+                        <input class="form-check-input" type="radio" value="sudah" name="menikah" />
+                        <label class="form-check-label" for="exampleRadios2">
+                          Menikah
+                        </label>
+                      </div>
                     </div>
 
-                    <!-- <div class="row">
+                    <div class="card p-2 hide" id="cardInputGaji">
+                      <span class="mb-1" style="font-size: 12px">Apakah pasangan anda bekerja ?</span>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="bekerja" value="sudah" />
+                        <label style="font-size: 12px" class="form-check-label" for="inlineRadio1">Ya</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="bekerja" value="belum" />
+                        <label style="font-size: 12px" class="form-check-label" for="inlineRadio2">Tidak</label>
+                      </div>
+                      <div class="userLog">
+                        <span class="mt-1 mb-1" style="font-size: 12px">Masukkan jumlah gaji anda!</span>
+                        <input class="form-control" type="number" name="gaji_user" placeholder="Gaji anda" />
+                      </div>
+                      <div class="pasanganUser hide" id="pasanganUser">
+                        <span class="mt-1 mb-1" style="font-size: 12px">Masukkan jumlah gaji pasangan anda!</span>
+                        <input class="form-control" type="number" name="gaji_pasangan"
+                          placeholder="Gaji pasangan anda" />
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <label class="labels">Total Gaji</label>
+                    <input class="form-control" type="number" name="range_gaji" placeholder="Total gaji" id="totalGaji"
+                      value="{{ user_profile_data.range_gaji }}" />
+                  </div>
+                  <div class="col-md-12">
+                    <label class="labels">Lokasi tempat kerja</label>
+                    <input type="text" name="alamat_tempat_kerja" class="form-control" placeholder="Lokasi Kerja"
+                      id="alamat_tempat_kerja" value="{{ user_profile_data.alamat_tempat_kerja }}" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="row">
                         <div class="mt-3">
                             <div id="googleMap"></div>
                         </div>
                     </div> -->
 
-                    <div class="row" style="margin-top: -10px; padding-bottom: 3em;">
-                        <div class="mt-5 text-center">
-                            <button class="btn btn-primary profile-button" type="submit">
-                                Save Profile
-                            </button>
-                        </div>
-                    </div>
-                </form>
+          <div class="row" style="margin-top: -10px; padding-bottom: 3em">
+            <div class="mt-5 text-center">
+              <button class="btn btn-primary profile-button" type="submit">
+                Save Profile
+              </button>
             </div>
-        </article>
-    </main>
+          </div>
+        </form>
+      </div>
+    </article>
+  </main>
 
-    <footer class="footer">
-        <div class="footer-top">
-            <div class="container">
-                <div class="footer-brand">
-                    <a href="#" class="logo">
-                        <img src="{{ url_for('static', filename='images/logo-light.png') }}" alt="Homeverse logo" />
-                    </a>
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="footer-brand">
+          <a href="#" class="logo">
+            <img src="{{ url_for('static', filename='images/logo-light.png') }}" alt="Homeverse logo" />
+          </a>
 
-                    <p class="section-text">
-                        Rumah Tangsel merupakan perusahaan penyedia jasa pembelian
-                        rumah,penyedia informasi dan rekomendasi harga rumah, dan membantu
-                        anda dalam penjualan properti
-                    </p>
+          <p class="section-text">
+            Rumah Tangsel merupakan perusahaan penyedia jasa pembelian
+            rumah,penyedia informasi dan rekomendasi harga rumah, dan membantu
+            anda dalam penjualan properti
+          </p>
 
-                    <ul class="contact-list">
-                        <li>
-                            <a href="#" class="contact-link">
-                                <ion-icon name="location-outline"></ion-icon>
+          <ul class="contact-list">
+            <li>
+              <a href="#" class="contact-link">
+                <ion-icon name="location-outline"></ion-icon>
 
-                                <address>Viktor,Pamulang,Tanggerang Selatan</address>
-                            </a>
-                        </li>
+                <address>Viktor,Pamulang,Tanggerang Selatan</address>
+              </a>
+            </li>
 
-                        <li>
-                            <a href="tel:+0123456789" class="contact-link">
-                                <ion-icon name="call-outline"></ion-icon>
+            <li>
+              <a href="tel:+0123456789" class="contact-link">
+                <ion-icon name="call-outline"></ion-icon>
 
-                                <span>+0123-456789</span>
-                            </a>
-                        </li>
+                <span>+0123-456789</span>
+              </a>
+            </li>
 
-                        <li>
-                            <a href="mailto:contact@homeverse.com" class="contact-link">
-                                <ion-icon name="mail-outline"></ion-icon>
+            <li>
+              <a href="mailto:contact@homeverse.com" class="contact-link">
+                <ion-icon name="mail-outline"></ion-icon>
 
-                                <span>sales@rumahtangsel.com</span>
-                            </a>
-                        </li>
-                    </ul>
+                <span>sales@rumahtangsel.com</span>
+              </a>
+            </li>
+          </ul>
 
-                    <ul class="social-list">
-                        <li>
-                            <a href="#" class="social-link">
-                                <ion-icon name="logo-facebook"></ion-icon>
-                            </a>
-                        </li>
+          <ul class="social-list">
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+            </li>
 
-                        <li>
-                            <a href="#" class="social-link">
-                                <ion-icon name="logo-twitter"></ion-icon>
-                            </a>
-                        </li>
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </a>
+            </li>
 
-                        <li>
-                            <a href="#" class="social-link">
-                                <ion-icon name="logo-linkedin"></ion-icon>
-                            </a>
-                        </li>
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-linkedin"></ion-icon>
+              </a>
+            </li>
 
-                        <li>
-                            <a href="#" class="social-link">
-                                <ion-icon name="logo-youtube"></ion-icon>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="footer-link-box">
-                    <ul class="footer-list">
-                        <li>
-                            <p class="footer-list-title">Perusahaan</p>
-                        </li>
-
-                        <li>
-                            <a href="/about" class="footer-link">Tentang Kami</a>
-                        </li>
-
-                        <li>
-                            <a href="#" class="footer-link">Semua Produk</a>
-                        </li>
-
-                        <li>
-                            <a href="#" class="footer-link">Peta Lokasi</a>
-                        </li>
-
-                        <li>
-                            <a href="/contact" class="footer-link">Tanya Kami</a>
-                        </li>
-
-                        <li>
-                            <a href="/contact" class="footer-link">Kontak Kami</a>
-                        </li>
-                    </ul>
-
-                    <ul class="footer-list">
-                        <li>
-                            <p class="footer-list-title">Services</p>
-                        </li>
-
-                        <li>
-                            <a href="#" class="footer-link">Beli Rumah</a>
-                        </li>
-
-                        <li>
-                            <a href="#" class="footer-link">Rekomendasi Harga</a>
-                        </li>
-
-                        <li>
-                            <a href="#" class="footer-link">Jual Rumah</a>
-                        </li>
-
-                        <li>
-                            <a href="#" class="footer-link">Penawaran Spesial</a>
-                        </li>
-                    </ul>
-
-                    <ul class="footer-list">
-                        <li>
-                            <p class="footer-list-title">Pelayanan Pelanggan</p>
-                        </li>
-
-                        <li>
-                            <a href="#" class="footer-link">Hubungi Kami</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-youtube"></ion-icon>
+              </a>
+            </li>
+          </ul>
         </div>
 
-        <div class="footer-bottom">
-            <div class="container">
-                <p class="copyright">
-                    &copy; 2022 <a href="#">codewithsadee</a>. All Rights Reserved
-                </p>
-            </div>
+        <div class="footer-link-box">
+          <ul class="footer-list">
+            <li>
+              <p class="footer-list-title">Perusahaan</p>
+            </li>
+
+            <li>
+              <a href="/about" class="footer-link">Tentang Kami</a>
+            </li>
+
+            <li>
+              <a href="#" class="footer-link">Semua Produk</a>
+            </li>
+
+            <li>
+              <a href="#" class="footer-link">Peta Lokasi</a>
+            </li>
+
+            <li>
+              <a href="/contact" class="footer-link">Tanya Kami</a>
+            </li>
+
+            <li>
+              <a href="/contact" class="footer-link">Kontak Kami</a>
+            </li>
+          </ul>
+
+          <ul class="footer-list">
+            <li>
+              <p class="footer-list-title">Services</p>
+            </li>
+
+            <li>
+              <a href="#" class="footer-link">Beli Rumah</a>
+            </li>
+
+            <li>
+              <a href="#" class="footer-link">Rekomendasi Harga</a>
+            </li>
+
+            <li>
+              <a href="#" class="footer-link">Jual Rumah</a>
+            </li>
+
+            <li>
+              <a href="#" class="footer-link">Penawaran Spesial</a>
+            </li>
+          </ul>
+
+          <ul class="footer-list">
+            <li>
+              <p class="footer-list-title">Pelayanan Pelanggan</p>
+            </li>
+
+            <li>
+              <a href="#" class="footer-link">Hubungi Kami</a>
+            </li>
+          </ul>
         </div>
-    </footer>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+      </div>
+    </div>
 
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <!-- Google maps API -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwqGQ5BbN_hu-bSFX7aHvqMDW2C2tK5Yo&libraries=places&callback=initMap">
-        </script>
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="copyright">
+          &copy; 2022 <a href="#">codewithsadee</a>. All Rights Reserved
+        </p>
+      </div>
+    </div>
+  </footer>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            let autocomplete;
-            let id = 'alamat_tempat_kerja';
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <!-- Google maps API -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwqGQ5BbN_hu-bSFX7aHvqMDW2C2tK5Yo&libraries=places&callback=initMap"></script>
 
-            autocomplete = new google.maps.places.Autocomplete((document.getElementById(id)), {
-                types: ['geocode'],
-            })
-        });
-    </script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      let autocomplete;
+      let id = "alamat_tempat_kerja";
+
+      autocomplete = new google.maps.places.Autocomplete(
+        document.getElementById(id),
+        {
+          types: ["geocode"],
+        }
+      );
+    });
+
+    var radioButtonMenikah = document.querySelectorAll(
+      "input[name='menikah']"
+    );
+    var radioButtonBekerja = document.querySelectorAll(
+      "input[name='bekerja']"
+    );
+    //   var gaji = document.querySelectorAll("input[name='gaji']");
+    var cardInputGaji = document.getElementById("cardInputGaji");
+    var pasanganUser = document.getElementById("pasanganUser");
+    var totalGaji = document.getElementById("totalGaji");
+
+    let findSelected = () => {
+      let selected = document.querySelector(
+        "input[name='menikah']:checked"
+      ).value;
+
+      if (selected == "sudah") {
+        cardInputGaji.classList.add("show");
+        cardInputGaji.classList.remove("hide");
+        totalGaji.disabled = true;
+      } else {
+        cardInputGaji.classList.add("hide");
+        cardInputGaji.classList.remove("show");
+        totalGaji.disabled = false;
+      }
+    };
+
+    let findSelected2 = () => {
+      let selected = document.querySelector(
+        "input[name='bekerja']:checked"
+      ).value;
+
+      if (selected == "sudah") {
+        pasanganUser.classList.add("show");
+        pasanganUser.classList.remove("hide");
+      } else {
+        pasanganUser.classList.add("hide");
+        pasanganUser.classList.remove("show");
+      }
+    };
+
+    radioButtonMenikah.forEach((rbMenikah) => {
+      rbMenikah.addEventListener("change", findSelected);
+    });
+    radioButtonBekerja.forEach((rbBekerja) => {
+      rbBekerja.addEventListener("change", findSelected2);
+    });
+
+    //   let hitungTotalGaji = () => {
+    //     totalGaji.value = 324;
+    //   };
+  </script>
 </body>
 
 </html>

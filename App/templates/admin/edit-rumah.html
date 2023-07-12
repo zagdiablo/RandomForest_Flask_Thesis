@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='vendors/iconly/bold.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendors/choices.js/choices.min.css') }}">
     <!--     
     <link rel="stylesheet" href="assets/vendors/dripicons/webfont.css">
     <link rel="stylesheet" href="assets/css/pages/dripicons.css"> -->
@@ -244,7 +246,7 @@
                                                 </div>
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
-                                                        <label for="email-id-column">Kontak</label>
+                                                        <label for="email-id-column"><strong>Kontak</strong></label>
                                                         <select class="form-select" name="kontak_agen">
                                                             <option selected>{{ to_edit_rumah.kontak_agen }}</option>
                                                             {% for agen in all_agen %}
@@ -254,8 +256,42 @@
                                                         </select>
                                                     </div>
                                                 </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="country-floating"><strong>Fasilitas</strong></label>
+                                                        <select name="fasilitas"
+                                                            class="choices form-select multiple-remove"
+                                                            multiple="multiple">
+                                                            <optgroup label="Fasilitas">
+                                                                <option value="gym">Gym</option>
+                                                                <option value="masjid" selected>Masjid</option>
+                                                                <option value="taman">Taman</option>
+                                                                <option value="playground">Playground</option>
+                                                                <option value="kolam renang">Kolam Renang</option>
+                                                            </optgroup>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                                 <div class="form-group mt-2 mb-2 col-12">
-                                                    <label for="add-image"><strong>Gambar</strong></label>
+                                                    <div class="form-group mb-3">
+                                                        <label for="country-floating"><strong>Deskripsi
+                                                                Rumah</strong></label>
+                                                        <textarea class="form-control" id="exampleFormControlTextarea1"
+                                                            rows="3"
+                                                            name="deskripsi">{{ to_edit_rumah.deskripsi }}</textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group mt-2 mb-2 col-12">
+                                                    <label><strong>List Gambar</strong></label><br>
+
+                                                    {% for gambar in to_edit_rumah.gambar %}
+                                                    {{ gambar.nama_gambar }}<br>
+                                                    {% endfor %}
+                                                </div>
+
+                                                <div class="form-group mt-2 mb-2 col-12">
+                                                    <label for="add-image"><strong>Tambah Gambar</strong></label>
                                                     <input type="file" id="add-image" class="image-preview-filepond"
                                                         name="gambar-rumah">
                                                 </div>
@@ -313,6 +349,9 @@
     </script>
 
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='vendors/choices.js/choices.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
 </body>
 
 </html>

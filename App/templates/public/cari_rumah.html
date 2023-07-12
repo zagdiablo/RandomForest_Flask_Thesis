@@ -16,7 +16,6 @@
     - custom css link
   -->
 
-
     <!-- 
     - google font link
   -->
@@ -195,6 +194,11 @@
 
     .tampil {
         display: block;
+    }
+
+    .form-check-input:checked {
+        background-color: var(--orange-soda);
+        border-color: var(--orange-soda);
     }
 </style>
 
@@ -436,7 +440,6 @@
                                                     <fieldset>
                                                         <h5>Fasilitas</h5>
                                                         <div class="row">
-
                                                             <div class="col-xl-3">
                                                                 <div class="form__group">
                                                                     <input type="checkbox" value="gym"
@@ -477,12 +480,13 @@
                                                 <!-- end dropdown parameter fasilitas -->
 
                                                 <div class="d-flex justify-content-between align-items-center mt-4">
-                                                    <p class="mb-0 " style="color: var(--prussian-blue);">
-                                                        <strong>Kisaran
-                                                            Harga</strong><span
-                                                            class="font-weight-bold"><strong>Berdasarkan dengan kriteria
-                                                                yang anda pilih.</strong></span>
-                                                    </p>
+                                                    <div class="form-check d-flex form-switch">
+                                                        <input name='sort-by-jarak' class="form-check-input"
+                                                            type="checkbox" id="flexSwitchCheckChecked">
+                                                        <strong class="align-self-center">
+                                                            <h5>Urutkan Berdasakan Harga</h5>
+                                                        </strong>
+                                                    </div>
 
                                                     <!-- action buttons -->
                                                     <div>
@@ -553,16 +557,15 @@
                         <!-- end alert logic -->
 
                         <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
-
                             {% if query_rumah %}
-                            {% for jarak, rumah in query_rumah.items() %}
+                            {% for key, rumah in query_rumah.items() %}
                             <div class="col">
                                 <div class="property-card">
                                     <figure class="card-banner">
                                         <!-- TODO link detail rumah -->
-                                        <a href="/detail_rumah/{{ rumah.id }}/1">
-                                            {% if rumah.gambar %}
-                                            <img src="../../static/images/{{ rumah.gambar }}"
+                                        <a href="/detail_rumah/{{ rumah[1].id }}/1">
+                                            {% if rumah[1].gambar %}
+                                            <img src="../../static/images/{{ rumah[1].gambar[0].nama_gambar }}"
                                                 alt="Luxury villa in Rego Park" class="w-100">
                                             {% else %}
                                             <img src="{{ url_for('static', filename='images/property-4.png') }}"
@@ -574,26 +577,27 @@
                                             <button class="banner-actions-btn">
                                                 <ion-icon name="location"></ion-icon>
 
-                                                <address style="margin-bottom: 0;">{{ rumah.alamat }}</address>
+                                                <address style="margin-bottom: 0;">{{ rumah[1].alamat }}</address>
                                             </button>
                                         </div>
                                     </figure>
                                     <div class="card-content">
                                         <div class="card-price">
                                             <!-- Harga Disini -->
-                                            <strong class="hargaRumah">{{ rumah.harga }}</strong>
+                                            <strong class="hargaRumah">{{ rumah[1].harga }}</strong>
                                         </div>
                                         <h3 class="h3 card-title">
                                             <!-- Nama Perumahan / Rumah -->
-                                            <a href="/detail_rumah/{{ rumah.id }}/1">{{ rumah.nama_perumahan }}</a>
+                                            <a href="/detail_rumah/{{ rumah[1].id }}/1">{{ rumah[1].nama_perumahan
+                                                }}</a>
                                         </h3>
                                         <!--  -->
                                         <p class="card-text">
-                                        <h5>Fasilitas:</h5>{{ rumah.fasilitas }}</span>
+                                        <h5>Fasilitas:</h5>{{ rumah[1].fasilitas }}</span>
                                         </p>
                                         <p class="card-text">
                                             {% if user_is_authenticated %}
-                                        <div id="kecamatan" hidden>{{ rumah.kecamatan }}</div>
+                                        <div id="kecamatan" hidden>{{ rumah[1].kecamatan }}</div>
                                         <div id="lokasiKerja" hidden>{{ the_user.alamat_tempat_kerja }}</div>
                                         {%else%}
 
@@ -602,29 +606,29 @@
                                         {% if user_is_authenticated %}
                                         <p class="card-text">
                                         <h6>Jarak tempuh dari lokasi kerja anda:</h6>
-                                        {% if jarak %}
-                                        <strong> {{ jarak }} Km</strong>
+                                        {% if rumah[0] %}
+                                        <strong> {{ rumah[0] }} Km</strong>
                                         {% else %}
                                         <strong> Jarak tempuh tidak ditemukan, atau tidak valid. </strong>
                                         {% endif %}
                                         </p>
                                         {% endif %}
                                         <ul class="card-list">
-                                            <p hidden id="clickCount">{{ rumah.click_count }}</p>
+                                            <p hidden id="clickCount">{{ rumah[1].click_count }}</p>
                                             <li class="card-item">
-                                                <strong>{{ rumah.kamar_tidur }}</strong>
+                                                <strong>{{ rumah[1].kamar_tidur }}</strong>
 
                                                 <ion-icon name="bed-outline"></ion-icon>
 
                                                 <span>Kamar</span>
                                             </li>
                                             <li class="card-item">
-                                                <strong>{{ rumah.kamar_mandi }}</strong>
+                                                <strong>{{ rumah[1].kamar_mandi }}</strong>
                                                 <ion-icon name="water-outline"></ion-icon>
                                                 <span>Kamar Mandi</span>
                                             </li>
                                             <li class="card-item">
-                                                <strong>{{ rumah.luas }}</strong>
+                                                <strong>{{ rumah[1].luas }}</strong>
                                                 <ion-icon name="square-outline"></ion-icon>
                                                 <span>Luas M2</span>
                                             </li>
@@ -645,7 +649,7 @@
                                                 </figure>
                                                 <div class="contact-agen">
                                                     <p class="author-name">
-                                                        <a href="#">{{ rumah.kontak_agen }}</a>
+                                                        <a href="#">{{ rumah[1].kontak_agen }}</a>
                                                     </p>
                                                     <p class="author-title">Agen Perumahan</p>
                                                 </div>
@@ -672,6 +676,16 @@
                                     </div>
                                 </div>
                                 {% endfor %}
+                                {% else %}
+                                <script>
+                                    window.onload = function () {
+                                        Swal.fire({
+                                            icon: 'warning',
+                                            title: 'Hasil Pencarian',
+                                            text: 'Maaf, Tidak Ada Hasil Yang Sesuai Dengan Profil Anda.',
+                                        });
+                                    };
+                                </script>
                                 {% endif %}
                             </div>
                         </div>

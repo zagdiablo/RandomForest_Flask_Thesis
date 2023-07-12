@@ -4,7 +4,7 @@ from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_required, current_user
 
 
-from .models import User, Kecamatan, Rumah, Agen, FixedBunga
+from .models import User, Kecamatan, Rumah, Agen, FixedBunga, GambarRumah
 from .handle_image_upload import upload_image, delete_image
 from . import db
 
@@ -237,6 +237,8 @@ def handle_tambah_rumah():
     latitude = request.form.get("latitude")
     longitude = request.form.get("longitude")
     gambar = request.files["gambar-rumah"]
+    deskripsi = request.form.get("deskripsi")
+    fasilitas = request.values.getlist("fasilitas")
 
     if gambar:
         if gambar == "":
@@ -257,9 +259,17 @@ def handle_tambah_rumah():
         kontak_agen=kontak_agen,
         latitude=latitude,
         longitude=longitude,
-        gambar=nama_file_gambar,
+        deskripsi=deskripsi,
+        fasilitas=", ".join(fasilitas),
     )
     db.session.add(to_add_rumah)
+    db.session.commit()
+
+    to_add_gambar = GambarRumah(
+        nama_gambar=nama_file_gambar,
+        rumah=Rumah.query.filter(Rumah.alamat == alamat).first().id,
+    )
+    db.session.add(to_add_gambar)
     db.session.commit()
 
     flash(f"Rumah {alamat} berhasil ditambah", category="success")
@@ -306,16 +316,24 @@ def handle_edit_rumah(id):
     latitude = request.form.get("latitude")
     longitude = request.form.get("longitude")
     gambar = request.files["gambar-rumah"]
+    deskripsi = request.form.get("deskripsi")
+    fasilitas = request.values.getlist("fasilitas")
 
-    if gambar:
-        old_gambar = to_edit_rumah.gambar
-        delete_image(old_gambar)
+    # if gambar:
+    #     old_gambar = to_edit_rumah.gambar
+    #     delete_image(old_gambar)
 
-        if gambar == "":
-            flash("Gambar kosong", category="error")
-            return redirect(f"/edit_rumah/{id}")
+    #     if gambar == "":
+    #         flash("Gambar kosong", category="error")
+    #         return redirect(f"/edit_rumah/{id}")
 
-        upload_image(gambar, to_edit_rumah)
+    nama_file_gambar = upload_image(gambar, None)
+    to_add_gambar = GambarRumah(
+        nama_gambar=nama_file_gambar,
+        rumah=id,
+    )
+    db.session.add(to_add_gambar)
+    db.session.commit()
 
     if to_edit_rumah:
         to_edit_rumah.nama_perumahan = nama_perumahan
@@ -330,6 +348,8 @@ def handle_edit_rumah(id):
         to_edit_rumah.latitude = latitude
         to_edit_rumah.longitude = longitude
         to_edit_rumah.gambar = to_edit_rumah.gambar
+        to_edit_rumah.deskripsi = deskripsi
+        to_edit_rumah.fasilitas = ", ".join(fasilitas)
         db.session.commit()
         flash(
             f"berhasil mengedit data rumah {to_edit_rumah.alamat}", category="warning"

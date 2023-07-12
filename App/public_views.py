@@ -6,6 +6,7 @@ import re
 
 from .models import User, Rumah, Agen, Kecamatan, FixedBunga
 from . import db
+from .hitung_jarak_kendaraan_umum import hitung_jarak_kendaraan_umum
 
 
 public_views = Blueprint("public_views", __name__)
@@ -26,9 +27,13 @@ def get_distance_api(tempat, tujuan, user_is_authenticated):
 
     if user_is_authenticated and profil_lengkap:
         response = requests.request("GET", url, headers=headers, data=payload)
-        distance_data = dict(response.json())["rows"][0]["elements"][0]["distance"][
-            "text"
-        ]
+
+        try:
+            distance_data = dict(response.json())["rows"][0]["elements"][0]["distance"][
+                "text"
+            ]
+        except KeyError:
+            distance_data = "0.0"
 
         try:
             distance = float(re.findall(r"\d+\.\d+", distance_data)[0])
@@ -57,16 +62,36 @@ def handle_query(
     checkbox_taman,
     checkbox_playground,
     checkbox_kolam_renang,
+    sort_by_jarak,
 ):
     number = list("12345")
+    print("handle query func hit")
 
     # query rumah berdasarkan kecamatan dan fasilitas yang di passing dari halaman cari rumah
-    query = Rumah.query.filter(Rumah.kecamatan == kecamatan)
+    if kecamatan == "Kecamatan":
+        query = Rumah.query.filter(Rumah.kamar_mandi > -1)
+    else:
+        query = Rumah.query.filter(Rumah.kecamatan == kecamatan)
+
     if user_is_authenticated:
+        print("is authenticated")
         # FIXME dynamic perhitungan di bagian persentase gaji dan lama waktu cicilan (5 - 25 bulan dropdown)
-        rekomendasi_harga_rumah = (((gaji_user * 40) / 100) * 12) * 30
-        print(rekomendasi_harga_rumah)
-        query = query.filter(Rumah.harga <= rekomendasi_harga_rumah)
+        # rekomendasi_harga_rumah = (((gaji_user * 40) / 100) * 12) * 30
+        if gaji_user >= 1000000 and gaji_user <= 15000000:
+            print("hit 1")
+            query = query.filter(Rumah.harga <= 800000000)
+        elif gaji_user > 15000000 and gaji_user <= 20000000:
+            print("hit 2")
+            query = query.filter(Rumah.harga <= 1100000000)
+        elif gaji_user > 20000000 and gaji_user <= 30000000:
+            print("hit 3")
+            query = query.filter(Rumah.harga <= 1500000000)
+        elif gaji_user > 30000000 and gaji_user <= 40000000:
+            print("hit 4")
+            query = query.filter(Rumah.harga <= 2500000000)
+        else:
+            print("hit 5")
+            query = query.filter(Rumah.harga > 2500000000)
 
     if dropdown_lantai in number:
         print("lantai")
@@ -104,24 +129,45 @@ def handle_query(
 
     query_with_distances = {}
     # jika user telah login, query dan hitung jarak menggunakan fungsi get_distance_api
+    print(sort_by_jarak)
     if user_is_authenticated:
-        query_results = query.order_by(Rumah.click_count.desc()).all()
-        for query in query_results:
-            query_cordinates = ",".join([query.latitude, query.longitude])
-            distance = get_distance_api(
-                the_user.alamat_tempat_kerja, query_cordinates, user_is_authenticated
-            )
-            query_with_distances[distance] = query
-        # sorted(query_with_distances.items()) mengurutkan hasil query berdasarkan jarak
-        query_with_distances = dict(sorted(query_with_distances.items()))
+        if sort_by_jarak:
+            query_results = query.order_by(Rumah.harga.asc()).all()
+            print(query_results)
+            for index, query in enumerate(query_results):
+                query_cordinates = ",".join([query.latitude, query.longitude])
+                distance = get_distance_api(
+                    the_user.alamat_tempat_kerja,
+                    query_cordinates,
+                    user_is_authenticated,
+                )
+                query_with_distances[index] = [distance, query]
+                print(query_with_distances)
+        else:
+            query_results = query.order_by(Rumah.click_count.desc()).all()
+            for index, query in enumerate(query_results):
+                query_cordinates = ",".join([query.latitude, query.longitude])
+                distance = get_distance_api(
+                    the_user.alamat_tempat_kerja,
+                    query_cordinates,
+                    user_is_authenticated,
+                )
+                query_with_distances[index] = [distance, query]
+            # sorted(query_with_distances.items()) mengurutkan hasil query berdasarkan jarak
+            query_with_distances = dict(sorted(query_with_distances.items()))
     # jika tidak isi jarak dengan angka index saja, dan tidak ditampilkan pada halaman hasil pencarian
     else:
         # click_count.desc() query data yang di urutkan berdasarkan click count terbanyak
-        query_results = query.order_by(Rumah.click_count.desc()).all()
+        if sort_by_jarak:
+            query_results = query.order_by(Rumah.harga.asc()).all()
+            print(query_results)
+        else:
+            query_results = query.order_by(Rumah.click_count.desc()).all()
         for index, query in enumerate(query_results):
-            query_with_distances[index] = query
+            query_with_distances[index] = [0.0, query]
 
     # return data hasil query database
+    print(query_with_distances)
     return query_with_distances
 
 
@@ -151,28 +197,48 @@ def cari_rumah_page():
     # query list kecamatan dan agen
     all_kecamatan = Kecamatan.query.all()
     all_agen = Agen.query.all()
-    all_rumah = Rumah.query.filter(Rumah.kamar_mandi > 0)
+    query = Rumah.query.filter(Rumah.kamar_mandi > 0)
     status_profil_user = None
-    the_user = None
-    query_results = all_rumah.order_by(Rumah.click_count.desc()).all()
+    the_user = User.query.get(current_user.get_id())
+
+    if the_user:
+        if the_user.range_gaji >= 1000000 and the_user.range_gaji <= 15000000:
+            print("hit 1")
+            all_rumah = query.filter(Rumah.harga <= 800000000)
+        elif the_user.range_gaji > 15000000 and the_user.range_gaji <= 20000000:
+            print("hit 2")
+            all_rumah = query.filter(Rumah.harga <= 1100000000)
+        elif the_user.range_gaji > 20000000 and the_user.range_gaji <= 30000000:
+            print("hit 3")
+            all_rumah = query.filter(Rumah.harga <= 1500000000)
+        elif the_user.range_gaji > 30000000 and the_user.range_gaji <= 40000000:
+            print("hit 4")
+            all_rumah = query.filter(Rumah.harga <= 2500000000)
+        else:
+            print("hit 5")
+            all_rumah = query.filter(Rumah.harga > 2500000000)
+
+        query_results = all_rumah.order_by(Rumah.click_count.desc()).all()
+    else:
+        query_results = query.order_by(Rumah.click_count.desc()).all()
 
     query_rumah = {}
     if user_is_authenticated:
         the_user = User.query.get(current_user.get_id())
         status_profil_user = the_user.is_filled
 
-        for rumah in query_results:
+        for index, rumah in enumerate(query_results):
             query_cordinates = ",".join([rumah.latitude, rumah.longitude])
             distance = get_distance_api(
                 the_user.alamat_tempat_kerja, query_cordinates, user_is_authenticated
             )
-            query_rumah[distance] = rumah
+            query_rumah[index] = [distance, rumah]
         # sorted(query_with_distances.items()) mengurutkan hasil query berdasarkan jarak
         query_rumah = dict(sorted(query_rumah.items()))
     else:
         # query semua rumah
         for index, rumah in enumerate(query_results):
-            query_rumah[index] = rumah
+            query_rumah[index] = [0.0, rumah]
 
     # manmpilkan halaman cari rumah dengan hasil query yg telah di dapat
     return render_template(
@@ -213,6 +279,7 @@ def handle_cari_rumah():
     checkbox_taman = request.form.get("checkbox_taman")
     checkbox_playground = request.form.get("checkbox_playground")
     checkbox_kolam_renang = request.form.get("checkbox_kolam_renang")
+    sort_by_jarak = request.form.get("sort-by-jarak")
 
     # jika user login maka query data user dari database
     if user_is_authenticated:
@@ -234,7 +301,10 @@ def handle_cari_rumah():
         checkbox_taman,
         checkbox_playground,
         checkbox_kolam_renang,
+        sort_by_jarak,
     )
+
+    print(query_rumah)
 
     # tampilkan hasil query ke halaman cari rumah
     return render_template(
@@ -264,8 +334,22 @@ def detail_rumah(id, from_cari_rumah):
     jarak = None
     cicilan = None
 
+    for gambar in detail_rumah.gambar:
+        print(gambar.nama_gambar)
+
     if not detail_rumah:
         return redirect("/cari_rumah")
+
+    # hitung jarak ke fasilitas umum (kendaraan)
+    jarak_kendaraan_umum = hitung_jarak_kendaraan_umum(
+        ",".join([detail_rumah.latitude, detail_rumah.longitude])
+    )
+    bandara = jarak_kendaraan_umum["bandara"][0]
+    jarak_bandara = jarak_kendaraan_umum["bandara"][1]
+    krl = jarak_kendaraan_umum["krl"][0]
+    jarak_krl = jarak_kendaraan_umum["krl"][1]
+    bus_stop = jarak_kendaraan_umum["bus_stop"][0]
+    jarak_bus_stop = jarak_kendaraan_umum["bus_stop"][1]
 
     # jika user login maka query data user
     if user_is_authenticated:
@@ -274,6 +358,7 @@ def detail_rumah(id, from_cari_rumah):
         jarak = get_distance_api(
             the_user.alamat_tempat_kerja, kordinat_rumah, user_is_authenticated
         )
+        print(jarak)
 
     # jika user click detail rumah pada halaman cari rumah maka dihitung click count
     # pengurutan rumah rekomendasi jika user tidak login adalah berdasarkan click count
@@ -293,6 +378,12 @@ def detail_rumah(id, from_cari_rumah):
                 user_is_authenticated=user_is_authenticated,
                 cicilan=cicilan,
                 fixed_bunga=fixed_bunga,
+                bandara=bandara,
+                jarak_bandara=jarak_bandara,
+                krl=krl,
+                jarak_krl=jarak_krl,
+                bus_stop=bus_stop,
+                jarak_bus_stop=jarak_bus_stop,
             )
         )
 
@@ -305,6 +396,12 @@ def detail_rumah(id, from_cari_rumah):
         user_is_authenticated=user_is_authenticated,
         cicilan=cicilan,
         fixed_bunga=fixed_bunga,
+        bandara=bandara,
+        jarak_bandara=jarak_bandara,
+        krl=krl,
+        jarak_krl=jarak_krl,
+        bus_stop=bus_stop,
+        jarak_bus_stop=jarak_bus_stop,
     )
 
 
