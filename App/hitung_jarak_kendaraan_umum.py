@@ -68,12 +68,16 @@ def get_jarak_googleapi(tempat, tujuan_dict):
             jarak_counter = jarak
             terdekat = [nama_tempat, jarak]
 
+    print(terdekat)
     return terdekat
 
 
 def hitung_jarak_kendaraan_umum(kordinat_rumah):
     hasil_bandara = get_jarak_googleapi(kordinat_rumah, bandara)
+    print("bandara done")
     hasil_krl = get_jarak_googleapi(kordinat_rumah, krl)
+    print("krl done")
     hasil_bus_stop = get_jarak_googleapi(kordinat_rumah, bus_stop)
+    print("bus stop done")
 
     return {"bandara": hasil_bandara, "krl": hasil_krl, "bus_stop": hasil_bus_stop}

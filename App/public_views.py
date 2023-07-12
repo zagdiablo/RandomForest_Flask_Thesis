@@ -62,11 +62,17 @@ def handle_query(
     checkbox_taman,
     checkbox_playground,
     checkbox_kolam_renang,
+    sort_by_jarak,
 ):
     number = list("12345")
     print("handle query func hit")
+
     # query rumah berdasarkan kecamatan dan fasilitas yang di passing dari halaman cari rumah
-    query = Rumah.query.filter(Rumah.kecamatan == kecamatan)
+    if kecamatan == "Kecamatan":
+        query = Rumah.query.filter(Rumah.kamar_mandi > -1)
+    else:
+        query = Rumah.query.filter(Rumah.kecamatan == kecamatan)
+
     if user_is_authenticated:
         print("is authenticated")
         # FIXME dynamic perhitungan di bagian persentase gaji dan lama waktu cicilan (5 - 25 bulan dropdown)
@@ -123,24 +129,45 @@ def handle_query(
 
     query_with_distances = {}
     # jika user telah login, query dan hitung jarak menggunakan fungsi get_distance_api
+    print(sort_by_jarak)
     if user_is_authenticated:
-        query_results = query.order_by(Rumah.click_count.desc()).all()
-        for query in query_results:
-            query_cordinates = ",".join([query.latitude, query.longitude])
-            distance = get_distance_api(
-                the_user.alamat_tempat_kerja, query_cordinates, user_is_authenticated
-            )
-            query_with_distances[distance] = query
-        # sorted(query_with_distances.items()) mengurutkan hasil query berdasarkan jarak
-        query_with_distances = dict(sorted(query_with_distances.items()))
+        if sort_by_jarak:
+            query_results = query.order_by(Rumah.harga.asc()).all()
+            print(query_results)
+            for index, query in enumerate(query_results):
+                query_cordinates = ",".join([query.latitude, query.longitude])
+                distance = get_distance_api(
+                    the_user.alamat_tempat_kerja,
+                    query_cordinates,
+                    user_is_authenticated,
+                )
+                query_with_distances[index] = [distance, query]
+                print(query_with_distances)
+        else:
+            query_results = query.order_by(Rumah.click_count.desc()).all()
+            for index, query in enumerate(query_results):
+                query_cordinates = ",".join([query.latitude, query.longitude])
+                distance = get_distance_api(
+                    the_user.alamat_tempat_kerja,
+                    query_cordinates,
+                    user_is_authenticated,
+                )
+                query_with_distances[index] = [distance, query]
+            # sorted(query_with_distances.items()) mengurutkan hasil query berdasarkan jarak
+            query_with_distances = dict(sorted(query_with_distances.items()))
     # jika tidak isi jarak dengan angka index saja, dan tidak ditampilkan pada halaman hasil pencarian
     else:
         # click_count.desc() query data yang di urutkan berdasarkan click count terbanyak
-        query_results = query.order_by(Rumah.click_count.desc()).all()
+        if sort_by_jarak:
+            query_results = query.order_by(Rumah.harga.asc()).all()
+            print(query_results)
+        else:
+            query_results = query.order_by(Rumah.click_count.desc()).all()
         for index, query in enumerate(query_results):
-            query_with_distances[index] = query
+            query_with_distances[index] = [0.0, query]
 
     # return data hasil query database
+    print(query_with_distances)
     return query_with_distances
 
 
@@ -200,18 +227,18 @@ def cari_rumah_page():
         the_user = User.query.get(current_user.get_id())
         status_profil_user = the_user.is_filled
 
-        for rumah in query_results:
+        for index, rumah in enumerate(query_results):
             query_cordinates = ",".join([rumah.latitude, rumah.longitude])
             distance = get_distance_api(
                 the_user.alamat_tempat_kerja, query_cordinates, user_is_authenticated
             )
-            query_rumah[distance] = rumah
+            query_rumah[index] = [distance, rumah]
         # sorted(query_with_distances.items()) mengurutkan hasil query berdasarkan jarak
         query_rumah = dict(sorted(query_rumah.items()))
     else:
         # query semua rumah
         for index, rumah in enumerate(query_results):
-            query_rumah[index] = rumah
+            query_rumah[index] = [0.0, rumah]
 
     # manmpilkan halaman cari rumah dengan hasil query yg telah di dapat
     return render_template(
@@ -252,6 +279,7 @@ def handle_cari_rumah():
     checkbox_taman = request.form.get("checkbox_taman")
     checkbox_playground = request.form.get("checkbox_playground")
     checkbox_kolam_renang = request.form.get("checkbox_kolam_renang")
+    sort_by_jarak = request.form.get("sort-by-jarak")
 
     # jika user login maka query data user dari database
     if user_is_authenticated:
@@ -273,7 +301,10 @@ def handle_cari_rumah():
         checkbox_taman,
         checkbox_playground,
         checkbox_kolam_renang,
+        sort_by_jarak,
     )
+
+    print(query_rumah)
 
     # tampilkan hasil query ke halaman cari rumah
     return render_template(
@@ -303,28 +334,22 @@ def detail_rumah(id, from_cari_rumah):
     jarak = None
     cicilan = None
 
+    for gambar in detail_rumah.gambar:
+        print(gambar.nama_gambar)
+
     if not detail_rumah:
         return redirect("/cari_rumah")
 
     # hitung jarak ke fasilitas umum (kendaraan)
-    bandara = hitung_jarak_kendaraan_umum(
+    jarak_kendaraan_umum = hitung_jarak_kendaraan_umum(
         ",".join([detail_rumah.latitude, detail_rumah.longitude])
-    )["bandara"][0]
-    jarak_bandara = hitung_jarak_kendaraan_umum(
-        ",".join([detail_rumah.latitude, detail_rumah.longitude])
-    )["bandara"][1]
-    krl = hitung_jarak_kendaraan_umum(
-        ",".join([detail_rumah.latitude, detail_rumah.longitude])
-    )["krl"][0]
-    jarak_krl = hitung_jarak_kendaraan_umum(
-        ",".join([detail_rumah.latitude, detail_rumah.longitude])
-    )["krl"][1]
-    bus_stop = hitung_jarak_kendaraan_umum(
-        ",".join([detail_rumah.latitude, detail_rumah.longitude])
-    )["bus_stop"][0]
-    jarak_bus_stop = hitung_jarak_kendaraan_umum(
-        ",".join([detail_rumah.latitude, detail_rumah.longitude])
-    )["bus_stop"][1]
+    )
+    bandara = jarak_kendaraan_umum["bandara"][0]
+    jarak_bandara = jarak_kendaraan_umum["bandara"][1]
+    krl = jarak_kendaraan_umum["krl"][0]
+    jarak_krl = jarak_kendaraan_umum["krl"][1]
+    bus_stop = jarak_kendaraan_umum["bus_stop"][0]
+    jarak_bus_stop = jarak_kendaraan_umum["bus_stop"][1]
 
     # jika user login maka query data user
     if user_is_authenticated:

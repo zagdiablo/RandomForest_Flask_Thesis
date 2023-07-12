@@ -281,8 +281,17 @@
                                                             name="deskripsi">{{ to_edit_rumah.deskripsi }}</textarea>
                                                     </div>
                                                 </div>
+
                                                 <div class="form-group mt-2 mb-2 col-12">
-                                                    <label for="add-image"><strong>Gambar</strong></label>
+                                                    <label><strong>List Gambar</strong></label><br>
+
+                                                    {% for gambar in to_edit_rumah.gambar %}
+                                                    {{ gambar.nama_gambar }}<br>
+                                                    {% endfor %}
+                                                </div>
+
+                                                <div class="form-group mt-2 mb-2 col-12">
+                                                    <label for="add-image"><strong>Tambah Gambar</strong></label>
                                                     <input type="file" id="add-image" class="image-preview-filepond"
                                                         name="gambar-rumah">
                                                 </div>
