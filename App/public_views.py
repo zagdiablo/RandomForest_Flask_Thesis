@@ -152,9 +152,21 @@ def handle_query(
                     query_cordinates,
                     user_is_authenticated,
                 )
-                query_with_distances[index] = [distance, query]
+                query_with_distances[distance] = [distance, query]
             # sorted(query_with_distances.items()) mengurutkan hasil query berdasarkan jarak
-            query_with_distances = dict(sorted(query_with_distances.items()))
+            # TODO query_with_distances = dict(sorted(query_with_distances.items()))
+            temp = list(query_with_distances.keys())
+            print(temp)
+            temp = sorted(temp)
+            print(temp)
+            final_query_with_distance = {}
+            for index, key in enumerate(temp):
+                final_query_with_distance[index] = [
+                    query_with_distances[key][0],
+                    query_with_distances[key][1],
+                ]
+            print(final_query_with_distance)
+            return final_query_with_distance
     # jika tidak isi jarak dengan angka index saja, dan tidak ditampilkan pada halaman hasil pencarian
     else:
         # click_count.desc() query data yang di urutkan berdasarkan click count terbanyak
@@ -167,7 +179,6 @@ def handle_query(
             query_with_distances[index] = [0.0, query]
 
     # return data hasil query database
-    print(query_with_distances)
     return query_with_distances
 
 
@@ -232,9 +243,20 @@ def cari_rumah_page():
             distance = get_distance_api(
                 the_user.alamat_tempat_kerja, query_cordinates, user_is_authenticated
             )
-            query_rumah[index] = [distance, rumah]
+            query_rumah[distance] = [distance, rumah]
         # sorted(query_with_distances.items()) mengurutkan hasil query berdasarkan jarak
-        query_rumah = dict(sorted(query_rumah.items()))
+        # query_rumah = dict(sorted(query_rumah.items()))
+        temp = list(query_rumah.keys())
+        print(temp)
+        temp = sorted(temp)
+        print(temp)
+        final_query_with_distance = {}
+        for index, key in enumerate(temp):
+            final_query_with_distance[index] = [
+                query_rumah[key][0],
+                query_rumah[key][1],
+            ]
+        query_rumah = final_query_with_distance
     else:
         # query semua rumah
         for index, rumah in enumerate(query_results):
@@ -256,7 +278,7 @@ def cari_rumah_page():
 # mengecek parameter pencarian seperti fasilitas, lantai, kamar mandi, dan kamar tidur
 # di olang menggunakan fungsi handle_query() lalu di tampilkan hasil querinya
 # pada halama cari rumah
-@public_views.route("/handle_cari_rumah", methods=["POST"])
+@public_views.route("/handle_cari_rumah", methods=["POST", "GET"])
 def handle_cari_rumah():
     # cek user login atau tidak
     user_is_authenticated = current_user.is_authenticated
