@@ -281,23 +281,10 @@
                                                             name="deskripsi">{{ to_edit_rumah.deskripsi }}</textarea>
                                                     </div>
                                                 </div>
-
-                                                <div class="form-group mt-2 mb-2 col-12">
-                                                    <label><strong>List Gambar</strong></label><br>
-
-                                                    {% for gambar in to_edit_rumah.gambar %}
-                                                    {{ gambar.nama_gambar }}<br>
-                                                    {% endfor %}
-                                                </div>
-
-                                                <div class="form-group mt-2 mb-2 col-12">
-                                                    <label for="add-image"><strong>Tambah Gambar</strong></label>
-                                                    <input type="file" id="add-image" class="image-preview-filepond"
-                                                        name="gambar-rumah">
-                                                </div>
                                             </div>
+
                                             <div class="col-12 d-flex justify-content-end">
-                                                <button type="submit" class="btn btn-primary me-1 mb-1">Edit</button>
+                                                <button type="submit" class="btn btn-primary me-1 mb-1">Tambah</button>
                                                 <a href="/admin_rumah">
                                                     <span class="btn btn-light-secondary me-1 mb-1">Batal</span>
                                                 </a>
@@ -305,6 +292,94 @@
                                     </div>
                                     </form>
                                     <!-- edit rumah form end -->
+
+                                    <div style="padding: 1em;" class="form-group mt-2 mb-2 col-12">
+                                        <label><strong>List Gambar</strong></label><br>
+
+                                        {% for gambar in to_edit_rumah.gambar %}
+                                        <!-- tombal modal untuk hapus gambar -->
+                                        <button type="button" class="btn btn-danger me-1 mb-1" data-bs-toggle="modal"
+                                            data-bs-target="#hapusGambar{{gambar.id}}">
+                                            Hapus Gambar
+                                        </button>
+
+                                        <!-- Modal untuk hapus gambar -->
+                                        <div class="modal fade" id="hapusGambar{{gambar.id}}" tabindex="-1"
+                                            aria-labelledby="hapusGambar{{gambar.id}}Label" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="hapusGambar{{gambar.id}}Label">
+                                                            Modal
+                                                            title</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <form action="/handle_hapus_gambar_rumah/{{ to_edit_rumah.id }}"
+                                                        method="post">
+                                                        <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+
+                                                        <div class="modal-body">
+                                                            <div class="form-group mt-2 mb-2 col-12">
+                                                                <input type="hidden" id="add-image"
+                                                                    class="image-preview-filepond" name="id-gambar"
+                                                                    value="{{gambar.id}}">
+                                                                <h3>Hapus gambar?</h3>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Batal</button>
+                                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{ gambar.nama_gambar }}<br>
+                                        {% endfor %}
+
+                                        <!-- tombal modal untuk tambah gambar -->
+                                        <br>
+                                        <button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal">
+                                            Tambah Gambar
+                                        </button>
+                                    </div>
+
+                                    <!-- Modal untuk tambah gambar -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal
+                                                        title</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <form action="/handle_tambah_gambar_rumah/{{ to_edit_rumah.id }}"
+                                                    method="post" enctype="multipart/form-data">
+                                                    <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+
+                                                    <div class="modal-body">
+                                                        <div class="form-group mt-2 mb-2 col-12">
+                                                            <label for="add-image"><strong>Tambah
+                                                                    Gambar</strong></label>
+                                                            <input type="file" id="add-image"
+                                                                class="image-preview-filepond" name="gambar-rumah">
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Batal</button>
+                                                        <button type="submit" class="btn btn-primary">Tambah
+                                                            Gambar</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                 </div>
                             </div>

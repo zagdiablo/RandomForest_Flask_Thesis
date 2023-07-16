@@ -236,8 +236,8 @@ def handle_tambah_rumah():
     kontak_agen = request.form.get("kontak_agen")
     latitude = request.form.get("latitude")
     longitude = request.form.get("longitude")
-    gambar = request.files["gambar-rumah"]
     deskripsi = request.form.get("deskripsi")
+    gambar = request.files["gambar-rumah"]
     fasilitas = request.values.getlist("fasilitas")
 
     if gambar:
@@ -315,25 +315,8 @@ def handle_edit_rumah(id):
     kontak_agen = request.form.get("kontak_agen")
     latitude = request.form.get("latitude")
     longitude = request.form.get("longitude")
-    gambar = request.files["gambar-rumah"]
     deskripsi = request.form.get("deskripsi")
     fasilitas = request.values.getlist("fasilitas")
-
-    # if gambar:
-    #     old_gambar = to_edit_rumah.gambar
-    #     delete_image(old_gambar)
-
-    #     if gambar == "":
-    #         flash("Gambar kosong", category="error")
-    #         return redirect(f"/edit_rumah/{id}")
-
-    nama_file_gambar = upload_image(gambar, None)
-    to_add_gambar = GambarRumah(
-        nama_gambar=nama_file_gambar,
-        rumah=id,
-    )
-    db.session.add(to_add_gambar)
-    db.session.commit()
 
     if to_edit_rumah:
         to_edit_rumah.nama_perumahan = nama_perumahan
@@ -357,6 +340,42 @@ def handle_edit_rumah(id):
         return redirect(f"/edit_rumah/{id}")
 
     flash(f"gagal mengedit data rumah {to_edit_rumah.alamat}", category="error")
+    return redirect(f"/edit_rumah/{id}")
+
+
+@admin_views.route("/handle_tambah_gambar_rumah/<int:id>", methods=["POST"])
+def handle_tambah_gambar_rumah(id):
+    gambar = request.files["gambar-rumah"]
+
+    nama_file_gambar = upload_image(gambar, None)
+    to_add_gambar = GambarRumah(
+        nama_gambar=nama_file_gambar,
+        rumah=id,
+    )
+    db.session.add(to_add_gambar)
+    db.session.commit()
+
+    flash("Berhasil menambah gambar rumah")
+    return redirect(f"/edit_rumah/{id}")
+
+
+@admin_views.route("/handle_hapus_gambar_rumah/<int:id>", methods=["POST"])
+def handle_hapus_gambar_rumah(id):
+    id_gambar = int(request.form.get("id-gambar"))
+    to_edit_rumah = Rumah.query.get(id)
+
+    print(id_gambar)
+
+    for gambar in to_edit_rumah.gambar:
+        print(gambar.id, id_gambar)
+        if gambar.id == id_gambar:
+            to_delete_gambar = GambarRumah.query.get(gambar.id)
+            print(f"{gambar.id} == {id_gambar}")
+            flash(f"Berhasil menghapus gambar {gambar.nama_gambar}")
+            delete_image(gambar.nama_gambar)
+            db.session.delete(to_delete_gambar)
+            db.session.commit()
+
     return redirect(f"/edit_rumah/{id}")
 
 

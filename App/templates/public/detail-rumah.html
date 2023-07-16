@@ -590,8 +590,8 @@
               <div class="carousel">
                 {% if user_is_authenticated %}
                 <ul class="slides">
-                  
-                  {% if gambar %}
+
+                  {% if detail_rumah.gambar %}
                   {% for gambar in detail_rumah.gambar %}
                   <input type="radio" name="radio-buttons" id="img-{{loop.index}}" checked />
                   <li class="slide-container">
@@ -629,7 +629,7 @@
                       </label>
                     </div>
                   </li>
-                 {% endif %}
+                  {% endif %}
                 </ul>
                 {% else %}
                 <ul class="slides">
@@ -642,12 +642,12 @@
                       <label class="prev-slide">
                         <span>&lsaquo;</span>
                       </label>
-                      <label  class="next-slide">
+                      <label class="next-slide">
                         <span>&rsaquo;</span>
                       </label>
                     </div>
-                  </li>    
-                  <div class="carousel-dots">      
+                  </li>
+                  <div class="carousel-dots">
                     <label class="carousel-dot"></label>
                   </div>
                 </ul>
