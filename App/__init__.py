@@ -76,7 +76,7 @@ def create_app():
     # generate database
     create_database(app)
     generate_admin_account(app)
-    datasets_to_database(app)
+    # datasets_to_database(app)
     generate_fixed_bunga(app)
 
     return app
@@ -145,78 +145,78 @@ def generate_fixed_bunga(app):
         return
 
 
-#
-#
-# membaca file houses_dummy_datasets.json dari folder datasets untuk dimasukkan ke dataabse
-def datasets_to_database(app):
-    from .models import Rumah
-    from .models import Kecamatan
-    from .models import Agen
+# #
+# #
+# # membaca file houses_dummy_datasets.json dari folder datasets untuk dimasukkan ke dataabse
+# def datasets_to_database(app):
+#     from .models import Rumah
+#     from .models import Kecamatan
+#     from .models import Agen
 
-    # cek apakah data houses_dummy_datasets.json ada atau tidak
-    if os.path.exists(f"App/datasets/houses_dummy_datasets.json"):
-        df = pd.read_json(os.path.join(f"App/datasets/houses_dummy_datasets.json"))
+#     # cek apakah data houses_dummy_datasets.json ada atau tidak
+#     if os.path.exists(f"App/datasets/houses_dummy_datasets.json"):
+#         df = pd.read_json(os.path.join(f"App/datasets/houses_dummy_datasets.json"))
 
-        # jika ada baca dan baca dan masukkan data per kunci ke database
-        with app.app_context():
-            for _, rs in df.iterrows():
-                kontak_agen = dict(rs[9])
-                kordinat = dict(rs[8])
+#         # jika ada baca dan baca dan masukkan data per kunci ke database
+#         with app.app_context():
+#             for _, rs in df.iterrows():
+#                 kontak_agen = dict(rs[9])
+#                 kordinat = dict(rs[8])
 
-                # data rumah
-                new_rumah_data = Rumah(
-                    alamat=str(rs[0]),
-                    nama_perumahan=str(rs[1]),
-                    luas=int(rs[2]),
-                    harga=rs[3],
-                    lantai=int(rs[4]),
-                    kamar_tidur=int(rs[5]),
-                    kamar_mandi=int(rs[6]),
-                    kecamatan=str(rs[7]),
-                    latitude=kordinat["latitude"],
-                    longitude=kordinat["longitude"],
-                    kontak_agen=str(kontak_agen["nama"]),
-                    fasilitas=", ".join(rs[11]),
-                    njop=int(rs[10]),
-                )
-                db.session.add(new_rumah_data)
-            db.session.commit()
+#                 # data rumah
+#                 new_rumah_data = Rumah(
+#                     alamat=str(rs[0]),
+#                     nama_perumahan=str(rs[1]),
+#                     luas=int(rs[2]),
+#                     harga=rs[3],
+#                     lantai=int(rs[4]),
+#                     kamar_tidur=int(rs[5]),
+#                     kamar_mandi=int(rs[6]),
+#                     kecamatan=str(rs[7]),
+#                     latitude=kordinat["latitude"],
+#                     longitude=kordinat["longitude"],
+#                     kontak_agen=str(kontak_agen["nama"]),
+#                     fasilitas=", ".join(rs[11]),
+#                     njop=int(rs[10]),
+#                 )
+#                 db.session.add(new_rumah_data)
+#             db.session.commit()
 
-            # data kecamatan
-            for _, rs in df.iterrows():
-                to_check_kecamatan = Kecamatan.query.filter_by(
-                    nama_kecamatan=str(rs[7])
-                ).first()
+#             # data kecamatan
+#             for _, rs in df.iterrows():
+#                 to_check_kecamatan = Kecamatan.query.filter_by(
+#                     nama_kecamatan=str(rs[7])
+#                 ).first()
 
-                if not to_check_kecamatan:
-                    new_kecamatan = Kecamatan(nama_kecamatan=str(rs[7]))
-                    db.session.add(new_kecamatan)
-            db.session.commit()
+#                 if not to_check_kecamatan:
+#                     new_kecamatan = Kecamatan(nama_kecamatan=str(rs[7]))
+#                     db.session.add(new_kecamatan)
+#             db.session.commit()
 
-            # data agen
-            for _, rs in df.iterrows():
-                kontak_agen = dict(rs[9])
+#             # data agen
+#             for _, rs in df.iterrows():
+#                 kontak_agen = dict(rs[9])
 
-                to_check_agen = Agen.query.filter_by(
-                    nama_agen=kontak_agen["nama"]
-                ).first()
-                if not to_check_agen:
-                    new_agen = Agen(
-                        nama_agen=kontak_agen["nama"],
-                        nomor_telepon=kontak_agen["nomor_telepon"],
-                        email=kontak_agen["email"],
-                        whatsapp=kontak_agen["nomor_whatsapp"],
-                    )
-                    db.session.add(new_agen)
-                db.session.commit()
+#                 to_check_agen = Agen.query.filter_by(
+#                     nama_agen=kontak_agen["nama"]
+#                 ).first()
+#                 if not to_check_agen:
+#                     new_agen = Agen(
+#                         nama_agen=kontak_agen["nama"],
+#                         nomor_telepon=kontak_agen["nomor_telepon"],
+#                         email=kontak_agen["email"],
+#                         whatsapp=kontak_agen["nomor_whatsapp"],
+#                     )
+#                     db.session.add(new_agen)
+#                 db.session.commit()
 
-        os.rename(
-            os.path.join(f"App/datasets/houses_dummy_datasets.json"),
-            os.path.join(f"App/datasets/houses_dummy_datasets_DONE.json"),
-        )
-        print("[+] berhasil menambahkan dataset ke database")
-        return
+#         os.rename(
+#             os.path.join(f"App/datasets/houses_dummy_datasets.json"),
+#             os.path.join(f"App/datasets/houses_dummy_datasets_DONE.json"),
+#         )
+#         print("[+] berhasil menambahkan dataset ke database")
+#         return
 
-    # jika dataset sudah ada di database maka tidak perlu di masukkan
-    print("[-] dataset sudah ada dalam database")
-    return
+#     # jika dataset sudah ada di database maka tidak perlu di masukkan
+#     print("[-] dataset sudah ada dalam database")
+#     return
