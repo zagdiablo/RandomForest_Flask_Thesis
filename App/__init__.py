@@ -3,7 +3,6 @@ from flask_wtf import CSRFProtect
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from werkzeug.security import generate_password_hash
-from flask_migrate import Migrate
 
 import os
 import pathlib
@@ -51,7 +50,6 @@ def create_app():
     from .models import User
 
     db.init_app(app)
-    migrate = Migrate(app, db)
 
     # import blueprint
     from .admin_views import admin_views

@@ -389,7 +389,8 @@ def delete_rumah(id):
     to_delete_rumah = Rumah.query.get(id)
 
     if to_delete_rumah:
-        delete_image(to_delete_rumah.gambar)
+        for gambar in to_delete_rumah.gambar:
+            delete_image(gambar.nama_gambar)
 
         flash(
             f"berhasil menghapus data rumah {to_delete_rumah.alamat}",
