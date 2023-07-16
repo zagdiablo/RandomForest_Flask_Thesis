@@ -89,10 +89,10 @@ def create_database(app):
     # cek apakah  database sudah ada
     if not os.path.exists(f"App/{DB_NAME}"):
         # jika belum generate database
-        os.rename(
-            os.path.join(f"App/datasets/houses_dummy_datasets_DONE.json"),
-            os.path.join(f"App/datasets/houses_dummy_datasets.json"),
-        )
+        # os.rename(
+        #     os.path.join(f"App/datasets/houses_dummy_datasets_DONE.json"),
+        #     os.path.join(f"App/datasets/houses_dummy_datasets.json"),
+        # )
         db.create_all(app=app)
         print(f"[+] Database successfully created!")
         return
@@ -195,8 +195,6 @@ def generate_fixed_bunga(app):
 
 #             # data agen
 #             for _, rs in df.iterrows():
-#                 kontak_agen = dict(rs[9])
-
 #                 to_check_agen = Agen.query.filter_by(
 #                     nama_agen=kontak_agen["nama"]
 #                 ).first()

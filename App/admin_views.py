@@ -233,7 +233,16 @@ def handle_tambah_rumah():
     lantai = request.form.get("lantai")
     kamar_tidur = request.form.get("kamar_tidur")
     kamar_mandi = request.form.get("kamar_mandi")
-    kontak_agen = request.form.get("kontak_agen")
+
+    get_kontak_agen = request.form.get("kontak_agen").split(",")
+    kontak_agen = get_kontak_agen[0]
+    kontak_agen_id = int(get_kontak_agen[1])
+
+    data_agen = Agen.query.get(kontak_agen_id)
+    agen_nomor_telepon = data_agen.nomor_telepon
+    agen_email = data_agen.email
+    agen_whatsapp = data_agen.whatsapp
+
     latitude = request.form.get("latitude")
     longitude = request.form.get("longitude")
     deskripsi = request.form.get("deskripsi")
@@ -257,6 +266,10 @@ def handle_tambah_rumah():
         kamar_tidur=kamar_tidur,
         kamar_mandi=kamar_mandi,
         kontak_agen=kontak_agen,
+        kontak_agen_id=kontak_agen_id,
+        agen_nomor_telepon=agen_nomor_telepon,
+        agen_email=agen_email,
+        agen_whatsapp=agen_whatsapp,
         latitude=latitude,
         longitude=longitude,
         deskripsi=deskripsi,

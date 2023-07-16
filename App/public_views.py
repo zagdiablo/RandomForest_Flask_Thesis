@@ -350,6 +350,7 @@ def handle_cari_rumah():
 def detail_rumah(id, from_cari_rumah):
     # query data detail dan fasilitas rumah
     detail_rumah = Rumah.query.get(id)
+    agen_rumah = Agen.query.get(detail_rumah.kontak_agen_id)
     user_is_authenticated = current_user.is_authenticated
     fasilitas_rumah = detail_rumah.fasilitas
     fixed_bunga = FixedBunga.query.get(1)
@@ -395,6 +396,7 @@ def detail_rumah(id, from_cari_rumah):
                 id=id,
                 from_cari_rumah=0,
                 detail_rumah=detail_rumah,
+                agen_rumah=agen_rumah,
                 fasilitas_rumah=fasilitas_rumah,
                 jarak=jarak,
                 user_is_authenticated=user_is_authenticated,
@@ -413,6 +415,7 @@ def detail_rumah(id, from_cari_rumah):
     return render_template(
         f"public/detail-rumah.html",
         detail_rumah=detail_rumah,
+        agen_rumah=agen_rumah,
         fasilitas_rumah=fasilitas_rumah,
         jarak=jarak,
         user_is_authenticated=user_is_authenticated,

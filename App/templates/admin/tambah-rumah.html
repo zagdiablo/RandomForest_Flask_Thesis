@@ -241,7 +241,8 @@
                                                         <select class="form-select" name="kontak_agen">
                                                             <option selected>Pilih Agen</option>
                                                             {% for agen in all_agen %}
-                                                            <option value="{{ agen.nama_agen }}">{{ agen.nama_agen }}
+                                                            <option value="{{ agen.nama_agen }}, {{agen.id}}">{{
+                                                                agen.nama_agen }}
                                                             </option>
                                                             {% endfor %}
                                                         </select>

@@ -556,7 +556,7 @@
                         </div>
                         {% endif %} {% endfor %} {% endif %} {% endwith %}
                         <!-- end alert logic -->
- 
+
                         <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
                             {% if query_rumah %}
                             {% for key, rumah in query_rumah.items() %}
@@ -656,21 +656,20 @@
                                                 </div>
 
                                                 <div class="card-footer-actions">
-
-                                                    <a href="mailto:info@rumahtangsel.com"
+                                                    <a href="mailto:{{rumah[1].agen_email}}"
                                                         class="card-footer-actions-btn">
                                                         <ion-icon name="mail-outline"></ion-icon>
                                                     </a>
 
-                                                    <a href="https://wa.me/0832432432" onclick="copyText()"
-                                                        class="card-footer-actions-btn">
+                                                    <a href="https://wa.me/{{rumah[1].agen_whatsapp}}"
+                                                        onclick="copyText()" class="card-footer-actions-btn">
                                                         <ion-icon name="logo-whatsapp"></ion-icon>
                                                     </a>
 
-                                                    <a href="tel:+62832423342" class="card-footer-actions-btn">
+                                                    <a href="tel:{{rumah[1].agen_nomor_telepon}}"
+                                                        class="card-footer-actions-btn">
                                                         <ion-icon name="call-outline"></ion-icon>
                                                     </a>
-
                                                 </div>
                                             </div>
                                         </div>

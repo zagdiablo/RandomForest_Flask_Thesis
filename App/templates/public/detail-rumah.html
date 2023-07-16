@@ -608,7 +608,7 @@
                     </div>
                   </li>
                   {% endfor %}
- 
+
                   <div class="carousel-dots">
                     {% for gambar in detail_rumah.gambar %}
                     <label for="img-{{loop.index}}" class="carousel-dot" id="img-dot-{{loop.index}}"></label>
@@ -787,17 +787,17 @@
                 </div>
 
                 <div class="card-footer-actions">
-                  <button class="card-footer-actions-btn">
+                  <a href="mailto:{{agen_rumah.email}}" class="card-footer-actions-btn">
                     <ion-icon name="mail-outline"></ion-icon>
-                  </button>
+                  </a>
 
-                  <button class="card-footer-actions-btn">
+                  <a href="https://wa.me/{{agen_rumah.whatsapp}}" class="card-footer-actions-btn">
                     <ion-icon name="logo-whatsapp"></ion-icon>
-                  </button>
+                  </a>
 
-                  <button class="card-footer-actions-btn">
+                  <a href="tel:{{agen_rumah.nomor_telepon}}" class="card-footer-actions-btn">
                     <ion-icon name="call-outline"></ion-icon>
-                  </button>
+                  </a>
                 </div>
               </div>
               {% endif %}
