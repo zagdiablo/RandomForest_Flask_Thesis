@@ -3,6 +3,7 @@ from flask_wtf import CSRFProtect
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from werkzeug.security import generate_password_hash
+from flask_migrate import Migrate
 
 import os
 import pathlib
@@ -24,7 +25,7 @@ db = SQLAlchemy()
 DB_NAME = "database.db"
 
 
-def start_app():
+def create_app():
     # check os platform
     if os.name == "nt":
         UPLOAD_FOLDER = f"{pathlib.Path().absolute()}/App/static/images/"
@@ -50,6 +51,7 @@ def start_app():
     from .models import User
 
     db.init_app(app)
+    migrate = Migrate(app, db)
 
     # import blueprint
     from .admin_views import admin_views
