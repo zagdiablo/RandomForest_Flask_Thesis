@@ -588,7 +588,7 @@
                 </div>
               </div> -->
               <div class="carousel">
-                {% if user_is_authenticated %}
+                
                 <ul class="slides">
 
                   {% if detail_rumah.gambar %}
@@ -631,27 +631,7 @@
                   </li>
                   {% endif %}
                 </ul>
-                {% else %}
-                <ul class="slides">
-                  <input type="radio" name="radio-buttons" checked />
-                  <li class="slide-container">
-                    <div class="slide-image">
-                      <img alt="Rumah-tangsel" class="w-100" src="../../static/images/about-banner-2.jpg">
-                    </div>
-                    <div class="carousel-controls">
-                      <label class="prev-slide">
-                        <span>&lsaquo;</span>
-                      </label>
-                      <label class="next-slide">
-                        <span>&rsaquo;</span>
-                      </label>
-                    </div>
-                  </li>
-                  <div class="carousel-dots">
-                    <label class="carousel-dot"></label>
-                  </div>
-                </ul>
-                {% endif %}
+                
               </div>
 
 
