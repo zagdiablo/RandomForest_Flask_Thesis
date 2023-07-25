@@ -10,6 +10,15 @@ import pandas as pd
 import locale
 
 
+try:
+    from flask_migrate import Migrate
+except ModuleNotFoundError:
+    print("flask_migrate is not installed, installing flask_migrate.")
+    os.system("pip install flask_migrate")
+finally:
+    from flask_migrate import Migrate
+
+
 # file inisialisasi saat menjalankan aplikasi web
 
 
@@ -27,14 +36,19 @@ DB_NAME = "database.db"
 def create_app():
     # check os platform
     if os.name == "nt":
-        UPLOAD_FOLDER = f"{pathlib.Path().absolute()}/App/static/images/"
+        UPLOAD_IMAGE_FOLDER = f"{pathlib.Path().absolute()}/App/static/images/"
+        UPLOAD_FILE_FOLDER = f"{pathlib.Path().absolute()}/App/datasets/"
     else:
-        UPLOAD_FOLDER = (
+        UPLOAD_IMAGE_FOLDER = (
             f"{pathlib.Path().absolute()}/SMK_Perwira_Backend/App/static/images/"
+        )
+        UPLOAD_FILE_FOLDER = (
+            f"{pathlib.Path().absolute()}/SMK_Perwira_Backend/App/datasets/"
         )
 
     # application config
-    app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+    app.config["UPLOAD_IMAGE_FOLDER"] = UPLOAD_IMAGE_FOLDER
+    app.config["UPLOAD_FILE_FOLDER"] = UPLOAD_FILE_FOLDER
     app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024
     app.config["DEBUG"] = True
     app.config["SECRET_KEY"] = "katakakekukukukakikakakukakukenapaku6969"
@@ -50,6 +64,7 @@ def create_app():
     from .models import User
 
     db.init_app(app)
+    migrate = Migrate(app, db)
 
     # import blueprint
     from .admin_views import admin_views

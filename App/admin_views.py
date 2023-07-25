@@ -1,4 +1,7 @@
 # views handling halaman dashboard admin
+import pandas as pd
+import pathlib
+
 
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_required, current_user
@@ -6,6 +9,11 @@ from flask_login import login_required, current_user
 
 from .models import User, Kecamatan, Rumah, Agen, FixedBunga, GambarRumah
 from .handle_image_upload import upload_image, delete_image
+from .handle_dataset_upload import (
+    upload_dataset,
+    delete_dataset,
+    input_dataset_to_database,
+)
 from . import db
 
 
@@ -24,9 +32,6 @@ def check_admin():
 
 
 ######################################
-
-
-# TODO add gambar upload functionality to tambah rumah and edit rumah
 
 
 #
@@ -287,6 +292,21 @@ def handle_tambah_rumah():
 
     flash(f"Rumah {alamat} berhasil ditambah", category="success")
     return redirect("/tambah_rumah")
+
+
+@admin_views.route("/handle_tambah_rumah_upload_dataset", methods=["POST"])
+def handle_tambah_rumah_upload_dataset():
+    dataset_file = request.files["dataset-rumah"]
+
+    dataset_is_uploaded, message = upload_dataset(dataset_file)
+
+    if dataset_is_uploaded:
+        flash(message, category="success")
+        input_dataset_to_database(dataset_file)
+        return redirect("/admin_rumah")
+
+    flash(message, category="error")
+    return redirect("/admin_rumah")
 
 
 # menampilkan halaman edit rumah pada dashboard admin

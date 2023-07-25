@@ -122,9 +122,29 @@
                     <div class="card">
                         <div class="card-body">
 
+                            <!-- Upload file dataset excel -->
                             <div class="row mt-2 mb-3">
                                 <div class="col-md-6">
+                                    <form action="/handle_tambah_rumah_upload_dataset" method="post"
+                                        enctype="multipart/form-data">
 
+                                        <div class="mb-3">
+                                            <label for="formFile" class="form-label">Upload file dataset dalam bentuk
+                                                Excel (.xlsx)</label>
+                                            <div style="width: 100%; display: flex; flex-direction: row;">
+                                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                                <input class="form-control" type="file" id="formFile"
+                                                    name="dataset-rumah">
+                                                <button style="margin-left: 1em;" type="submit"
+                                                    class="btn btn-primary">Upload</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="row mt-2 mb-3">
+                                <div class="col-md-6">
                                     <a href="/tambah_rumah" class="btn btn-primary"
                                         style="display: flex; align-items: center;width: 170px;">
                                         <i class="bi bi-plus-circle" style="font-size: 20px;margin-top: -5px;"></i>

@@ -20,13 +20,15 @@ def upload_image(image_file, to_edit_query_object):
             # TODO change local server save
             if os.name == "nt":
                 # windows path
-                image_file.save(f'{app.config["UPLOAD_FOLDER"]}/{image_file_name}')
+                image_file.save(
+                    f'{app.config["UPLOAD_IMAGE_FOLDER"]}/{image_file_name}'
+                )
                 to_edit_query_object.gambar = image_file_name
                 db.session.commit()
             else:
                 # python anywhere save
                 image_file.save(
-                    os.path.join(app.config["UPLOAD_FOLDER"], image_file_name)
+                    os.path.join(app.config["UPLOAD_IMAGE_FOLDER"], image_file_name)
                 )
                 to_edit_query_object.gambar = image_file_name
                 db.session.commit()
@@ -35,10 +37,12 @@ def upload_image(image_file, to_edit_query_object):
 
         if os.name == "nt":
             # windows path
-            image_file.save(f'{app.config["UPLOAD_FOLDER"]}/{image_file_name}')
+            image_file.save(f'{app.config["UPLOAD_IMAGE_FOLDER"]}/{image_file_name}')
         else:
             # python anywhere save
-            image_file.save(os.path.join(app.config["UPLOAD_FOLDER"], image_file_name))
+            image_file.save(
+                os.path.join(app.config["UPLOAD_IMAGE_FOLDER"], image_file_name)
+            )
         return image_file_name
 
 
@@ -47,10 +51,12 @@ def delete_image(image_file_name):
         try:
             if os.name == "nt":
                 # windows path
-                os.remove(f'{app.config["UPLOAD_FOLDER"]}/{image_file_name}')
+                os.remove(f'{app.config["UPLOAD_IMAGE_FOLDER"]}/{image_file_name}')
             else:
                 # python anywhere delete path
-                os.remove(os.path.join(app.config["UPLOAD_FOLDER"], image_file_name))
+                os.remove(
+                    os.path.join(app.config["UPLOAD_IMAGE_FOLDER"], image_file_name)
+                )
         except FileNotFoundError:
             return
     return
