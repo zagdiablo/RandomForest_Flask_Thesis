@@ -93,6 +93,7 @@ def create_app():
     generate_admin_account(app)
     # datasets_to_database(app)
     generate_fixed_bunga(app)
+    # generate_user_accounts(app)
 
     return app
 
@@ -104,10 +105,10 @@ def create_database(app):
     # cek apakah  database sudah ada
     if not os.path.exists(f"App/{DB_NAME}"):
         # jika belum generate database
-        # os.rename(
-        #     os.path.join(f"App/datasets/houses_dummy_datasets_DONE.json"),
-        #     os.path.join(f"App/datasets/houses_dummy_datasets.json"),
-        # )
+        os.rename(
+            os.path.join(f"App/datasets/user_accounts_DONE.json"),
+            os.path.join(f"App/datasets/user_accounts.json"),
+        )
         db.create_all(app=app)
         print(f"[+] Database successfully created!")
         return
@@ -159,6 +160,38 @@ def generate_fixed_bunga(app):
         print("[-] table fixed bunga sudah ada")
         return
 
+
+# def generate_user_accounts(app):
+#     from .models import User
+
+#     if os.path.exists("App/datasets/user_accounts.xlsx"):
+#         df = pd.read_excel(os.path.join(f"App/datasets/user_accounts.xlsx"))
+
+#     with app.app_context():
+#         for _, user in df.iterrows():
+#             new_account = User(
+#                 nama_lengkap = user['nama_lengkap'],
+#                 email = user['email'],
+#                 password = generate_password_hash(str(user['password']), 'sha256'),
+#                 is_admin = user['is_admin'],
+#                 alamat_tempat_kerja = user['alamat_tempat_kerja'],
+#                 range_gaji = user['range_gaji'],
+#                 is_filled = user['is_filled'],
+#                 selesai_loading_jarak = user['selesai_loading_jarak']
+#             )
+#             db.session.add(new_account)
+#         db.session.commit()
+#         os.rename(
+#             os.path.join(f"App/datasets/user_accounts.xlsx"),
+#             os.path.join(f"App/datasets/user_accounts_DONE.xlsx"),
+#         )
+#         print("[+] berhasil menambahkan user accounts ke database")
+#         return
+
+#     # jika dataset sudah ada di database maka tidak perlu di masukkan
+#     print("[-] user accounts sudah ada dalam database")
+#     return
+    
 
 # #
 # #

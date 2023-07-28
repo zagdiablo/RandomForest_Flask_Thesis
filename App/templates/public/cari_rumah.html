@@ -557,6 +557,19 @@
                         {% endif %} {% endfor %} {% endif %} {% endwith %}
                         <!-- end alert logic -->
 
+                        {% if user_is_authenticated %}
+
+                        {% if the_user.range_gaji < 5500000 %}
+                        <script>
+                            window.onload = function () {
+                                Swal.fire({
+                                    icon: 'warning',
+                                    title: 'Hasil Pencarian',
+                                    text: 'Maaf, Tidak Ada Hasil Yang Sesuai Dengan Profil Anda.',
+                                });
+                            };
+                        </script>
+                        {%else%}
                         <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
                             {% if query_rumah %}
                             {% for key, rumah in query_rumah.items() %}
@@ -689,6 +702,147 @@
                                 {% endif %}
                             </div>
                         </div>
+                        {% endif %}
+                        
+                        {%else%}
+
+                        <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
+                            {% if query_rumah %}
+                            {% for key, rumah in query_rumah.items() %}
+                            <div class="col">
+                                <div class="property-card">
+                                    <figure class="card-banner">
+                                        <!-- TODO link detail rumah -->
+                                        <a href="/detail_rumah/{{ rumah[1].id }}/1">
+                                            {% if rumah[1].gambar %}
+                                            <img src="../../static/images/{{ rumah[1].gambar[0].nama_gambar }}"
+                                                alt="Luxury villa in Rego Park" class="w-100">
+                                            {% else %}
+                                            <img src="{{ url_for('static', filename='images/property-4.png') }}"
+                                                alt="Luxury villa in Rego Park" class="w-100">
+                                            {% endif %}
+                                        </a>
+                                        <div class="card-badge orange">{{ loop.index }}</div>
+                                        <div class="banner-actions">
+                                            <button class="banner-actions-btn">
+                                                <ion-icon name="location"></ion-icon>
+
+                                                <address style="margin-bottom: 0;">{{ rumah[1].alamat }}</address>
+                                            </button>
+                                        </div>
+                                    </figure>
+                                    <div class="card-content">
+                                        <div class="card-price">
+                                            <!-- Harga Disini -->
+                                            <strong class="hargaRumah">{{ rumah[1].harga }}</strong>
+                                        </div>
+                                        <h3 class="h3 card-title">
+                                            <!-- Nama Perumahan / Rumah -->
+                                            <a href="/detail_rumah/{{ rumah[1].id }}/1">{{ rumah[1].nama_perumahan
+                                                }}</a>
+                                        </h3>
+                                        <!--  -->
+                                        <p class="card-text">
+                                        <h5>Fasilitas:</h5>{{ rumah[1].fasilitas }}</span>
+                                        </p>
+                                        <p class="card-text">
+                                            {% if user_is_authenticated %}
+                                        <div id="kecamatan" hidden>{{ rumah[1].kecamatan }}</div>
+                                        <div id="lokasiKerja" hidden>{{ the_user.alamat_tempat_kerja }}</div>
+                                        {%else%}
+
+                                        {% endif %}
+                                        </p>
+                                        {% if user_is_authenticated %}
+                                        <p class="card-text">
+                                        <h6>Jarak tempuh dari lokasi kerja anda:</h6>
+                                        {% if rumah[0] %}
+                                        <strong> {{ rumah[0] }} Km</strong>
+                                        {% else %}
+                                        <strong> Jarak tempuh tidak ditemukan, atau tidak valid. </strong>
+                                        {% endif %}
+                                        </p>
+                                        {% endif %}
+                                        <ul class="card-list">
+                                            <p hidden id="clickCount">{{ rumah[1].click_count }}</p>
+                                            <li class="card-item">
+                                                <strong>{{ rumah[1].kamar_tidur }}</strong>
+
+                                                <ion-icon name="bed-outline"></ion-icon>
+
+                                                <span>Kamar</span>
+                                            </li>
+                                            <li class="card-item">
+                                                <strong>{{ rumah[1].kamar_mandi }}</strong>
+                                                <ion-icon name="water-outline"></ion-icon>
+                                                <span>Kamar Mandi</span>
+                                            </li>
+                                            <li class="card-item">
+                                                <strong>{{ rumah[1].luas }}</strong>
+                                                <ion-icon name="square-outline"></ion-icon>
+                                                <span>Luas M2</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- Kalau Login Tambahkan Class Tampil pada card-footer  -->
+                                    <!-- class="card-footer tampil" -->
+                                    {% if user_is_authenticated %}
+                                    <div class="card-footer tampil">
+                                        {%else%}
+                                        <div class="card-footer">
+                                            {% endif %}
+                                            <div class="card-author">
+                                                <figure class="author-avatar">
+                                                    <img src="{{ url_for('static', filename='images/author.jpg') }}"
+                                                        alt="Habibi Qodri" class="w-100">
+                                                </figure>
+                                                <div class="contact-agen">
+                                                    <p class="author-name">
+                                                        <a href="#">{{ rumah[1].kontak_agen }}</a>
+                                                    </p>
+                                                    <p class="author-title">Agen Perumahan</p>
+                                                </div>
+
+                                                <div class="card-footer-actions">
+                                                    <a href="mailto:{{rumah[1].agen_email}}"
+                                                        class="card-footer-actions-btn">
+                                                        <ion-icon name="mail-outline"></ion-icon>
+                                                    </a>
+
+                                                    <a href="https://wa.me/{{rumah[1].agen_whatsapp}}"
+                                                        onclick="copyText()" class="card-footer-actions-btn">
+                                                        <ion-icon name="logo-whatsapp"></ion-icon>
+                                                    </a>
+
+                                                    <a href="tel:{{rumah[1].agen_nomor_telepon}}"
+                                                        class="card-footer-actions-btn">
+                                                        <ion-icon name="call-outline"></ion-icon>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                {% else %}
+                                <script>
+                                    window.onload = function () {
+                                        Swal.fire({
+                                            icon: 'warning',
+                                            title: 'Hasil Pencarian',
+                                            text: 'Maaf, Tidak Ada Hasil Yang Sesuai Dengan Profil Anda.',
+                                        });
+                                    };
+                                </script>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        {% endif %}
+
+
+                      
                 </section>
             </div>
             <!-- End of recommendation section -->
