@@ -39,7 +39,6 @@ class Rumah(db.Model):
     agen_nomor_telepon = db.Column(db.String(100), nullable=False, default="")
     agen_email = db.Column(db.String(100), nullable=True, default="")
     agen_whatsapp = db.Column(db.String(100), nullable=True, default="")
-    categori_fasilitas = db.Column(db.String(500), nullable=True, default="")
     fasilitas = db.Column(db.String(500), nullable=True, default="")
     luas = db.Column(db.Integer, nullable=False, default=0)
     lantai = db.Column(db.Integer, nullable=False, default=0)

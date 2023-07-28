@@ -1,0 +1,8 @@
+to optimized:
+- query rumah tambahkan async
+- query data jarak kendaraan per rumah disimpan ke database (relationship by: User, Rumah)
+    - load ketika penambahan rumah, menggunakan async
+    - cek apakah data jarak kendaraan umum sudah ada apa belum
+    - jika tidak:
+        - tambahkan
+- 
